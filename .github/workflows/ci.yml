@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup NPM
+        uses: bahmutov/npm-install@v1
+
+      - name: Run ESLint
+        run: yarn eslint src
+
+      - name: Build & Compile
+        run: yarn build --verbose

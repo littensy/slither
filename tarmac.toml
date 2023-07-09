@@ -1,0 +1,9 @@
+name = "tarmac"
+
+# Most projects will define some 'inputs'.
+# This tells Tarmac where to find assets that we'll use in our game.
+[[inputs]]
+glob = "assets/images/**/*.png"
+codegen = true
+codegen-path = "src/shared/assets/images/init.lua"
+codegen-base-path = "assets"
