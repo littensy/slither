@@ -12,7 +12,7 @@ export = hoarcekat(() => {
 	useMountEffect(() => {
 		for (const id of ids) {
 			store.addSnake(id, id, new Vector2(math.random(0, 20), math.random(0, 20)));
-			store.incrementSnakeScore(id, math.random(0, 500));
+			store.incrementSnakeScore(id, math.random(0, 2000));
 		}
 	});
 
@@ -27,6 +27,14 @@ export = hoarcekat(() => {
 			}
 		},
 		1.5,
+		{ immediate: true },
+	);
+
+	useInterval(
+		() => {
+			store.setWorldFocus(ids[math.random(0, ids.size() - 1)]);
+		},
+		500,
 		{ immediate: true },
 	);
 

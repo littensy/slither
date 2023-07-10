@@ -1,5 +1,5 @@
 import { usePrevious } from "@rbxts/pretty-react-hooks";
-import { useRef } from "@rbxts/roact";
+import { useEffect, useRef } from "@rbxts/roact";
 import { subtractRadians } from "shared/utils/math-utils";
 
 /**
@@ -11,9 +11,9 @@ export function useContinuousAngle(angle: number) {
 	const previousAngle = usePrevious(angle) ?? angle;
 	const continuousAngle = useRef(angle);
 
-	if (previousAngle !== angle) {
+	useEffect(() => {
 		continuousAngle.current += subtractRadians(angle, previousAngle);
-	}
+	}, [angle]);
 
 	return continuousAngle.current;
 }

@@ -124,11 +124,12 @@
   resolved "https://registry.yarnpkg.com/@rbxts/object-utils/-/object-utils-1.0.4.tgz#c53d80f89e75c401365446be63fa1396bc2cffe7"
   integrity sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==
 
-"@rbxts/pretty-react-hooks@^0.1.3":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.1.4.tgz#8f8aed66f0e3fba87444f506ac8f2a66078e5c54"
-  integrity sha512-Jk5Km0QT9fSDH4iwvzftFxgnRlhK6F0mOmuwiG81tiqS4RLTLiABiajj12+fx6JY2Y1pf4dY1RPDbGCLJiB4fQ==
+"@rbxts/pretty-react-hooks@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.2.0.tgz#2e636bf624dd6b166490e7255e328bcfd8a0eabb"
+  integrity sha512-WZn2+K5lr5eD4BFrmVWyD2/ARBfgNbtIESbdSmjPBhgjcgxKaXlUmNBFA1EBeP0mz8o8Shb9g5TFJWTKNbRfvw==
   dependencies:
+    "@rbxts/react-roblox" "^0.1.1"
     "@rbxts/services" "^1.5.1"
     "@rbxts/set-timeout" "^1.1.2"
 
@@ -161,7 +162,7 @@
   resolved "https://registry.yarnpkg.com/@rbxts/react-reflex/-/react-reflex-0.1.2.tgz#1fd5e1ee2106e99b480b74667eac2ecfd4348d09"
   integrity sha512-/PnjKYKvj8IYR1uGUA/xt5XlPEgg/bHUItcZ2+CGCp8oB/gkm6f6HqLKPZbfJYw8SPNBWLnvO5fYsmKeLnq9LQ==
 
-"@rbxts/react-roblox@^0.1.0":
+"@rbxts/react-roblox@^0.1.0", "@rbxts/react-roblox@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@rbxts/react-roblox/-/react-roblox-0.1.1.tgz#2a3bb1bb0226f1bd832b71cf422140c87f06edeb"
   integrity sha512-TIViS38pKuJmydW9QhzNwfINkk3lATByEk/7aR3lc/PwiqFBHQA4QVrrl5IspZnRMRvQanrYC9AjZHcYroTK2g==
@@ -192,10 +193,10 @@
     "@rbxts/react-roblox" "^0.1.0"
     "@rbxts/shared-internal" "^0.2.0"
 
-"@rbxts/roact@npm:@rbxts/react-ts@0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@rbxts/react-ts/-/react-ts-0.8.1.tgz#912e270d401f4f0b009913f6fbb6aee9cdd02cd8"
-  integrity sha512-E0Iz5Y6w4sNAPJoy7Qc8Smspw0z/PPyWtpeg5r+G6GG0Hwzrnso5EQUcJxuSSYR3rakJNbeAt37dB5tA7M04FA==
+"@rbxts/roact@npm:@rbxts/react-ts@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@rbxts/react-ts/-/react-ts-0.9.0.tgz#5d9c81f56a79ea135b2f1b114778ca8f187cbad8"
+  integrity sha512-u8sSmEpGio+udmXPnfHMoTENgI/PkAPeqs4qwagkntiMiqo/EbTSh7HJHaYh5pFcRgdaTxOvtcZyfjfr4lhgiA==
   dependencies:
     "@rbxts/react-internal" "^0.2.1"
     "@rbxts/roact-compat-internal" "^0.3.0"

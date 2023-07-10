@@ -13,7 +13,7 @@ export function getSegmentRadius(score: number) {
 }
 
 export function getSegmentSpacing(score: number) {
-	return lerpStrict(0.3, 1.5, score / 3000);
+	return lerpStrict(0.5, 2.5, score / 3000);
 }
 
 export function getSnakeTurnSpeed(score: number) {

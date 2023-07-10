@@ -1,4 +1,4 @@
-import { Spring, useMotor, useViewport } from "@rbxts/pretty-react-hooks";
+import { Spring, map, useMotor, useViewport } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
@@ -58,15 +58,13 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				}
 
 				const previous = snake.segments[index - 1] || snake.head;
-				const direction = previous !== segment ? previous.sub(segment).Unit : Vector2.zero;
-				const angle = math.atan2(direction.Y, direction.X);
 
 				return (
 					<SnakeSegment
 						key={`segment-${index}`}
 						size={size * scale}
-						position={segment.mul(scale)}
-						angle={angle}
+						from={previous.mul(scale)}
+						to={segment.mul(scale)}
 						index={index}
 					/>
 				);

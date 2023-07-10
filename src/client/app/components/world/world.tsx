@@ -1,17 +1,17 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact from "@rbxts/roact";
+import { selectWorldCamera } from "client/store/world";
 import { selectSnakeIds } from "shared/store/snakes";
 import { Snake } from "../snake";
-import { useWorldView } from "./use-world-view";
 
 export function World() {
 	const ids = useSelector(selectSnakeIds);
-	const { offset, scale } = useWorldView();
+	const world = useSelector(selectWorldCamera);
 
 	return (
 		<>
 			{ids.map((id) => (
-				<Snake key={`snake-${id}`} id={id} offset={offset} scale={scale} />
+				<Snake key={`snake-${id}`} id={id} offset={world.offset} scale={world.scale} />
 			))}
 		</>
 	);
