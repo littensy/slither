@@ -68,7 +68,7 @@ export const snakesSlice = createProducer(initialState, {
 					return;
 				}
 
-				const previous = snake.segments[index - 1] || head;
+				const previous = snake.segments[index - 1] || snake.head;
 				const distance = segment.sub(previous).Magnitude;
 
 				if (distance <= segmentSpacing) {

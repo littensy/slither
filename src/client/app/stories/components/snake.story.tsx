@@ -26,7 +26,7 @@ function ScoreCounter() {
 
 export = hoarcekat(() => {
 	useMountEffect(() => {
-		store.addSnake("id", "name", new Vector2(10, 15));
+		store.addSnake("id", "name", Vector2.zero);
 		store.incrementSnakeScore("id", 100);
 	});
 
@@ -41,7 +41,7 @@ export = hoarcekat(() => {
 
 	return (
 		<RootProvider>
-			<Snake id="id" offset={Vector2.zero} scale={2} />
+			<Snake id="id" offset={new Vector2(3, 3)} scale={6} />
 			<ScoreCounter />
 		</RootProvider>
 	);
