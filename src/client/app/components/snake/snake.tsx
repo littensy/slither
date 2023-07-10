@@ -1,6 +1,6 @@
 import { Spring, useMotor, useViewport } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
+import Roact, { useEffect } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
 import { getSegmentRadius, selectSnakeById } from "shared/store/snakes";
@@ -40,28 +40,6 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 		return position.X >= 0 && position.X <= screen.X && position.Y >= 0 && position.Y <= screen.Y;
 	};
 
-	const segments = useMemo(() => {
-		return snake.segments.mapFiltered((segment, index) => {
-			if (!isOnScreen(segment)) {
-				return;
-			}
-
-			const previous = snake.segments[index - 1] || snake.head;
-			const direction = previous !== segment ? previous.sub(segment).Unit : Vector2.zero;
-			const angle = math.atan2(direction.Y, direction.X);
-
-			return (
-				<SnakeSegment
-					key={`segment-${index}`}
-					size={size * scale}
-					position={segment.mul(scale)}
-					angle={angle}
-					index={index}
-				/>
-			);
-		});
-	}, [snake.segments, scale]);
-
 	return (
 		<Group
 			position={smoothOffset.map((offset) => new UDim2(0.5, offset.x * rem * scale, 0.5, offset.y * rem * scale))}
@@ -74,7 +52,25 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				targetAngle={snake.targetAngle}
 			/>
 
-			{segments}
+			{snake.segments.mapFiltered((segment, index) => {
+				if (!isOnScreen(segment)) {
+					return;
+				}
+
+				const previous = snake.segments[index - 1] || snake.head;
+				const direction = previous !== segment ? previous.sub(segment).Unit : Vector2.zero;
+				const angle = math.atan2(direction.Y, direction.X);
+
+				return (
+					<SnakeSegment
+						key={`segment-${index}`}
+						size={size * scale}
+						position={segment.mul(scale)}
+						angle={angle}
+						index={index}
+					/>
+				);
+			})}
 		</Group>
 	);
 }
