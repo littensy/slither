@@ -119,6 +119,11 @@
     "@rbxts/compiler-types" "^1.2.3-types.1"
     "@rbxts/types" "^1.0.537"
 
+"@rbxts/object-utils@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rbxts/object-utils/-/object-utils-1.0.4.tgz#c53d80f89e75c401365446be63fa1396bc2cffe7"
+  integrity sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==
+
 "@rbxts/pretty-react-hooks@^0.1.3":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.1.4.tgz#8f8aed66f0e3fba87444f506ac8f2a66078e5c54"
@@ -221,6 +226,11 @@
   integrity sha512-UG+aOwGH/WhAxtU93KQbfw5L+z05rgDMPMTDd1nlchCo2fezpe5l/r9X3+woFn+s5K2Vhw31HvNpbAH89jsplw==
   dependencies:
     "@rbxts/luau-polyfill-internal" "1.2.3-ts.0"
+
+"@rbxts/sift@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@rbxts/sift/-/sift-0.0.6.tgz#30f1333dd3a8c1bf2523f1fc8a2b754de619195a"
+  integrity sha512-P9roA24mM36RJcmTAcMhm8Gi0fZDQjoOGp26PkZC3FgoOFaEJnKZgJggJ7zMFQIV309ZxTZJOfgMoJ8sVwypkQ==
 
 "@rbxts/testez@^0.4.2-ts.0":
   version "0.4.2-ts.0"
