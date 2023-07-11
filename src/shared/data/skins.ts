@@ -4,9 +4,9 @@ import { palette } from "shared/data/palette";
 
 export interface SnakeSkin {
 	readonly id: string;
-	readonly tint: Color3;
+	readonly tint: Color3 | readonly Color3[];
 	readonly size: Vector2;
-	readonly texture: string;
+	readonly texture: string | readonly string[];
 }
 
 export const defaultSnakeSkins: readonly SnakeSkin[] = Object.entries(palette).map(([id, tint]) => {
@@ -22,6 +22,14 @@ const snakeSkinMap = new Map(snakeSkins.map((skin) => [skin.id, skin]));
 
 export function getSnakeSkin(id: string): SnakeSkin {
 	return snakeSkinMap.get(id) || defaultSnakeSkins[0];
+}
+
+export function getSnakeSegmentSkin(id: string, index: number): { readonly texture: string; readonly tint: Color3 } {
+	const { texture, tint } = getSnakeSkin(id);
+	return {
+		texture: typeIs(texture, "string") ? texture : texture[index % texture.size()],
+		tint: typeIs(tint, "Color3") ? tint : tint[index % tint.size()],
+	};
 }
 
 export function getRandomDefaultSnakeSkin(): SnakeSkin {

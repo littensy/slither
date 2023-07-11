@@ -2,7 +2,7 @@ import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
 import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
-import { SnakeSkin } from "shared/data/skins";
+import { SnakeSkin, getSnakeSegmentSkin } from "shared/data/skins";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
 
 interface SnakeSegmentProps {
@@ -17,6 +17,7 @@ export function SnakeSegment({ from, to, size, index, skin }: SnakeSegmentProps)
 	const rem = useRem();
 	const [smoothFrom, setSmoothFrom] = useMotor({ x: from.X, y: from.Y });
 	const [smoothTo, setSmoothTo] = useMotor({ x: to.X, y: to.Y });
+	const { texture, tint } = getSnakeSegmentSkin(skin.id, index);
 
 	const { length, position, angle } = useMemo(() => {
 		const binding = joinBindings([smoothFrom, smoothTo]);
@@ -43,8 +44,8 @@ export function SnakeSegment({ from, to, size, index, skin }: SnakeSegmentProps)
 
 	return (
 		<Image
-			image={skin.texture}
-			imageColor={skin.tint}
+			image={texture}
+			imageColor={tint}
 			scaleType="Slice"
 			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 			sliceScale={4}

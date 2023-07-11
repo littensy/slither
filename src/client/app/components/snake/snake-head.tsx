@@ -3,7 +3,7 @@ import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useContinuousAngle, useRem } from "client/app/hooks";
 import { images } from "shared/assets";
-import { SnakeSkin } from "shared/data/skins";
+import { SnakeSkin, getSnakeSegmentSkin } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
 
@@ -21,6 +21,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin }: SnakeHea
 	const [smoothPosition, setSmoothPosition] = useMotor({ x: position.X, y: position.Y });
 	const [smoothAngle, setSmoothAngle] = useMotor(continuousAngle);
 	const [smoothEyeAngle, setSmoothEyeAngle] = useMotor(0);
+	const { texture, tint } = getSnakeSegmentSkin(skin.id, 0);
 
 	useEffect(() => {
 		setSmoothPosition({
@@ -33,8 +34,8 @@ export function SnakeHead({ position, angle, targetAngle, size, skin }: SnakeHea
 
 	return (
 		<Image
-			image={skin.texture}
-			imageColor={skin.tint}
+			image={texture}
+			imageColor={tint}
 			scaleType="Slice"
 			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 			sliceScale={4}
