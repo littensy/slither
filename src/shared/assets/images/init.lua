@@ -9,5 +9,6 @@ return {
 		scroll_bar_bottom = "rbxassetid://14001170424",
 		scroll_bar_mid = "rbxassetid://14001170501",
 		scroll_bar_top = "rbxassetid://14001170564",
+		snake_main = "rbxassetid://14025927056",
 	},
 }

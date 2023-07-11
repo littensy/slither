@@ -9,4 +9,5 @@ export const images: {
 	readonly scroll_bar_bottom: string;
 	readonly scroll_bar_mid: string;
 	readonly scroll_bar_top: string;
+	readonly snake_main: string;
 };

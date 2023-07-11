@@ -37,3 +37,8 @@ packable = false
 hash = "11f79397daf9eb079559fdda647e9aa5c2ce9d6f6d3315e4f0a945185218f7d3"
 id = 14001170564
 packable = false
+
+[inputs."assets/images/snake_main.png"]
+hash = "59f471826dbb8a8d0508999035bca7afb9fada150a94207a682714fb0d53eb33"
+id = 14025927056
+packable = false
