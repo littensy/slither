@@ -179,9 +179,9 @@
   integrity sha512-6eMZg9jW7xecqLh19fUQ2RUoyqPZMEkmlZXkPMyZXllvKHD7E20F5QJtkT/TGcyrhTx3vQNutHuZNoBhxxngWA==
 
 "@rbxts/remo@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@rbxts/remo/-/remo-1.1.0.tgz#43a0c09440557934bbee87bbf547d2f2f11b422b"
-  integrity sha512-nJ+Jj+heczQHFY+Z1C5rm2Xas3T4E/j6dQdKoHu1uzj4YLp9rCW//Ptzqcd0/9H5B059VbgUVjPAKIJr6m7GAA==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@rbxts/remo/-/remo-1.2.1.tgz#fc6924c03a3e25072d93f4da21eacee04ec0868a"
+  integrity sha512-S/eh9zr7fysgsR5Ft5nnO2LgueegMduXOoCVv6l1Flg2Vdbhs1sgTzuSJsJAbxMpvfTWLml9063DzHqP1N0T6g==
 
 "@rbxts/roact-compat-internal@^0.3.0":
   version "0.3.0"

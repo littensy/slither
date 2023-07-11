@@ -8,7 +8,17 @@ hash = "805fb0b4345e44c5a0739a484129ba918f853614fa634ad56ce78b4f872fd62b"
 id = 14026306246
 packable = false
 
+[inputs."assets/images/skins/snake_eye_left.png"]
+hash = "3572781920b0c779fb4fcbf5c8d895c828f7f5b10fa90ed1c384d2248bd68f10"
+id = 14034366397
+packable = false
+
+[inputs."assets/images/skins/snake_eye_right.png"]
+hash = "e30dd8bae04d2f44b57451114ca1a3456a35b5bb506ff5d54c7e2595a92a335e"
+id = 14034362504
+packable = false
+
 [inputs."assets/images/skins/snake_main.png"]
-hash = "9f5293519739932bbd0552303655563d3b98b8165c75692b50aeaa78a0086fe5"
-id = 14026497247
+hash = "9483d6b0201a129930d97225be6bb42a01daa4775d19a6c079ecaa63517c6d96"
+id = 14034345574
 packable = false

@@ -5,7 +5,7 @@ import { SharedState } from "./store";
 export const remotes = createRemotes(
 	{
 		/**
-		 * Remotes used for syncing server state with the client
+		 * Sync server state with the client
 		 */
 		store: namespace({
 			/**
@@ -16,6 +16,15 @@ export const remotes = createRemotes(
 			 * @returns The current state of the store
 			 */
 			state: remote<Server>().returns<SharedState>(),
+		}),
+		/**
+		 * Inputs for snake characters
+		 */
+		snake: namespace({
+			/**
+			 * @param angle The direction to move the snake
+			 */
+			move: remote<Server, [angle: number]>(),
 		}),
 	},
 	loggerMiddleware,

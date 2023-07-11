@@ -3,7 +3,8 @@ export const images: {
 		readonly blur: string;
 	};
 	readonly skins: {
-		readonly snake_eye: string;
+		readonly snake_eye_left: string;
+		readonly snake_eye_right: string;
 		readonly snake_main: string;
 	};
 };

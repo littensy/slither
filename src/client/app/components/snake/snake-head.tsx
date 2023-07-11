@@ -46,7 +46,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin }: SnakeHea
 		>
 			<Image
 				key="eye-right"
-				image={images.skins.snake_eye}
+				image={images.skins.snake_eye_right}
 				size={new UDim2(0.4, 0, 0.4, 0)}
 				position={new UDim2(0.5, 0, 0.1, 0)}
 				rotation={smoothEyeAngle.map(math.deg)}
@@ -54,7 +54,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin }: SnakeHea
 
 			<Image
 				key="eye-left"
-				image={images.skins.snake_eye}
+				image={images.skins.snake_eye_left}
 				anchorPoint={new Vector2(1, 0)}
 				size={new UDim2(0.4, 0, 0.4, 0)}
 				position={new UDim2(0.5, 0, 0.1, 0)}

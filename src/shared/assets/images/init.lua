@@ -6,7 +6,9 @@ return {
 		},
 		skins = {
 			snake_eye = "rbxassetid://14026306246",
-			snake_main = "rbxassetid://14026497247",
+			snake_eye_left = "rbxassetid://14034366397",
+			snake_eye_right = "rbxassetid://14034362504",
+			snake_main = "rbxassetid://14034345574",
 		},
 	},
 }

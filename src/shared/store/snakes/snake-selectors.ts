@@ -1,9 +1,14 @@
 import Object from "@rbxts/object-utils";
 import { createSelector, shallowEqual } from "@rbxts/reflex";
+import { LOCAL_ID } from "shared/constants";
 import { SharedState } from "shared/store";
 
 export const selectSnakesById = (state: SharedState) => {
 	return state.snakes;
+};
+
+export const selectLocalSnake = (state: SharedState) => {
+	return state.snakes[LOCAL_ID];
 };
 
 export const selectSnakes = createSelector(selectSnakesById, (snakesById) => {

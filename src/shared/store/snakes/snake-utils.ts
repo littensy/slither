@@ -18,6 +18,6 @@ export function describeSnakeFromScore(score: number): SnakeDescription {
 		radius: lerpStrict(0.5, 2, score / 3000),
 		spacing: lerpStrict(0.25, 2, score / 3000),
 		interpolation: lerpStrict(1, 4, score / 3000),
-		turnSpeed: lerpStrict(math.rad(200), math.rad(90), score / 3000),
+		turnSpeed: lerpStrict(math.rad(150), math.rad(45), score / 3000),
 	};
 }

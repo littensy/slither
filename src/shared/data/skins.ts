@@ -10,7 +10,7 @@ export interface SnakeSkin {
 }
 
 export const defaultSnakeSkins: readonly SnakeSkin[] = Object.entries(palette).map(([id, tint]) => {
-	return { id, tint, size: new Vector2(96, 96), texture: images.skins.snake_main };
+	return { id, tint, size: new Vector2(512, 512), texture: images.skins.snake_main };
 });
 
 export const snakeSkins: readonly SnakeSkin[] = [

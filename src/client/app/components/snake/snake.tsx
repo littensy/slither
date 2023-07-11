@@ -5,6 +5,7 @@ import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
 import { getSnakeSkin } from "shared/data/skins";
 import { describeSnakeFromScore, selectSnakeById } from "shared/store/snakes";
+import { SNAKE_ON_SCREEN_MARGIN } from "./constants";
 import { SnakeHead } from "./snake-head";
 import { SnakeSegment } from "./snake-segment";
 
@@ -35,7 +36,8 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 	const { radius } = describeSnakeFromScore(snake.score);
 
 	const isOnScreen = (segment: Vector2) => {
-		const screen = viewport.getValue();
+		const margin = new Vector2(SNAKE_ON_SCREEN_MARGIN, SNAKE_ON_SCREEN_MARGIN).mul(rem);
+		const screen = viewport.getValue().add(margin.mul(2));
 		const positionNotCentered = segment.mul(rem * scale).add(offset.mul(rem * scale));
 		const position = positionNotCentered.add(screen.mul(0.5));
 
@@ -56,11 +58,12 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 			/>
 
 			{snake.segments.mapFiltered((segment, index) => {
-				if (!isOnScreen(segment)) {
+				const previous = snake.segments[index - 1] || snake.head;
+				const middle = segment.add(previous).div(2);
+
+				if (!isOnScreen(middle)) {
 					return;
 				}
-
-				const previous = snake.segments[index - 1] || snake.head;
 
 				return (
 					<SnakeSegment
