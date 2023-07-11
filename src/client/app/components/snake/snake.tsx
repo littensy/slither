@@ -1,8 +1,9 @@
-import { Spring, map, useMotor, useViewport } from "@rbxts/pretty-react-hooks";
+import { Spring, useMotor, useViewport } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
+import { getSnakeSkin } from "shared/data/skins";
 import { describeSnakeFromScore, selectSnakeById } from "shared/store/snakes";
 import { SnakeHead } from "./snake-head";
 import { SnakeSegment } from "./snake-segment";
@@ -30,6 +31,7 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 		return <></>;
 	}
 
+	const skin = getSnakeSkin(snake.skin);
 	const { radius } = describeSnakeFromScore(snake.score);
 
 	const isOnScreen = (segment: Vector2) => {
@@ -50,6 +52,7 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				position={snake.head.mul(scale)}
 				angle={snake.angle}
 				targetAngle={snake.targetAngle}
+				skin={skin}
 			/>
 
 			{snake.segments.mapFiltered((segment, index) => {
@@ -63,9 +66,10 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 					<SnakeSegment
 						key={`segment-${index}`}
 						size={radius * 2 * scale}
-						from={previous.mul(scale)}
-						to={segment.mul(scale)}
+						from={segment.mul(scale)}
+						to={previous.mul(scale)}
 						index={index}
+						skin={skin}
 					/>
 				);
 			})}

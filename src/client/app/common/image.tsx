@@ -1,10 +1,8 @@
 import Roact from "@rbxts/roact";
-import { ImageName, images } from "shared/assets";
 import { FrameProps } from "./frame";
 
 export interface ImageProps extends FrameProps<ImageLabel> {
-	image?: ImageName;
-	imageId?: string;
+	image: string;
 	imageColor?: Color3 | Roact.Binding<Color3>;
 	imageTransparency?: number | Roact.Binding<number>;
 	imageRectOffset?: Vector2 | Roact.Binding<Vector2>;
@@ -19,7 +17,7 @@ export function Image(props: ImageProps) {
 	return (
 		<imagelabel
 			ref={props.ref}
-			Image={props.image !== undefined ? images[props.image] : props.imageId}
+			Image={props.image}
 			ImageColor3={props.imageColor}
 			ImageTransparency={props.imageTransparency}
 			ImageRectOffset={props.imageRectOffset}

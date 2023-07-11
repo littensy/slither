@@ -1,7 +1,8 @@
 import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
 import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
-import { Frame } from "client/app/common/frame";
+import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
+import { SnakeSkin } from "shared/data/skins";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
 
 interface SnakeSegmentProps {
@@ -9,9 +10,10 @@ interface SnakeSegmentProps {
 	readonly to: Vector2;
 	readonly size: number;
 	readonly index: number;
+	readonly skin: SnakeSkin;
 }
 
-export function SnakeSegment({ from, to, size, index }: SnakeSegmentProps) {
+export function SnakeSegment({ from, to, size, index, skin }: SnakeSegmentProps) {
 	const rem = useRem();
 	const [smoothFrom, setSmoothFrom] = useMotor({ x: from.X, y: from.Y });
 	const [smoothTo, setSmoothTo] = useMotor({ x: to.X, y: to.Y });
@@ -40,13 +42,16 @@ export function SnakeSegment({ from, to, size, index }: SnakeSegmentProps) {
 	}, [from, to]);
 
 	return (
-		<Frame
+		<Image
+			image={skin.texture}
+			imageColor={skin.tint}
+			scaleType="Slice"
+			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
+			sliceScale={4}
 			size={length.map((length) => new UDim2(0, size * rem, 0, size * rem + length * rem))}
 			position={position.map((position) => new UDim2(0, position.X * rem, 0, position.Y * rem))}
 			rotation={angle.map(math.deg)}
 			anchorPoint={new Vector2(0.5, 0.5)}
-			cornerRadius={new UDim(1, 0)}
-			backgroundColor={Color3.fromRGB(51, 130, 97).Lerp(Color3.fromRGB(0, 0, 0), (index + 1) / 20)}
 			zIndex={-index}
 		/>
 	);

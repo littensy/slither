@@ -1,7 +1,9 @@
 import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
 import Roact, { useEffect } from "@rbxts/roact";
-import { Frame } from "client/app/common/frame";
+import { Image } from "client/app/common/image";
 import { useContinuousAngle, useRem } from "client/app/hooks";
+import { images } from "shared/assets";
+import { SnakeSkin } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
 
@@ -10,9 +12,10 @@ interface SnakeHeadProps {
 	readonly angle: number;
 	readonly targetAngle: number;
 	readonly size: number;
+	readonly skin: SnakeSkin;
 }
 
-export function SnakeHead({ position, angle, targetAngle, size }: SnakeHeadProps) {
+export function SnakeHead({ position, angle, targetAngle, size, skin }: SnakeHeadProps) {
 	const rem = useRem();
 	const continuousAngle = useContinuousAngle(angle);
 	const [smoothPosition, setSmoothPosition] = useMotor({ x: position.X, y: position.Y });
@@ -29,50 +32,33 @@ export function SnakeHead({ position, angle, targetAngle, size }: SnakeHeadProps
 	}, [position, continuousAngle, targetAngle]);
 
 	return (
-		<Frame
+		<Image
+			image={skin.texture}
+			imageColor={skin.tint}
+			scaleType="Slice"
+			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
+			sliceScale={4}
+			anchorPoint={new Vector2(0.5, 0.5)}
 			size={new UDim2(0, size * rem, 0, size * rem)}
 			position={smoothPosition.map(({ x, y }) => new UDim2(0, x * rem, 0, y * rem))}
 			rotation={smoothAngle.map(math.deg)}
-			anchorPoint={new Vector2(0.5, 0.5)}
-			cornerRadius={new UDim(1, 0)}
-			backgroundColor={Color3.fromRGB(51, 130, 97)}
 		>
-			<Frame
+			<Image
 				key="eye-right"
+				image={images.skins.snake_eye}
 				size={new UDim2(0.4, 0, 0.4, 0)}
 				position={new UDim2(0.5, 0, 0.1, 0)}
 				rotation={smoothEyeAngle.map(math.deg)}
-				cornerRadius={new UDim(1, 0)}
-				backgroundColor={Color3.fromRGB(255, 255, 255)}
-			>
-				<Frame
-					key="pupil"
-					anchorPoint={new Vector2(0.5, 0)}
-					size={new UDim2(0.6, 0, 0.6, 0)}
-					position={new UDim2(0.5, 0, 0, 0)}
-					cornerRadius={new UDim(1, 0)}
-					backgroundColor={Color3.fromRGB(0, 0, 0)}
-				/>
-			</Frame>
+			/>
 
-			<Frame
+			<Image
 				key="eye-left"
+				image={images.skins.snake_eye}
 				anchorPoint={new Vector2(1, 0)}
 				size={new UDim2(0.4, 0, 0.4, 0)}
 				position={new UDim2(0.5, 0, 0.1, 0)}
 				rotation={smoothEyeAngle.map(math.deg)}
-				cornerRadius={new UDim(1, 0)}
-				backgroundColor={Color3.fromRGB(255, 255, 255)}
-			>
-				<Frame
-					key="pupil"
-					anchorPoint={new Vector2(0.5, 0)}
-					size={new UDim2(0.6, 0, 0.6, 0)}
-					position={new UDim2(0.5, 0, 0, 0)}
-					cornerRadius={new UDim(1, 0)}
-					backgroundColor={Color3.fromRGB(0, 0, 0)}
-				/>
-			</Frame>
-		</Frame>
+			/>
+		</Image>
 	);
 }

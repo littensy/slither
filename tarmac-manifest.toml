@@ -1,44 +1,14 @@
-[inputs."assets/images/blur_100.png"]
+[inputs."assets/images/common/blur.png"]
 hash = "b8246be6aabe3db83b60bccf6ed9dbb7d3c97bd515fe7d0d0aea66605d324e33"
-id = 14001169741
+id = 14026306195
 packable = false
 
-[inputs."assets/images/blur_150.png"]
-hash = "ab80cb21b5035807394a83ca6870c2b6ea8f1297b0381e2d598ef9454fbd00ad"
-id = 14001169850
+[inputs."assets/images/skins/snake_eye.png"]
+hash = "805fb0b4345e44c5a0739a484129ba918f853614fa634ad56ce78b4f872fd62b"
+id = 14026306246
 packable = false
 
-[inputs."assets/images/blur_50.png"]
-hash = "8426d51141835fc7ac7056e680bb541343de428cd08493da2e42b5036ff4eeea"
-id = 14001169959
-packable = false
-
-[inputs."assets/images/blur_75.png"]
-hash = "0c934b05fefa79aeb57558fccc3dae138bc3f892c422f34bbd26fe478b739c0f"
-id = 14001170092
-packable = false
-
-[inputs."assets/images/circle.png"]
-hash = "1396859f4c604a8466ab169c9a32529d3fe5f00a66f814277211bce093290b0f"
-id = 14001170211
-packable = false
-
-[inputs."assets/images/scroll_bar_bottom.png"]
-hash = "2e0d8baaff8e75bb1f7d3e406f1820478350eaa7296e9703d3ed48445ccb1114"
-id = 14001170424
-packable = false
-
-[inputs."assets/images/scroll_bar_mid.png"]
-hash = "99e475986501fbd9f08880b7e7b1f9f092e2223cf661b980412ca2c9a004a984"
-id = 14001170501
-packable = false
-
-[inputs."assets/images/scroll_bar_top.png"]
-hash = "11f79397daf9eb079559fdda647e9aa5c2ce9d6f6d3315e4f0a945185218f7d3"
-id = 14001170564
-packable = false
-
-[inputs."assets/images/snake_main.png"]
-hash = "59f471826dbb8a8d0508999035bca7afb9fada150a94207a682714fb0d53eb33"
-id = 14025927056
+[inputs."assets/images/skins/snake_main.png"]
+hash = "9f5293519739932bbd0552303655563d3b98b8165c75692b50aeaa78a0086fe5"
+id = 14026497247
 packable = false

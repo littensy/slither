@@ -5,6 +5,10 @@ import { images, sounds } from "shared/assets";
 import { Text } from "../common/text";
 import { useRem } from "../hooks";
 
+interface Assets {
+	[key: string]: string | Assets;
+}
+
 export function Preloader() {
 	const rem = useRem();
 
@@ -12,10 +16,19 @@ export function Preloader() {
 		const contentIds: string[] = [];
 		const contentNamesById = new Map<string, string>();
 
-		for (const [name, id] of pairs({ ...images, ...sounds })) {
-			contentIds.push(id);
-			contentNamesById.set(id, `${name in images ? "images" : "sounds"}/${name}`);
-		}
+		const scan = (assets: Assets, prefix = "") => {
+			for (const [name, asset] of pairs(assets)) {
+				if (typeIs(asset, "string")) {
+					contentIds.push(asset);
+					contentNamesById.set(asset, `${prefix}${name}`);
+				} else {
+					scan(asset, `${prefix}${name}/`);
+				}
+			}
+		};
+
+		scan(images, "images/");
+		scan(sounds, "sounds/");
 
 		return [contentIds, contentNamesById] as const;
 	}, []);

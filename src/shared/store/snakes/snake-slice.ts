@@ -16,14 +16,27 @@ export interface SnakeEntity {
 	readonly score: number;
 	readonly boost: boolean;
 	readonly segments: readonly Vector2[];
+	readonly skin: string;
 }
 
 const initialState: SnakesState = {};
 
+const initialSnake: SnakeEntity = {
+	id: "",
+	name: "",
+	head: new Vector2(),
+	angle: 0,
+	targetAngle: 0,
+	score: 0,
+	boost: false,
+	segments: [],
+	skin: "",
+};
+
 export const snakesSlice = createProducer(initialState, {
-	addSnake: (state, id: string, name: string, head: Vector2) => ({
+	addSnake: (state, id: string, name: string, head: Vector2, skin: string) => ({
 		...state,
-		[id]: { id, name, head, angle: 0, targetAngle: 0, score: 0, boost: false, segments: new Array(4, head) },
+		[id]: { ...initialSnake, id, name, head, skin },
 	}),
 
 	removeSnake: (state, id: string) => ({

@@ -4,6 +4,7 @@ import { Players } from "@rbxts/services";
 import { World } from "client/app/components/world";
 import { RootProvider } from "client/app/providers/root-provider";
 import { store } from "client/store";
+import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { SNAKE_STEP_TIME } from "shared/store/snakes";
 import { createScheduler } from "shared/utils/scheduler";
 
@@ -12,8 +13,8 @@ const ids = [Players.LocalPlayer.Name, ...new Array(10, 0).map((_, index) => `${
 export = hoarcekat(() => {
 	useEffect(() => {
 		for (const id of ids) {
-			store.addSnake(id, id, new Vector2(math.random(0, 20), math.random(0, 20)));
-			store.incrementSnakeScore(id, 3000);
+			store.addSnake(id, id, new Vector2(math.random(0, 20), math.random(0, 20)), getRandomDefaultSnakeSkin().id);
+			store.incrementSnakeScore(id, math.random(0, 2000));
 		}
 	}, []);
 

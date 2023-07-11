@@ -6,6 +6,7 @@ import { Snake } from "client/app/components/snake/snake";
 import { useRem } from "client/app/hooks";
 import { RootProvider } from "client/app/providers/root-provider";
 import { store } from "client/store";
+import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { SNAKE_STEP_TIME, selectSnakeById } from "shared/store/snakes";
 
 function ScoreCounter() {
@@ -26,7 +27,7 @@ function ScoreCounter() {
 
 export = hoarcekat(() => {
 	useMountEffect(() => {
-		store.addSnake("id", "name", Vector2.zero);
+		store.addSnake("id", "name", Vector2.zero, getRandomDefaultSnakeSkin().id);
 		store.incrementSnakeScore("id", 100);
 	});
 
