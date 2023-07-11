@@ -228,11 +228,6 @@
   dependencies:
     "@rbxts/luau-polyfill-internal" "1.2.3-ts.0"
 
-"@rbxts/sift@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@rbxts/sift/-/sift-0.0.6.tgz#30f1333dd3a8c1bf2523f1fc8a2b754de619195a"
-  integrity sha512-P9roA24mM36RJcmTAcMhm8Gi0fZDQjoOGp26PkZC3FgoOFaEJnKZgJggJ7zMFQIV309ZxTZJOfgMoJ8sVwypkQ==
-
 "@rbxts/testez@^0.4.2-ts.0":
   version "0.4.2-ts.0"
   resolved "https://registry.yarnpkg.com/@rbxts/testez/-/testez-0.4.2-ts.0.tgz#4475183d317182ac7099bffee6492ffcb7bcaf0b"

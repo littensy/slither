@@ -32,7 +32,6 @@
     "@rbxts/remo": "^1.1.0",
     "@rbxts/roact": "npm:@rbxts/react-ts@0.9.0",
     "@rbxts/services": "^1.5.1",
-    "@rbxts/sift": "^0.0.6",
     "@rbxts/testez": "^0.4.2-ts.0"
   }
 }

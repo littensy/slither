@@ -1,6 +1,6 @@
 import { createProducer } from "@rbxts/reflex";
-import { Dictionary } from "@rbxts/sift";
 import { lerpRadians } from "shared/utils/math-utils";
+import { mapObject } from "shared/utils/object-utils";
 import { SNAKE_BOOST_SPEED, SNAKE_SPEED, describeSnakeFromScore } from "./snake-utils";
 
 export interface SnakesState {
@@ -32,11 +32,7 @@ export const snakesSlice = createProducer(initialState, {
 	}),
 
 	updateSnakes: (state, deltaTime: number) => {
-		return Dictionary.map(state, (snake) => {
-			if (!snake) {
-				return;
-			}
-
+		return mapObject(state, (snake) => {
 			const {
 				turnSpeed,
 				segments: targetSegmentCount,
