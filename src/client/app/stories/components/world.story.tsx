@@ -1,24 +1,28 @@
-import { hoarcekat, useInterval, useMountEffect } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import { hoarcekat, useInterval } from "@rbxts/pretty-react-hooks";
+import Roact, { useEffect } from "@rbxts/roact";
 import { Players } from "@rbxts/services";
 import { World } from "client/app/components/world";
 import { RootProvider } from "client/app/providers/root-provider";
 import { store } from "client/store";
 import { SNAKE_STEP_TIME } from "shared/store/snakes";
+import { createScheduler } from "shared/utils/scheduler";
 
 const ids = [Players.LocalPlayer.Name, ...new Array(10, 0).map((_, index) => `${index}`)];
 
 export = hoarcekat(() => {
-	useMountEffect(() => {
+	useEffect(() => {
 		for (const id of ids) {
 			store.addSnake(id, id, new Vector2(math.random(0, 20), math.random(0, 20)));
-			store.incrementSnakeScore(id, math.random(0, 2000));
+			store.incrementSnakeScore(id, 3000);
 		}
-	});
+	}, []);
 
-	useInterval(() => {
-		store.updateSnakes();
-	}, SNAKE_STEP_TIME);
+	useEffect(() => {
+		return createScheduler({
+			interval: SNAKE_STEP_TIME,
+			onStep: store.updateSnakes,
+		});
+	}, []);
 
 	useInterval(
 		() => {
@@ -34,7 +38,7 @@ export = hoarcekat(() => {
 		() => {
 			store.setWorldFocus(ids[math.random(0, ids.size() - 1)]);
 		},
-		500,
+		4,
 		{ immediate: true },
 	);
 

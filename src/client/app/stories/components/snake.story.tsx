@@ -31,7 +31,7 @@ export = hoarcekat(() => {
 	});
 
 	useInterval(() => {
-		store.updateSnakes();
+		store.updateSnakes(SNAKE_STEP_TIME);
 		store.incrementSnakeScore("id", 1);
 	}, SNAKE_STEP_TIME);
 

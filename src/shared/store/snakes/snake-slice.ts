@@ -1,14 +1,7 @@
 import { createProducer } from "@rbxts/reflex";
 import { Dictionary } from "@rbxts/sift";
 import { lerpRadians } from "shared/utils/math-utils";
-import {
-	SNAKE_BOOST_SPEED,
-	SNAKE_SPEED,
-	SNAKE_STEP_TIME,
-	getSegmentCount,
-	getSegmentSpacing,
-	getSnakeTurnSpeed,
-} from "./snake-utils";
+import { SNAKE_BOOST_SPEED, SNAKE_SPEED, describeSnakeFromScore } from "./snake-utils";
 
 export interface SnakesState {
 	readonly [id: string]: SnakeEntity | undefined;
@@ -30,16 +23,7 @@ const initialState: SnakesState = {};
 export const snakesSlice = createProducer(initialState, {
 	addSnake: (state, id: string, name: string, head: Vector2) => ({
 		...state,
-		[id]: {
-			id,
-			name,
-			head,
-			angle: 0,
-			targetAngle: 0,
-			score: 0,
-			boost: false,
-			segments: new Array(getSegmentCount(0), head),
-		},
+		[id]: { id, name, head, angle: 0, targetAngle: 0, score: 0, boost: false, segments: new Array(4, head) },
 	}),
 
 	removeSnake: (state, id: string) => ({
@@ -47,21 +31,22 @@ export const snakesSlice = createProducer(initialState, {
 		[id]: undefined,
 	}),
 
-	updateSnakes: (state) => {
+	updateSnakes: (state, deltaTime: number) => {
 		return Dictionary.map(state, (snake) => {
 			if (!snake) {
 				return;
 			}
 
-			const turnSpeed = getSnakeTurnSpeed(snake.score);
-			const angle = lerpRadians(snake.angle, snake.targetAngle, turnSpeed * SNAKE_STEP_TIME);
+			const {
+				turnSpeed,
+				segments: targetSegmentCount,
+				spacing,
+				interpolation,
+			} = describeSnakeFromScore(snake.score);
 
+			const angle = lerpRadians(snake.angle, snake.targetAngle, turnSpeed * deltaTime);
 			const speed = snake.boost ? SNAKE_BOOST_SPEED : SNAKE_SPEED;
-			const head = snake.head.add(new Vector2(math.cos(angle), math.sin(angle)).mul(speed * SNAKE_STEP_TIME));
-
-			const currentSegmentCount = snake.segments.size();
-			const targetSegmentCount = getSegmentCount(snake.score);
-			const segmentSpacing = getSegmentSpacing(snake.score);
+			const head = snake.head.add(new Vector2(math.cos(angle), math.sin(angle)).mul(speed * deltaTime));
 
 			const segments = snake.segments.mapFiltered((segment, index) => {
 				if (index >= targetSegmentCount) {
@@ -69,18 +54,22 @@ export const snakesSlice = createProducer(initialState, {
 				}
 
 				const previous = snake.segments[index - 1] || snake.head;
-				const distance = segment.sub(previous).Magnitude;
 
-				if (distance <= segmentSpacing) {
-					return segment;
+				// interpolate towards the previous segment
+				segment = segment.Lerp(previous, (deltaTime * speed) / interpolation);
+
+				// constrain the segment to the segment spacing
+				if (segment.sub(previous).Magnitude > spacing) {
+					segment = previous.add(segment.sub(previous).Unit.mul(spacing));
 				}
 
-				const direction = distance > 0 ? segment.sub(previous).Unit : Vector2.zero;
-
-				return previous.add(direction.mul(segmentSpacing));
+				return segment;
 			});
 
+			const currentSegmentCount = snake.segments.size();
+
 			if (currentSegmentCount < targetSegmentCount) {
+				// grow the snake by adding segments to the tail
 				const tail = segments[segments.size() - 1] || head;
 
 				for (const _ of $range(currentSegmentCount, targetSegmentCount)) {
@@ -88,12 +77,7 @@ export const snakesSlice = createProducer(initialState, {
 				}
 			}
 
-			return {
-				...snake,
-				head,
-				angle,
-				segments,
-			};
+			return { ...snake, head, angle, segments };
 		});
 	},
 

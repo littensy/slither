@@ -1,5 +1,5 @@
+import { map } from "@rbxts/pretty-react-hooks";
 import { createSelector } from "@rbxts/reflex";
-import { getSegmentRadius } from "shared/store/snakes";
 import { RootState } from "../";
 
 export interface WorldCamera {
@@ -7,7 +7,7 @@ export interface WorldCamera {
 	readonly scale: number;
 }
 
-const WORLD_SCALE = 3;
+const WORLD_SCALE = 5;
 
 export const selectWorldFocus = (state: RootState) => {
 	return state.world.focus;
@@ -29,7 +29,7 @@ export const selectWorldCamera = createSelector(
 
 		return {
 			offset: snake.head.mul(-1),
-			scale: WORLD_SCALE / getSegmentRadius(snake.score),
+			scale: map(snake.score, 0, 3000, WORLD_SCALE, WORLD_SCALE * 0.6),
 		};
 	},
 	{
