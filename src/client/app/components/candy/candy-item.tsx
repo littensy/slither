@@ -2,7 +2,7 @@ import { Spring, blend, map, useMotor, useTimer } from "@rbxts/pretty-react-hook
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
-import { useRem } from "client/app/hooks";
+import { useRem, useSeed } from "client/app/hooks";
 import { images } from "shared/assets";
 import { getRandomAccent } from "shared/data/palette";
 import { mapStrict } from "shared/utils/math-utils";
@@ -15,7 +15,7 @@ interface CandyItemProps {
 export function CandyItem({ size, point }: CandyItemProps) {
 	const rem = useRem();
 	const timer = useTimer();
-	const seed = useMemo(() => 100 * math.random(), []);
+	const seed = useSeed();
 	const color = useMemo(getRandomAccent, []);
 	const [pointSmooth, setPointSmooth] = useMotor({ x: point.X, y: point.Y });
 
