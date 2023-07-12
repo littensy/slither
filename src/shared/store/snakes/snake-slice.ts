@@ -67,12 +67,12 @@ export const snakesSlice = createProducer(initialState, {
 
 				// as the index approaches the end of the snake, the
 				// segments should be further apart
-				const spacing = map(index, 0, targetSegmentCount, spacingAtHead, spacingAtTail);
+				const spacing = map(index, 0, currentSegmentCount, spacingAtHead, spacingAtTail);
 
-				// interpolate towards the previous segment
-				segment = segment.Lerp(previous, (speed * deltaTime) / spacing);
+				// make sure the interpolation doesn't overshoot the previous segment
+				const alpha = math.min((speed / spacing) * deltaTime, 1);
 
-				return segment;
+				return segment.Lerp(previous, alpha);
 			});
 
 			if (currentSegmentCount < targetSegmentCount) {

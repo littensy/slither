@@ -14,10 +14,10 @@ interface SnakeDescription {
 
 export function describeSnakeFromScore(score: number): SnakeDescription {
 	return {
-		segments: lerpStrict(3, 50, score / 2000),
-		radius: lerpStrict(0.5, 2, score / 3000),
-		spacingAtHead: lerpStrict(0.5, 2.5, score / 3000),
-		spacingAtTail: lerpStrict(0.5, 10, score / 3000),
-		turnSpeed: lerpStrict(math.rad(150), math.rad(45), score / 3000),
+		segments: lerpStrict(3, 40, score / 6000),
+		radius: lerpStrict(0.5, 3, score / 8000),
+		spacingAtHead: lerpStrict(0.5, 3, score / 8000),
+		spacingAtTail: lerpStrict(0.5, 12, score / 8000),
+		turnSpeed: lerpStrict(math.rad(150), math.rad(45), score / 8000),
 	};
 }

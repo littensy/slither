@@ -7,7 +7,7 @@ export interface WorldCamera {
 	readonly scale: number;
 }
 
-const WORLD_SCALE = 5;
+const WORLD_SCALE = 4;
 
 export const selectWorldFocus = (state: RootState) => {
 	return state.world.focus;
@@ -29,7 +29,7 @@ export const selectWorldCamera = createSelector(
 
 		return {
 			offset: snake.head.mul(-1),
-			scale: map(snake.score, 0, 3000, WORLD_SCALE, WORLD_SCALE * 0.6),
+			scale: map(snake.score, 0, 8000, WORLD_SCALE, WORLD_SCALE * 0.3),
 		};
 	},
 	{
