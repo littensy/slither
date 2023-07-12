@@ -4,6 +4,7 @@ return {
 		common = {
 			backdrop = "rbxassetid://14035264818",
 			blur = "rbxassetid://14036268520",
+			circle = "rbxassetid://14044052585",
 		},
 		skins = {
 			snake_eye = "rbxassetid://14026306246",

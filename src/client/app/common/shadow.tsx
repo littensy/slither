@@ -15,7 +15,7 @@ interface ShadowProps {
 }
 
 const IMAGE_SIZE = new Vector2(512, 512);
-const BLUR_RADIUS = 160;
+const BLUR_RADIUS = 50;
 
 export function Shadow({
 	shadowBlur = 1,

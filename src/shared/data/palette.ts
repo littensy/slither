@@ -1,3 +1,5 @@
+import Object from "@rbxts/object-utils";
+
 /**
  * @see https://github.com/catppuccin/catppuccin
  */
@@ -43,3 +45,8 @@ export const palette = {
 	...accents,
 	...neutrals,
 } as const;
+
+export function getRandomAccent(): Color3 {
+	const values = Object.values(accents);
+	return values[math.random(0, values.size() - 1)];
+}

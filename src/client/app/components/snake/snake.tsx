@@ -1,4 +1,4 @@
-import { Spring, useMotor, useViewport } from "@rbxts/pretty-react-hooks";
+import { Spring, useCamera, useMotor } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
@@ -17,7 +17,7 @@ interface SnakeProps {
 
 export function Snake({ id, offset, scale }: SnakeProps) {
 	const rem = useRem();
-	const viewport = useViewport();
+	const camera = useCamera();
 	const snake = useSelectorCreator(selectSnakeById, id);
 	const [smoothOffset, setSmoothOffset] = useMotor({ x: offset.X, y: offset.Y });
 
@@ -37,7 +37,8 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 
 	const isOnScreen = (segment: Vector2) => {
 		const margin = new Vector2(SNAKE_ON_SCREEN_MARGIN, SNAKE_ON_SCREEN_MARGIN).mul(rem);
-		const screen = viewport.getValue().add(margin.mul(2));
+		const screen = camera.ViewportSize.add(margin.mul(2));
+
 		const positionNotCentered = segment.mul(rem * scale).add(offset.mul(rem * scale));
 		const position = positionNotCentered.add(screen.mul(0.5));
 
