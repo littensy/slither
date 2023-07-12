@@ -1,4 +1,5 @@
 import { createProducer } from "@rbxts/reflex";
+import { mapObject } from "shared/utils/object-utils";
 
 export interface CandyState {
 	readonly static: {
@@ -10,6 +11,9 @@ export interface CandyEntity {
 	readonly id: string;
 	readonly size: number;
 	readonly position: Vector2;
+	readonly color: Color3;
+	readonly type: CandyType;
+	readonly eatenAt?: Vector2;
 }
 
 export type CandyType = "static" | "chase";
@@ -19,18 +23,20 @@ const initialState: CandyState = {
 };
 
 export const candySlice = createProducer(initialState, {
-	populateStaticCandy: (state, candy: CandyEntity[]) => ({
+	populateCandy: (state, candy: CandyEntity[]) => ({
 		...state,
 		static: {
 			...state.static,
 			...candy.reduce<Record<string, CandyEntity>>((map, candy) => {
-				map[candy.id] = candy;
+				if (candy.type === "static") {
+					map[candy.id] = candy;
+				}
 				return map;
 			}, {}),
 		},
 	}),
 
-	addStaticCandy: (state, candy: CandyEntity) => ({
+	addCandy: (state, candy: CandyEntity) => ({
 		...state,
 		static: {
 			...state.static,
@@ -38,11 +44,21 @@ export const candySlice = createProducer(initialState, {
 		},
 	}),
 
-	removeStaticCandy: (state, id: string) => ({
+	removeCandy: (state, id: string) => ({
 		...state,
 		static: {
 			...state.static,
 			[id]: undefined,
 		},
+	}),
+
+	setCandyEatenAt: (state, id: string, eatenAt: Vector2) => ({
+		...state,
+		static: mapObject(state.static, (candy) => {
+			if (candy.id !== id) {
+				return candy;
+			}
+			return { ...candy, eatenAt };
+		}),
 	}),
 });

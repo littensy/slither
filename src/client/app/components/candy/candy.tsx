@@ -45,7 +45,13 @@ export function Candy() {
 				}
 
 				return (
-					<CandyItem key={`candy-${entity.id}`} point={entity.position.mul(world.scale)} size={entity.size} />
+					<CandyItem
+						key={`candy-${entity.id}`}
+						size={entity.size}
+						point={entity.position.mul(world.scale)}
+						color={entity.color}
+						eatenAt={entity.eatenAt}
+					/>
 				);
 			})}
 		</Group>
