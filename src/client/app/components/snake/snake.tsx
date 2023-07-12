@@ -55,6 +55,7 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				angle={snake.angle}
 				targetAngle={snake.targetAngle}
 				skin={skin}
+				boost={snake.boost}
 			/>
 
 			{snake.segments.mapFiltered((segment, index) => {
@@ -73,6 +74,7 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 						to={previous.mul(scale)}
 						index={index}
 						skin={skin}
+						boost={snake.boost}
 					/>
 				);
 			})}

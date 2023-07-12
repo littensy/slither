@@ -1,3 +1,4 @@
+import { map } from "@rbxts/pretty-react-hooks";
 import { createProducer } from "@rbxts/reflex";
 import { lerpRadians } from "shared/utils/math-utils";
 import { mapObject } from "shared/utils/object-utils";
@@ -49,14 +50,15 @@ export const snakesSlice = createProducer(initialState, {
 			const {
 				turnSpeed,
 				segments: targetSegmentCount,
-				spacing,
-				interpolation,
+				spacingAtHead,
+				spacingAtTail,
 			} = describeSnakeFromScore(snake.score);
 
 			const angle = lerpRadians(snake.angle, snake.targetAngle, turnSpeed * deltaTime);
 			const speed = snake.boost ? SNAKE_BOOST_SPEED : SNAKE_SPEED;
 			const head = snake.head.add(new Vector2(math.cos(angle), math.sin(angle)).mul(speed * deltaTime));
 
+			const currentSegmentCount = snake.segments.size();
 			const segments = snake.segments.mapFiltered((segment, index) => {
 				if (index >= targetSegmentCount) {
 					return;
@@ -64,18 +66,15 @@ export const snakesSlice = createProducer(initialState, {
 
 				const previous = snake.segments[index - 1] || snake.head;
 
-				// interpolate towards the previous segment
-				segment = segment.Lerp(previous, (deltaTime * speed) / interpolation);
+				// as the index approaches the end of the snake, the
+				// segments should be further apart
+				const spacing = map(index, 0, targetSegmentCount, spacingAtHead, spacingAtTail);
 
-				// constrain the segment to the segment spacing
-				if (segment.sub(previous).Magnitude > spacing) {
-					segment = previous.add(segment.sub(previous).Unit.mul(spacing));
-				}
+				// interpolate towards the previous segment
+				segment = segment.Lerp(previous, (speed * deltaTime) / spacing);
 
 				return segment;
 			});
-
-			const currentSegmentCount = snake.segments.size();
 
 			if (currentSegmentCount < targetSegmentCount) {
 				// grow the snake by adding segments to the tail
@@ -100,6 +99,19 @@ export const snakesSlice = createProducer(initialState, {
 		return {
 			...state,
 			[id]: { ...snake, targetAngle },
+		};
+	},
+
+	setSnakeBoost: (state, id: string, boost: boolean) => {
+		const snake = state[id];
+
+		if (!snake) {
+			return state;
+		}
+
+		return {
+			...state,
+			[id]: { ...snake, boost },
 		};
 	},
 

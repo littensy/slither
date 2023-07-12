@@ -6,6 +6,7 @@ import { images } from "shared/assets";
 import { SnakeSkin, getSnakeSegmentSkin } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
+import { useSegmentColor } from "./use-segment-color";
 
 interface SnakeHeadProps {
 	readonly position: Vector2;
@@ -13,15 +14,17 @@ interface SnakeHeadProps {
 	readonly targetAngle: number;
 	readonly size: number;
 	readonly skin: SnakeSkin;
+	readonly boost: boolean;
 }
 
-export function SnakeHead({ position, angle, targetAngle, size, skin }: SnakeHeadProps) {
+export function SnakeHead({ position, angle, targetAngle, size, skin, boost }: SnakeHeadProps) {
+	const { texture, tint } = getSnakeSegmentSkin(skin.id, 0);
 	const rem = useRem();
 	const continuousAngle = useContinuousAngle(angle);
+	const color = useSegmentColor(boost, tint, -1);
 	const [smoothPosition, setSmoothPosition] = useMotor({ x: position.X, y: position.Y });
 	const [smoothAngle, setSmoothAngle] = useMotor(continuousAngle);
 	const [smoothEyeAngle, setSmoothEyeAngle] = useMotor(0);
-	const { texture, tint } = getSnakeSegmentSkin(skin.id, 0);
 
 	useEffect(() => {
 		setSmoothPosition({
@@ -35,7 +38,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin }: SnakeHea
 	return (
 		<Image
 			image={texture}
-			imageColor={tint}
+			imageColor={color}
 			scaleType="Slice"
 			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 			sliceScale={4}

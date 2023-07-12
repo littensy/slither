@@ -14,9 +14,8 @@ interface ShadowProps {
 	zIndex?: number;
 }
 
-const BASE_IMAGE_SIZE = 143;
-const BLUR_OFFSET = 2 * 100;
-const IMAGE_SIZE = new Vector2(BASE_IMAGE_SIZE + BLUR_OFFSET, BASE_IMAGE_SIZE + BLUR_OFFSET);
+const IMAGE_SIZE = new Vector2(512, 512);
+const BLUR_RADIUS = 160;
 
 export function Shadow({
 	shadowBlur = 1,
@@ -35,7 +34,7 @@ export function Shadow({
 			imageColor={shadowColor}
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={mapBinding(shadowSize, (size) => {
-				const sizeOffsetScaled = BLUR_OFFSET * shadowBlur;
+				const sizeOffsetScaled = BLUR_RADIUS * shadowBlur;
 
 				if (typeIs(size, "UDim2")) {
 					return new UDim2(1, scale(sizeOffsetScaled, rem), 1, scale(sizeOffsetScaled, rem)).add(size);

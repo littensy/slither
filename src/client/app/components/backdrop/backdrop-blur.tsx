@@ -18,7 +18,7 @@ function mod(value: number, min: number, max: number) {
 	return ((value - min) % range) + min;
 }
 
-export function BackdropRing() {
+export function BackdropBlur() {
 	const camera = useCamera();
 	const world = useSelector(selectWorldCamera);
 	const offset = useRef(world.offset);
@@ -36,8 +36,8 @@ export function BackdropRing() {
 			const noiseX = map(math.noise(t, SEED), -0.5, 0.5, -3, 4);
 			const noiseY = map(math.noise(SEED, t + 100), -0.5, 0.5, -3, 4);
 
-			const x = mod(noiseX + 0.005 * offset.current.X, -1, 2);
-			const y = mod(noiseY + 0.005 * offset.current.Y * aspectRatio, -1, 2);
+			const x = mod(noiseX + 0.02 * offset.current.X, -1, 2);
+			const y = mod(noiseY + 0.02 * offset.current.Y * aspectRatio, -1, 2);
 
 			return new UDim2(x, 0, y, 0);
 		});
