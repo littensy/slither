@@ -1,3 +1,13 @@
+[inputs."assets/images/common/backdrop.png"]
+hash = "3b73473f816c8e13d50d3bdb8216ed64c5f34f19d74370cb587a3b059b6a8e12"
+id = 14035264818
+packable = false
+
+[inputs."assets/images/common/backdrop_rings.png"]
+hash = "cf384cd75b22e4dc83d411c8c60e37b171c1908783d8558d402e2f53650ff9d6"
+id = 14035281397
+packable = false
+
 [inputs."assets/images/common/blur.png"]
 hash = "b8246be6aabe3db83b60bccf6ed9dbb7d3c97bd515fe7d0d0aea66605d324e33"
 id = 14026306195

@@ -1,5 +1,7 @@
 export const images: {
 	readonly common: {
+		readonly backdrop: string;
+		readonly backdrop_rings: string;
 		readonly blur: string;
 	};
 	readonly skins: {

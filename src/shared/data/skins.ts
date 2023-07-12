@@ -1,6 +1,6 @@
 import Object from "@rbxts/object-utils";
 import { images } from "shared/assets";
-import { palette } from "shared/data/palette";
+import { accents } from "shared/data/palette";
 
 export interface SnakeSkin {
 	readonly id: string;
@@ -9,7 +9,7 @@ export interface SnakeSkin {
 	readonly texture: string | readonly string[];
 }
 
-export const defaultSnakeSkins: readonly SnakeSkin[] = Object.entries(palette).map(([id, tint]) => {
+export const defaultSnakeSkins: readonly SnakeSkin[] = Object.entries(accents).map(([id, tint]) => {
 	return { id, tint, size: new Vector2(512, 512), texture: images.skins.snake_main };
 });
 

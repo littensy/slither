@@ -2,6 +2,8 @@
 return {
 	images = {
 		common = {
+			backdrop = "rbxassetid://14035264818",
+			backdrop_rings = "rbxassetid://14035281397",
 			blur = "rbxassetid://14026306195",
 		},
 		skins = {

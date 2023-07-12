@@ -1,5 +1,6 @@
 import { hoarcekat, useInterval } from "@rbxts/pretty-react-hooks";
 import Roact, { useEffect } from "@rbxts/roact";
+import { Backdrop } from "client/app/components/backdrop";
 import { SnakeController } from "client/app/components/snake-controller";
 import { World } from "client/app/components/world";
 import { RootProvider } from "client/app/providers/root-provider";
@@ -41,6 +42,7 @@ export = hoarcekat(() => {
 
 	return (
 		<RootProvider>
+			<Backdrop />
 			<World />
 			<SnakeController />
 		</RootProvider>
