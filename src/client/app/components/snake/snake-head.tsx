@@ -21,7 +21,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost }: S
 	const { texture, tint } = getSnakeSegmentSkin(skin.id, 0);
 	const rem = useRem();
 	const continuousAngle = useContinuousAngle(angle);
-	const color = useSegmentColor(boost, tint, -1);
+	const color = useSegmentColor(boost, tint, 0);
 	const [smoothPosition, setSmoothPosition] = useMotor({ x: position.X, y: position.Y });
 	const [smoothAngle, setSmoothAngle] = useMotor(continuousAngle);
 	const [smoothEyeAngle, setSmoothEyeAngle] = useMotor(0);
