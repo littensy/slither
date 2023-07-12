@@ -1,5 +1,5 @@
-import { map } from "@rbxts/pretty-react-hooks";
 import { createSelector } from "@rbxts/reflex";
+import { map } from "shared/utils/math-utils";
 import { RootState } from "../";
 
 export interface WorldCamera {

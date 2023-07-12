@@ -1,6 +1,5 @@
-import { map } from "@rbxts/pretty-react-hooks";
 import { createProducer } from "@rbxts/reflex";
-import { lerpRadians } from "shared/utils/math-utils";
+import { lerpRadians, map } from "shared/utils/math-utils";
 import { mapObject } from "shared/utils/object-utils";
 import { SNAKE_BOOST_SPEED, SNAKE_SPEED, describeSnakeFromScore } from "./snake-utils";
 
