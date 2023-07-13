@@ -1,3 +1,8 @@
+interface Vector {
+	readonly X: number;
+	readonly Y: number;
+}
+
 export interface Quadtree {
 	/**
 	 * The rectangle that this node represents.
@@ -15,17 +20,17 @@ export interface Quadtree {
 	 * Inserts an item into the quadtree. If the maximum number of items per
 	 * node is exceeded, the node will be split.
 	 */
-	readonly insert: (item: Vector3) => void;
+	readonly insert: (item: Vector) => void;
 	/**
 	 * Removes an item from the quadtree. Returns true if the item was removed,
 	 * false if it was not found.
 	 */
-	readonly remove: (item: Vector3) => boolean;
+	readonly remove: (item: Vector) => boolean;
 	/**
 	 * Replaces an item in the quadtree by removing the old item and inserting
 	 * the new one.
 	 */
-	readonly replace: (item: Vector3, replacement: Vector3) => void;
+	readonly replace: (item: Vector, replacement: Vector) => void;
 	/**
 	 * Returns all items that intersect with the given rectangle.
 	 */
@@ -125,7 +130,9 @@ function createQuadtreeNode(rect: Rectangle, depth: number, maxItems: number, ma
 		items.clear();
 	};
 
-	const insert = (item: Vector3) => {
+	const insert = (vector: Vector) => {
+		const item = new Vector3(vector.X, vector.Y, 0);
+
 		if (length < maxItems || depth >= maxDepth) {
 			items.add(item);
 			length += 1;
@@ -144,7 +151,9 @@ function createQuadtreeNode(rect: Rectangle, depth: number, maxItems: number, ma
 		}
 	};
 
-	const remove = (item: Vector3) => {
+	const remove = (vector: Vector) => {
+		const item = new Vector3(vector.X, vector.Y, 0);
+
 		if (items.delete(item)) {
 			length -= 1;
 			return true;
@@ -159,7 +168,7 @@ function createQuadtreeNode(rect: Rectangle, depth: number, maxItems: number, ma
 		return false;
 	};
 
-	const replace = (item: Vector3, replacement: Vector3) => {
+	const replace = (item: Vector, replacement: Vector) => {
 		remove(item);
 		insert(replacement);
 	};

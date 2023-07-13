@@ -6,8 +6,9 @@ import { Snake } from "client/app/components/snake/snake";
 import { useRem } from "client/app/hooks";
 import { RootProvider } from "client/app/providers/root-provider";
 import { store } from "client/store";
+import { WORLD_STEP_TIME } from "shared/constants";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
-import { SNAKE_STEP_TIME, selectSnakeById } from "shared/store/snakes";
+import { selectSnakeById } from "shared/store/snakes";
 
 function ScoreCounter() {
 	const rem = useRem();
@@ -32,9 +33,9 @@ export = hoarcekat(() => {
 	});
 
 	useInterval(() => {
-		store.updateSnakes(SNAKE_STEP_TIME);
+		store.updateSnakes(WORLD_STEP_TIME);
 		store.incrementSnakeScore("id", 1);
-	}, SNAKE_STEP_TIME);
+	}, WORLD_STEP_TIME);
 
 	useInterval(() => {
 		store.setSnakeTargetAngle("id", math.random() * 2 * math.pi);

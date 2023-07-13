@@ -2,7 +2,6 @@ import { lerpStrict } from "shared/utils/math-utils";
 
 export const SNAKE_SPEED = 6;
 export const SNAKE_BOOST_SPEED = 10;
-export const SNAKE_STEP_TIME = 1 / 16;
 
 interface SnakeDescription {
 	readonly segments: number;

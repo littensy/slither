@@ -173,10 +173,10 @@
     "@rbxts/scheduler-internal" "^0.2.0"
     "@rbxts/shared-internal" "^0.2.0"
 
-"@rbxts/reflex@^3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@rbxts/reflex/-/reflex-3.4.0.tgz#05a49344eaf1adefa11b544b3a6240570806b880"
-  integrity sha512-6eMZg9jW7xecqLh19fUQ2RUoyqPZMEkmlZXkPMyZXllvKHD7E20F5QJtkT/TGcyrhTx3vQNutHuZNoBhxxngWA==
+"@rbxts/reflex@3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@rbxts/reflex/-/reflex-3.4.1.tgz#bef9c58890ec03beae8f66afd3613c1b21dea0f1"
+  integrity sha512-KA/CrnXE5BaYc7x0ULLkzKmXKn6QTr8UZb5tmIsNSwmLDXrbqm7j0A7i2sVDpd6DbPJ73ZCDqIUl8AWE5CT8fQ==
 
 "@rbxts/remo@^1.1.0":
   version "1.2.1"

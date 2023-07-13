@@ -17,6 +17,7 @@ export interface SnakeEntity {
 	readonly boost: boolean;
 	readonly segments: readonly Vector2[];
 	readonly skin: string;
+	readonly dead: boolean;
 }
 
 const initialState: SnakesState = {};
@@ -31,6 +32,7 @@ const initialSnake: SnakeEntity = {
 	boost: false,
 	segments: [],
 	skin: "",
+	dead: false,
 };
 
 export const snakesSlice = createProducer(initialState, {

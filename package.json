@@ -28,7 +28,7 @@
     "@rbxts/pretty-react-hooks": "0.2.0",
     "@rbxts/react-reflex": "0.1.2",
     "@rbxts/react-roblox": "^0.1.0",
-    "@rbxts/reflex": "^3.4.0",
+    "@rbxts/reflex": "3.4.1",
     "@rbxts/remo": "^1.1.0",
     "@rbxts/roact": "npm:@rbxts/react-ts@0.9.0",
     "@rbxts/services": "^1.5.1",
