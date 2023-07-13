@@ -20,7 +20,7 @@ const random = new Random();
 export function connectCandyWorker() {
 	// keep the amount of candy in the world at a constant size
 	// if the amount of candy is less than the max, create more
-	store.subscribe(
+	const unsubscribe = store.subscribe(
 		selectStaticCandyCount,
 		(count) => count < WORLD_MAX_CANDY,
 		(count) => populateCandy(WORLD_MAX_CANDY - count),
@@ -28,11 +28,16 @@ export function connectCandyWorker() {
 
 	// when a snake dies, create candy on the snake's segments so
 	// that other snakes can eat it
-	store.observe(selectDeadSnakesById, snakeDiscriminator, (snake) => {
+	const disconnect = store.observe(selectDeadSnakesById, snakeDiscriminator, (snake) => {
 		createCandyOnSnake(snake);
 	});
 
 	populateCandy(WORLD_MAX_CANDY);
+
+	return () => {
+		unsubscribe();
+		disconnect();
+	};
 }
 
 export function handleCandyUpdate() {
@@ -72,6 +77,7 @@ function eatCandy(snake: SnakeEntity, candyNode: Vector3) {
 
 	quadtree.remove(candyNode);
 	store.setCandyEatenAt(candy.id, snake.head);
+	store.incrementSnakeScore(snake.id, candy.size);
 
 	setTimeout(() => {
 		store.removeCandy(candy.id);
