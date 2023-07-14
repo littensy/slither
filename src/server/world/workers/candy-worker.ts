@@ -28,14 +28,14 @@ const createCandyId = ({ X, Y }: Vector) => `candy-${X}-${Y}`;
 export function connectCandyWorker() {
 	// keep the amount of candy in the world at a constant size
 	// if the amount of candy is less than the max, create more
-	const populationHandler = store.subscribe(
+	const controlPopulation = store.subscribe(
 		selectStaticCandyCount,
 		(count) => count < WORLD_MAX_CANDY,
 		(count) => populateCandy(WORLD_MAX_CANDY - count),
 	);
 
 	// when a candy is added, add it to the quadtree
-	const quadtreeHandler = store.observe(selectStaticCandiesUneaten, candyDiscriminator, (candy) => {
+	const candyObserver = store.observe(selectStaticCandiesUneaten, candyDiscriminator, (candy) => {
 		quadtree.insert(candy.position);
 
 		return () => {
@@ -45,16 +45,16 @@ export function connectCandyWorker() {
 
 	// when a snake dies, create candy on the snake's segments so
 	// that other snakes can eat it
-	const deathHandler = store.observe(selectDeadSnakesById, snakeDiscriminator, (snake) => {
+	const snakeObserver = store.observe(selectDeadSnakesById, snakeDiscriminator, (snake) => {
 		createCandyOnSnake(snake);
 	});
 
 	populateCandy(WORLD_MAX_CANDY);
 
 	return () => {
-		populationHandler();
-		quadtreeHandler();
-		deathHandler();
+		controlPopulation();
+		candyObserver();
+		snakeObserver();
 	};
 }
 
