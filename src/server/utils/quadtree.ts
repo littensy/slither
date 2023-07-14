@@ -1,7 +1,4 @@
-interface Vector {
-	readonly X: number;
-	readonly Y: number;
-}
+export type Vector = Vector2 | Vector3;
 
 export interface Quadtree {
 	/**

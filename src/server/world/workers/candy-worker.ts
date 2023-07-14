@@ -1,6 +1,6 @@
 import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { createQuadtree } from "server/utils/quadtree";
+import { Vector, createQuadtree } from "server/utils/quadtree";
 import { WORLD_BOUNDS, WORLD_MAX_CANDY } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
 import { getSnakeSegmentSkin } from "shared/data/skins";
@@ -23,7 +23,7 @@ import { fillArray } from "shared/utils/object-utils";
 const quadtree = createQuadtree(new Vector2(WORLD_BOUNDS, WORLD_BOUNDS));
 const random = new Random();
 
-const createCandyId = (position: Vector2 | Vector3) => `candy-${position.X}-${position.Y}`;
+const createCandyId = ({ X, Y }: Vector) => `candy-${X}-${Y}`;
 
 export function connectCandyWorker() {
 	// keep the amount of candy in the world at a constant size
@@ -79,7 +79,7 @@ export function handleCandyUpdate() {
 
 export function createCandy(
 	size = random.NextInteger(0, 20),
-	position = new Vector2(random.NextNumber(-0.5, 0.5), random.NextNumber(-0.5, 0.5)).mul(WORLD_BOUNDS),
+	position = new Vector2(random.NextNumber(-1, 1), random.NextNumber(-1, 1)).mul(WORLD_BOUNDS),
 	color = getRandomAccent(),
 ): CandyEntity {
 	return { id: createCandyId(position), type: "static", color, size, position };
