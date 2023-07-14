@@ -5,7 +5,7 @@ import { SharedState } from "shared/store";
 import { mapObject } from "shared/utils/object-utils";
 import { SnakeEntity } from "./snake-slice";
 
-export const snakeDiscriminator = (snake: SnakeEntity) => {
+export const identifySnake = (snake: SnakeEntity) => {
 	return snake.id;
 };
 

@@ -6,7 +6,7 @@ import { getRandomAccent } from "shared/data/palette";
 import { getSnakeSegmentSkin } from "shared/data/skins";
 import {
 	CandyEntity,
-	candyDiscriminator,
+	identifyCandy,
 	selectCandyById,
 	selectStaticCandiesUneaten,
 	selectStaticCandyCount,
@@ -14,9 +14,9 @@ import {
 import {
 	SnakeEntity,
 	describeSnakeFromScore,
+	identifySnake,
 	selectDeadSnakesById,
 	selectSnakesById,
-	snakeDiscriminator,
 } from "shared/store/snakes";
 import { fillArray } from "shared/utils/object-utils";
 
@@ -35,7 +35,7 @@ export function connectCandyWorker() {
 	);
 
 	// when a candy is added, add it to the quadtree
-	const candyObserver = store.observe(selectStaticCandiesUneaten, candyDiscriminator, (candy) => {
+	const candyObserver = store.observe(selectStaticCandiesUneaten, identifyCandy, (candy) => {
 		quadtree.insert(candy.position);
 
 		return () => {
@@ -45,7 +45,7 @@ export function connectCandyWorker() {
 
 	// when a snake dies, create candy on the snake's segments so
 	// that other snakes can eat it
-	const snakeObserver = store.observe(selectDeadSnakesById, snakeDiscriminator, (snake) => {
+	const snakeObserver = store.observe(selectDeadSnakesById, identifySnake, (snake) => {
 		createCandyOnSnake(snake);
 	});
 

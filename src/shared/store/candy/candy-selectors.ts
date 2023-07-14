@@ -3,7 +3,7 @@ import { createSelector } from "@rbxts/reflex";
 import { SharedState } from "../";
 import { CandyEntity } from "./candy-slice";
 
-export const candyDiscriminator = (candy: CandyEntity) => {
+export const identifyCandy = (candy: CandyEntity) => {
 	return candy.id;
 };
 
