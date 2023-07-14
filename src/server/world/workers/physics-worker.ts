@@ -17,6 +17,6 @@ export function connectPhysicsWorker() {
 	};
 }
 
-export function handlePhyicsUpdate() {
+export function handlePhysicsUpdate() {
 	store.updateSnakes(WORLD_STEP_TIME);
 }
