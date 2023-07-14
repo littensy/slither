@@ -1,99 +1,91 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { connectCandyWorker, handleCandyUpdate } from "server/world/workers/candy-worker";
+import { connectCandyWorker, createCandy, handleCandyUpdate } from "server/world/workers/candy-worker";
 import { WORLD_MAX_CANDY } from "shared/constants";
 import { snakeSkins } from "shared/data/skins";
 import { selectCandyById, selectStaticCandies, selectStaticCandyCount } from "shared/store/candy";
 import { selectSnakeById } from "shared/store/snakes";
 
 export = () => {
+	let worker: (() => void) | undefined;
+
 	beforeEach(() => {
 		store.resetState();
+		worker = connectCandyWorker();
 	});
 
 	afterEach(() => {
 		store.resetState();
+		worker?.();
 	});
 
 	const countCandy = () => {
 		return store.getState(selectStaticCandyCount);
 	};
 
-	describe("connectCandyWorker", () => {
-		let worker: (() => void) | undefined;
+	const didEatCandy = (id: string) => {
+		const candy = store.getState(selectCandyById(id));
+		return !candy || candy.eatenAt !== undefined;
+	};
 
-		afterEach(() => {
-			worker?.();
-		});
-
-		it("should populate the state with candy", () => {
-			worker = connectCandyWorker();
-			expect(countCandy()).to.equal(WORLD_MAX_CANDY);
-		});
-
-		it("should create new candy when the amount decreases", () => {
-			worker = connectCandyWorker();
-
-			const candies = store.getState(selectStaticCandies);
-			const candiesToRemove = new Set(candies.move(0, 5, 0, []));
-
-			for (const candy of candiesToRemove) {
-				store.removeCandy(candy.id);
-			}
-
-			expect(countCandy()).to.equal(WORLD_MAX_CANDY - candiesToRemove.size());
-			store.flush();
-
-			const newCandies = store.getState(selectStaticCandies);
-			expect(countCandy()).to.equal(WORLD_MAX_CANDY);
-			expect(newCandies.every((candy) => !candiesToRemove.has(candy))).to.equal(true);
-		});
-
-		it("should not create new candy when the amount increases", () => {
-			worker = connectCandyWorker();
-
-			const candies = store.getState(selectStaticCandies);
-			const candiesToAdd = new Set(candies.move(0, 5, 0, []));
-
-			for (const candy of candiesToAdd) {
-				store.addCandy(candy);
-			}
-
-			expect(countCandy()).to.equal(WORLD_MAX_CANDY + candiesToAdd.size());
-			store.flush();
-			expect(countCandy()).to.equal(WORLD_MAX_CANDY + candiesToAdd.size());
-		});
-
-		it("should create candy when a snake dies", () => {
-			worker = connectCandyWorker();
-			store.addSnake("__test__", "__test__", Vector2.zero, snakeSkins[0].id);
-			store.updateSnake("__test__", { dead: true });
-			store.flush();
-			expect(countCandy() > WORLD_MAX_CANDY).to.equal(true);
-		});
+	it("should populate the state with candy", () => {
+		expect(countCandy()).to.equal(WORLD_MAX_CANDY);
 	});
 
-	describe("handleCandyUpdate", () => {
-		const didEatCandy = (id: string) => {
-			const candy = store.getState(selectCandyById(id));
-			return !candy || candy.eatenAt !== undefined;
-		};
+	it("should create new candy when the amount decreases", () => {
+		const candies = store.getState(selectStaticCandies);
+		const candiesToRemove = new Set(candies.move(0, 5, 0, []));
 
-		it("should eat candy when a snake is close", () => {
-			store.addCandy({ id: "__test__", position: Vector2.zero, size: 10, color: new Color3(), type: "static" });
-			store.addSnake("__test__", "__test__", Vector2.one, snakeSkins[0].id);
-			handleCandyUpdate();
-			expect(didEatCandy("__test__")).to.equal(true);
-			expect(store.getState(selectSnakeById("__test__"))!.score).to.equal(10);
-		});
+		for (const candy of candiesToRemove) {
+			store.removeCandy(candy.id);
+		}
 
-		it("should not eat candy if a snake is far away", () => {
-			store.addCandy({ id: "__test__", position: Vector2.zero, size: 10, color: new Color3(), type: "static" });
-			store.addSnake("__test__", "__test__", new Vector2(100, 100), snakeSkins[0].id);
-			handleCandyUpdate();
-			expect(didEatCandy("__test__")).to.equal(false);
-			expect(store.getState(selectSnakeById("__test__"))!.score).to.equal(0);
-		});
+		expect(countCandy()).to.equal(WORLD_MAX_CANDY - candiesToRemove.size());
+		store.flush();
+
+		const newCandies = store.getState(selectStaticCandies);
+		expect(countCandy()).to.equal(WORLD_MAX_CANDY);
+		expect(newCandies.every((candy) => !candiesToRemove.has(candy))).to.equal(true);
+	});
+
+	it("should not create new candy when the amount increases", () => {
+		const [template] = store.getState(selectStaticCandies);
+
+		for (const index of $range(1, 10)) {
+			store.addCandy({ ...template, id: `__test__${index}` });
+		}
+
+		expect(countCandy()).to.equal(WORLD_MAX_CANDY + 10);
+		store.flush();
+		expect(countCandy()).to.equal(WORLD_MAX_CANDY + 10);
+	});
+
+	it("should create candy when a snake dies", () => {
+		store.addSnake("__test__", "__test__", Vector2.zero, snakeSkins[0].id);
+		store.updateSnakes(0);
+		store.updateSnake("__test__", { dead: true });
+		store.flush();
+		expect(countCandy() > WORLD_MAX_CANDY).to.equal(true);
+	});
+
+	it("should eat candy when a snake is close", () => {
+		const candy = createCandy(10, Vector2.zero);
+		store.addCandy(candy);
+		store.addSnake("__test__", "__test__", new Vector2(0.5, 0.5), snakeSkins[0].id);
+		store.flush();
+		handleCandyUpdate();
+		expect(didEatCandy(candy.id)).to.equal(true);
+		expect(store.getState(selectSnakeById("__test__"))!.score).to.never.equal(0);
+	});
+
+	it("should not eat candy if a snake is far away", () => {
+		const candy = createCandy(10, Vector2.zero);
+		store.addCandy(candy);
+		store.addSnake("__test__", "__test__", new Vector2(100, 100), snakeSkins[0].id);
+		store.flush();
+		handleCandyUpdate();
+		expect(didEatCandy(candy.id)).to.equal(false);
+		expect(store.getState(selectSnakeById("__test__"))!.score).to.equal(0);
 	});
 };

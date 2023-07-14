@@ -4,7 +4,13 @@ import { createQuadtree } from "server/utils/quadtree";
 import { WORLD_BOUNDS, WORLD_MAX_CANDY } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
 import { getSnakeSegmentSkin } from "shared/data/skins";
-import { CandyEntity, selectCandyByPosition, selectStaticCandyCount } from "shared/store/candy";
+import {
+	CandyEntity,
+	candyDiscriminator,
+	selectCandyById,
+	selectStaticCandiesUneaten,
+	selectStaticCandyCount,
+} from "shared/store/candy";
 import {
 	SnakeEntity,
 	describeSnakeFromScore,
@@ -17,31 +23,47 @@ import { fillArray } from "shared/utils/object-utils";
 const quadtree = createQuadtree(new Vector2(WORLD_BOUNDS, WORLD_BOUNDS));
 const random = new Random();
 
+const createCandyId = (position: Vector2 | Vector3) => `candy-${position.X}-${position.Y}`;
+
 export function connectCandyWorker() {
 	// keep the amount of candy in the world at a constant size
 	// if the amount of candy is less than the max, create more
-	const unsubscribe = store.subscribe(
+	const populationHandler = store.subscribe(
 		selectStaticCandyCount,
 		(count) => count < WORLD_MAX_CANDY,
 		(count) => populateCandy(WORLD_MAX_CANDY - count),
 	);
 
+	// when a candy is added, add it to the quadtree
+	const quadtreeHandler = store.observe(selectStaticCandiesUneaten, candyDiscriminator, (candy) => {
+		quadtree.insert(candy.position);
+
+		return () => {
+			quadtree.remove(candy.position);
+		};
+	});
+
 	// when a snake dies, create candy on the snake's segments so
 	// that other snakes can eat it
-	const disconnect = store.observe(selectDeadSnakesById, snakeDiscriminator, (snake) => {
+	const deathHandler = store.observe(selectDeadSnakesById, snakeDiscriminator, (snake) => {
 		createCandyOnSnake(snake);
 	});
 
 	populateCandy(WORLD_MAX_CANDY);
 
 	return () => {
-		unsubscribe();
-		disconnect();
+		populationHandler();
+		quadtreeHandler();
+		deathHandler();
 	};
 }
 
 export function handleCandyUpdate() {
 	for (const [, snake] of pairs(store.getState(selectSnakesById))) {
+		if (snake.dead) {
+			continue;
+		}
+
 		const { radius } = describeSnakeFromScore(snake.score);
 
 		const results = quadtree.queryRange({
@@ -50,32 +72,30 @@ export function handleCandyUpdate() {
 		});
 
 		for (const candyNode of results) {
-			eatCandy(snake, candyNode);
+			eatCandy(snake, createCandyId(candyNode));
 		}
 	}
 }
 
-function createCandy(
+export function createCandy(
 	size = random.NextInteger(0, 20),
 	position = new Vector2(random.NextNumber(-0.5, 0.5), random.NextNumber(-0.5, 0.5)).mul(WORLD_BOUNDS),
 	color = getRandomAccent(),
 ): CandyEntity {
-	quadtree.insert(position);
-	return { id: `${position}`, type: "static", color, size, position };
+	return { id: createCandyId(position), type: "static", color, size, position };
 }
 
 function populateCandy(amount: number) {
 	store.populateCandy(fillArray(amount, () => createCandy()));
 }
 
-function eatCandy(snake: SnakeEntity, candyNode: Vector3) {
-	const candy = store.getState(selectCandyByPosition(candyNode));
+function eatCandy(snake: SnakeEntity, id: string) {
+	const candy = store.getState(selectCandyById(id));
 
 	if (!candy || candy.eatenAt) {
 		return;
 	}
 
-	quadtree.remove(candyNode);
 	store.setCandyEatenAt(candy.id, snake.head);
 	store.incrementSnakeScore(snake.id, candy.size);
 
@@ -85,8 +105,10 @@ function eatCandy(snake: SnakeEntity, candyNode: Vector3) {
 }
 
 function createCandyOnSnake(snake: SnakeEntity): void {
-	snake.segments.forEach((segment, index) => {
+	const candies = snake.segments.map((segment, index) => {
 		const skin = getSnakeSegmentSkin(snake.skin, index);
-		createCandy(random.NextInteger(30, 50), segment, skin.tint);
+		return createCandy(random.NextInteger(30, 50), segment, skin.tint);
 	});
+
+	store.populateCandy(candies);
 }
