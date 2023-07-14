@@ -64,7 +64,7 @@ export = () => {
 	it("should create candy when a snake dies", () => {
 		store.addSnake("__test__", "__test__", Vector2.zero, snakeSkins[0].id);
 		store.updateSnakes(0);
-		store.updateSnake("__test__", { dead: true });
+		store.patchSnake("__test__", { dead: true });
 		store.flush();
 		expect(countCandy() > WORLD_MAX_CANDY).to.equal(true);
 	});

@@ -102,7 +102,13 @@ export const snakesSlice = createProducer(initialState, {
 		});
 	},
 
-	updateSnake: (state, id: string, intersection: Partial<SnakeEntity>) => {
+	setSnakeDead: (state, id: string) => {
+		return mapObject(state, (snake) => {
+			return snake.id === id ? { ...snake, dead: true } : snake;
+		});
+	},
+
+	patchSnake: (state, id: string, intersection: Partial<SnakeEntity>) => {
 		return mapObject(state, (snake) => {
 			return snake.id === id ? { ...snake, ...intersection } : snake;
 		});
