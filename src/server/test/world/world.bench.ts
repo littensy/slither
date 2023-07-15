@@ -1,7 +1,7 @@
 import { store } from "server/store";
-import { createCandy, handleCandyUpdate } from "server/world/workers/candy-worker";
-import { handleCollisionUpdate } from "server/world/workers/collision-worker";
-import { handlePhysicsUpdate } from "server/world/workers/physics-worker";
+import { createCandy, onCandyStep } from "server/world/workers/candy-worker";
+import { onCollisionStep } from "server/world/workers/collision-worker";
+import { onPhysicsStep } from "server/world/workers/physics-worker";
 import { benchmark } from "shared/utils/benchmark";
 
 store.destroy();
@@ -19,8 +19,8 @@ for (const index of $range(0, 50)) {
 
 export = benchmark({
 	functions: {
-		handleCollisionUpdate,
-		handlePhysicsUpdate,
-		handleCandyUpdate,
+		handleCollisionUpdate: onCollisionStep,
+		handlePhysicsUpdate: onPhysicsStep,
+		handleCandyUpdate: onCandyStep,
 	},
 });

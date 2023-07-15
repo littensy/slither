@@ -2,7 +2,7 @@ import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { SnakeEntity, SnakesState, describeSnakeFromScore, selectSnakesById } from "shared/store/snakes";
 
-export function handleCollisionUpdate() {
+export function onCollisionStep() {
 	const snakes = store.getState(selectSnakesById);
 
 	for (const [, snake] of pairs(snakes)) {

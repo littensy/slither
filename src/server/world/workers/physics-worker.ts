@@ -18,7 +18,7 @@ export function connectPhysicsWorker() {
 	};
 }
 
-export function handlePhysicsUpdate() {
+export function onPhysicsStep() {
 	store.updateSnakes(WORLD_STEP_TIME);
 	killSnakesOutOfBounds();
 }

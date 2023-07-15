@@ -39,7 +39,7 @@ export function connectCandyWorker() {
 	};
 }
 
-export function handleCandyUpdate() {
+export function onCandyStep() {
 	const snakes = store.getState(selectSnakesById);
 	const candies = store.getState(selectStaticCandiesById);
 

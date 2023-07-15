@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { connectCandyWorker, createCandy, handleCandyUpdate } from "server/world/workers/candy-worker";
+import { connectCandyWorker, createCandy, onCandyStep } from "server/world/workers/candy-worker";
 import { WORLD_MAX_CANDY } from "shared/constants";
 import { snakeSkins } from "shared/data/skins";
 import { selectCandyById, selectStaticCandies, selectStaticCandyCount } from "shared/store/candy";
@@ -74,7 +74,7 @@ export = () => {
 		store.addCandy(candy);
 		store.addSnake("__test__", "__test__", new Vector2(1000, 1000.5), snakeSkins[0].id);
 		store.flush();
-		handleCandyUpdate();
+		onCandyStep();
 		expect(didEatCandy(candy.id)).to.equal(true);
 		expect(store.getState(selectSnakeById("__test__"))!.score).to.never.equal(0);
 	});
@@ -84,7 +84,7 @@ export = () => {
 		store.addCandy(candy);
 		store.addSnake("__test__", "__test__", new Vector2(100, 100), snakeSkins[0].id);
 		store.flush();
-		handleCandyUpdate();
+		onCandyStep();
 		expect(didEatCandy(candy.id)).to.equal(false);
 	});
 };
