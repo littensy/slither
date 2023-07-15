@@ -2,11 +2,6 @@ import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { SnakeEntity, SnakesState, describeSnakeFromScore, selectSnakesById } from "shared/store/snakes";
 
-export function connectCollisionWorker() {
-	// todo: benchmark with quadtrees to speed up collision detection
-	return () => {};
-}
-
 export function handleCollisionUpdate() {
 	const snakes = store.getState(selectSnakesById);
 

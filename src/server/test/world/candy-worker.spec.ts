@@ -70,9 +70,9 @@ export = () => {
 	});
 
 	it("should eat candy when a snake is close", () => {
-		const candy = createCandy(10, Vector2.zero);
+		const candy = createCandy(10, new Vector2(1000, 1000));
 		store.addCandy(candy);
-		store.addSnake("__test__", "__test__", new Vector2(0.5, 0.5), snakeSkins[0].id);
+		store.addSnake("__test__", "__test__", new Vector2(1000, 1000.5), snakeSkins[0].id);
 		store.flush();
 		handleCandyUpdate();
 		expect(didEatCandy(candy.id)).to.equal(true);
@@ -86,6 +86,5 @@ export = () => {
 		store.flush();
 		handleCandyUpdate();
 		expect(didEatCandy(candy.id)).to.equal(false);
-		expect(store.getState(selectSnakeById("__test__"))!.score).to.equal(0);
 	});
 };

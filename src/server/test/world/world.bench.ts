@@ -4,6 +4,9 @@ import { handleCollisionUpdate } from "server/world/workers/collision-worker";
 import { handlePhysicsUpdate } from "server/world/workers/physics-worker";
 import { benchmark } from "shared/utils/benchmark";
 
+store.destroy();
+store.resetState();
+
 for (const index of $range(0, 50)) {
 	const position = new Vector2(10 * index, 0);
 	store.addSnake(`Snake ${index}`, "", position, "");
