@@ -1,19 +1,15 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { connectCollisionWorker, handleCollisionUpdate } from "server/world/workers/collision-worker";
+import { handleCollisionUpdate } from "server/world/workers/collision-worker";
 import { selectSnakeById } from "shared/store/snakes";
 
 export = () => {
-	let worker: (() => void) | undefined;
-
 	beforeEach(() => {
 		store.resetState();
-		worker = connectCollisionWorker();
 	});
 
 	afterEach(() => {
-		worker?.();
 		store.resetState();
 	});
 
