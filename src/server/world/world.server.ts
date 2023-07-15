@@ -1,7 +1,7 @@
 import { WORLD_STEP_TIME } from "shared/constants";
 import { createScheduler } from "shared/utils/scheduler";
 import { connectCandyWorker, handleCandyUpdate } from "./workers/candy-worker";
-import { connectCollisionWorker, handleCollisionUpdate } from "./workers/collision-worker";
+import { handleCollisionUpdate } from "./workers/collision-worker";
 import { connectPhysicsWorker, handlePhysicsUpdate } from "./workers/physics-worker";
 
 // We can use the createScheduler to run different tasks in different
@@ -22,5 +22,4 @@ for (const { phase, onStep } of phases) {
 }
 
 connectPhysicsWorker();
-connectCollisionWorker();
 connectCandyWorker();

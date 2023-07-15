@@ -1,7 +1,8 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { connectPhysicsWorker } from "server/world/workers/physics-worker";
+import { connectPhysicsWorker, handlePhysicsUpdate } from "server/world/workers/physics-worker";
+import { WORLD_BOUNDS } from "shared/constants";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { selectSnakeById } from "shared/store/snakes";
 
@@ -36,9 +37,16 @@ export = () => {
 
 	it("should step snake physics", () => {
 		store.addSnake("__test__", "__test__", Vector2.zero, getRandomDefaultSnakeSkin().id);
-		store.updateSnakes(0.1);
+		handlePhysicsUpdate();
 		const snake = getSnake("__test__")!;
 		expect(snake.head).to.never.equal(Vector2.zero);
 		expect(snake.segments.size()).to.never.equal(0);
+	});
+
+	it("should kill snakes out of bounds", () => {
+		store.addSnake("__test__", "__test__", new Vector2(0, WORLD_BOUNDS + 1), getRandomDefaultSnakeSkin().id);
+		expect(getSnake("__test__")?.dead).to.equal(false);
+		handlePhysicsUpdate();
+		expect(getSnake("__test__")?.dead).to.equal(true);
 	});
 };
