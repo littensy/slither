@@ -1,9 +1,19 @@
 import { store } from "server/store";
 import { WORLD_BOUNDS, WORLD_STEP_TIME } from "shared/constants";
+import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { remotes } from "shared/remotes";
-import { selectSnakesById } from "shared/store/snakes";
+import { selectSnakeById, selectSnakesById } from "shared/store/snakes";
+import { getSafePointInWorld } from "../utils";
 
 export function connectPhysicsWorker() {
+	const disconnectSpawn = remotes.snake.spawn.connect((player) => {
+		if (playerIsSpawned(player)) {
+			return;
+		}
+
+		store.addSnake(player.Name, player.DisplayName, getSafePointInWorld(), getRandomDefaultSnakeSkin().id);
+	});
+
 	const disconnectMove = remotes.snake.move.connect((player, angle) => {
 		store.setSnakeTargetAngle(player.Name, angle);
 	});
@@ -13,6 +23,7 @@ export function connectPhysicsWorker() {
 	});
 
 	return () => {
+		disconnectSpawn();
 		disconnectMove();
 		disconnectBoost();
 	};
@@ -35,4 +46,8 @@ function killSnakesOutOfBounds() {
 			store.setSnakeDead(snake.id);
 		}
 	}
+}
+
+function playerIsSpawned(player: Player) {
+	return store.getState(selectSnakeById(player.Name)) !== undefined;
 }

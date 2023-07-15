@@ -1,6 +1,6 @@
 import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { WORLD_BOUNDS, WORLD_MAX_CANDY } from "shared/constants";
+import { WORLD_MAX_CANDY } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
 import { getSnakeSegmentSkin } from "shared/data/skins";
 import { CandyEntity, selectCandyById, selectStaticCandiesById, selectStaticCandyCount } from "shared/store/candy";
@@ -12,6 +12,7 @@ import {
 	selectSnakesById,
 } from "shared/store/snakes";
 import { fillArray } from "shared/utils/object-utils";
+import { getRandomPointNearWorldOrigin } from "../utils";
 
 const random = new Random();
 let nextCandyId = 0;
@@ -67,7 +68,7 @@ export function onCandyStep() {
 
 export function createCandy(
 	size = random.NextInteger(0, 20),
-	position = new Vector2(random.NextNumber(-1, 1), random.NextNumber(-1, 1)).mul(WORLD_BOUNDS),
+	position = getRandomPointNearWorldOrigin(0.9),
 	color = getRandomAccent(),
 ): CandyEntity {
 	return { id: `candy-${nextCandyId++}`, type: "static", color, size, position };
