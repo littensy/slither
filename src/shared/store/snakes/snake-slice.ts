@@ -17,6 +17,7 @@ export interface SnakeEntity {
 	readonly boost: boolean;
 	readonly segments: readonly Vector2[];
 	readonly skin: string;
+	readonly dead: boolean;
 }
 
 const initialState: SnakesState = {};
@@ -31,6 +32,7 @@ const initialSnake: SnakeEntity = {
 	boost: false,
 	segments: [],
 	skin: "",
+	dead: false,
 };
 
 export const snakesSlice = createProducer(initialState, {
@@ -100,7 +102,13 @@ export const snakesSlice = createProducer(initialState, {
 		});
 	},
 
-	updateSnake: (state, id: string, intersection: Partial<SnakeEntity>) => {
+	setSnakeDead: (state, id: string) => {
+		return mapObject(state, (snake) => {
+			return snake.id === id ? { ...snake, dead: true } : snake;
+		});
+	},
+
+	patchSnake: (state, id: string, intersection: Partial<SnakeEntity>) => {
 		return mapObject(state, (snake) => {
 			return snake.id === id ? { ...snake, ...intersection } : snake;
 		});

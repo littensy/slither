@@ -24,3 +24,10 @@ export function mapObject<K extends string, V, T>(
 
 	return result;
 }
+
+/**
+ * Creates a new array of values given a length and a mapper function.
+ */
+export function fillArray<T extends defined>(length: number, mapper: (index: number) => T): T[] {
+	return new Array(length, 0).map((_, index) => mapper(index));
+}
