@@ -6,7 +6,7 @@ import { BackdropBlur } from "./backdrop-blur";
 export function Backdrop() {
 	return (
 		<Image image={images.common.backdrop} size={new UDim2(1, 0, 1, 0)}>
-			{new Array(12, <BackdropBlur />)}
+			{new Array(20, <BackdropBlur />)}
 		</Image>
 	);
 }

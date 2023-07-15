@@ -43,19 +43,15 @@ export function BackdropBlur() {
 		});
 
 		const size = timer.map((t) => {
-			const diameter = map(math.noise(t + 100, seed), -0.5, 0.5, 1.25, 2.5);
+			const diameter = map(math.noise(t + 100, seed), -0.5, 0.5, 1, 2);
 			return new UDim2(diameter, 0, diameter, 0);
 		});
 
-		const rotation = timer.map((t) => {
-			return map(math.noise(5 * t - 100, seed), -0.5, 0.5, -360, 360);
-		});
-
 		const transparency = timer.map((t) => {
-			return map(math.noise(t + 200, seed), -0.5, 0.5, 0.3, 0.6);
+			return map(math.noise(5 * t + 200, seed), -0.5, 0.5, 0.6, 0.9);
 		});
 
-		return { position, size, rotation, transparency };
+		return { position, size, transparency };
 	}, []);
 
 	useEventListener(RunService.Heartbeat, (deltaTime) => {
@@ -72,7 +68,6 @@ export function BackdropBlur() {
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={style.size}
 			position={style.position}
-			rotation={style.rotation}
 		/>
 	);
 }

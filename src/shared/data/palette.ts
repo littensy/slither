@@ -4,38 +4,38 @@ import Object from "@rbxts/object-utils";
  * @see https://github.com/catppuccin/catppuccin
  */
 export const accents = {
-	rosewater: Color3.fromRGB(242, 213, 207),
-	flamingo: Color3.fromRGB(238, 190, 190),
-	pink: Color3.fromRGB(244, 184, 228),
-	mauve: Color3.fromRGB(202, 158, 230),
-	red: Color3.fromRGB(231, 130, 132),
-	maroon: Color3.fromRGB(234, 153, 156),
-	peach: Color3.fromRGB(239, 159, 118),
-	yellow: Color3.fromRGB(229, 200, 144),
-	green: Color3.fromRGB(166, 209, 137),
-	teal: Color3.fromRGB(129, 200, 190),
-	sky: Color3.fromRGB(153, 209, 219),
-	sapphire: Color3.fromRGB(133, 193, 220),
-	blue: Color3.fromRGB(140, 170, 238),
-	lavender: Color3.fromRGB(186, 187, 241),
+	rosewater: Color3.fromRGB(244, 219, 214),
+	flamingo: Color3.fromRGB(240, 198, 198),
+	pink: Color3.fromRGB(245, 189, 230),
+	mauve: Color3.fromRGB(198, 160, 246),
+	red: Color3.fromRGB(237, 135, 150),
+	maroon: Color3.fromRGB(238, 153, 160),
+	peach: Color3.fromRGB(245, 169, 127),
+	yellow: Color3.fromRGB(238, 212, 159),
+	green: Color3.fromRGB(166, 218, 149),
+	teal: Color3.fromRGB(139, 213, 202),
+	sky: Color3.fromRGB(145, 215, 227),
+	sapphire: Color3.fromRGB(125, 196, 228),
+	blue: Color3.fromRGB(138, 173, 244),
+	lavender: Color3.fromRGB(183, 189, 248),
 } as const;
 
 /**
  * @see https://github.com/catppuccin/catppuccin
  */
 export const neutrals = {
-	text: Color3.fromRGB(198, 208, 245),
-	subtext1: Color3.fromRGB(181, 191, 226),
-	subtext0: Color3.fromRGB(165, 173, 206),
-	overlay2: Color3.fromRGB(148, 156, 187),
-	overlay1: Color3.fromRGB(131, 139, 167),
-	overlay0: Color3.fromRGB(115, 121, 148),
-	surface2: Color3.fromRGB(98, 104, 128),
-	surface1: Color3.fromRGB(81, 87, 109),
-	surface0: Color3.fromRGB(65, 69, 89),
-	base: Color3.fromRGB(48, 52, 70),
-	mantle: Color3.fromRGB(41, 44, 60),
-	crust: Color3.fromRGB(35, 38, 52),
+	text: Color3.fromRGB(202, 211, 245),
+	subtext1: Color3.fromRGB(184, 192, 224),
+	subtext0: Color3.fromRGB(165, 173, 203),
+	overlay2: Color3.fromRGB(147, 154, 183),
+	overlay1: Color3.fromRGB(128, 135, 162),
+	overlay0: Color3.fromRGB(110, 115, 141),
+	surface2: Color3.fromRGB(91, 96, 120),
+	surface1: Color3.fromRGB(73, 77, 100),
+	surface0: Color3.fromRGB(54, 58, 79),
+	base: Color3.fromRGB(36, 39, 58),
+	mantle: Color3.fromRGB(30, 32, 48),
+	crust: Color3.fromRGB(24, 25, 38),
 } as const;
 
 /**

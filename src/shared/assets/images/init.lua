@@ -2,7 +2,7 @@
 return {
 	images = {
 		common = {
-			backdrop = "rbxassetid://14035264818",
+			backdrop = "rbxassetid://14070281970",
 			blur = "rbxassetid://14036268520",
 			circle = "rbxassetid://14044052585",
 		},
