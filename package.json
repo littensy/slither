@@ -18,6 +18,7 @@
     "eslint-plugin-prettier": "5.0.0-alpha.2",
     "eslint-plugin-roblox-ts": "^0.0.35",
     "prettier": "^3.0.0",
+    "rbxts-transform-debug": "^2.1.0-beta.0",
     "roblox-ts": "^2.1.1",
     "typescript": "~5.0"
   },
@@ -28,7 +29,7 @@
     "@rbxts/pretty-react-hooks": "0.2.0",
     "@rbxts/react-reflex": "0.1.2",
     "@rbxts/react-roblox": "^0.1.0",
-    "@rbxts/reflex": "3.4.1",
+    "@rbxts/reflex": "/Users/richerd/Documents/GitHub/reflex/rbxts-reflex-3.5.0.tgz",
     "@rbxts/remo": "^1.1.0",
     "@rbxts/roact": "npm:@rbxts/react-ts@0.9.0",
     "@rbxts/services": "^1.5.1",

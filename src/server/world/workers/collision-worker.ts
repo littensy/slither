@@ -1,30 +1,31 @@
-import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { SnakeEntity, SnakesState, describeSnakeFromScore, selectSnakesById } from "shared/store/snakes";
+import { SnakeEntity, describeSnakeFromScore, selectSnakeById, selectSnakesSorted } from "shared/store/snakes";
+import { killSnake } from "../utils";
 
-export function onCollisionStep() {
-	const snakes = store.getState(selectSnakesById);
+export function onCollisionTick() {
+	// in a head-on collision, the snake with the lowest score is killed
+	const snakes = store.getState(selectSnakesSorted((a, b) => a.score < b.score));
 
-	for (const [, snake] of pairs(snakes)) {
+	for (const snake of snakes) {
 		if (snake.dead) {
 			continue;
 		}
 
 		if (checkCollisions(snake, snakes)) {
-			store.setSnakeDead(snake.id);
-
-			setTimeout(() => {
-				store.removeSnake(snake.id);
-			}, 1);
+			killSnake(snake.id);
 		}
 	}
 }
 
-function checkCollisions(snake: SnakeEntity, snakes: SnakesState) {
+function checkCollisions(snake: SnakeEntity, snakes: SnakeEntity[]) {
 	const { radius } = describeSnakeFromScore(snake.score);
 
-	for (const [, enemy] of pairs(snakes)) {
-		if (snake === enemy || enemy.dead) {
+	for (const enemyStale of snakes) {
+		// treat the enemy state as 'stale' just in case a previous
+		// snake killed this one in the same tick
+		const enemy = store.getState(selectSnakeById(enemyStale.id));
+
+		if (!enemy || snake === enemy || enemy.dead) {
 			continue;
 		}
 

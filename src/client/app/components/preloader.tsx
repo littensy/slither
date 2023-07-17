@@ -50,15 +50,15 @@ export function Preloader() {
 	return (
 		<Text
 			text={`Loading ${currentAsset}`}
-			textSize={2 * rem}
+			textSize={rem(2)}
 			textXAlignment="Right"
 			textYAlignment="Bottom"
 			textColor={Color3.fromRGB(255, 255, 255)}
 			textTransparency={0.2}
-			position={new UDim2(1, -2 * rem, 1, -2 * rem)}
+			position={new UDim2(1, rem(-2), 1, rem(-2))}
 		>
 			<uistroke
-				Thickness={0.1 * rem}
+				Thickness={rem(0.1)}
 				Color={Color3.fromRGB(0, 0, 0)}
 				Transparency={0.5}
 				ApplyStrokeMode="Contextual"

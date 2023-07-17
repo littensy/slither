@@ -14,6 +14,7 @@ export interface CandyEntity {
 	readonly color: Color3;
 	readonly type: CandyType;
 	readonly eatenAt?: Vector2;
+	readonly fromSnake?: boolean;
 }
 
 export type CandyType = "static" | "chase";

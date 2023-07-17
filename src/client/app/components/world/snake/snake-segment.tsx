@@ -1,12 +1,12 @@
-import { Spring, lerpBinding, map, useMotor } from "@rbxts/pretty-react-hooks";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
+import { Spring, blend, lerpBinding, map, useMotor } from "@rbxts/pretty-react-hooks";
+import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
 import { DelayRender } from "client/app/common/delay-render";
 import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
 import { images } from "shared/assets";
 import { SnakeSkin, getSnakeSegmentSkin } from "shared/data/skins";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
-import { useSegmentColor } from "./use-segment-color";
+import { useSegmentStyle } from "./use-segment-style";
 
 interface SnakeSegmentProps {
 	readonly from: Vector2;
@@ -15,12 +15,15 @@ interface SnakeSegmentProps {
 	readonly index: number;
 	readonly skin: SnakeSkin;
 	readonly boost: boolean;
+	readonly dead: boolean;
 }
 
-export function SnakeSegment({ from, to, size, index, skin, boost }: SnakeSegmentProps) {
+export function SnakeSegment({ from, to, size, index, skin, boost, dead }: SnakeSegmentProps) {
 	const { texture, tint } = getSnakeSegmentSkin(skin.id, index);
+
 	const rem = useRem();
-	const color = useSegmentColor(boost, tint, index);
+	const style = useSegmentStyle(boost, dead, tint, index);
+
 	const [glow, setGlow] = useMotor(0);
 	const [line, setLine] = useMotor({ fromX: from.X, fromY: from.Y, toX: to.X, toY: to.Y });
 
@@ -56,25 +59,28 @@ export function SnakeSegment({ from, to, size, index, skin, boost }: SnakeSegmen
 	return (
 		<Image
 			image={texture}
-			imageColor={color}
+			imageColor={style.color}
+			imageTransparency={style.transparency}
 			scaleType="Slice"
 			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 			sliceScale={4}
 			anchorPoint={new Vector2(0.5, 0.5)}
-			size={length.map((length) => new UDim2(0, size * rem, 0, (size + length) * rem))}
-			position={position.map((position) => new UDim2(0, position.X * rem, 0, position.Y * rem))}
+			size={length.map((length) => new UDim2(0, rem(size), 0, rem(size + length)))}
+			position={position.map((position) => new UDim2(0, rem(position.X), 0, rem(position.Y)))}
 			rotation={angle.map(math.deg)}
 			zIndex={-index}
 		>
 			<DelayRender shouldRender={boost} unmountDelay={0.5}>
 				<Image
 					image={images.common.blur}
-					imageColor={color.map((color) => color.Lerp(new Color3(), 0.1))}
-					imageTransparency={lerpBinding(glow, 1, 0)}
+					imageColor={style.color.map((color) => color.Lerp(new Color3(), 0.1))}
+					imageTransparency={joinBindings([lerpBinding(glow, 1, 0), style.transparency]).map(([a, b]) =>
+						blend(a, b),
+					)}
 					scaleType="Slice"
 					sliceCenter={new Rect(256, 256, 256, 256)}
 					anchorPoint={new Vector2(0.5, 0.5)}
-					size={lerpBinding(glow, new UDim2(), new UDim2(1, (1 + size) * rem, 1, (1 + size) * rem))}
+					size={lerpBinding(glow, new UDim2(), new UDim2(1, rem(size + 1), 1, rem(size + 1)))}
 					position={new UDim2(0.5, 0, 0.5, 0)}
 				/>
 			</DelayRender>

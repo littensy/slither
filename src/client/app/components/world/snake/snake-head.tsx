@@ -6,7 +6,7 @@ import { images } from "shared/assets";
 import { SnakeSkin, getSnakeSegmentSkin } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
-import { useSegmentColor } from "./use-segment-color";
+import { useSegmentStyle } from "./use-segment-style";
 
 interface SnakeHeadProps {
 	readonly position: Vector2;
@@ -15,13 +15,16 @@ interface SnakeHeadProps {
 	readonly size: number;
 	readonly skin: SnakeSkin;
 	readonly boost: boolean;
+	readonly dead: boolean;
 }
 
-export function SnakeHead({ position, angle, targetAngle, size, skin, boost }: SnakeHeadProps) {
+export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dead }: SnakeHeadProps) {
 	const { texture, tint } = getSnakeSegmentSkin(skin.id, 0);
+
 	const rem = useRem();
 	const continuousAngle = useContinuousAngle(angle);
-	const color = useSegmentColor(boost, tint, 0);
+	const style = useSegmentStyle(boost, dead, tint, 0);
+
 	const [smoothPosition, setSmoothPosition] = useMotor({ x: position.X, y: position.Y });
 	const [smoothAngle, setSmoothAngle] = useMotor(continuousAngle);
 	const [smoothEyeAngle, setSmoothEyeAngle] = useMotor(0);
@@ -38,18 +41,20 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost }: S
 	return (
 		<Image
 			image={texture}
-			imageColor={color}
+			imageColor={style.color}
+			imageTransparency={style.transparency}
 			scaleType="Slice"
 			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 			sliceScale={4}
 			anchorPoint={new Vector2(0.5, 0.5)}
-			size={new UDim2(0, size * rem, 0, size * rem)}
-			position={smoothPosition.map(({ x, y }) => new UDim2(0, x * rem, 0, y * rem))}
+			size={new UDim2(0, rem(size), 0, rem(size))}
+			position={smoothPosition.map(({ x, y }) => new UDim2(0, rem(x), 0, rem(y)))}
 			rotation={smoothAngle.map(math.deg)}
 		>
 			<Image
 				key="eye-right"
 				image={images.skins.snake_eye_right}
+				imageTransparency={style.transparency}
 				size={new UDim2(0.4, 0, 0.4, 0)}
 				position={new UDim2(0.5, 0, 0.1, 0)}
 				rotation={smoothEyeAngle.map(math.deg)}
@@ -58,6 +63,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost }: S
 			<Image
 				key="eye-left"
 				image={images.skins.snake_eye_left}
+				imageTransparency={style.transparency}
 				anchorPoint={new Vector2(1, 0)}
 				size={new UDim2(0.4, 0, 0.4, 0)}
 				position={new UDim2(0.5, 0, 0.1, 0)}

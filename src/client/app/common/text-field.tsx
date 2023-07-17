@@ -12,7 +12,7 @@ interface TextFieldProps extends TextProps<TextBox> {
 }
 
 export function TextField(props: TextFieldProps) {
-	const fontFace = useFontFace(props.font || "FredokaOne", props.fontWeight, props.fontStyle);
+	const fontFace = useFontFace(props.font, props.fontWeight, props.fontStyle);
 
 	const [childRef, setChildRef] = useState<Frame | undefined>(undefined);
 
@@ -24,7 +24,6 @@ export function TextField(props: TextFieldProps) {
 
 	return (
 		<textbox
-			ref={props.ref}
 			PlaceholderText={props.placeholderText}
 			PlaceholderColor3={props.placeholderColor}
 			ClearTextOnFocus={props.clearTextOnFocus}

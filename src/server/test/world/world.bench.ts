@@ -1,8 +1,8 @@
 import { store } from "server/store";
 import { getSafePointInWorld } from "server/world/utils";
-import { createCandy, onCandyStep } from "server/world/workers/candy-worker";
-import { onCollisionStep } from "server/world/workers/collision-worker";
-import { onPhysicsStep } from "server/world/workers/physics-worker";
+import { createCandy, onCandyTick } from "server/world/workers/candy-worker";
+import { onCollisionTick } from "server/world/workers/collision-worker";
+import { onPhysicsTick } from "server/world/workers/physics-worker";
 import { WORLD_BOUNDS } from "shared/constants";
 import { benchmark } from "shared/utils/benchmark";
 
@@ -23,9 +23,9 @@ for (const index of $range(0, 50)) {
 
 export = benchmark({
 	functions: {
-		onPhysicsStep,
-		onCandyStep,
-		onCollisionStep,
+		onPhysicsTick,
+		onCandyTick,
+		onCollisionTick,
 		getSafePointInWorld,
 	},
 });

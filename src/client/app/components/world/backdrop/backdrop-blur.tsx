@@ -1,7 +1,7 @@
 import Object from "@rbxts/object-utils";
-import { map, useCamera, useEventListener } from "@rbxts/pretty-react-hooks";
+import { Spring, map, useCamera, useEventListener, useMotor } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useBinding, useMemo, useRef } from "@rbxts/roact";
+import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { Image } from "client/app/common/image";
 import { useSeed } from "client/app/hooks";
@@ -20,9 +20,9 @@ function mod(value: number, min: number, max: number) {
 export function BackdropBlur() {
 	const camera = useCamera();
 	const world = useSelector(selectWorldCamera);
-	const offset = useRef(world.offset);
 	const seed = useSeed();
 	const [timer, setTimer] = useBinding(0);
+	const [smoothOffset, setSmoothOffset] = useMotor({ x: world.offset.X, y: world.offset.Y });
 
 	const color = useMemo(() => {
 		const colors = Object.values(accents);
@@ -32,12 +32,13 @@ export function BackdropBlur() {
 	const style = useMemo(() => {
 		const position = timer.map((t) => {
 			const aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
+			const offset = smoothOffset.getValue();
 
 			const noiseX = map(math.noise(t, seed), -0.5, 0.5, -3, 4);
 			const noiseY = map(math.noise(seed, t + 100), -0.5, 0.5, -3, 4);
 
-			const x = mod(noiseX + 0.02 * offset.current.X, -1, 2);
-			const y = mod(noiseY + 0.02 * offset.current.Y * aspectRatio, -1, 2);
+			const x = mod(noiseX + 0.02 * offset.x, -1, 2);
+			const y = mod(noiseY + 0.02 * offset.y * aspectRatio, -1, 2);
 
 			return new UDim2(x, 0, y, 0);
 		});
@@ -56,8 +57,14 @@ export function BackdropBlur() {
 
 	useEventListener(RunService.Heartbeat, (deltaTime) => {
 		setTimer(timer.getValue() + 0.01 * deltaTime);
-		offset.current = offset.current.Lerp(world.offset, 1 - math.exp(-deltaTime * 10));
 	});
+
+	useEffect(() => {
+		setSmoothOffset({
+			x: new Spring(world.offset.X),
+			y: new Spring(world.offset.Y),
+		});
+	}, [world.offset]);
 
 	return (
 		<Image

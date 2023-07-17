@@ -1,4 +1,4 @@
-import { setTimeout } from "@rbxts/set-timeout";
+import { setInterval, setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { WORLD_MAX_CANDY } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
@@ -8,7 +8,9 @@ import {
 	SnakeEntity,
 	describeSnakeFromScore,
 	identifySnake,
-	selectDeadSnakesById,
+	selectAliveSnakesById,
+	selectSnakeById,
+	selectSnakeIsBoosting,
 	selectSnakesById,
 } from "shared/store/snakes";
 import { fillArray } from "shared/utils/object-utils";
@@ -26,10 +28,27 @@ export function connectCandyWorker() {
 		(count) => populateCandy(WORLD_MAX_CANDY - count),
 	);
 
-	// when a snake dies, create candy on the snake's segments so
-	// that other snakes can eat it
-	const snakeObserver = store.observe(selectDeadSnakesById, identifySnake, (snake) => {
-		createCandyOnSnake(snake);
+	// while boosting, decrement the snake's score and create candy
+	// on the snake's tail
+	const snakeObserver = store.observe(selectAliveSnakesById, identifySnake, ({ id }) => {
+		const boostObserver = store.observeWhile(selectSnakeIsBoosting(id), () => {
+			const update = () => {
+				const snake = store.getState(selectSnakeById(id))!;
+				const tail = snake.segments[snake.segments.size() - 1];
+
+				store.incrementSnakeScore(id, -25);
+				store.addCandy(createCandy(random.NextInteger(5, 15), tail));
+			};
+
+			update();
+
+			return setInterval(update, 0.2);
+		});
+
+		return () => {
+			boostObserver();
+			createCandyOnSnake(id);
+		};
 	});
 
 	populateCandy(WORLD_MAX_CANDY);
@@ -40,7 +59,7 @@ export function connectCandyWorker() {
 	};
 }
 
-export function onCandyStep() {
+export function onCandyTick() {
 	const snakes = store.getState(selectSnakesById);
 	const candies = store.getState(selectStaticCandiesById);
 
@@ -50,7 +69,7 @@ export function onCandyStep() {
 		}
 
 		const description = describeSnakeFromScore(snake.score);
-		const range = description.radius * 2;
+		const range = description.radius * 1.5 + 1;
 
 		for (const [, candy] of pairs(candies)) {
 			if (candy.eatenAt) {
@@ -67,11 +86,12 @@ export function onCandyStep() {
 }
 
 export function createCandy(
-	size = random.NextInteger(0, 20),
+	size = random.NextInteger(1, 20),
 	position = getRandomPointNearWorldOrigin(0.9),
 	color = getRandomAccent(),
+	fromSnake?: boolean,
 ): CandyEntity {
-	return { id: `candy-${nextCandyId++}`, type: "static", color, size, position };
+	return { id: `candy-${nextCandyId++}`, type: "static", color, size, position, fromSnake };
 }
 
 function populateCandy(amount: number) {
@@ -93,10 +113,16 @@ function eatCandy(snake: SnakeEntity, id: string) {
 	}, 0.5);
 }
 
-function createCandyOnSnake(snake: SnakeEntity): void {
+function createCandyOnSnake(id: string): void {
+	const snake = store.getState(selectSnakeById(id));
+
+	if (!snake) {
+		return;
+	}
+
 	const candies = snake.segments.map((segment, index) => {
 		const skin = getSnakeSegmentSkin(snake.skin, index);
-		return createCandy(random.NextInteger(30, 50), segment, skin.tint);
+		return createCandy(random.NextInteger(30, 50), segment, skin.tint, true);
 	});
 
 	store.populateCandy(candies);

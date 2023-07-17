@@ -1,8 +1,20 @@
+import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { WORLD_BOUNDS } from "shared/constants";
 import { selectSnakesById } from "shared/store/snakes";
 
 const MIN_SAFE_DISTANCE = 10;
+
+/**
+ * Kills the given snake and then removes it from the world.
+ */
+export function killSnake(snakeId: string) {
+	store.setSnakeDead(snakeId);
+
+	setTimeout(() => {
+		store.removeSnake(snakeId);
+	}, 2);
+}
 
 /**
  * Returns a random point in the world. If the margin is specified,
@@ -25,7 +37,7 @@ export function getRandomPointInWorld(margin = 1) {
  * Returns a random point in the world that is more likely to be
  * closer to the origin.
  */
-export function getRandomPointNearWorldOrigin(margin = 1, passes = 3) {
+export function getRandomPointNearWorldOrigin(margin = 1, passes = 2) {
 	let currentPosition = new Vector2();
 	let currentDistance = math.huge;
 

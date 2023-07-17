@@ -3,11 +3,11 @@ import { RunService } from "@rbxts/services";
 interface SchedulerOptions {
 	readonly interval: number;
 	readonly phase?: number;
-	readonly onStep?: (deltaTime: number) => void;
+	readonly onTick?: (deltaTime: number) => void;
 	readonly onRender?: (deltaTime: number, alpha: number) => void;
 }
 
-export function createScheduler({ interval, phase, onStep, onRender }: SchedulerOptions) {
+export function createScheduler({ interval, phase, onTick, onRender }: SchedulerOptions) {
 	let timer = phase ?? 0;
 
 	const connection = RunService.Heartbeat.Connect((deltaTime) => {
@@ -17,7 +17,7 @@ export function createScheduler({ interval, phase, onStep, onRender }: Scheduler
 
 		while (timer >= interval) {
 			timer -= interval;
-			onStep?.(interval);
+			onTick?.(interval);
 		}
 
 		onRender?.(frameTime, timer / interval);

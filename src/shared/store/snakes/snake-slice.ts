@@ -1,7 +1,14 @@
+import { lerp } from "@rbxts/pretty-react-hooks";
 import { createProducer } from "@rbxts/reflex";
-import { lerpRadians, map } from "shared/utils/math-utils";
+import { map, turnRadians } from "shared/utils/math-utils";
 import { mapObject } from "shared/utils/object-utils";
-import { SNAKE_BOOST_SPEED, SNAKE_SPEED, describeSnakeFromScore } from "./snake-utils";
+import {
+	SNAKE_BOOST_SPEED,
+	SNAKE_SPEED,
+	describeSnakeFromScore,
+	getSnakePercentUntilNewSegment,
+	snakeIsBoosting,
+} from "./snake-utils";
 
 export interface SnakesState {
 	readonly [id: string]: SnakeEntity | undefined;
@@ -48,6 +55,10 @@ export const snakesSlice = createProducer(initialState, {
 
 	updateSnakes: (state, deltaTime: number) => {
 		return mapObject(state, (snake) => {
+			if (snake.dead) {
+				return snake;
+			}
+
 			const {
 				turnSpeed,
 				segments: targetSegmentCount,
@@ -55,38 +66,47 @@ export const snakesSlice = createProducer(initialState, {
 				spacingAtTail,
 			} = describeSnakeFromScore(snake.score);
 
-			const angle = lerpRadians(snake.angle, snake.targetAngle, turnSpeed * deltaTime);
-			const speed = snake.boost ? SNAKE_BOOST_SPEED : SNAKE_SPEED;
-			const head = snake.head.add(new Vector2(math.cos(angle), math.sin(angle)).mul(speed * deltaTime));
+			const speed = snakeIsBoosting(snake) ? SNAKE_BOOST_SPEED : SNAKE_SPEED;
+
+			const newAngle = turnRadians(snake.angle, snake.targetAngle, turnSpeed * deltaTime);
+			const newHead = snake.head.add(new Vector2(math.cos(newAngle), math.sin(newAngle)).mul(speed * deltaTime));
 
 			const currentSegmentCount = snake.segments.size();
-			const segments = snake.segments.mapFiltered((segment, index) => {
+			const newSegments: Vector2[] = [];
+			let lastSegment = newHead;
+
+			snake.segments.forEach((segment, index) => {
 				if (index >= targetSegmentCount) {
 					return;
 				}
 
-				const previous = snake.segments[index - 1] || snake.head;
-
-				// as the index approaches the end of the snake, the
-				// segments should be further apart
+				// as the index approaches the end of the snake, the segments should
+				// be further apart
 				const spacing = map(index, 0, currentSegmentCount, spacingAtHead, spacingAtTail);
 
 				// make sure the interpolation doesn't overshoot the previous segment
-				const alpha = math.min((speed / spacing) * deltaTime, 1);
+				let alpha = math.clamp(1 - math.exp((-speed * deltaTime) / spacing), 0, 1);
 
-				return segment.Lerp(previous, alpha);
+				// the tail should be closer to the next segment based on how close it
+				// is to generating a new segment
+				if (index === currentSegmentCount - 1) {
+					const percent = getSnakePercentUntilNewSegment(snake.score, currentSegmentCount);
+					alpha = lerp(alpha, 1, 1 - percent);
+				}
+
+				lastSegment = segment.Lerp(lastSegment, alpha);
+				newSegments.push(lastSegment);
 			});
 
 			if (currentSegmentCount < targetSegmentCount) {
-				// grow the snake by adding segments to the tail
-				const tail = segments[segments.size() - 1] || head;
+				const tail = newSegments[newSegments.size() - 1] || newHead;
 
 				for (const _ of $range(currentSegmentCount, targetSegmentCount)) {
-					segments.push(tail);
+					newSegments.push(tail);
 				}
 			}
 
-			return { ...snake, head, angle, segments };
+			return { ...snake, head: newHead, angle: newAngle, segments: newSegments };
 		});
 	},
 
@@ -116,7 +136,7 @@ export const snakesSlice = createProducer(initialState, {
 
 	incrementSnakeScore: (state, id: string, amount: number) => {
 		return mapObject(state, (snake) => {
-			return snake.id === id ? { ...snake, score: snake.score + amount } : snake;
+			return snake.id === id ? { ...snake, score: math.max(snake.score + amount, 0) } : snake;
 		});
 	},
 });

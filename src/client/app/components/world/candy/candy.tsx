@@ -14,6 +14,7 @@ export function Candy() {
 	const camera = useCamera();
 	const candy = useSelector(selectStaticCandies);
 	const world = useSelector(selectWorldCamera);
+
 	const [smoothOffset, setSmoothOffset] = useMotor({ x: world.offset.X, y: world.offset.Y });
 
 	useEffect(() => {
@@ -24,10 +25,10 @@ export function Candy() {
 	}, [world.offset]);
 
 	const isOnScreen = (point: Vector2) => {
-		const margin = new Vector2(CANDY_ON_SCREEN_MARGIN, CANDY_ON_SCREEN_MARGIN).mul(rem);
+		const margin = rem(new Vector2(CANDY_ON_SCREEN_MARGIN, CANDY_ON_SCREEN_MARGIN));
 		const screen = camera.ViewportSize.add(margin.mul(2));
 
-		const positionNotCentered = point.mul(rem * world.scale).add(world.offset.mul(rem * world.scale));
+		const positionNotCentered = rem(point.mul(world.scale).add(world.offset.mul(world.scale)));
 		const position = positionNotCentered.add(screen.mul(0.5));
 
 		return position.X >= 0 && position.X <= screen.X && position.Y >= 0 && position.Y <= screen.Y;
@@ -36,7 +37,7 @@ export function Candy() {
 	return (
 		<Group
 			position={smoothOffset.map(
-				(offset) => new UDim2(0.5, offset.x * rem * world.scale, 0.5, offset.y * rem * world.scale),
+				(offset) => new UDim2(0.5, rem(offset.x * world.scale), 0.5, rem(offset.y * world.scale)),
 			)}
 		>
 			{candy.mapFiltered((entity) => {
@@ -50,7 +51,7 @@ export function Candy() {
 						size={entity.size}
 						point={entity.position.mul(world.scale)}
 						color={entity.color}
-						eatenAt={entity.eatenAt}
+						eatenAt={entity.eatenAt?.mul(world.scale)}
 					/>
 				);
 			})}

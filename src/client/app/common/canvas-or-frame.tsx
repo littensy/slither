@@ -1,11 +1,10 @@
-import { mapBinding, useBindingState } from "@rbxts/pretty-react-hooks";
-import Roact, { useEffect, useMemo, useState } from "@rbxts/roact";
+import { useBindingListener, useUnmountEffect } from "@rbxts/pretty-react-hooks";
+import Roact, { Portal, useEffect, useMemo, useState } from "@rbxts/roact";
 import { CanvasGroup, CanvasGroupProps } from "./canvas-group";
 import { Frame } from "./frame";
 import { Group } from "./group";
 
 type CanvasOrFrameProps = CanvasGroupProps & {
-	ref?: Roact.RefPropertyOrFunction<Frame | CanvasGroup>;
 	event?: Roact.JsxInstanceEvents<Frame | CanvasGroup>;
 	change?: Roact.JsxInstanceChangeEvents<Frame | CanvasGroup>;
 	directChildren?: Roact.Element;
@@ -19,45 +18,42 @@ export function CanvasOrFrame(props: CanvasOrFrameProps) {
 		children: undefined,
 	};
 
-	const isCanvasBinding = useMemo(() => {
-		return mapBinding(props.groupTransparency, (t = 0) => t > EPSILON);
-	}, [props.groupTransparency]);
-
-	const isCanvas = useBindingState(isCanvasBinding);
-
-	const [canvas, canvasRef] = useState<CanvasGroup>();
+	const [renderMode, setRenderMode] = useState<"canvas" | "frame">("canvas");
+	const [visible, setVisible] = useState(true);
 	const [frame, frameRef] = useState<Frame>();
+	const [canvas, canvasRef] = useState<CanvasGroup>();
 
-	const portalTarget = useMemo(() => {
-		const frame = new Instance("Frame");
-		frame.Name = "smart-canvas-target";
-		frame.Size = UDim2.fromScale(1, 1);
-		frame.BackgroundTransparency = 1;
-		return frame;
+	const container = useMemo(() => {
+		const container = new Instance("Frame");
+		container.Size = new UDim2(1, 0, 1, 0);
+		container.BackgroundTransparency = 1;
+		return container;
 	}, []);
 
-	useEffect(() => {
-		portalTarget.Parent = isCanvas ? canvas : frame;
-	}, [isCanvas, canvas, frame]);
+	useBindingListener(props.groupTransparency, (t = 0) => {
+		setRenderMode(t > EPSILON ? "canvas" : "frame");
+		setVisible(t < 1);
+	});
 
 	useEffect(() => {
-		return () => {
-			portalTarget.Destroy();
-		};
-	}, []);
+		container.Parent = renderMode === "canvas" ? canvas : frame;
+	}, [renderMode, canvas, frame]);
+
+	useUnmountEffect(() => {
+		container.Destroy();
+	});
 
 	return (
-		<>
-			<Roact.Portal target={portalTarget}>{props.children}</Roact.Portal>
+		<Group>
+			<Portal target={container}>{props.children}</Portal>
 
-			<Group>
-				<CanvasGroup {...propsWithoutChildren} visible={isCanvas} ref={canvasRef}>
-					{props.directChildren}
-				</CanvasGroup>
-				<Frame {...propsWithoutChildren} visible={!isCanvas} ref={frameRef}>
-					{props.directChildren}
-				</Frame>
-			</Group>
-		</>
+			<CanvasGroup {...propsWithoutChildren} visible={visible} ref={canvasRef}>
+				{props.directChildren}
+			</CanvasGroup>
+
+			<Frame {...propsWithoutChildren} visible={visible} ref={frameRef}>
+				{props.directChildren}
+			</Frame>
+		</Group>
 	);
 }

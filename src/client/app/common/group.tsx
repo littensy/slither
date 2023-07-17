@@ -1,7 +1,7 @@
-import Roact from "@rbxts/roact";
+import Roact, { forwardRef } from "@rbxts/roact";
 
 interface GroupProps extends Roact.PropsWithChildren {
-	ref?: Roact.RefPropertyOrFunction<Frame>;
+	ref?: Roact.Ref<Frame>;
 	event?: Roact.JsxInstanceEvents<Frame>;
 	change?: Roact.JsxInstanceChangeEvents<Frame>;
 	size?: UDim2 | Roact.Binding<UDim2>;
@@ -14,10 +14,10 @@ interface GroupProps extends Roact.PropsWithChildren {
 	zIndex?: number | Roact.Binding<number>;
 }
 
-export function Group(props: GroupProps) {
+export const Group = forwardRef((props: GroupProps, ref: Roact.Ref<Frame>) => {
 	return (
 		<frame
-			ref={props.ref}
+			ref={ref}
 			Size={props.size || UDim2.fromScale(1, 1)}
 			Position={props.position}
 			AnchorPoint={props.anchorPoint}
@@ -33,4 +33,4 @@ export function Group(props: GroupProps) {
 			{props.children}
 		</frame>
 	);
-}
+});

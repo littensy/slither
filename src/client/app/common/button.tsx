@@ -24,7 +24,6 @@ export function Button(props: ButtonProps) {
 
 	return (
 		<textbutton
-			ref={props.ref}
 			Active={props.active}
 			Text=""
 			AutoButtonColor={false}

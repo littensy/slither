@@ -16,7 +16,6 @@ export interface ImageProps extends FrameProps<ImageLabel> {
 export function Image(props: ImageProps) {
 	return (
 		<imagelabel
-			ref={props.ref}
 			Image={props.image}
 			ImageColor3={props.imageColor}
 			ImageTransparency={props.imageTransparency}

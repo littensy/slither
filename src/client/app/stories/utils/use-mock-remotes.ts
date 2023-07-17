@@ -13,6 +13,10 @@ export function useMockRemotes() {
 			remotes.snake.boost.test.onFire((boost) => {
 				store.setSnakeBoost(LOCAL_USER, boost);
 			}),
+
+			remotes.snake.spawn.test.onFire(() => {
+				store.addSnake(LOCAL_USER, "", Vector2.zero, "");
+			}),
 		];
 
 		return () => {

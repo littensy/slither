@@ -4,12 +4,14 @@ import { useButtonAnimation, useButtonState, useRem } from "../hooks";
 import { Button } from "./button";
 import { Frame } from "./frame";
 
-interface PrettyButtonProps extends Roact.PropsWithChildren {
+interface ReactiveButtonProps extends Roact.PropsWithChildren {
 	onClick?: () => void;
 	onMouseDown?: () => void;
 	onMouseUp?: () => void;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	onHover?: (hovered: boolean) => void;
+	onPress?: (pressed: boolean) => void;
 	enabled?: boolean;
 	size?: UDim2 | Roact.Binding<UDim2>;
 	position?: UDim2 | Roact.Binding<UDim2>;
@@ -28,12 +30,14 @@ interface PrettyButtonProps extends Roact.PropsWithChildren {
 	change?: Roact.JsxInstanceChangeEvents<TextButton>;
 }
 
-export function PrettyButton({
+export function ReactiveButton({
 	onClick,
 	onMouseDown,
 	onMouseUp,
 	onMouseEnter,
 	onMouseLeave,
+	onHover,
+	onPress,
 	enabled = true,
 	size,
 	position,
@@ -51,7 +55,7 @@ export function PrettyButton({
 	event = {},
 	change = {},
 	children,
-}: PrettyButtonProps) {
+}: ReactiveButtonProps) {
 	const rem = useRem();
 	const [sizeAnimation, setSizeAnimation, sizeAnimationApi] = useMotor(0);
 	const [press, hover, buttonEvents] = useButtonState();
@@ -64,6 +68,14 @@ export function PrettyButton({
 			sizeAnimationApi.setState({ velocity: 30 });
 			setSizeAnimation(new Spring(0));
 		}
+	}, [press]);
+
+	useUpdateEffect(() => {
+		onHover?.(hover);
+	}, [hover]);
+
+	useUpdateEffect(() => {
+		onPress?.(press);
 	}, [press]);
 
 	return (
@@ -113,16 +125,16 @@ export function PrettyButton({
 				size={lerpBinding(
 					animateSize ? sizeAnimation : 0,
 					new UDim2(1, 0, 1, 0),
-					new UDim2(1, 2 * rem * animateSizeStrength, 1, 2 * rem * animateSizeStrength),
+					new UDim2(1, rem(2 * animateSizeStrength), 1, rem(2 * animateSizeStrength)),
 				)}
 				position={lerpBinding(
 					animatePosition ? animation.position : 0,
 					new UDim2(0.5, 0, 0.5, 0),
 					new UDim2(
 						0.5,
-						(3 + 0.1 * rem) * animatePositionStrength * animatePositionDirection.X,
+						(3 + rem(0.1)) * animatePositionStrength * animatePositionDirection.X,
 						0.5,
-						(3 + 0.1 * rem) * animatePositionStrength * animatePositionDirection.Y,
+						(3 + rem(0.1)) * animatePositionStrength * animatePositionDirection.Y,
 					),
 				)}
 			>
