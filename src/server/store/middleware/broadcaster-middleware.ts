@@ -5,13 +5,14 @@ import { slices } from "shared/store";
 export function broadcasterMiddleware() {
 	const broadcaster = createBroadcaster({
 		producers: slices,
-		broadcast: (players, actions) => {
-			remotes.store.dispatch.firePlayers(players, actions);
+		hydrateRate: 30,
+		dispatch: (player, actions) => {
+			remotes.store.dispatch.fire(player, actions);
 		},
 	});
 
-	remotes.store.state.onRequest((player) => {
-		return broadcaster.playerRequestedState(player);
+	remotes.store.start.connect((player) => {
+		broadcaster.start(player);
 	});
 
 	return broadcaster.middleware;

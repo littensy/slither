@@ -5,6 +5,9 @@ return {
 			backdrop = "rbxassetid://14070281970",
 			blur = "rbxassetid://14036268520",
 			circle = "rbxassetid://14044052585",
+			menu_title_blox = "rbxassetid://14075978899",
+			menu_title_slither = "rbxassetid://14075979105",
+			vignette = "rbxassetid://14093011331",
 		},
 		skins = {
 			snake_eye = "rbxassetid://14026306246",

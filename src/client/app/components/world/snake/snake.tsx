@@ -4,7 +4,7 @@ import Roact, { useEffect } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
 import { getSnakeSkin } from "shared/data/skins";
-import { describeSnakeFromScore, selectSnakeById } from "shared/store/snakes";
+import { describeSnakeFromScore, selectSnakeById, selectSnakeIsBoosting } from "shared/store/snakes";
 import { SNAKE_ON_SCREEN_MARGIN } from "./constants";
 import { SnakeHead } from "./snake-head";
 import { SnakeSegment } from "./snake-segment";
@@ -18,7 +18,10 @@ interface SnakeProps {
 export function Snake({ id, offset, scale }: SnakeProps) {
 	const rem = useRem();
 	const camera = useCamera();
+
 	const snake = useSelectorCreator(selectSnakeById, id);
+	const boosting = useSelectorCreator(selectSnakeIsBoosting, id);
+
 	const [smoothOffset, setSmoothOffset] = useMotor({ x: offset.X, y: offset.Y });
 
 	useEffect(() => {
@@ -36,10 +39,10 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 	const { radius } = describeSnakeFromScore(snake.score);
 
 	const isOnScreen = (segment: Vector2) => {
-		const margin = new Vector2(SNAKE_ON_SCREEN_MARGIN, SNAKE_ON_SCREEN_MARGIN).mul(rem);
+		const margin = rem(new Vector2(SNAKE_ON_SCREEN_MARGIN, SNAKE_ON_SCREEN_MARGIN));
 		const screen = camera.ViewportSize.add(margin.mul(2));
 
-		const positionNotCentered = segment.mul(rem * scale).add(offset.mul(rem * scale));
+		const positionNotCentered = rem(segment.mul(scale).add(offset.mul(scale)));
 		const position = positionNotCentered.add(screen.mul(0.5));
 
 		return position.X >= 0 && position.X <= screen.X && position.Y >= 0 && position.Y <= screen.Y;
@@ -47,7 +50,7 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 
 	return (
 		<Group
-			position={smoothOffset.map((offset) => new UDim2(0.5, offset.x * rem * scale, 0.5, offset.y * rem * scale))}
+			position={smoothOffset.map((offset) => new UDim2(0.5, rem(offset.x * scale), 0.5, rem(offset.y * scale)))}
 		>
 			<SnakeHead
 				key="head"
@@ -56,7 +59,8 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				angle={snake.angle}
 				targetAngle={snake.targetAngle}
 				skin={skin}
-				boost={snake.boost}
+				boost={boosting}
+				dead={snake.dead}
 			/>
 
 			{snake.segments.mapFiltered((segment, index) => {
@@ -75,7 +79,8 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 						to={previous.mul(scale)}
 						index={index}
 						skin={skin}
-						boost={snake.boost}
+						boost={boosting}
+						dead={snake.dead}
 					/>
 				);
 			})}

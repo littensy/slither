@@ -22,8 +22,10 @@ export const selectStaticCandiesUneaten = createSelector(selectStaticCandies, (c
 export const selectStaticCandyCount = createSelector(selectStaticCandiesById, (staticCandiesById) => {
 	let size = 0;
 
-	for (const _ of pairs(staticCandiesById)) {
-		size += 1;
+	for (const [, candy] of pairs(staticCandiesById)) {
+		if (!candy.fromSnake) {
+			size += 1;
+		}
 	}
 
 	return size;

@@ -3,7 +3,9 @@ import { remotes } from "shared/remotes";
 
 export function receiverMiddleware() {
 	const receiver = createBroadcastReceiver({
-		requestState: () => remotes.store.state(),
+		start: () => {
+			remotes.store.start.fire();
+		},
 	});
 
 	remotes.store.dispatch.connect((actions) => {

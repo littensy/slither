@@ -1,5 +1,5 @@
-import { Spring, blend, map, useMotor, useTimer } from "@rbxts/pretty-react-hooks";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
+import { Spring, blend, lerp, map, useMotor, useTimer } from "@rbxts/pretty-react-hooks";
+import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useRem, useSeed } from "client/app/hooks";
@@ -17,50 +17,59 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 	const rem = useRem();
 	const timer = useTimer();
 	const seed = useSeed();
-	const [pointSmooth, setPointSmooth] = useMotor({ x: point.X, y: point.Y });
 
-	const { position, glow, flash } = useMemo(() => {
+	const [pointSmooth, setPointSmooth] = useMotor({ x: point.X, y: point.Y });
+	const [transition, setTransition] = useMotor(eatenAt ? 1 : 0);
+
+	const { position, glow, transparency } = useMemo(() => {
 		const position = timer.value.map((t) => {
 			const x = 4 * math.noise(t, seed);
 			const y = 4 * math.noise(-seed, t);
 			const point = pointSmooth.getValue();
 
-			return new UDim2(0, (point.x + x) * rem, 0, (point.y + y) * rem);
+			return new UDim2(0, rem(point.x + x), 0, rem(point.y + y));
 		});
 
 		const glow = timer.value.map((t) => {
 			const diameter = map(math.noise(seed - 3 * t), -0.5, 0.5, 0, 4);
-			return new UDim2(0, diameter * rem, 0, diameter * rem);
+			return new UDim2(0, rem(diameter), 0, rem(diameter));
 		});
 
-		const flash = timer.value.map((t) => {
-			return map(math.noise(seed + 4 * t), -0.5, 0.5, 0.4, 0.7);
+		const transparency = joinBindings([timer.value, transition]).map(([timer, transition]) => {
+			const flicker = map(math.noise(seed + 4 * timer), -0.5, 0.5, 0.4, 0.7);
+			return lerp(flicker, 1, transition);
 		});
 
-		return { position, glow, flash };
+		return { position, glow, transparency };
 	}, [rem]);
 
-	const diameter = mapStrict(size, 0, 50, rem, 3 * rem);
+	const diameter = mapStrict(size, 0, 50, rem(1), rem(3));
 
 	useEffect(() => {
+		const position = eatenAt || point;
+
 		setPointSmooth({
-			x: new Spring(point.X),
-			y: new Spring(point.Y),
+			x: new Spring(position.X),
+			y: new Spring(position.Y),
 		});
-	}, [point]);
+
+		if (eatenAt) {
+			setTransition(new Spring(1));
+		}
+	}, [point, eatenAt]);
 
 	return (
 		<Image
 			image={images.common.circle}
 			imageColor={color.Lerp(Color3.fromRGB(255, 255, 255), 0.7)}
-			imageTransparency={flash}
+			imageTransparency={transparency}
 			size={new UDim2(0, diameter, 0, diameter)}
 			position={position}
 		>
 			<Shadow
 				shadowColor={color}
 				shadowSize={glow}
-				shadowTransparency={flash.map((t) => blend(0.5, t))}
+				shadowTransparency={transparency.map((t) => blend(0.5, t))}
 				shadowOffset={0}
 			/>
 		</Image>

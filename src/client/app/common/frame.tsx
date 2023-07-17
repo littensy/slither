@@ -1,7 +1,7 @@
-import Roact from "@rbxts/roact";
+import Roact, { Ref, forwardRef } from "@rbxts/roact";
 
 export interface FrameProps<T extends Instance = Frame> extends Roact.PropsWithChildren {
-	ref?: Roact.RefPropertyOrFunction<T>;
+	ref?: Roact.Ref<T>;
 	event?: Roact.JsxInstanceEvents<T>;
 	change?: Roact.JsxInstanceChangeEvents<T>;
 	size?: UDim2 | Roact.Binding<UDim2>;
@@ -17,10 +17,10 @@ export interface FrameProps<T extends Instance = Frame> extends Roact.PropsWithC
 	cornerRadius?: UDim | Roact.Binding<UDim>;
 }
 
-export function Frame(props: FrameProps) {
+export const Frame = forwardRef((props: FrameProps, ref: Ref<Frame>) => {
 	return (
 		<frame
-			ref={props.ref}
+			ref={ref}
 			Size={props.size}
 			Position={props.position}
 			AnchorPoint={props.anchorPoint}
@@ -39,4 +39,4 @@ export function Frame(props: FrameProps) {
 			{props.children}
 		</frame>
 	);
-}
+});

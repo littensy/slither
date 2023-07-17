@@ -11,28 +11,6 @@ export const BASE_REM = 16;
 
 export const RemContext = createContext<number>(BASE_REM);
 
-/**
- * Scales a UDim2 value to be relative to the current rem.
- * @param value The UDim2 to scale.
- * @returns The scaled value.
- */
-export function scale<T extends UDim2 | UDim | number>(value: T, rem: number): T {
-	if (typeIs(value, "UDim2")) {
-		return new UDim2(
-			value.X.Scale,
-			math.round(value.X.Offset * (rem / BASE_REM)),
-			value.Y.Scale,
-			math.round(value.Y.Offset * (rem / BASE_REM)),
-		) as T;
-	} else if (typeIs(value, "UDim")) {
-		return new UDim(value.Scale, math.round(value.Offset * (rem / BASE_REM))) as T;
-	} else if (typeIs(value, "number")) {
-		return math.round(value * (rem / BASE_REM)) as T;
-	} else {
-		return value;
-	}
-}
-
 export function RemProvider({ baseRem = BASE_REM, remOverride, children }: RemProviderProps) {
 	const camera = useCamera();
 

@@ -23,7 +23,7 @@ export const selectWorldCamera = createSelector(
 		if (!snake) {
 			return {
 				offset: new Vector2(),
-				scale: 1,
+				scale: WORLD_SCALE,
 			};
 		}
 

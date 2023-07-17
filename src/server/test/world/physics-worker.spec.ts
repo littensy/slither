@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { connectPhysicsWorker, onPhysicsStep } from "server/world/workers/physics-worker";
+import { connectPhysicsWorker, onPhysicsTick } from "server/world/workers/physics-worker";
 import { WORLD_BOUNDS } from "shared/constants";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { selectSnakeById } from "shared/store/snakes";
@@ -15,8 +15,8 @@ export = () => {
 	});
 
 	afterEach(() => {
-		worker?.();
 		store.resetState();
+		worker?.();
 	});
 
 	const getSnake = (id: string) => {
@@ -37,7 +37,7 @@ export = () => {
 
 	it("should step snake physics", () => {
 		store.addSnake("__test__", "__test__", Vector2.zero, getRandomDefaultSnakeSkin().id);
-		onPhysicsStep();
+		onPhysicsTick();
 		const snake = getSnake("__test__")!;
 		expect(snake.head).to.never.equal(Vector2.zero);
 		expect(snake.segments.size()).to.never.equal(0);
@@ -46,7 +46,16 @@ export = () => {
 	it("should kill snakes out of bounds", () => {
 		store.addSnake("__test__", "__test__", new Vector2(0, WORLD_BOUNDS + 1), getRandomDefaultSnakeSkin().id);
 		expect(getSnake("__test__")?.dead).to.equal(false);
-		onPhysicsStep();
+		onPhysicsTick();
 		expect(getSnake("__test__")?.dead).to.equal(true);
+	});
+
+	it("should not move dead snakes", () => {
+		store.addSnake("__test__", "__test__", new Vector2(0, WORLD_BOUNDS + 1), getRandomDefaultSnakeSkin().id);
+		onPhysicsTick();
+		const initialSnake = getSnake("__test__")!;
+		onPhysicsTick();
+		const finalSnake = getSnake("__test__")!;
+		expect(initialSnake.head).to.equal(finalSnake.head);
 	});
 };

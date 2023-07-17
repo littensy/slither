@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import Roact, { Ref, forwardRef } from "@rbxts/roact";
 import { FrameProps } from "./frame";
 
 export interface CanvasGroupProps extends FrameProps<CanvasGroup> {
@@ -6,10 +6,10 @@ export interface CanvasGroupProps extends FrameProps<CanvasGroup> {
 	groupTransparency?: number | Roact.Binding<number>;
 }
 
-export function CanvasGroup(props: CanvasGroupProps) {
+export const CanvasGroup = forwardRef((props: CanvasGroupProps, ref: Ref<CanvasGroup>) => {
 	return (
 		<canvasgroup
-			ref={props.ref}
+			ref={ref}
 			GroupColor3={props.groupColor}
 			GroupTransparency={props.groupTransparency}
 			Size={props.size}
@@ -29,4 +29,4 @@ export function CanvasGroup(props: CanvasGroupProps) {
 			{props.children}
 		</canvasgroup>
 	);
-}
+});

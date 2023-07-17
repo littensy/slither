@@ -21,3 +21,10 @@ export function subtractRadians(a: number, b: number) {
 export function lerpRadians(a: number, b: number, t: number) {
 	return a + subtractRadians(b, a) * t;
 }
+
+export function turnRadians(current: number, target: number, angle: number) {
+	const difference = subtractRadians(target, current);
+	const sign = math.sign(difference);
+	const amount = math.min(math.abs(difference), angle);
+	return current + amount * sign;
+}
