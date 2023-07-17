@@ -173,9 +173,10 @@
     "@rbxts/scheduler-internal" "^0.2.0"
     "@rbxts/shared-internal" "^0.2.0"
 
-"@rbxts/reflex@/Users/richerd/Documents/GitHub/reflex/rbxts-reflex-3.5.0.tgz":
-  version "3.5.0"
-  resolved "/Users/richerd/Documents/GitHub/reflex/rbxts-reflex-3.5.0.tgz#6e64b804731c04f424d6606ea54bfab57e308757"
+"@rbxts/reflex@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@rbxts/reflex/-/reflex-4.0.0.tgz#a95eef7fab8bbbc7145ad17b7d4296996e2d4e68"
+  integrity sha512-vc9t3YBM1UWV0vh9C2F89oHGCbRu/+riiEmwG7k3MPZRRKNL91jN23aggQjRVGXmqjY6CG6xCHl1zw310r3kQw==
 
 "@rbxts/remo@^1.1.0":
   version "1.2.1"
