@@ -3,7 +3,7 @@ import { store } from "server/store";
 import { WORLD_MAX_CANDY } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
 import { getSnakeSegmentSkin } from "shared/data/skins";
-import { CandyEntity, selectCandyById, selectStaticCandiesById, selectStaticCandyCount } from "shared/store/candy";
+import { CandyEntity, selectCandyById, selectSpawnedCandyCount, selectStaticCandiesById } from "shared/store/candy";
 import {
 	SnakeEntity,
 	describeSnakeFromScore,
@@ -23,7 +23,7 @@ export function connectCandyWorker() {
 	// keep the amount of candy in the world at a constant size
 	// if the amount of candy is less than the max, create more
 	const controlPopulation = store.subscribe(
-		selectStaticCandyCount,
+		selectSpawnedCandyCount,
 		(count) => count < WORLD_MAX_CANDY,
 		(count) => populateCandy(WORLD_MAX_CANDY - count),
 	);
