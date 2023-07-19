@@ -1,8 +1,5 @@
 import { SnakeEntity } from "./snake-slice";
 
-export const SNAKE_SPEED = 4;
-export const SNAKE_BOOST_SPEED = 10;
-
 interface SnakeDescription {
 	readonly length: number;
 	readonly radius: number;

@@ -1,8 +1,8 @@
 import { createProducer } from "@rbxts/reflex";
-import { WORLD_TICK } from "shared/constants";
+import { SNAKE_BOOST_SPEED, SNAKE_SPEED, WORLD_TICK } from "shared/constants";
 import { map, turnRadians } from "shared/utils/math-utils";
 import { mapObject } from "shared/utils/object-utils";
-import { SNAKE_BOOST_SPEED, SNAKE_SPEED, describeSnakeFromScore, snakeIsBoosting } from "./snake-utils";
+import { describeSnakeFromScore, snakeIsBoosting } from "./snake-utils";
 
 export interface SnakesState {
 	readonly [id: string]: SnakeEntity | undefined;
