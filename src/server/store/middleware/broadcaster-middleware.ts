@@ -8,11 +8,10 @@ export function broadcasterMiddleware() {
 
 	const broadcaster = createBroadcaster({
 		producers: slices,
-
+		hydrateRate: 120,
 		dispatch: (player, actions) => {
 			remotes.store.dispatch.fire(player, actions);
 		},
-
 		beforeHydrate: (player, state) => {
 			if (!hydrated.has(player.UserId)) {
 				return state;

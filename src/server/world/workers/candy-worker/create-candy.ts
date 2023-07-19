@@ -1,4 +1,4 @@
-import { getRandomPointInWorld } from "server/world/utils/world-utils";
+import { getRandomPointNearWorldOrigin } from "server/world/utils/world-utils";
 import { getRandomAccent } from "shared/data/palette";
 import { CandyEntity } from "shared/store/candy";
 
@@ -10,7 +10,7 @@ export function createCandy(patch?: Partial<CandyEntity>): CandyEntity {
 		id: `candy-${nextCandyId++}`,
 		type: "static",
 		size: math.round(1 + random.NextInteger(1, 10) ** 0.5),
-		position: getRandomPointInWorld(0.9),
+		position: getRandomPointNearWorldOrigin(0.9),
 		color: getRandomAccent(),
 		...patch,
 	};

@@ -3,8 +3,9 @@ import { getSafePointInWorld } from "server/world";
 import { createCandy, onCandyTick } from "server/world/workers/candy-worker";
 import { onCollisionTick } from "server/world/workers/collision-worker";
 import { onSnakeTick } from "server/world/workers/snake-worker";
-import { WORLD_BOUNDS } from "shared/constants";
+import { WORLD_BOUNDS, WORLD_MAX_CANDY } from "shared/constants";
 import { benchmark } from "shared/utils/benchmark";
+import { fillArray } from "shared/utils/object-utils";
 
 store.destroy();
 store.resetState();
@@ -19,9 +20,9 @@ for (const index of $range(0, 50)) {
 		score: 1000 + 160 * index,
 		desiredAngle: 0.5 * index,
 	});
-
-	store.addCandy(createCandy());
 }
+
+store.populateCandy(fillArray(WORLD_MAX_CANDY, () => createCandy()));
 
 export = benchmark({
 	functions: {

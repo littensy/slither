@@ -2,7 +2,7 @@ import { store } from "server/store";
 import { selectSnakeCount } from "shared/store/snakes";
 import { spawnBots } from "./spawn-bots";
 
-const MIN_SNAKES = 10;
+const MIN_SNAKES = 20;
 
 export function connectBotWorker() {
 	store.subscribe(
