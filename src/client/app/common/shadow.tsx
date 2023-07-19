@@ -30,7 +30,7 @@ export function Shadow({
 
 	return (
 		<Image
-			image={images.common.blur}
+			image={images.ui.blur}
 			imageTransparency={shadowTransparency}
 			imageColor={shadowColor}
 			anchorPoint={new Vector2(0.5, 0.5)}

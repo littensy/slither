@@ -20,12 +20,12 @@ export function HomeTitle({ position }: HomeTitleProps) {
 		<Group anchorPoint={new Vector2(0.5, 0.5)} position={position}>
 			<uilistlayout FillDirection="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
-			<Image image={images.common.menu_title_slither} scaleType="Fit" size={new UDim2(0, rem(22), 0, rem(14))}>
+			<Image image={images.ui.menu_title_slither} scaleType="Fit" size={new UDim2(0, rem(22), 0, rem(14))}>
 				<uigradient Color={GRADIENT} Rotation={rotation} />
 			</Image>
 
 			<Image
-				image={images.common.menu_title_blox}
+				image={images.ui.menu_title_blox}
 				imageColor={palette.text}
 				imageTransparency={0.1}
 				scaleType="Fit"

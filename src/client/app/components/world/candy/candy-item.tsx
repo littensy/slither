@@ -58,7 +58,7 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 
 	return (
 		<Image
-			image={images.common.circle}
+			image={images.ui.circle}
 			imageColor={color.Lerp(Color3.fromRGB(255, 255, 255), 0.7)}
 			imageTransparency={transparency}
 			size={new UDim2(0, diameter, 0, diameter)}

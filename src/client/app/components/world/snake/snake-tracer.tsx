@@ -72,7 +72,7 @@ export function SnakeTracer({ from, to, size, index, skin, boost, dead }: SnakeT
 		>
 			<DelayRender shouldRender={boost} unmountDelay={0.5}>
 				<Image
-					image={images.common.blur}
+					image={images.ui.blur}
 					imageColor={style.color.map((color) => color.Lerp(new Color3(), 0.1))}
 					imageTransparency={joinBindings([lerpBinding(glow, 1, 0), style.transparency]).map(([a, b]) =>
 						blend(a, b),

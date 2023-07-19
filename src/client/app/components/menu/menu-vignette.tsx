@@ -20,7 +20,7 @@ export function MenuVignette() {
 
 	return (
 		<Image
-			image={images.common.vignette}
+			image={images.ui.vignette}
 			imageColor={palette.black}
 			imageTransparency={lerpBinding(transition, 1, 0)}
 			backgroundColor={palette.black}

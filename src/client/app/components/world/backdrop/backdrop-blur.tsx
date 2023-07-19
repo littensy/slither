@@ -68,7 +68,7 @@ export function BackdropBlur() {
 
 	return (
 		<Image
-			image={images.common.blur}
+			image={images.ui.blur}
 			imageColor={color}
 			imageTransparency={style.transparency}
 			scaleType="Fit"

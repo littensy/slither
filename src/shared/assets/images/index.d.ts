@@ -1,5 +1,5 @@
 export const images: {
-	readonly common: {
+	readonly ui: {
 		readonly backdrop: string;
 		readonly blur: string;
 		readonly circle: string;
