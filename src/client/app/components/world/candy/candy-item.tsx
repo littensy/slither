@@ -19,7 +19,7 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 	const seed = useSeed();
 
 	const [pointSmooth, setPointSmooth] = useMotor({ x: point.X, y: point.Y });
-	const [transition, setTransition] = useMotor(eatenAt ? 1 : 0);
+	const [transition, setTransition] = useMotor(1);
 
 	const { position, glow, transparency } = useMemo(() => {
 		const position = timer.value.map((t) => {
@@ -43,7 +43,7 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 		return { position, glow, transparency };
 	}, [rem]);
 
-	const diameter = mapStrict(size, 0, 50, rem(1), rem(3));
+	const diameter = mapStrict(size, 0, 30, rem(0.75), rem(4));
 
 	useEffect(() => {
 		const position = eatenAt || point;
@@ -53,9 +53,7 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 			y: new Spring(position.Y),
 		});
 
-		if (eatenAt) {
-			setTransition(new Spring(1));
-		}
+		setTransition(new Spring(eatenAt ? 1 : 0));
 	}, [point, eatenAt]);
 
 	return (

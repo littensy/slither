@@ -24,7 +24,7 @@ export function getSnakeSkin(id: string): SnakeSkin {
 	return snakeSkinMap.get(id) || defaultSnakeSkins[0];
 }
 
-export function getSnakeSegmentSkin(id: string, index: number): { readonly texture: string; readonly tint: Color3 } {
+export function getSnakeTracerSkin(id: string, index: number): { readonly texture: string; readonly tint: Color3 } {
 	const { texture, tint } = getSnakeSkin(id);
 	return {
 		texture: typeIs(texture, "string") ? texture : texture[index % texture.size()],

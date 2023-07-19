@@ -1,14 +1,14 @@
-import { Spring, blend, lerpBinding, map, useMotor } from "@rbxts/pretty-react-hooks";
+import { Spring, blend, lerpBinding, useMotor } from "@rbxts/pretty-react-hooks";
 import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
 import { DelayRender } from "client/app/common/delay-render";
 import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
 import { images } from "shared/assets";
-import { SnakeSkin, getSnakeSegmentSkin } from "shared/data/skins";
+import { SnakeSkin, getSnakeTracerSkin } from "shared/data/skins";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
-import { useSegmentStyle } from "./use-segment-style";
+import { useTracerStyle } from "./use-tracer-style";
 
-interface SnakeSegmentProps {
+interface SnakeTracerProps {
 	readonly from: Vector2;
 	readonly to: Vector2;
 	readonly size: number;
@@ -18,11 +18,11 @@ interface SnakeSegmentProps {
 	readonly dead: boolean;
 }
 
-export function SnakeSegment({ from, to, size, index, skin, boost, dead }: SnakeSegmentProps) {
-	const { texture, tint } = getSnakeSegmentSkin(skin.id, index);
+export function SnakeTracer({ from, to, size, index, skin, boost, dead }: SnakeTracerProps) {
+	const { texture, tint } = getSnakeTracerSkin(skin.id, index);
 
 	const rem = useRem();
-	const style = useSegmentStyle(boost, dead, tint, index);
+	const style = useTracerStyle(boost, dead, tint, index);
 
 	const [glow, setGlow] = useMotor(0);
 	const [line, setLine] = useMotor({ fromX: from.X, fromY: from.Y, toX: to.X, toY: to.Y });

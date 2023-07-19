@@ -18,7 +18,7 @@ export = hoarcekat(() => {
 		if (snake) {
 			store.removeSnake(LOCAL_USER);
 		} else {
-			store.addSnake(LOCAL_USER, "", Vector2.zero, "");
+			store.addSnake(LOCAL_USER);
 		}
 	};
 

@@ -12,10 +12,14 @@ const CANDY_ON_SCREEN_MARGIN = 5;
 export function Candy() {
 	const rem = useRem();
 	const camera = useCamera();
+
 	const candy = useSelector(selectStaticCandies);
 	const world = useSelector(selectWorldCamera);
 
-	const [smoothOffset, setSmoothOffset] = useMotor({ x: world.offset.X, y: world.offset.Y });
+	const [smoothOffset, setSmoothOffset] = useMotor({
+		x: world.offset.X,
+		y: world.offset.Y,
+	});
 
 	useEffect(() => {
 		setSmoothOffset({
