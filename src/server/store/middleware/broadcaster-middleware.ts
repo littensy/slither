@@ -14,10 +14,9 @@ export function broadcasterMiddleware() {
 		},
 		beforeHydrate: (player, state) => {
 			if (!hydrated.has(player.UserId)) {
+				hydrated.add(player.UserId);
 				return state;
 			}
-
-			hydrated.add(player.UserId);
 
 			// exclude candy to reduce network traffic
 			return { ...state, candy: undefined };

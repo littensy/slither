@@ -1,30 +1,48 @@
-import { map } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import { Spring, map, useMotor } from "@rbxts/pretty-react-hooks";
+import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
+import { BASE_REM } from "client/app/providers/rem-provider";
 import { images } from "shared/assets";
 import { WORLD_BOUNDS } from "shared/constants";
 import { palette } from "shared/data/palette";
 
 interface MinimapNodeProps {
 	readonly point: Vector2;
+	readonly rotation?: number;
 	readonly isClient?: boolean;
 }
 
-export function MinimapNode({ point, isClient = false }: MinimapNodeProps) {
+export function MinimapNode({ point, rotation = 0, isClient = false }: MinimapNodeProps) {
 	const rem = useRem();
+	const [smoothPoint, setSmoothPoint] = useMotor({ x: point.X, y: point.Y });
+	const [smoothRotation, setSmoothRotation] = useMotor(rotation);
 
-	const position = UDim2.fromScale(
-		map(point.X, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
-		map(point.Y, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
-	);
+	const position = smoothPoint.map((point) => {
+		return UDim2.fromScale(
+			map(point.x, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
+			map(point.y, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
+		);
+	});
+
+	useEffect(() => {
+		setSmoothPoint({
+			x: new Spring(point.X, { frequency: 2 }),
+			y: new Spring(point.Y, { frequency: 2 }),
+		});
+
+		setSmoothRotation(new Spring(rotation, { frequency: 2 }));
+	}, [point, rotation]);
 
 	return (
 		<Image
-			image={images.ui.circle}
+			image={isClient ? images.ui.map_cursor : images.ui.circle}
 			imageColor={isClient ? palette.text : palette.lavender}
 			anchorPoint={new Vector2(0.5, 0.5)}
-			size={isClient ? new UDim2(0, rem(0.75), 0, rem(0.75)) : new UDim2(0, rem(0.5), 0, rem(0.5))}
+			size={
+				isClient ? new UDim2(0, rem(28 / BASE_REM), 0, rem(28 / BASE_REM)) : new UDim2(0, rem(0.4), 0, rem(0.4))
+			}
+			rotation={smoothRotation}
 			position={position}
 		/>
 	);

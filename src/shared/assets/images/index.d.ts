@@ -3,7 +3,8 @@ export const images: {
 		readonly backdrop: string;
 		readonly blur: string;
 		readonly circle: string;
-		readonly crosshair: string;
+		readonly map_crosshair: string;
+		readonly map_cursor: string;
 		readonly menu_title: string;
 		readonly vignette: string;
 	};

@@ -10,7 +10,7 @@ export function Game() {
 	const [transition, setTransition] = useMotor(0);
 
 	useEffect(() => {
-		setTransition(new Spring(inGame ? 1 : 0, { frequency: 2 }));
+		setTransition(new Spring(inGame ? 1 : 0, { frequency: 1 }));
 	}, [inGame]);
 
 	return (

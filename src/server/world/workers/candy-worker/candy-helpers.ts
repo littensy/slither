@@ -14,8 +14,8 @@ export function createCandy(patch?: Partial<CandyEntity>): CandyEntity {
 	return {
 		id: `${nextCandyId++}`,
 		type: "default",
-		size: math.round(1 + random.NextInteger(1, 10) ** 0.5),
-		position: getRandomPointNearWorldOrigin(0.9),
+		size: math.round(random.NextInteger(1, 10) ** 0.5),
+		position: getRandomPointNearWorldOrigin(0.95),
 		color: getRandomAccent(),
 		...patch,
 	};

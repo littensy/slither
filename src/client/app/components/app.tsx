@@ -1,5 +1,6 @@
 import Roact from "@rbxts/roact";
 import { Root } from "../common/root";
+import { Game } from "./game";
 import { Menu } from "./menu";
 import { Preloader } from "./preloader";
 import { SnakeController } from "./snake-controller";
@@ -13,6 +14,7 @@ export function App() {
 			<Root>
 				<SnakeController />
 				<World />
+				<Game />
 			</Root>
 
 			<Root>

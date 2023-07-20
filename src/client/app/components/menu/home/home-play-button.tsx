@@ -39,8 +39,8 @@ export function HomePlayButton({ anchorPoint, size, position }: HomePlayButtonPr
 		>
 			<Shadow
 				shadowColor={Color3.fromRGB(255, 255, 255)}
-				shadowTransparency={0.2}
-				shadowSize={rem(2.5)}
+				shadowTransparency={0.1}
+				shadowSize={rem(1.25)}
 				shadowOffset={rem(0.25)}
 			>
 				<uigradient Color={gradient} Rotation={shimmer} />

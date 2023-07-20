@@ -2,7 +2,6 @@
 return {
 	images = {
 		skins = {
-			snake_eye = "rbxassetid://14026306246",
 			snake_eye_left = "rbxassetid://14034366397",
 			snake_eye_right = "rbxassetid://14034362504",
 			snake_main = "rbxassetid://14035801225",
@@ -11,7 +10,8 @@ return {
 			backdrop = "rbxassetid://14120525361",
 			blur = "rbxassetid://14120516187",
 			circle = "rbxassetid://14120516288",
-			crosshair = "rbxassetid://14126730923",
+			map_crosshair = "rbxassetid://14127467312",
+			map_cursor = "rbxassetid://14127465927",
 			menu_title = "rbxassetid://14120569384",
 			vignette = "rbxassetid://14120516929",
 		},

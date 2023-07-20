@@ -1,8 +1,3 @@
-[inputs."assets/images/skins/snake_eye.png"]
-hash = "805fb0b4345e44c5a0739a484129ba918f853614fa634ad56ce78b4f872fd62b"
-id = 14026306246
-packable = false
-
 [inputs."assets/images/skins/snake_eye_left.png"]
 hash = "3572781920b0c779fb4fcbf5c8d895c828f7f5b10fa90ed1c384d2248bd68f10"
 id = 14034366397
@@ -33,9 +28,14 @@ hash = "f09bf69c83b01c4545a27118082cf0aa4eab4d930d8b30a50f633e023536ebe8"
 id = 14120516288
 packable = false
 
-[inputs."assets/images/ui/crosshair.png"]
+[inputs."assets/images/ui/map_crosshair.png"]
 hash = "cf91f362ff6af65cf1aaa1c1f05681001fdc2d7af9a71c1f9162100e6a400a76"
-id = 14126730923
+id = 14127467312
+packable = false
+
+[inputs."assets/images/ui/map_cursor.png"]
+hash = "ccd68193219542e81475ff1426d77ea45fa7e44c5b85194f6950c8e6492c6379"
+id = 14127465927
 packable = false
 
 [inputs."assets/images/ui/menu_title.png"]

@@ -18,23 +18,43 @@ export function Minimap() {
 			size={new UDim2(0, rem(10), 0, rem(10))}
 			position={new UDim2(1, rem(-3), 1, rem(-3))}
 		>
-			<Shadow key="drop-shadow" shadowColor={palette.crust} />
+			<Shadow
+				key="drop-shadow"
+				shadowColor={palette.black}
+				shadowSize={rem(5)}
+				shadowOffset={rem(1.5)}
+				shadowTransparency={0}
+			/>
 
-			<Frame key="background" backgroundColor={palette.white1} size={new UDim2(1, 0, 1, 0)}>
+			<Frame
+				key="background"
+				backgroundColor={palette.white1}
+				cornerRadius={new UDim(1, 0)}
+				size={new UDim2(1, 0, 1, 0)}
+			>
 				<uigradient
 					Color={new ColorSequence(palette.crust, palette.mantle)}
-					Transparency={new NumberSequence(0, 0.05)}
-					Rotation={45}
+					Transparency={new NumberSequence(0.3, 0.1)}
+					Rotation={-45}
 				/>
-				<uistroke Color={palette.text} Transparency={0.85} Thickness={rem(0.1)} />
 				<uistroke Color={palette.lavender} Transparency={0.9} Thickness={rem(0.25)} />
+			</Frame>
+
+			<Frame
+				key="inner-stroke"
+				backgroundTransparency={1}
+				cornerRadius={new UDim(1, 0)}
+				size={new UDim2(1, -2, 1, -2)}
+				position={new UDim2(0, 1, 0, 1)}
+			>
+				<uistroke Color={palette.text} Transparency={0.85} Thickness={rem(0.05)} />
 			</Frame>
 
 			<Image
 				key="crosshair"
-				image={images.ui.crosshair}
+				image={images.ui.map_crosshair}
 				anchorPoint={new Vector2(0.5, 0.5)}
-				size={new UDim2(0, rem(36 / BASE_REM), 0, rem(36 / BASE_REM))}
+				size={new UDim2(0, rem(16 / BASE_REM), 0, rem(16 / BASE_REM))}
 				position={new UDim2(0.5, 0, 0.5, 0)}
 			/>
 
