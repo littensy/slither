@@ -1,6 +1,5 @@
 import { createSelector } from "@rbxts/reflex";
 import { describeSnakeFromScore } from "shared/store/snakes";
-import { mapStrict } from "shared/utils/math-utils";
 import { RootState } from "../";
 
 export interface WorldCamera {
@@ -32,7 +31,8 @@ export const selectWorldCamera = createSelector(
 
 		return {
 			offset: snake.head.mul(-1),
-			scale: mapStrict(radius, 0.5, 3, WORLD_SCALE, WORLD_SCALE * 0.5),
+			// scale: mapStrict(radius, 0.5, 3, WORLD_SCALE, WORLD_SCALE * 0.5),
+			scale: 0.5,
 		};
 	},
 	{

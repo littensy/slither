@@ -88,7 +88,9 @@ function createCandyOnSnake(id: string): void {
 		return;
 	}
 
-	const candies = snake.tracers.map((tracer, index) => {
+	const tracers = [...snake.tracers, snake.head];
+
+	const candies = tracers.map((tracer, index) => {
 		const skin = getSnakeTracerSkin(snake.skin, index);
 
 		return createCandy({

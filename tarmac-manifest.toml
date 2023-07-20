@@ -33,6 +33,11 @@ hash = "f09bf69c83b01c4545a27118082cf0aa4eab4d930d8b30a50f633e023536ebe8"
 id = 14120516288
 packable = false
 
+[inputs."assets/images/ui/crosshair.png"]
+hash = "cf91f362ff6af65cf1aaa1c1f05681001fdc2d7af9a71c1f9162100e6a400a76"
+id = 14126730923
+packable = false
+
 [inputs."assets/images/ui/menu_title.png"]
 hash = "64020170b0236890947e4ea28e15592699351f7d9d9a3825b05b030fb8a3d3f0"
 id = 14120569384

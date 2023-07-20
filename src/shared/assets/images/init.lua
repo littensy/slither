@@ -11,6 +11,7 @@ return {
 			backdrop = "rbxassetid://14120525361",
 			blur = "rbxassetid://14120516187",
 			circle = "rbxassetid://14120516288",
+			crosshair = "rbxassetid://14126730923",
 			menu_title = "rbxassetid://14120569384",
 			vignette = "rbxassetid://14120516929",
 		},

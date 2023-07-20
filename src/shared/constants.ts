@@ -1,11 +1,11 @@
 import { Players, RunService } from "@rbxts/services";
 import { CandyType } from "./store/candy";
 
-export const WORLD_BOUNDS = 256;
+export const WORLD_BOUNDS = 168;
 export const WORLD_TICK = 1 / 12;
 
 export const CANDY_LIMITS: { readonly [K in CandyType]: number } = {
-	default: 3072,
+	default: 4096,
 	dropping: 256,
 	loot: 256,
 };

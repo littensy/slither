@@ -22,11 +22,12 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dea
 	const { texture, tint } = getSnakeTracerSkin(skin.id, 0);
 
 	const rem = useRem();
-	const continuousAngle = useContinuousAngle(angle);
+	const currentAngle = useContinuousAngle(angle);
+	const angleDifference = useContinuousAngle(subtractRadians(targetAngle, currentAngle));
 	const style = useTracerStyle(boost, dead, tint, 0);
 
 	const [smoothPosition, setSmoothPosition] = useMotor({ x: position.X, y: position.Y });
-	const [smoothAngle, setSmoothAngle] = useMotor(continuousAngle);
+	const [smoothAngle, setSmoothAngle] = useMotor(currentAngle);
 	const [smoothEyeAngle, setSmoothEyeAngle] = useMotor(0);
 
 	useEffect(() => {
@@ -34,9 +35,9 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dea
 			x: new Spring(position.X),
 			y: new Spring(position.Y),
 		});
-		setSmoothAngle(new Spring(continuousAngle + SNAKE_ANGLE_OFFSET));
-		setSmoothEyeAngle(new Spring(subtractRadians(targetAngle, continuousAngle)));
-	}, [position, continuousAngle, targetAngle]);
+		setSmoothAngle(new Spring(currentAngle + SNAKE_ANGLE_OFFSET));
+		setSmoothEyeAngle(new Spring(angleDifference));
+	}, [position, currentAngle, angleDifference]);
 
 	return (
 		<Image

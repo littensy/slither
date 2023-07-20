@@ -16,7 +16,7 @@ export function connectSnakeInputs() {
 			name: player.DisplayName,
 			head: getSafePointInWorld(),
 			skin: getRandomDefaultSnakeSkin().id,
-			score: 20000,
+			score: 10,
 		});
 	});
 
