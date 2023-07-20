@@ -4,11 +4,11 @@ import { fillArray } from "shared/utils/object-utils";
 
 export = benchmark({
 	parameters: () => {
-		const grid = createGrid(50);
+		const grid = createGrid(25);
 		const set = new Set<Vector3>();
 		const vectors: Vector2[] = [];
 
-		for (const index of $range(0, 10000)) {
+		for (const index of $range(0, 5000)) {
 			const random = new Random(index);
 			const vector = new Vector2(random.NextNumber(0, 1000), random.NextNumber(0, 1000));
 			grid.insert(vector);

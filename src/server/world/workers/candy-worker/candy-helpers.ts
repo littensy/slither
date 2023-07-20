@@ -8,7 +8,7 @@ import { getRandomAccent } from "shared/data/palette";
 import { CandyEntity, CandyType, selectCandyById, selectCandyCount, selectStaleCandyOfType } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 
-export const candyGrid = createGrid<{ id: string }>(50);
+export const candyGrid = createGrid<{ id: string }>(20);
 
 let nextCandyId = 0;
 
