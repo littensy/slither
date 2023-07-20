@@ -1,10 +1,11 @@
 export const images: {
-	readonly common: {
+	readonly ui: {
 		readonly backdrop: string;
 		readonly blur: string;
 		readonly circle: string;
-		readonly menu_title_blox: string;
-		readonly menu_title_slither: string;
+		readonly map_crosshair: string;
+		readonly map_cursor: string;
+		readonly menu_title: string;
 		readonly vignette: string;
 	};
 	readonly skins: {

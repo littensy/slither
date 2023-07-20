@@ -7,15 +7,15 @@ export function useMockRemotes() {
 	useEffect(() => {
 		const connections = [
 			remotes.snake.move.test.onFire((angle) => {
-				store.setSnakeTargetAngle(LOCAL_USER, angle);
+				store.turnSnake(LOCAL_USER, angle);
 			}),
 
 			remotes.snake.boost.test.onFire((boost) => {
-				store.setSnakeBoost(LOCAL_USER, boost);
+				store.boostSnake(LOCAL_USER, boost);
 			}),
 
 			remotes.snake.spawn.test.onFire(() => {
-				store.addSnake(LOCAL_USER, "", Vector2.zero, "");
+				store.addSnake(LOCAL_USER);
 			}),
 		];
 

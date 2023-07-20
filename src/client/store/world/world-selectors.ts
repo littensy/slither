@@ -1,5 +1,6 @@
 import { createSelector } from "@rbxts/reflex";
-import { map } from "shared/utils/math-utils";
+import { describeSnakeFromScore } from "shared/store/snakes";
+import { mapStrict } from "shared/utils/math-utils";
 import { RootState } from "../";
 
 export interface WorldCamera {
@@ -9,16 +10,16 @@ export interface WorldCamera {
 
 const WORLD_SCALE = 4;
 
-export const selectWorldFocus = (state: RootState) => {
-	return state.world.focus;
+export const selectWorldSubject = (state: RootState) => {
+	return state.world.subject;
 };
 
-export const selectSnakeInFocus = (state: RootState) => {
-	return state.snakes[state.world.focus];
+export const selectSnakeFromWorldSubject = (state: RootState) => {
+	return state.snakes[state.world.subject];
 };
 
 export const selectWorldCamera = createSelector(
-	[selectSnakeInFocus],
+	[selectSnakeFromWorldSubject],
 	(snake) => {
 		if (!snake) {
 			return {
@@ -27,9 +28,11 @@ export const selectWorldCamera = createSelector(
 			};
 		}
 
+		const { radius } = describeSnakeFromScore(snake.score);
+
 		return {
 			offset: snake.head.mul(-1),
-			scale: map(snake.score, 0, 8000, WORLD_SCALE, WORLD_SCALE * 0.3),
+			scale: mapStrict(radius, 0.5, 3, WORLD_SCALE, WORLD_SCALE * 0.5),
 		};
 	},
 	{

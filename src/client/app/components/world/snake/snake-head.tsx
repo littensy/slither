@@ -3,10 +3,10 @@ import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useContinuousAngle, useRem } from "client/app/hooks";
 import { images } from "shared/assets";
-import { SnakeSkin, getSnakeSegmentSkin } from "shared/data/skins";
+import { SnakeSkin, getSnakeTracerSkin } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 import { SNAKE_ANGLE_OFFSET } from "./constants";
-import { useSegmentStyle } from "./use-segment-style";
+import { useTracerStyle } from "./use-tracer-style";
 
 interface SnakeHeadProps {
 	readonly position: Vector2;
@@ -19,14 +19,15 @@ interface SnakeHeadProps {
 }
 
 export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dead }: SnakeHeadProps) {
-	const { texture, tint } = getSnakeSegmentSkin(skin.id, 0);
+	const { texture, tint } = getSnakeTracerSkin(skin.id, 0);
 
 	const rem = useRem();
-	const continuousAngle = useContinuousAngle(angle);
-	const style = useSegmentStyle(boost, dead, tint, 0);
+	const currentAngle = useContinuousAngle(angle);
+	const angleDifference = useContinuousAngle(subtractRadians(targetAngle, currentAngle));
+	const style = useTracerStyle(boost, dead, tint, 0);
 
 	const [smoothPosition, setSmoothPosition] = useMotor({ x: position.X, y: position.Y });
-	const [smoothAngle, setSmoothAngle] = useMotor(continuousAngle);
+	const [smoothAngle, setSmoothAngle] = useMotor(currentAngle);
 	const [smoothEyeAngle, setSmoothEyeAngle] = useMotor(0);
 
 	useEffect(() => {
@@ -34,9 +35,9 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dea
 			x: new Spring(position.X),
 			y: new Spring(position.Y),
 		});
-		setSmoothAngle(new Spring(continuousAngle + SNAKE_ANGLE_OFFSET));
-		setSmoothEyeAngle(new Spring(subtractRadians(targetAngle, continuousAngle)));
-	}, [position, continuousAngle, targetAngle]);
+		setSmoothAngle(new Spring(currentAngle + SNAKE_ANGLE_OFFSET));
+		setSmoothEyeAngle(new Spring(angleDifference));
+	}, [position, currentAngle, angleDifference]);
 
 	return (
 		<Image
@@ -55,7 +56,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dea
 				key="eye-right"
 				image={images.skins.snake_eye_right}
 				imageTransparency={style.transparency}
-				size={new UDim2(0.4, 0, 0.4, 0)}
+				size={new UDim2(0.45, 0, 0.45, 0)}
 				position={new UDim2(0.5, 0, 0.1, 0)}
 				rotation={smoothEyeAngle.map(math.deg)}
 			/>
@@ -65,7 +66,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dea
 				image={images.skins.snake_eye_left}
 				imageTransparency={style.transparency}
 				anchorPoint={new Vector2(1, 0)}
-				size={new UDim2(0.4, 0, 0.4, 0)}
+				size={new UDim2(0.45, 0, 0.45, 0)}
 				position={new UDim2(0.5, 0, 0.1, 0)}
 				rotation={smoothEyeAngle.map(math.deg)}
 			/>

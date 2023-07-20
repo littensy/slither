@@ -1,8 +1,10 @@
 import { StarterGui } from "@rbxts/services";
 import { remotes } from "shared/remotes";
-import { coreEvent, retryCore } from "./utils";
+import { retryCore } from "./utils";
 
-const resetBindable = coreEvent(() => {
+const resetBindable = new Instance("BindableEvent");
+
+resetBindable.Event.Connect(() => {
 	remotes.snake.kill.fire();
 });
 

@@ -11,12 +11,3 @@ export async function retryCore(callback: () => void) {
 		}
 	}, 8);
 }
-
-/**
- * Create a BindableEvent that calls the given callback when fired.
- */
-export function coreEvent<T extends Callback>(callback: T) {
-	const event = new Instance("BindableEvent");
-	event.Event.Connect(callback);
-	return event;
-}

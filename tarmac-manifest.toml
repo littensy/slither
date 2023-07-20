@@ -1,38 +1,3 @@
-[inputs."assets/images/common/backdrop.png"]
-hash = "a43c7ebbb9ec7da7fc9dd72894fe2525e225f644ce3ff4180319cb30372e1a39"
-id = 14070281970
-packable = false
-
-[inputs."assets/images/common/blur.png"]
-hash = "d1b211a8eaaf1a834836d63b984aaf85538b10e34a714d06fc65ba0faf440af6"
-id = 14036268520
-packable = false
-
-[inputs."assets/images/common/circle.png"]
-hash = "f09bf69c83b01c4545a27118082cf0aa4eab4d930d8b30a50f633e023536ebe8"
-id = 14044052585
-packable = false
-
-[inputs."assets/images/common/menu_title_blox.png"]
-hash = "3cf67fa49358b6377d77740e24981bb63906e717e47058517e8a7dc49c0080d8"
-id = 14075978899
-packable = false
-
-[inputs."assets/images/common/menu_title_slither.png"]
-hash = "a1093cc16db89fc61aae8f68c432b6e577c72cc47eff87110fed60f29c77830c"
-id = 14075979105
-packable = false
-
-[inputs."assets/images/common/vignette.png"]
-hash = "82cd560e5759d23863dfeef00411ccae3135d7c3509852b1ca0055d6b1061503"
-id = 14093011331
-packable = false
-
-[inputs."assets/images/skins/snake_eye.png"]
-hash = "805fb0b4345e44c5a0739a484129ba918f853614fa634ad56ce78b4f872fd62b"
-id = 14026306246
-packable = false
-
 [inputs."assets/images/skins/snake_eye_left.png"]
 hash = "3572781920b0c779fb4fcbf5c8d895c828f7f5b10fa90ed1c384d2248bd68f10"
 id = 14034366397
@@ -46,4 +11,39 @@ packable = false
 [inputs."assets/images/skins/snake_main.png"]
 hash = "1e598a6a305b566bf81f2aae5382b203681277c9525c86a33c84a29a593448c7"
 id = 14035801225
+packable = false
+
+[inputs."assets/images/ui/backdrop.png"]
+hash = "a43c7ebbb9ec7da7fc9dd72894fe2525e225f644ce3ff4180319cb30372e1a39"
+id = 14120525361
+packable = false
+
+[inputs."assets/images/ui/blur.png"]
+hash = "d1b211a8eaaf1a834836d63b984aaf85538b10e34a714d06fc65ba0faf440af6"
+id = 14120516187
+packable = false
+
+[inputs."assets/images/ui/circle.png"]
+hash = "f09bf69c83b01c4545a27118082cf0aa4eab4d930d8b30a50f633e023536ebe8"
+id = 14120516288
+packable = false
+
+[inputs."assets/images/ui/map_crosshair.png"]
+hash = "cf91f362ff6af65cf1aaa1c1f05681001fdc2d7af9a71c1f9162100e6a400a76"
+id = 14127467312
+packable = false
+
+[inputs."assets/images/ui/map_cursor.png"]
+hash = "ccd68193219542e81475ff1426d77ea45fa7e44c5b85194f6950c8e6492c6379"
+id = 14127465927
+packable = false
+
+[inputs."assets/images/ui/menu_title.png"]
+hash = "64020170b0236890947e4ea28e15592699351f7d9d9a3825b05b030fb8a3d3f0"
+id = 14120569384
+packable = false
+
+[inputs."assets/images/ui/vignette.png"]
+hash = "82cd560e5759d23863dfeef00411ccae3135d7c3509852b1ca0055d6b1061503"
+id = 14120516929
 packable = false

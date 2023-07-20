@@ -1,11 +1,15 @@
+import { useThrottleCallback } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { InputCapture } from "client/app/common/input-capture";
 import { remotes } from "shared/remotes";
 
 export function SnakeInput() {
-	const updateAngle = (angle: number) => {
-		remotes.snake.move.fire(angle);
-	};
+	const updateAngle = useThrottleCallback(
+		(angle: number) => {
+			remotes.snake.move.fire(angle);
+		},
+		{ wait: 1 / 20 },
+	);
 
 	const setBoost = (boost: boolean) => {
 		remotes.snake.boost.fire(boost);
@@ -20,7 +24,7 @@ export function SnakeInput() {
 			const direction = mouse.sub(frame.AbsolutePosition).sub(frame.AbsoluteSize.div(2));
 			const angle = math.atan2(direction.Y, direction.X);
 
-			updateAngle(angle);
+			updateAngle.run(angle);
 		}
 	};
 

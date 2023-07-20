@@ -1,9 +1,24 @@
 import { palette } from "shared/data/palette";
 
-export const GRADIENT = new ColorSequence([
-	new ColorSequenceKeypoint(0, palette.red),
-	new ColorSequenceKeypoint(0.25, palette.yellow),
-	new ColorSequenceKeypoint(0.5, palette.teal),
-	new ColorSequenceKeypoint(0.75, palette.blue),
-	new ColorSequenceKeypoint(1, palette.mauve),
+const generate = (colors: Color3[]) => {
+	const sequence: ColorSequenceKeypoint[] = [];
+	const length = colors.size();
+
+	colors.forEach((color, index) => {
+		sequence.push(new ColorSequenceKeypoint(index / (length - 1), color));
+	});
+
+	return new ColorSequence(sequence);
+};
+
+export const gradient = generate([palette.red, palette.yellow, palette.teal, palette.blue, palette.mauve]);
+
+export const gradientPinched = generate([
+	palette.red,
+	palette.red,
+	palette.yellow,
+	palette.teal,
+	palette.blue,
+	palette.mauve,
+	palette.mauve,
 ]);

@@ -1,5 +1,5 @@
 import { Spring, blend, lerp, map, useMotor, useTimer } from "@rbxts/pretty-react-hooks";
-import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
+import Roact, { joinBindings, memo, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useRem, useSeed } from "client/app/hooks";
@@ -13,13 +13,13 @@ interface CandyItemProps {
 	readonly eatenAt?: Vector2;
 }
 
-export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
+function CandyItemComponent({ size, point, color, eatenAt }: CandyItemProps) {
 	const rem = useRem();
 	const timer = useTimer();
 	const seed = useSeed();
 
 	const [pointSmooth, setPointSmooth] = useMotor({ x: point.X, y: point.Y });
-	const [transition, setTransition] = useMotor(eatenAt ? 1 : 0);
+	const [transition, setTransition] = useMotor(1);
 
 	const { position, glow, transparency } = useMemo(() => {
 		const position = timer.value.map((t) => {
@@ -43,7 +43,7 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 		return { position, glow, transparency };
 	}, [rem]);
 
-	const diameter = mapStrict(size, 0, 50, rem(1), rem(3));
+	const diameter = mapStrict(size, 0, 30, rem(0.75), rem(4));
 
 	useEffect(() => {
 		const position = eatenAt || point;
@@ -53,14 +53,12 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 			y: new Spring(position.Y),
 		});
 
-		if (eatenAt) {
-			setTransition(new Spring(1));
-		}
+		setTransition(new Spring(eatenAt ? 1 : 0));
 	}, [point, eatenAt]);
 
 	return (
 		<Image
-			image={images.common.circle}
+			image={images.ui.circle}
 			imageColor={color.Lerp(Color3.fromRGB(255, 255, 255), 0.7)}
 			imageTransparency={transparency}
 			size={new UDim2(0, diameter, 0, diameter)}
@@ -75,3 +73,5 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 		</Image>
 	);
 }
+
+export const CandyItem = memo(CandyItemComponent);

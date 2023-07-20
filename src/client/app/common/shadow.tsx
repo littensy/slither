@@ -15,11 +15,11 @@ interface ShadowProps extends Roact.PropsWithChildren {
 }
 
 const IMAGE_SIZE = new Vector2(512, 512);
-const BLUR_RADIUS = 50;
+const BLUR_RADIUS = 80;
 
 export function Shadow({
 	shadowBlur = 1,
-	shadowOffset = 4,
+	shadowOffset,
 	shadowSize = 0,
 	shadowColor = new Color3(),
 	shadowTransparency = 0.5,
@@ -28,9 +28,11 @@ export function Shadow({
 }: ShadowProps) {
 	const rem = useRem();
 
+	shadowOffset ??= rem(1);
+
 	return (
 		<Image
-			image={images.common.blur}
+			image={images.ui.blur}
 			imageTransparency={shadowTransparency}
 			imageColor={shadowColor}
 			anchorPoint={new Vector2(0.5, 0.5)}

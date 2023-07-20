@@ -11,7 +11,7 @@ function redden(color: Color3) {
 	return color.Lerp(Color3.fromRGB(255, 0, 0), 0.3);
 }
 
-export function useSegmentStyle(boost: boolean, dead: boolean, tint: Color3, index: number) {
+export function useTracerStyle(boost: boolean, dead: boolean, tint: Color3, index: number) {
 	const [color, setColor] = useBinding(tint);
 	const [transparency, setTransparency] = useBinding(0);
 

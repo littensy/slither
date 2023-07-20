@@ -1,11 +1,7 @@
-import { lerpStrict, mapStrict } from "shared/utils/math-utils";
 import { SnakeEntity } from "./snake-slice";
 
-export const SNAKE_SPEED = 6;
-export const SNAKE_BOOST_SPEED = 10;
-
 interface SnakeDescription {
-	readonly segments: number;
+	readonly length: number;
 	readonly radius: number;
 	readonly spacingAtHead: number;
 	readonly spacingAtTail: number;
@@ -13,25 +9,17 @@ interface SnakeDescription {
 }
 
 export function snakeIsBoosting(snake: SnakeEntity) {
-	return snake.boost && snake.score >= 50;
+	return snake.boost && snake.score > 10;
 }
 
 export function describeSnakeFromScore(score: number): SnakeDescription {
+	const radius = math.max(1 * math.log10(score / 512 + 1.5) + 0.3, 0.5);
+
 	return {
-		segments: math.floor(lerpStrict(4, 50, score / 4000)),
-		radius: mapStrict(score, 500, 8000, 0.5, 3),
-		spacingAtHead: lerpStrict(0.75, 3, score / 8000),
-		spacingAtTail: lerpStrict(0.75, 12, score / 8000),
-		turnSpeed: lerpStrict(math.rad(270), math.rad(180), score / 8000),
+		radius,
+		spacingAtHead: radius,
+		spacingAtTail: 2.5 * radius,
+		length: 48 * math.log10(score / 256 + 1) + 3,
+		turnSpeed: math.rad(math.max(270 - 96 * math.log10(score / 512 + 1), 45)),
 	};
-}
-
-export function getSnakeScoreFromSegments(segments: number): number {
-	return mapStrict(segments, 4, 50, 0, 4000);
-}
-
-export function getSnakePercentUntilNewSegment(score: number, segments: number): number {
-	const nextScore = getSnakeScoreFromSegments(segments + 1);
-	const prevScore = getSnakeScoreFromSegments(segments);
-	return mapStrict(score, prevScore, nextScore, 0, 1);
 }

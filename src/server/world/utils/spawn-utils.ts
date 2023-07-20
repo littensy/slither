@@ -1,20 +1,8 @@
-import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { WORLD_BOUNDS } from "shared/constants";
 import { selectSnakesById } from "shared/store/snakes";
 
 const MIN_SAFE_DISTANCE = 10;
-
-/**
- * Kills the given snake and then removes it from the world.
- */
-export function killSnake(snakeId: string) {
-	store.setSnakeDead(snakeId);
-
-	setTimeout(() => {
-		store.removeSnake(snakeId);
-	}, 2);
-}
 
 /**
  * Returns a random point in the world. If the margin is specified,
@@ -66,8 +54,8 @@ export function getSafePointInWorld() {
 		let closestDistance = math.huge;
 
 		for (const [, snake] of pairs(snakes)) {
-			for (const segment of snake.segments) {
-				closestDistance = math.min(closestDistance, segment.sub(spawn).Magnitude);
+			for (const tracer of snake.tracers) {
+				closestDistance = math.min(closestDistance, tracer.sub(spawn).Magnitude);
 
 				if (closestDistance <= MIN_SAFE_DISTANCE) {
 					return closestDistance;
