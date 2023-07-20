@@ -26,7 +26,9 @@ export = hoarcekat(() => {
 		<RootProvider>
 			<InputCapture
 				onInputBegan={(rbx, input) => {
-					if (input.KeyCode === Enum.KeyCode.F) toggle();
+					if (input.KeyCode === Enum.KeyCode.F) {
+						toggle();
+					}
 				}}
 			/>
 			<World />

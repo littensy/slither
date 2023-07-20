@@ -1,11 +1,11 @@
 import { hoarcekat, useInterval } from "@rbxts/pretty-react-hooks";
 import Roact, { useEffect } from "@rbxts/roact";
+import { Game } from "client/app/components/game";
 import { SnakeController } from "client/app/components/snake-controller";
-import { World } from "client/app/components/world/world";
+import { World } from "client/app/components/world";
 import { RootProvider } from "client/app/providers/root-provider";
 import { store } from "client/store";
-import { LOCAL_USER, WORLD_TICK } from "shared/constants";
-import { getRandomAccent } from "shared/data/palette";
+import { LOCAL_USER, WORLD_BOUNDS, WORLD_TICK } from "shared/constants";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { fillArray } from "shared/utils/object-utils";
 import { createScheduler } from "shared/utils/scheduler";
@@ -20,21 +20,11 @@ export = hoarcekat(() => {
 		for (const id of IDS) {
 			store.addSnake(id, {
 				name: id,
-				head: new Vector2(math.random(-10, 10), math.random(-10, 10)),
+				head: new Vector2(math.random(-WORLD_BOUNDS, WORLD_BOUNDS), math.random(-WORLD_BOUNDS, WORLD_BOUNDS)),
 				skin: getRandomDefaultSnakeSkin().id,
-				score: math.random(0, 8000),
+				score: math.random(0, 5000),
 			});
 		}
-
-		store.populateCandy(
-			fillArray(50, (index) => ({
-				id: `${index}`,
-				position: new Vector2(math.random(-50, 50), math.random(-25, 25)),
-				size: math.random(1, 50),
-				color: getRandomAccent(),
-				type: "default",
-			})),
-		);
 
 		return createScheduler({
 			name: "world-tick",
@@ -54,6 +44,7 @@ export = hoarcekat(() => {
 	return (
 		<RootProvider>
 			<World />
+			<Game />
 			<SnakeController />
 		</RootProvider>
 	);
