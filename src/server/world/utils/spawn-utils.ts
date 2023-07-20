@@ -1,6 +1,5 @@
-import { store } from "server/store";
 import { WORLD_BOUNDS } from "shared/constants";
-import { selectSnakesById } from "shared/store/snakes";
+import { snakeGrid } from "../workers/snake-worker/snake-grid";
 
 const MIN_SAFE_DISTANCE = 10;
 
@@ -47,23 +46,12 @@ export function getRandomPointNearWorldOrigin(margin = 1, passes = 2) {
  * not too close to any other snake, but not the farthest point either.
  */
 export function getSafePointInWorld() {
-	const snakes = store.getState(selectSnakesById);
 	const spawns: { position: Vector2; safety: number }[] = [];
 
 	const scoreSafety = (spawn: Vector2) => {
-		let closestDistance = math.huge;
-
-		for (const [, snake] of pairs(snakes)) {
-			for (const tracer of snake.tracers) {
-				closestDistance = math.min(closestDistance, tracer.sub(spawn).Magnitude);
-
-				if (closestDistance <= MIN_SAFE_DISTANCE) {
-					return closestDistance;
-				}
-			}
-		}
-
-		return closestDistance;
+		const nearest = snakeGrid.nearest(spawn, MIN_SAFE_DISTANCE * 2);
+		const distance = nearest ? nearest.position.sub(spawn).Magnitude : math.huge;
+		return distance;
 	};
 
 	for (const _ of $range(0, 10)) {

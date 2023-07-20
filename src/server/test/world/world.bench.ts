@@ -1,6 +1,6 @@
 import { store } from "server/store";
 import { getSafePointInWorld } from "server/world";
-import { createCandy, onCandyTick } from "server/world/workers/candy-worker";
+import { candyGrid, createCandy, onCandyTick } from "server/world/workers/candy-worker";
 import { onCollisionTick } from "server/world/workers/collision-worker";
 import { onSnakeTick } from "server/world/workers/snake-worker";
 import { CANDY_LIMITS, WORLD_BOUNDS } from "shared/constants";
@@ -9,6 +9,7 @@ import { fillArray } from "shared/utils/object-utils";
 
 store.destroy();
 store.resetState();
+candyGrid.clear();
 
 for (const index of $range(0, 50)) {
 	const x = (index * 4) % WORLD_BOUNDS;
@@ -26,7 +27,7 @@ store.populateCandy(fillArray(CANDY_LIMITS.default, () => createCandy()));
 
 export = benchmark({
 	functions: {
-		onPhysicsTick: onSnakeTick,
+		onSnakeTick,
 		onCandyTick,
 		onCollisionTick,
 		getSafePointInWorld,

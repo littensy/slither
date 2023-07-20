@@ -6,14 +6,14 @@ import { onCollisionTick } from "./workers/collision-worker";
 import { connectSnakeWorker, onSnakeTick } from "./workers/snake-worker";
 
 /**
- * The world updates every 1/12th of a second, and the work can be delegated
- * across several frames. Note that because the collision cycle can be very
- * costly, no work is done for a while to allow the framerate to recover.
+ * The world updates every world tick, which is less than the server's
+ * heartbeat rate. This means that we can schedule different cycles to run
+ * on different frames to reduce the load on a single frame.
  */
 const cycles = [
 	{ name: "snake", onTick: onSnakeTick },
-	{ name: "candy", phase: 0.25 * WORLD_TICK, onTick: onCandyTick },
-	{ name: "collision", phase: 0.5 * WORLD_TICK, onTick: onCollisionTick },
+	{ name: "candy", phase: 0.33 * WORLD_TICK, onTick: onCandyTick },
+	{ name: "collision", phase: 0.66 * WORLD_TICK, onTick: onCollisionTick },
 ];
 
 const workers = [connectBotWorker, connectSnakeWorker, connectCandyWorker];
