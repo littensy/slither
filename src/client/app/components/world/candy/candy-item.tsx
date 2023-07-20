@@ -43,7 +43,7 @@ function CandyItemComponent({ size, point, color, eatenAt }: CandyItemProps) {
 		return { position, glow, transparency };
 	}, [rem]);
 
-	const diameter = mapStrict(size, 0, 30, rem(0.75), rem(4));
+	const diameter = mapStrict(size, 1, 20, rem(0.75), rem(3.5));
 
 	useEffect(() => {
 		const position = eatenAt || point;
