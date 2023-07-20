@@ -6,6 +6,7 @@ import { World } from "client/app/components/world";
 import { RootProvider } from "client/app/providers/root-provider";
 import { store } from "client/store";
 import { LOCAL_USER, WORLD_BOUNDS, WORLD_TICK } from "shared/constants";
+import { getRandomAccent } from "shared/data/palette";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { fillArray } from "shared/utils/object-utils";
 import { createScheduler } from "shared/utils/scheduler";
@@ -20,11 +21,30 @@ export = hoarcekat(() => {
 		for (const id of IDS) {
 			store.addSnake(id, {
 				name: id,
-				head: new Vector2(math.random(-WORLD_BOUNDS, WORLD_BOUNDS), math.random(-WORLD_BOUNDS, WORLD_BOUNDS)),
+				head:
+					id === LOCAL_USER
+						? Vector2.zero
+						: new Vector2(
+								math.random(-WORLD_BOUNDS, WORLD_BOUNDS),
+								math.random(-WORLD_BOUNDS, WORLD_BOUNDS),
+						  ),
 				skin: getRandomDefaultSnakeSkin().id,
 				score: math.random(0, 5000),
 			});
 		}
+
+		store.populateCandy(
+			fillArray(512, (index) => ({
+				id: `test-${index}`,
+				type: "default",
+				position: new Vector2(
+					(math.random() * 2 - 1) * WORLD_BOUNDS * 0.2,
+					(math.random() * 2 - 1) * WORLD_BOUNDS * 0.2,
+				),
+				size: math.random(1, 10),
+				color: getRandomAccent(),
+			})),
+		);
 
 		return createScheduler({
 			name: "world-tick",

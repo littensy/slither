@@ -1,5 +1,5 @@
-import { createGrid } from "server/utils/grid";
 import { benchmark } from "shared/utils/benchmark";
+import { createGrid } from "shared/utils/grid";
 import { fillArray } from "shared/utils/object-utils";
 
 export = benchmark({
@@ -35,7 +35,7 @@ export = benchmark({
 	},
 
 	functions: {
-		grid: (profiler, { grid, queries, replacements }) => {
+		grid: (profiler, { set, grid, queries, replacements }) => {
 			profiler.Begin("nearest");
 			for (const query of queries) {
 				grid.nearest(new Vector2(query, query), 100);
@@ -45,6 +45,13 @@ export = benchmark({
 			profiler.Begin("replace");
 			for (const [from, to] of replacements) {
 				grid.replace(from, to);
+			}
+			profiler.End();
+
+			profiler.Begin("reset");
+			grid.clear();
+			for (const vector of set) {
+				grid.insert(new Vector2(vector.X, vector.Y));
 			}
 			profiler.End();
 		},
@@ -71,6 +78,13 @@ export = benchmark({
 			for (const [from, to] of replacements) {
 				set.delete(new Vector3(from.X, from.Y, 0));
 				set.add(new Vector3(to.X, to.Y, 0));
+			}
+			profiler.End();
+
+			profiler.Begin("reset");
+			set.clear();
+			for (const vector of set) {
+				set.add(vector);
 			}
 			profiler.End();
 		},

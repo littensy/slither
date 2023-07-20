@@ -1,6 +1,6 @@
 /// <reference types="@rbxts/testez/globals" />
 
-import { createGrid } from "server/utils/grid";
+import { createGrid } from "shared/utils/grid";
 
 export = () => {
 	it("should insert points", () => {
@@ -59,5 +59,35 @@ export = () => {
 		const nearest3 = grid.nearest(new Vector2(70, 70), 100);
 		expect(nearest3).to.be.ok();
 		expect(nearest3?.position).to.equal(new Vector2(100, 100));
+	});
+
+	it("should query points in a box", () => {
+		const grid = createGrid(5);
+		grid.insert(new Vector2(5, 5));
+		grid.insert(new Vector2(15, 15));
+		grid.insert(new Vector2(-3, -3));
+		grid.insert(new Vector2(100, 100));
+
+		const points = grid.queryBox(new Vector2(-4, -4), new Vector2(4 + 15, 4 + 17));
+		expect(points.size()).to.equal(3);
+		expect(points.find((point) => point.position === new Vector2(5, 5))).to.be.ok();
+		expect(points.find((point) => point.position === new Vector2(15, 15))).to.be.ok();
+		expect(points.find((point) => point.position === new Vector2(-3, -3))).to.be.ok();
+		expect(points.find((point) => point.position === new Vector2(100, 100))).to.never.be.ok();
+	});
+
+	it("should query points in a range", () => {
+		const grid = createGrid(5);
+		grid.insert(new Vector2(5, 5));
+		grid.insert(new Vector2(15, 15));
+		grid.insert(new Vector2(-3, -3));
+		grid.insert(new Vector2(100, 100));
+
+		const points = grid.queryRange(new Vector2(0, 0), 10);
+		expect(points.size()).to.equal(2);
+		expect(points.find((point) => point.position === new Vector2(5, 5))).to.be.ok();
+		expect(points.find((point) => point.position === new Vector2(-3, -3))).to.be.ok();
+		expect(points.find((point) => point.position === new Vector2(15, 15))).to.never.be.ok();
+		expect(points.find((point) => point.position === new Vector2(100, 100))).to.never.be.ok();
 	});
 };

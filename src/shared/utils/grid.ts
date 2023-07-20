@@ -8,6 +8,8 @@ interface Grid<T> {
 		range: number,
 		predicate?: (point: GridPoint<T>) => boolean,
 	) => GridPoint<T> | undefined;
+	readonly queryBox: (position: Vector2, size: Vector2) => GridPoint<T>[];
+	readonly queryRange: (position: Vector2, range: number) => GridPoint<T>[];
 	readonly clear: () => void;
 }
 
@@ -34,23 +36,42 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		return new Vector2(x, y);
 	};
 
+	const roundToGrid = (value: Vector2) => {
+		const x = math.round(value.X / resolution);
+		const y = math.round(value.Y / resolution);
+		return new Vector2(x, y);
+	};
+
 	const getCellsInRange = (vector: Vector2, range: number) => {
 		const cellsInRange: GridCell<T>[] = [];
 
 		vector = snapToGrid(vector);
-		range = math.floor(range / resolution);
+		range = math.round(range / resolution);
 
 		for (const i of $range(-range, range)) {
 			for (const j of $range(-range, range)) {
 				const cell = cells.get(new Vector3(vector.X + i, vector.Y + j));
-
-				if (cell) {
-					cellsInRange.push(cell);
-				}
+				cellsInRange.push(cell!);
 			}
 		}
 
 		return cellsInRange;
+	};
+
+	const getCellsInBox = (position: Vector2, size: Vector2) => {
+		const cellsInBox: GridCell<T>[] = [];
+
+		position = snapToGrid(position);
+		size = roundToGrid(size);
+
+		for (const i of $range(-1, size.X + 1)) {
+			for (const j of $range(-1, size.Y + 1)) {
+				const cell = cells.get(new Vector3(position.X + i, position.Y + j));
+				cellsInBox.push(cell!);
+			}
+		}
+
+		return cellsInBox;
 	};
 
 	const insert = (vector: Vector2, metadata: T) => {
@@ -104,9 +125,47 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		return nearestPoint;
 	};
 
+	const queryBox = (position: Vector2, size: Vector2) => {
+		const cellsInBox = getCellsInBox(position, size);
+		const points: GridPoint<T>[] = [];
+
+		for (const cell of cellsInBox) {
+			for (const [, point] of cell) {
+				const isInsideRect =
+					point.position.X >= position.X &&
+					point.position.Y >= position.Y &&
+					point.position.X <= position.X + size.X &&
+					point.position.Y <= position.Y + size.Y;
+
+				if (isInsideRect) {
+					points.push(point);
+				}
+			}
+		}
+
+		return points;
+	};
+
+	const queryRange = (position: Vector2, range: number) => {
+		const cellsInRange = getCellsInRange(position, range);
+		const points: GridPoint<T>[] = [];
+
+		for (const cell of cellsInRange) {
+			for (const [, point] of cell) {
+				const distance = position.sub(point.position).Magnitude;
+
+				if (distance <= range) {
+					points.push(point);
+				}
+			}
+		}
+
+		return points;
+	};
+
 	const clear = () => {
 		cells.clear();
 	};
 
-	return { cells, insert, remove, replace, nearest, clear };
+	return { cells, insert, remove, replace, nearest, queryBox, queryRange, clear };
 }
