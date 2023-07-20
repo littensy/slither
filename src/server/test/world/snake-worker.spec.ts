@@ -5,14 +5,6 @@ import { getSnake } from "server/world";
 import { onSnakeTick } from "server/world/workers/snake-worker";
 
 export = () => {
-	beforeEach(() => {
-		store.resetState();
-	});
-
-	afterEach(() => {
-		store.resetState();
-	});
-
 	it("should update snake target angle", () => {
 		store.addSnake("__test__");
 		store.turnSnake("__test__", 1);

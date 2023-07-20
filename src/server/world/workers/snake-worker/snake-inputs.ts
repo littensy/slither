@@ -7,7 +7,7 @@ import { remotes } from "shared/remotes";
 export const nextSnakeInputs = new Map<string, number>();
 
 export function connectSnakeInputs() {
-	remotes.snake.spawn.connect((player) => {
+	const spawnHandle = remotes.snake.spawn.connect((player) => {
 		if (playerIsSpawned(player)) {
 			return;
 		}
@@ -20,17 +20,24 @@ export function connectSnakeInputs() {
 		});
 	});
 
-	remotes.snake.move.connect((player, angle) => {
+	const moveHandle = remotes.snake.move.connect((player, angle) => {
 		nextSnakeInputs.set(player.Name, angle);
 	});
 
-	remotes.snake.boost.connect((player, boost) => {
+	const boostHandle = remotes.snake.boost.connect((player, boost) => {
 		store.boostSnake(player.Name, boost);
 	});
 
-	remotes.snake.kill.connect((player) => {
+	const killHandle = remotes.snake.kill.connect((player) => {
 		killSnake(player.Name);
 	});
+
+	return () => {
+		spawnHandle();
+		moveHandle();
+		boostHandle();
+		killHandle();
+	};
 }
 
 export function consumeNextSnakeInputs() {

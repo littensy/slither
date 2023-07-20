@@ -20,13 +20,11 @@ export = () => {
 	};
 
 	beforeEach(() => {
-		store.resetState();
 		worker = connectCandyWorker();
 	});
 
 	afterEach(() => {
 		worker?.();
-		store.resetState();
 	});
 
 	it("should populate the state with candy", () => {

@@ -3,21 +3,14 @@
 import { store } from "server/store";
 import { getSnake } from "server/world";
 import { onCollisionTick } from "server/world/workers/collision-worker";
+import { onSnakeTick } from "server/world/workers/snake-worker";
 import { WORLD_BOUNDS } from "shared/constants";
 
 export = () => {
-	beforeEach(() => {
-		store.resetState();
-	});
-
-	afterEach(() => {
-		store.resetState();
-	});
-
 	it("should kill snake on collision", () => {
 		store.addSnake("__test1__", { head: new Vector2(0, 0) });
 		store.addSnake("__test2__", { head: new Vector2(100, 100) });
-		store.snakeTick(0);
+		onSnakeTick();
 		store.patchSnake("__test1__", { head: new Vector2(100.1, 100) });
 		onCollisionTick();
 		const snake1 = getSnake("__test1__");
@@ -28,7 +21,7 @@ export = () => {
 
 	it("should not kill snake on self-collision", () => {
 		store.addSnake("__test__", { head: new Vector2(0, 0) });
-		store.snakeTick(0);
+		onSnakeTick();
 		onCollisionTick();
 		const snake = getSnake("__test__");
 		expect(snake?.dead).to.equal(false);
@@ -37,7 +30,7 @@ export = () => {
 	it("should not kill snake when not colliding", () => {
 		store.addSnake("__test1__", { head: new Vector2(0, 0) });
 		store.addSnake("__test2__", { head: new Vector2(100, 100) });
-		store.snakeTick(0);
+		onSnakeTick();
 		onCollisionTick();
 		const snake1 = getSnake("__test1__");
 		const snake2 = getSnake("__test2__");
@@ -48,7 +41,7 @@ export = () => {
 	it("should not kill snake when collided with dead snake", () => {
 		store.addSnake("__test1__", { head: new Vector2(100.1, 100) });
 		store.addSnake("__test2__", { head: new Vector2(100, 100) });
-		store.snakeTick(0);
+		onSnakeTick();
 		store.patchSnake("__test2__", { dead: true });
 		onCollisionTick();
 		const snake1 = getSnake("__test1__");

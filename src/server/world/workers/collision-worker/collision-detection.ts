@@ -1,43 +1,28 @@
 import { getSnake } from "server/world/utils/world-utils";
 import { WORLD_BOUNDS } from "shared/constants";
 import { SnakeEntity, describeSnakeFromScore } from "shared/store/snakes";
+import { snakeGrid } from "../snake-worker";
 
 export function isCollidingWithWall(snake: SnakeEntity) {
 	return snake.head.Magnitude > WORLD_BOUNDS;
 }
 
-export function isCollidingWithSnake(snake: SnakeEntity, snakes: SnakeEntity[]) {
-	const { radius } = describeSnakeFromScore(snake.score);
+export function isCollidingWithSnake(snake: SnakeEntity) {
+	const radius = describeSnakeFromScore(snake.score).radius;
 
-	const check = (tracer: Vector2, tracerRadius: number) => {
-		const distance = tracer.sub(snake.head).Magnitude;
+	const nearest = snakeGrid.nearest(snake.head, radius + 5, (data) => {
+		const enemy = getSnake(data.metadata.id);
+		return enemy !== undefined && !enemy.dead && enemy.id !== snake.id;
+	});
 
-		if (distance <= 0.9 * (radius + tracerRadius)) {
-			return true;
-		}
-	};
+	const enemy = nearest && getSnake(nearest.metadata.id);
 
-	for (const enemyStale of snakes) {
-		// treat the enemy state as 'stale' just in case a previous
-		// snake killed this one in the same tick
-		const enemy = getSnake(enemyStale.id);
-
-		if (!enemy || snake === enemy || enemy.dead) {
-			continue;
-		}
-
-		const { radius: enemyRadius } = describeSnakeFromScore(enemy.score);
-
-		if (check(enemy.head, enemyRadius)) {
-			return true;
-		}
-
-		for (const tracer of enemy.tracers) {
-			if (check(tracer, enemyRadius)) {
-				return true;
-			}
-		}
+	if (!enemy) {
+		return;
 	}
 
-	return false;
+	const enemyRadius = describeSnakeFromScore(enemy.score).radius;
+	const distance = nearest.position.sub(snake.head).Magnitude;
+
+	return distance <= 0.9 * (radius + enemyRadius);
 }

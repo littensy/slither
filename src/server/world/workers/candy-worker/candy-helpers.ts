@@ -1,5 +1,6 @@
 import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
+import { createGrid } from "server/utils/grid";
 import { getRandomPointNearWorldOrigin } from "server/world/utils/spawn-utils";
 import { getCandy, getSnake } from "server/world/utils/world-utils";
 import { CANDY_LIMITS } from "shared/constants";
@@ -7,11 +8,14 @@ import { getRandomAccent } from "shared/data/palette";
 import { CandyEntity, CandyType, selectCandyById, selectCandyCount, selectStaleCandyOfType } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 
-const random = new Random();
+export const candyGrid = createGrid<{ id: string }>(20);
+
 let nextCandyId = 0;
 
 export function createCandy(patch?: Partial<CandyEntity>): CandyEntity {
-	return {
+	const random = new Random();
+
+	const candy: CandyEntity = {
 		id: `${nextCandyId++}`,
 		type: "default",
 		size: math.round(random.NextInteger(1, 10) ** 0.5),
@@ -19,6 +23,10 @@ export function createCandy(patch?: Partial<CandyEntity>): CandyEntity {
 		color: getRandomAccent(),
 		...patch,
 	};
+
+	candyGrid.insert(candy.position, { id: candy.id });
+
+	return candy;
 }
 
 export function removeCandy(id: string, eatenAt?: Vector2) {
@@ -29,6 +37,7 @@ export function removeCandy(id: string, eatenAt?: Vector2) {
 	}
 
 	store.setCandyEatenAt(id, eatenAt ?? candy.position);
+	candyGrid.remove(candy.position);
 
 	setTimeout(() => {
 		store.removeCandy(id);

@@ -12,7 +12,7 @@ export function onCollisionTick() {
 			continue;
 		}
 
-		if (isCollidingWithWall(snake) || isCollidingWithSnake(snake, snakes)) {
+		if (isCollidingWithWall(snake) || isCollidingWithSnake(snake)) {
 			killSnake(snake.id);
 		}
 	}
