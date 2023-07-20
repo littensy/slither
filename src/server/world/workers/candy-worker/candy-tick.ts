@@ -1,4 +1,5 @@
 import { store } from "server/store";
+import { getCandy } from "server/world/utils/world-utils";
 import { describeSnakeFromScore, selectSnakesById } from "shared/store/snakes";
 import { candyGrid, eatCandy } from "./candy-helpers";
 
@@ -10,9 +11,12 @@ export function onCandyTick() {
 			continue;
 		}
 
-		const description = describeSnakeFromScore(snake.score);
-		const range = description.radius * 1.2 + 0.5;
-		const nearest = candyGrid.nearest(snake.head, range);
+		const range = describeSnakeFromScore(snake.score).radius * 1.2 + 0.5;
+
+		const nearest = candyGrid.nearest(snake.head, range, (point) => {
+			const candy = getCandy(point.metadata.id);
+			return candy !== undefined && !candy.eatenAt;
+		});
 
 		if (nearest) {
 			eatCandy(nearest.metadata.id, snake.id);
