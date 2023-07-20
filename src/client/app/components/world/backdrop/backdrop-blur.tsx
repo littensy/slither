@@ -49,7 +49,7 @@ export function BackdropBlur() {
 		});
 
 		const transparency = timer.map((t) => {
-			return map(math.noise(5 * t + 200, seed), -0.5, 0.5, 0.6, 0.9);
+			return map(math.noise(5 * t + 200, seed), -0.5, 0.5, 0.3, 0.8);
 		});
 
 		return { position, size, transparency };

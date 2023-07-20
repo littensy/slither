@@ -1,4 +1,4 @@
-import { getSnake } from "server/world/utils/snake-utils";
+import { getSnake } from "server/world/utils/world-utils";
 import { WORLD_BOUNDS } from "shared/constants";
 import { SnakeEntity, describeSnakeFromScore } from "shared/store/snakes";
 

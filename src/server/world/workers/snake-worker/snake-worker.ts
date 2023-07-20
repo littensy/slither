@@ -1,6 +1,6 @@
 import { Players } from "@rbxts/services";
 import { store } from "server/store";
-import { killSnake } from "server/world/utils/snake-utils";
+import { killSnake } from "server/world/utils/world-utils";
 import { connectSnakeInputs, consumeNextSnakeInputs, nextSnakeInputs } from "./snake-inputs";
 
 export function connectSnakeWorker() {

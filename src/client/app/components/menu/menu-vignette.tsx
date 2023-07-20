@@ -21,9 +21,9 @@ export function MenuVignette() {
 	return (
 		<Image
 			image={images.ui.vignette}
-			imageColor={palette.black}
+			imageColor={palette.crust}
 			imageTransparency={lerpBinding(transition, 1, 0)}
-			backgroundColor={palette.black}
+			backgroundColor={palette.crust}
 			backgroundTransparency={lerpBinding(transition, 1, 0.8)}
 			scaleType="Crop"
 			size={new UDim2(1, 0, 1, 0)}

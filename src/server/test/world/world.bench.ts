@@ -3,7 +3,7 @@ import { getSafePointInWorld } from "server/world";
 import { createCandy, onCandyTick } from "server/world/workers/candy-worker";
 import { onCollisionTick } from "server/world/workers/collision-worker";
 import { onSnakeTick } from "server/world/workers/snake-worker";
-import { WORLD_BOUNDS, WORLD_MAX_CANDY } from "shared/constants";
+import { CANDY_LIMITS, WORLD_BOUNDS } from "shared/constants";
 import { benchmark } from "shared/utils/benchmark";
 import { fillArray } from "shared/utils/object-utils";
 
@@ -22,7 +22,7 @@ for (const index of $range(0, 50)) {
 	});
 }
 
-store.populateCandy(fillArray(WORLD_MAX_CANDY, () => createCandy()));
+store.populateCandy(fillArray(CANDY_LIMITS.default, () => createCandy()));
 
 export = benchmark({
 	functions: {

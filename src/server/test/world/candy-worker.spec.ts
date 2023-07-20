@@ -2,15 +2,16 @@
 
 import { store } from "server/store";
 import { getSnake } from "server/world";
-import { connectCandyWorker, createCandy, onCandyTick } from "server/world/workers/candy-worker";
-import { WORLD_MAX_CANDY } from "shared/constants";
-import { selectCandyById, selectStaticCandies, selectStaticCandyCount } from "shared/store/candy";
+import { connectCandyWorker, createCandy, onCandyTick, removeCandyIfAtLimit } from "server/world/workers/candy-worker";
+import { CANDY_LIMITS } from "shared/constants";
+import { CandyType, selectCandies, selectCandyById, selectCandyCount } from "shared/store/candy";
+import { fillArray } from "shared/utils/object-utils";
 
 export = () => {
 	let worker: (() => void) | undefined;
 
-	const countCandy = () => {
-		return store.getState(selectStaticCandyCount);
+	const countCandy = (candyType?: CandyType) => {
+		return store.getState(selectCandyCount(candyType));
 	};
 
 	const didEatCandy = (id: string) => {
@@ -29,35 +30,35 @@ export = () => {
 	});
 
 	it("should populate the state with candy", () => {
-		expect(countCandy()).to.equal(WORLD_MAX_CANDY);
+		expect(countCandy()).to.equal(CANDY_LIMITS.default);
 	});
 
 	it("should create new candy when the amount decreases", () => {
-		const candies = store.getState(selectStaticCandies);
+		const candies = store.getState(selectCandies);
 		const candiesToRemove = new Set(candies.move(0, 5, 0, []));
 
 		for (const candy of candiesToRemove) {
 			store.removeCandy(candy.id);
 		}
 
-		expect(countCandy()).to.equal(WORLD_MAX_CANDY - candiesToRemove.size());
+		expect(countCandy()).to.equal(CANDY_LIMITS.default - candiesToRemove.size());
 		store.flush();
 
-		const newCandies = store.getState(selectStaticCandies);
-		expect(countCandy()).to.equal(WORLD_MAX_CANDY);
+		const newCandies = store.getState(selectCandies);
+		expect(countCandy()).to.equal(CANDY_LIMITS.default);
 		expect(newCandies.every((candy) => !candiesToRemove.has(candy))).to.equal(true);
 	});
 
 	it("should not create new candy when the amount increases", () => {
-		const [template] = store.getState(selectStaticCandies);
+		const [template] = store.getState(selectCandies);
 
 		for (const index of $range(1, 10)) {
 			store.addCandy({ ...template, id: `__test__${index}` });
 		}
 
-		expect(countCandy()).to.equal(WORLD_MAX_CANDY + 10);
+		expect(countCandy()).to.equal(CANDY_LIMITS.default + 10);
 		store.flush();
-		expect(countCandy()).to.equal(WORLD_MAX_CANDY + 10);
+		expect(countCandy()).to.equal(CANDY_LIMITS.default + 10);
 	});
 
 	it("should create candy when a snake dies", () => {
@@ -69,7 +70,7 @@ export = () => {
 	});
 
 	it("should keep candy population at the max if a snake dies", () => {
-		const initialCandy = store.getState(selectStaticCandies);
+		const initialCandy = store.getState(selectCandies);
 
 		store.addSnake("__test__");
 		store.snakeTick(0);
@@ -77,7 +78,7 @@ export = () => {
 		store.setSnakeIsDead("__test__");
 		store.flush();
 
-		expect(countCandy() > WORLD_MAX_CANDY).to.equal(true);
+		expect(countCandy() > CANDY_LIMITS.default).to.equal(true);
 
 		for (const index of $range(1, 50)) {
 			const candy = initialCandy[index];
@@ -86,13 +87,13 @@ export = () => {
 
 		store.flush();
 
-		expect(countCandy() > WORLD_MAX_CANDY).to.equal(true);
+		expect(countCandy() > CANDY_LIMITS.default).to.equal(true);
 	});
 
 	it("should eat candy when a snake is close", () => {
 		const candy = createCandy({ size: 10, position: new Vector2(1000, 1000) });
 		store.addCandy(candy);
-		store.addSnake("__test__", { head: new Vector2(1000, 1000.5) });
+		store.addSnake("__test__", { head: new Vector2(1000, 1000.1) });
 		store.flush();
 		onCandyTick();
 		expect(didEatCandy(candy.id)).to.equal(true);
@@ -106,5 +107,16 @@ export = () => {
 		store.flush();
 		onCandyTick();
 		expect(didEatCandy(candy.id)).to.equal(false);
+	});
+
+	it("should remove excess droppings", () => {
+		const candies = fillArray(CANDY_LIMITS.dropping + 1, () => {
+			return createCandy({ type: "dropping" });
+		});
+		store.populateCandy(candies);
+		expect(countCandy("dropping")).to.equal(CANDY_LIMITS.dropping + 1);
+		removeCandyIfAtLimit("dropping");
+		removeCandyIfAtLimit("dropping");
+		expect(countCandy("dropping")).to.equal(CANDY_LIMITS.dropping);
 	});
 };

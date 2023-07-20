@@ -69,7 +69,7 @@ export const snakesSlice = createProducer(initialState, {
 					return;
 				}
 
-				const previous = snake.tracers[index - 1] || head;
+				const previous = snake.tracers[index - 1] || snake.head;
 
 				// spacing should be longer near the end of the snake to allow longer
 				// snakes but with less tracers

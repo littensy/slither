@@ -32,7 +32,7 @@ export = hoarcekat(() => {
 				position: new Vector2(math.random(-50, 50), math.random(-25, 25)),
 				size: math.random(1, 50),
 				color: getRandomAccent(),
-				type: "static",
+				type: "default",
 			})),
 		);
 

@@ -25,7 +25,7 @@ export function WorldFocus() {
 
 		return setTimeout(
 			() => {
-				store.setWorldFocus(focus.id);
+				store.setWorldSubject(focus.id);
 			},
 			localSnake ? 0 : 2,
 		);

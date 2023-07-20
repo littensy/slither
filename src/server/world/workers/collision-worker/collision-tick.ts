@@ -1,5 +1,5 @@
 import { store } from "server/store";
-import { killSnake } from "server/world/utils/snake-utils";
+import { killSnake } from "server/world/utils/world-utils";
 import { selectSnakesSorted } from "shared/store/snakes";
 import { isCollidingWithSnake, isCollidingWithWall } from "./collision-detection";
 

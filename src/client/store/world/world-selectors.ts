@@ -10,16 +10,16 @@ export interface WorldCamera {
 
 const WORLD_SCALE = 4;
 
-export const selectWorldFocus = (state: RootState) => {
-	return state.world.focus;
+export const selectWorldSubject = (state: RootState) => {
+	return state.world.subject;
 };
 
-export const selectSnakeInFocus = (state: RootState) => {
-	return state.snakes[state.world.focus];
+export const selectSnakeFromWorldSubject = (state: RootState) => {
+	return state.snakes[state.world.subject];
 };
 
 export const selectWorldCamera = createSelector(
-	[selectSnakeInFocus],
+	[selectSnakeFromWorldSubject],
 	(snake) => {
 		if (!snake) {
 			return {

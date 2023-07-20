@@ -7,7 +7,7 @@ import { Text } from "client/app/common/text";
 import { useRem } from "client/app/hooks";
 import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
-import { GRADIENT } from "./utils";
+import { gradient } from "./utils";
 
 interface HomePlayButtonProps {
 	readonly anchorPoint: Vector2;
@@ -43,7 +43,7 @@ export function HomePlayButton({ anchorPoint, size, position }: HomePlayButtonPr
 				shadowSize={rem(2.5)}
 				shadowOffset={rem(0.25)}
 			>
-				<uigradient Color={GRADIENT} Rotation={shimmer} />
+				<uigradient Color={gradient} Rotation={shimmer} />
 			</Shadow>
 
 			<Frame

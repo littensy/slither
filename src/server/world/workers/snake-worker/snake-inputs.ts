@@ -1,6 +1,6 @@
 import { store } from "server/store";
-import { killSnake, playerIsSpawned } from "server/world/utils/snake-utils";
-import { getSafePointInWorld } from "server/world/utils/world-utils";
+import { getSafePointInWorld } from "server/world/utils/spawn-utils";
+import { killSnake, playerIsSpawned } from "server/world/utils/world-utils";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { remotes } from "shared/remotes";
 
@@ -16,7 +16,7 @@ export function connectSnakeInputs() {
 			name: player.DisplayName,
 			head: getSafePointInWorld(),
 			skin: getRandomDefaultSnakeSkin().id,
-			score: 4000,
+			score: 20000,
 		});
 	});
 

@@ -4,7 +4,7 @@ import Roact, { useEffect } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
 import { selectWorldCamera } from "client/store/world";
-import { selectStaticCandies } from "shared/store/candy";
+import { selectCandies } from "shared/store/candy";
 import { CandyItem } from "./candy-item";
 
 const CANDY_ON_SCREEN_MARGIN = 5;
@@ -13,7 +13,7 @@ export function Candy() {
 	const rem = useRem();
 	const camera = useCamera();
 
-	const candy = useSelector(selectStaticCandies);
+	const candy = useSelector(selectCandies);
 	const world = useSelector(selectWorldCamera);
 
 	const [smoothOffset, setSmoothOffset] = useMotor({

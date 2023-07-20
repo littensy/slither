@@ -1,12 +1,16 @@
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { getSnake } from "server/world/utils/snake-utils";
-import { WORLD_MAX_CANDY } from "shared/constants";
+import { getSnake } from "server/world/utils/world-utils";
+import { CANDY_LIMITS } from "shared/constants";
 import { getSnakeTracerSkin } from "shared/data/skins";
-import { selectSpawnedCandyCount } from "shared/store/candy";
-import { identifySnake, selectAliveSnakesById, selectSnakeIsBoosting } from "shared/store/snakes";
-import { fillArray } from "shared/utils/object-utils";
-import { createCandy } from "./create-candy";
+import { selectCandyCount } from "shared/store/candy";
+import {
+	describeSnakeFromScore,
+	identifySnake,
+	selectAliveSnakesById,
+	selectSnakeIsBoosting,
+} from "shared/store/snakes";
+import { createCandy, populateCandy, removeCandyIfAtLimit } from "./candy-helpers";
 
 const random = new Random();
 
@@ -14,9 +18,9 @@ export function connectCandyWorker() {
 	// keep the amount of candy in the world at a constant size
 	// if the amount of candy is less than the max, create more
 	const controlPopulation = store.subscribe(
-		selectSpawnedCandyCount,
-		(count) => count < WORLD_MAX_CANDY,
-		(count) => populateCandy(WORLD_MAX_CANDY - count),
+		selectCandyCount("default"),
+		(count) => count < CANDY_LIMITS.default,
+		(count) => populateCandy(CANDY_LIMITS.default - count),
 	);
 
 	const snakeObserver = store.observe(selectAliveSnakesById, identifySnake, ({ id }) => {
@@ -31,7 +35,7 @@ export function connectCandyWorker() {
 		};
 	});
 
-	populateCandy(WORLD_MAX_CANDY);
+	populateCandy(CANDY_LIMITS.default);
 
 	return () => {
 		controlPopulation();
@@ -39,19 +43,21 @@ export function connectCandyWorker() {
 	};
 }
 
-function populateCandy(amount: number) {
-	store.populateCandy(fillArray(amount, () => createCandy()));
-}
-
 function dropCandyWhileBoosting(id: string) {
 	return store.observeWhile(selectSnakeIsBoosting(id), () => {
 		let previousTail = Vector2.zero;
 
 		const dropCandy = () => {
-			const snake = getSnake(id)!;
+			const snake = getSnake(id);
+
+			if (!snake) {
+				return;
+			}
+
+			const description = describeSnakeFromScore(snake.score);
 			const tail = snake.tracers[snake.tracers.size() - 1];
 
-			if (tail.sub(previousTail).Magnitude < 1) {
+			if (tail.sub(previousTail).Magnitude < description.radius * 2) {
 				return;
 			}
 
@@ -60,8 +66,10 @@ function dropCandyWhileBoosting(id: string) {
 			const candy = createCandy({
 				size: random.NextInteger(1, 5),
 				position: tail,
-				fromSnake: true,
+				type: "dropping",
 			});
+
+			removeCandyIfAtLimit("dropping");
 
 			store.addCandy(candy);
 		};
@@ -87,9 +95,11 @@ function createCandyOnSnake(id: string): void {
 			size: random.NextInteger(5, 20),
 			position: tracer,
 			color: skin.tint,
-			fromSnake: true,
+			type: "loot",
 		});
 	});
+
+	removeCandyIfAtLimit("loot");
 
 	store.populateCandy(candies);
 }

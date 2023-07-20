@@ -1,11 +1,11 @@
-import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { selectCandyById, selectStaticCandiesById } from "shared/store/candy";
-import { SnakeEntity, describeSnakeFromScore, selectSnakesById } from "shared/store/snakes";
+import { selectCandiesById } from "shared/store/candy";
+import { describeSnakeFromScore, selectSnakesById } from "shared/store/snakes";
+import { eatCandy } from "./candy-helpers";
 
 export function onCandyTick() {
 	const snakes = store.getState(selectSnakesById);
-	const candies = store.getState(selectStaticCandiesById);
+	const candies = store.getState(selectCandiesById);
 
 	for (const [, snake] of pairs(snakes)) {
 		if (snake.dead) {
@@ -23,23 +23,8 @@ export function onCandyTick() {
 			const distance = candy.position.sub(snake.head).Magnitude;
 
 			if (distance <= range) {
-				eatCandy(snake, candy.id);
+				eatCandy(candy.id, snake.id);
 			}
 		}
 	}
-}
-
-function eatCandy(snake: SnakeEntity, id: string) {
-	const candy = store.getState(selectCandyById(id));
-
-	if (!candy || candy.eatenAt) {
-		return;
-	}
-
-	store.setCandyEatenAt(candy.id, snake.head);
-	store.incrementSnakeScore(snake.id, candy.size);
-
-	setTimeout(() => {
-		store.removeCandy(candy.id);
-	}, 0.5);
 }

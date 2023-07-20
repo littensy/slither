@@ -3,8 +3,7 @@ export const images: {
 		readonly backdrop: string;
 		readonly blur: string;
 		readonly circle: string;
-		readonly menu_title_blox: string;
-		readonly menu_title_slither: string;
+		readonly menu_title: string;
 		readonly vignette: string;
 	};
 	readonly skins: {

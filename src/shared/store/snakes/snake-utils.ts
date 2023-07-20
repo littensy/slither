@@ -13,13 +13,13 @@ export function snakeIsBoosting(snake: SnakeEntity) {
 }
 
 export function describeSnakeFromScore(score: number): SnakeDescription {
-	const radius = math.max(math.log10(score / 200 + 1), 0.5);
+	const radius = math.max(1 * math.log10(score / 512 + 1.5) + 0.3, 0.5);
 
 	return {
 		radius,
-		spacingAtHead: 1.5 * radius,
+		spacingAtHead: radius,
 		spacingAtTail: 2.5 * radius,
-		length: 36 * math.log10(score / 256 + 1) + 3,
-		turnSpeed: math.rad(math.max(320 - 2 * score ** 0.5, 90)),
+		length: 48 * math.log10(score / 256 + 1) + 3,
+		turnSpeed: math.rad(math.max(270 - 96 * math.log10(score / 512 + 1), 45)),
 	};
 }

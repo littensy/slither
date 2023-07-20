@@ -1,13 +1,13 @@
 import { createProducer } from "@rbxts/reflex";
 
 export interface WorldState {
-	readonly focus: string;
+	readonly subject: string;
 }
 
 const initialState: WorldState = {
-	focus: "",
+	subject: "",
 };
 
 export const worldSlice = createProducer(initialState, {
-	setWorldFocus: (state, snake: string) => ({ ...state, focus: snake }),
+	setWorldSubject: (state, snake: string) => ({ ...state, subject: snake }),
 });

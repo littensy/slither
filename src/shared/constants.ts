@@ -1,10 +1,16 @@
 import { Players, RunService } from "@rbxts/services";
+import { CandyType } from "./store/candy";
 
 export const WORLD_BOUNDS = 256;
-export const WORLD_MAX_CANDY = 4096;
 export const WORLD_TICK = 1 / 12;
 
-export const SNAKE_SPEED = 4;
+export const CANDY_LIMITS: { readonly [K in CandyType]: number } = {
+	default: 3072,
+	dropping: 256,
+	loot: 256,
+};
+
+export const SNAKE_SPEED = 5;
 export const SNAKE_BOOST_SPEED = 10;
 
 export const IS_CLIENT = RunService.IsClient();

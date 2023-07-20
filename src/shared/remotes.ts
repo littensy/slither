@@ -13,6 +13,8 @@ export const remotes = createRemotes({
 		spawn: remote<Server>(),
 		kill: remote<Server>(),
 		move: remote<Server, [angle: number]>(t.numberConstrained(-math.pi, math.pi)),
-		boost: remote<Server, [boost: boolean]>(t.boolean).middleware(throttleMiddleware(WORLD_TICK)),
+		boost: remote<Server, [boost: boolean]>(t.boolean).middleware(
+			throttleMiddleware({ throttle: WORLD_TICK, trailing: true }),
+		),
 	}),
 });
