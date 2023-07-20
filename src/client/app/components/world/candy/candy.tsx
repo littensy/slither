@@ -38,7 +38,7 @@ export function Candy() {
 		let length = 0;
 
 		return candy.mapFiltered((entity) => {
-			if (length > 100 || !isOnScreen(entity.position)) {
+			if (length > 128 || !isOnScreen(entity.position)) {
 				return;
 			}
 

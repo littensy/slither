@@ -19,7 +19,7 @@ import { createScheduler } from "shared/utils/scheduler";
 import { useMockRemotes } from "../utils/use-mock-remotes";
 
 const START_SIZE = 5000;
-const DEBUG_SIZES = [0, 1000, 5000, 10000, 20000, 40000, 80000];
+const DEBUG_SIZES = [0, 500, 1000, 5000, 10000, 20000, 40000, 80000];
 
 function Debugger() {
 	const rem = useRem();
@@ -61,7 +61,7 @@ function Debugger() {
 							cornerRadius={new UDim(1, 0)}
 						>
 							<Text
-								text={`${score}\n${math.floor(math.deg(description.turnSpeed))}`}
+								text={`${score}\n${math.floor(description.length)}`}
 								textColor={palette.crust}
 								textScaled
 								size={new UDim2(1, 0, 1, 0)}
