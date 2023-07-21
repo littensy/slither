@@ -3,9 +3,12 @@ import Roact, { Portal, StrictMode } from "@rbxts/roact";
 import { Players } from "@rbxts/services";
 import { App } from "./components/app";
 import { RootProvider } from "./providers/root-provider";
+import { profileAllComponents } from "./utils/profiler";
 
 const root = createRoot(new Instance("Folder"));
 const target = Players.LocalPlayer.WaitForChild("PlayerGui");
+
+profileAllComponents();
 
 root.render(
 	<StrictMode>
