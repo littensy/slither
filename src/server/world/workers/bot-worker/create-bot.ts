@@ -7,6 +7,12 @@ import { selectSnakeIsDead } from "shared/store/snakes";
 
 let nextBotId = 0;
 
+export function createBots(amount: number) {
+	for (const _ of $range(0, amount)) {
+		createBot();
+	}
+}
+
 export function createBot() {
 	const id = `bot-${nextBotId++}`;
 
