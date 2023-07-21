@@ -1,28 +1,26 @@
 import { Spring, useCamera, useMotor } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
+import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
 import { LOCAL_USER } from "shared/constants";
 import { getSnakeSkin } from "shared/data/skins";
-import { describeSnakeFromScore, selectSnakeById, selectSnakeIsBoosting } from "shared/store/snakes";
+import { SnakeEntity, describeSnakeFromScore, selectSnakeIsBoosting } from "shared/store/snakes";
 import { SNAKE_ON_SCREEN_MARGIN } from "./constants";
 import { SnakeHead } from "./snake-head";
 import { SnakeName } from "./snake-name";
 import { SnakeTracer } from "./snake-tracer";
 
 interface SnakeProps {
-	readonly id: string;
+	readonly snake: SnakeEntity;
 	readonly offset: Vector2;
 	readonly scale: number;
 }
 
-export function Snake({ id, offset, scale }: SnakeProps) {
+export function Snake({ snake, offset, scale }: SnakeProps) {
 	const rem = useRem();
 	const camera = useCamera();
-
-	const snake = useSelectorCreator(selectSnakeById, id);
-	const boosting = useSelectorCreator(selectSnakeIsBoosting, id);
+	const boosting = useSelectorCreator(selectSnakeIsBoosting, snake.id);
 
 	const [smoothOffset, setSmoothOffset] = useMotor({
 		x: offset.X * scale,
@@ -36,10 +34,6 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 		});
 	}, [offset, scale]);
 
-	if (!snake) {
-		return <></>;
-	}
-
 	const skin = getSnakeSkin(snake.skin);
 	const { radius } = describeSnakeFromScore(snake.score);
 
@@ -52,6 +46,31 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 
 		return position.X >= 0 && position.X <= screen.X && position.Y >= 0 && position.Y <= screen.Y;
 	};
+
+	const children = useMemo(() => {
+		return snake.tracers.mapFiltered((tracer, index) => {
+			const previous = snake.tracers[index - 1] || snake.head;
+			const middle = tracer.add(previous).div(2);
+
+			if (!isOnScreen(middle)) {
+				return;
+			}
+
+			return (
+				<SnakeTracer
+					key={`tracer-${index}`}
+					scale={scale}
+					size={radius * 2}
+					from={tracer}
+					to={previous}
+					index={index}
+					skin={skin}
+					boost={boosting}
+					dead={snake.dead}
+				/>
+			);
+		});
+	}, [snake.tracers, scale, radius, skin, boosting, snake.dead]);
 
 	return (
 		<Group position={smoothOffset.map((offset) => new UDim2(0.5, rem(offset.x), 0.5, rem(offset.y)))}>
@@ -67,7 +86,7 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				dead={snake.dead}
 			/>
 
-			{id !== LOCAL_USER + "=" && (
+			{snake.id !== LOCAL_USER && (
 				<SnakeName
 					key="nametag"
 					name={snake.name}
@@ -80,28 +99,7 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				/>
 			)}
 
-			{snake.tracers.mapFiltered((tracer, index) => {
-				const previous = snake.tracers[index - 1] || snake.head;
-				const middle = tracer.add(previous).div(2);
-
-				if (!isOnScreen(middle)) {
-					return;
-				}
-
-				return (
-					<SnakeTracer
-						key={`tracer-${index}`}
-						scale={scale}
-						size={radius * 2}
-						from={tracer}
-						to={previous}
-						index={index}
-						skin={skin}
-						boost={boosting}
-						dead={snake.dead}
-					/>
-				);
-			})}
+			{children}
 		</Group>
 	);
 }

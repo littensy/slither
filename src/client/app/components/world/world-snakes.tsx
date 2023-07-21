@@ -2,17 +2,17 @@ import { useSelector } from "@rbxts/react-reflex";
 import Roact from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { selectWorldCamera } from "client/store/world";
-import { selectSnakeIds } from "shared/store/snakes";
+import { selectSnakes } from "shared/store/snakes";
 import { Snake } from "./snake";
 
 export function WorldSnakes() {
-	const ids = useSelector(selectSnakeIds);
+	const snakes = useSelector(selectSnakes);
 	const world = useSelector(selectWorldCamera);
 
 	return (
 		<Group zIndex={2}>
-			{ids.map((id) => (
-				<Snake key={`snake-${id}`} id={id} offset={world.offset} scale={world.scale} />
+			{snakes.map((snake) => (
+				<Snake key={`snake-${snake.id}`} snake={snake} offset={world.offset} scale={world.scale} />
 			))}
 		</Group>
 	);
