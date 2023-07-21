@@ -90,17 +90,19 @@ export function Snake({ snake, offset, scale }: SnakeProps) {
 				dead={snake.dead}
 			/>
 
-			<SnakeName
-				key="name-tag"
-				name={snake.name}
-				head={snake.head}
-				headOffset={offset}
-				angle={snake.angle}
-				radius={radius}
-				scale={scale}
-				skin={skin.id}
-				visible={showNameTag}
-			/>
+			{isOnScreen(snake.head) && (
+				<SnakeName
+					key="name-tag"
+					name={snake.name}
+					head={snake.head}
+					headOffset={offset}
+					angle={snake.angle}
+					radius={radius}
+					scale={scale}
+					skin={skin.id}
+					visible={showNameTag}
+				/>
+			)}
 
 			{children}
 		</Group>

@@ -79,7 +79,7 @@ export function SnakeName({ name, head, headOffset, angle, scale, radius, skin, 
 	// without a separate effect, this may run regardless of whether
 	// the debounce is still waiting
 	useEffect(() => {
-		setSideTransition(new Spring(math.max(side, 0), { frequency: 1 }));
+		setSideTransition(new Spring(math.max(side, 0), { frequency: 2 }));
 	}, [side]);
 
 	useEffect(() => {
