@@ -1,8 +1,8 @@
 import { store } from "server/store";
 import { selectSnakeCount } from "shared/store/snakes";
-import { spawnBots } from "./spawn-bots";
+import { createBot } from "./create-bot";
 
-const MIN_SNAKES = 20;
+const MIN_SNAKES = 15;
 
 export function connectBotWorker() {
 	store.subscribe(
@@ -12,4 +12,10 @@ export function connectBotWorker() {
 	);
 
 	spawnBots(MIN_SNAKES);
+}
+
+function spawnBots(amount: number) {
+	for (const _ of $range(0, amount)) {
+		createBot();
+	}
 }

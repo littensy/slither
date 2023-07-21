@@ -7,13 +7,7 @@ import { selectSnakeIsDead } from "shared/store/snakes";
 
 let nextBotId = 0;
 
-export function spawnBots(amount: number) {
-	for (const _ of $range(0, amount)) {
-		spawnBot();
-	}
-}
-
-function spawnBot() {
+export function createBot() {
 	const id = `bot-${nextBotId++}`;
 
 	store.addSnake(id, {
@@ -29,9 +23,10 @@ function spawnBot() {
 			return;
 		}
 
-		const from = snake.head;
-		const to = getRandomPointInWorld(0.8);
-		const angle = math.atan2(to.Y - from.Y, to.X - from.X);
+		// prefer points that are further away
+		const goal = maxVector(getRandomPointInWorld(), getRandomPointInWorld());
+		const head = snake.head;
+		const angle = math.atan2(goal.Y - head.Y, goal.X - head.X);
 
 		store.turnSnake(id, angle);
 	}, 1);
@@ -39,4 +34,8 @@ function spawnBot() {
 	store.once(selectSnakeIsDead(id), () => {
 		clearMovement();
 	});
+}
+
+function maxVector(a: Vector2, b: Vector2) {
+	return new Vector2(math.max(a.X, b.X), math.max(a.Y, b.Y));
 }
