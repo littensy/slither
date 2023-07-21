@@ -1,9 +1,9 @@
 import { Spring, useCamera, useMotor } from "@rbxts/pretty-react-hooks";
-import { useSelectorCreator } from "@rbxts/react-reflex";
+import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
-import { LOCAL_USER } from "shared/constants";
+import { selectWorldSubject } from "client/store/world";
 import { getSnakeSkin } from "shared/data/skins";
 import { SnakeEntity, describeSnakeFromScore, selectSnakeIsBoosting } from "shared/store/snakes";
 import { SNAKE_ON_SCREEN_MARGIN } from "./constants";
@@ -20,22 +20,19 @@ interface SnakeProps {
 export function Snake({ snake, offset, scale }: SnakeProps) {
 	const rem = useRem();
 	const camera = useCamera();
+
+	const subject = useSelector(selectWorldSubject);
 	const boosting = useSelectorCreator(selectSnakeIsBoosting, snake.id);
+
+	const skin = getSnakeSkin(snake.skin);
+	const radius = describeSnakeFromScore(snake.score).radius;
+	const distance = snake.head.sub(offset.mul(-1)).Magnitude;
+	const showNameTag = snake.id !== subject && !snake.dead && distance < 16;
 
 	const [smoothOffset, setSmoothOffset] = useMotor({
 		x: offset.X * scale,
 		y: offset.Y * scale,
 	});
-
-	useEffect(() => {
-		setSmoothOffset({
-			x: new Spring(offset.X * scale),
-			y: new Spring(offset.Y * scale),
-		});
-	}, [offset, scale]);
-
-	const skin = getSnakeSkin(snake.skin);
-	const { radius } = describeSnakeFromScore(snake.score);
 
 	const isOnScreen = (tracer: Vector2) => {
 		const margin = rem(new Vector2(SNAKE_ON_SCREEN_MARGIN, SNAKE_ON_SCREEN_MARGIN));
@@ -46,6 +43,13 @@ export function Snake({ snake, offset, scale }: SnakeProps) {
 
 		return position.X >= 0 && position.X <= screen.X && position.Y >= 0 && position.Y <= screen.Y;
 	};
+
+	useEffect(() => {
+		setSmoothOffset({
+			x: new Spring(offset.X * scale),
+			y: new Spring(offset.Y * scale),
+		});
+	}, [offset, scale]);
 
 	const children = useMemo(() => {
 		return snake.tracers.mapFiltered((tracer, index) => {
@@ -86,18 +90,17 @@ export function Snake({ snake, offset, scale }: SnakeProps) {
 				dead={snake.dead}
 			/>
 
-			{snake.id !== LOCAL_USER && (
-				<SnakeName
-					key="nametag"
-					name={snake.name}
-					head={snake.head}
-					headOffset={offset}
-					angle={snake.angle}
-					radius={radius}
-					scale={scale}
-					skin={skin.id}
-				/>
-			)}
+			<SnakeName
+				key="name-tag"
+				name={snake.name}
+				head={snake.head}
+				headOffset={offset}
+				angle={snake.angle}
+				radius={radius}
+				scale={scale}
+				skin={skin.id}
+				visible={showNameTag}
+			/>
 
 			{children}
 		</Group>

@@ -17,6 +17,7 @@ export const CanvasGroup = forwardRef((props: CanvasGroupProps, ref: Ref<CanvasG
 			AnchorPoint={props.anchorPoint}
 			BackgroundColor3={props.backgroundColor}
 			BackgroundTransparency={props.backgroundTransparency}
+			Rotation={props.rotation}
 			ClipsDescendants={props.clipsDescendants}
 			Visible={props.visible}
 			ZIndex={props.zIndex}
