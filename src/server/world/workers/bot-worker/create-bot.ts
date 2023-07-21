@@ -37,5 +37,5 @@ export function createBot() {
 }
 
 function maxVector(a: Vector2, b: Vector2) {
-	return new Vector2(math.max(a.X, b.X), math.max(a.Y, b.Y));
+	return a.Magnitude > b.Magnitude ? a : b;
 }
