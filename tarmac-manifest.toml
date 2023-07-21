@@ -14,8 +14,8 @@ id = 14035801225
 packable = false
 
 [inputs."assets/images/ui/backdrop.png"]
-hash = "a43c7ebbb9ec7da7fc9dd72894fe2525e225f644ce3ff4180319cb30372e1a39"
-id = 14120525361
+hash = "dbce654530af652776ce0802aba23ee0a9ffd7577fb6271e5993f6ed06cd6b94"
+id = 14136965139
 packable = false
 
 [inputs."assets/images/ui/blur.png"]
@@ -41,6 +41,11 @@ packable = false
 [inputs."assets/images/ui/menu_title.png"]
 hash = "64020170b0236890947e4ea28e15592699351f7d9d9a3825b05b030fb8a3d3f0"
 id = 14120569384
+packable = false
+
+[inputs."assets/images/ui/tile_stripes.png"]
+hash = "f579f8ad1ad2b59967bcf7c31e758b7e103b0267177352175cf57f7d184eecf0"
+id = 14137143166
 packable = false
 
 [inputs."assets/images/ui/vignette.png"]
