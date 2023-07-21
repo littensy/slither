@@ -46,7 +46,7 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		const cellsInRange: GridCell<T>[] = [];
 
 		vector = snapToGrid(vector);
-		range = math.round(range / resolution);
+		range = math.ceil(range / resolution);
 
 		for (const i of $range(-range, range)) {
 			for (const j of $range(-range, range)) {

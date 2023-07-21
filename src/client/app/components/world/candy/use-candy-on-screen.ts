@@ -12,7 +12,7 @@ export function useCandyOnScreen(offset: Vector2, scale: number) {
 	const camera = useCamera();
 
 	const grid = useMemo(() => {
-		return createGrid<{ id: string }>(16);
+		return createGrid<{ id: string }>(5);
 	}, []);
 
 	const currentCandies = useSelector(selectCandiesById);

@@ -8,7 +8,7 @@ import { CandyEntity, CandyType, selectCandyById, selectCandyCount, selectStaleC
 import { createGrid } from "shared/utils/grid";
 import { fillArray } from "shared/utils/object-utils";
 
-export const candyGrid = createGrid<{ id: string }>(20);
+export const candyGrid = createGrid<{ id: string }>(5);
 
 let nextCandyId = 0;
 
