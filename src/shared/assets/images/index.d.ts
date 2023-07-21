@@ -7,6 +7,7 @@ export const images: {
 		readonly map_cursor: string;
 		readonly menu_title: string;
 		readonly vignette: string;
+		readonly tile_stripes: string;
 	};
 	readonly skins: {
 		readonly snake_eye_left: string;
