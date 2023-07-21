@@ -10,6 +10,7 @@ import { useTracerStyle } from "./use-tracer-style";
 
 interface SnakeHeadProps {
 	readonly position: Vector2;
+	readonly scale: number;
 	readonly angle: number;
 	readonly targetAngle: number;
 	readonly size: number;
@@ -18,7 +19,7 @@ interface SnakeHeadProps {
 	readonly dead: boolean;
 }
 
-export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dead }: SnakeHeadProps) {
+export function SnakeHead({ position, scale, angle, targetAngle, size, skin, boost, dead }: SnakeHeadProps) {
 	const { texture, tint } = getSnakeTracerSkin(skin.id, 0);
 
 	const rem = useRem();
@@ -26,18 +27,21 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dea
 	const angleDifference = useContinuousAngle(subtractRadians(targetAngle, currentAngle));
 	const style = useTracerStyle(boost, dead, tint, 0);
 
-	const [smoothPosition, setSmoothPosition] = useMotor({ x: position.X, y: position.Y });
+	const [smoothPosition, setSmoothPosition] = useMotor({
+		x: position.X * scale,
+		y: position.Y * scale,
+	});
 	const [smoothAngle, setSmoothAngle] = useMotor(currentAngle);
 	const [smoothEyeAngle, setSmoothEyeAngle] = useMotor(0);
 
 	useEffect(() => {
 		setSmoothPosition({
-			x: new Spring(position.X),
-			y: new Spring(position.Y),
+			x: new Spring(position.X * scale),
+			y: new Spring(position.Y * scale),
 		});
 		setSmoothAngle(new Spring(currentAngle + SNAKE_ANGLE_OFFSET));
 		setSmoothEyeAngle(new Spring(angleDifference));
-	}, [position, currentAngle, angleDifference]);
+	}, [position, currentAngle, angleDifference, scale]);
 
 	return (
 		<Image
@@ -48,7 +52,7 @@ export function SnakeHead({ position, angle, targetAngle, size, skin, boost, dea
 			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 			sliceScale={4}
 			anchorPoint={new Vector2(0.5, 0.5)}
-			size={new UDim2(0, rem(size), 0, rem(size))}
+			size={new UDim2(0, rem(size * scale), 0, rem(size * scale))}
 			position={smoothPosition.map(({ x, y }) => new UDim2(0, rem(x), 0, rem(y)))}
 			rotation={smoothAngle.map(math.deg)}
 		>

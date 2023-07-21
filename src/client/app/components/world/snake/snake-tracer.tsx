@@ -11,6 +11,7 @@ import { useTracerStyle } from "./use-tracer-style";
 interface SnakeTracerProps {
 	readonly from: Vector2;
 	readonly to: Vector2;
+	readonly scale: number;
 	readonly size: number;
 	readonly index: number;
 	readonly skin: SnakeSkin;
@@ -18,14 +19,19 @@ interface SnakeTracerProps {
 	readonly dead: boolean;
 }
 
-function SnakeTracerComponent({ from, to, size, index, skin, boost, dead }: SnakeTracerProps) {
+function SnakeTracerComponent({ from, to, scale, size, index, skin, boost, dead }: SnakeTracerProps) {
 	const { texture, tint } = getSnakeTracerSkin(skin.id, index);
 
 	const rem = useRem();
 	const style = useTracerStyle(boost, dead, tint, index);
 
 	const [glow, setGlow] = useMotor(0);
-	const [line, setLine] = useMotor({ fromX: from.X, fromY: from.Y, toX: to.X, toY: to.Y });
+	const [line, setLine] = useMotor({
+		fromX: from.X * scale,
+		fromY: from.Y * scale,
+		toX: to.X * scale,
+		toY: to.Y * scale,
+	});
 
 	const { length, position, angle } = useMemo(() => {
 		const length = line.map(({ fromX, fromY, toX, toY }) => {
@@ -45,12 +51,12 @@ function SnakeTracerComponent({ from, to, size, index, skin, boost, dead }: Snak
 
 	useEffect(() => {
 		setLine({
-			fromX: new Spring(from.X),
-			fromY: new Spring(from.Y),
-			toX: new Spring(to.X),
-			toY: new Spring(to.Y),
+			fromX: new Spring(from.X * scale),
+			fromY: new Spring(from.Y * scale),
+			toX: new Spring(to.X * scale),
+			toY: new Spring(to.Y * scale),
 		});
-	}, [from, to]);
+	}, [from, to, scale]);
 
 	useEffect(() => {
 		setGlow(new Spring(boost ? 1 : 0, { frequency: 2 }));
@@ -65,7 +71,7 @@ function SnakeTracerComponent({ from, to, size, index, skin, boost, dead }: Snak
 			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 			sliceScale={4}
 			anchorPoint={new Vector2(0.5, 0.5)}
-			size={length.map((length) => new UDim2(0, rem(size), 0, rem(size + length)))}
+			size={length.map((length) => new UDim2(0, rem(size * scale), 0, rem(size * scale + length)))}
 			position={position.map((position) => new UDim2(0, rem(position.X), 0, rem(position.Y)))}
 			rotation={angle.map(math.deg)}
 			zIndex={-index}
@@ -80,7 +86,7 @@ function SnakeTracerComponent({ from, to, size, index, skin, boost, dead }: Snak
 					scaleType="Slice"
 					sliceCenter={new Rect(256, 256, 256, 256)}
 					anchorPoint={new Vector2(0.5, 0.5)}
-					size={lerpBinding(glow, new UDim2(), new UDim2(1, rem(size + 1), 1, rem(size + 1)))}
+					size={lerpBinding(glow, new UDim2(), new UDim2(1, rem(size * scale + 1), 1, rem(size * scale + 1)))}
 					position={new UDim2(0.5, 0, 0.5, 0)}
 				/>
 			</DelayRender>

@@ -55,8 +55,9 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 		<Group position={smoothOffset.map((offset) => new UDim2(0.5, rem(offset.x), 0.5, rem(offset.y)))}>
 			<SnakeHead
 				key="head"
-				size={radius * 2 * scale}
-				position={snake.head.mul(scale)}
+				scale={scale}
+				size={radius * 2}
+				position={snake.head}
 				angle={snake.angle}
 				targetAngle={snake.desiredAngle}
 				skin={skin}
@@ -75,9 +76,10 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				return (
 					<SnakeTracer
 						key={`tracer-${index}`}
-						size={radius * 2 * scale}
-						from={tracer.mul(scale)}
-						to={previous.mul(scale)}
+						scale={scale}
+						size={radius * 2}
+						from={tracer}
+						to={previous}
 						index={index}
 						skin={skin}
 						boost={boosting}
