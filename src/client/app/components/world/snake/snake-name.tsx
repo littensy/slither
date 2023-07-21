@@ -23,7 +23,6 @@ const TEXT_PADDING = 1;
 export function SnakeName({ name, head, headOffset, angle, scale, radius, skin }: SnakeNameProps) {
 	const rem = useRem();
 	const previousHead = usePrevious(head) || head;
-	const previousHeadOffset = usePrevious(headOffset) || headOffset;
 	const { tint } = getSnakeTracerSkin(skin, 0);
 
 	const currentSide = useRef(1);
@@ -73,20 +72,22 @@ export function SnakeName({ name, head, headOffset, angle, scale, radius, skin }
 
 	useEffect(() => {
 		const y = scale * radius * 1.25 + (TEXT_PADDING + 2);
-		const rotation = math.clamp(20 * (head.X - previousHead.X + (headOffset.X - previousHeadOffset.X)), -45, 45);
 
 		setNamePosition({
 			x: new Spring(0, { frequency: 1, dampingRatio: 0.5 }),
 			y: new Spring(y * side, { frequency: 1, dampingRatio: 0.5 }),
 		});
 
-		setNameRotation(new Spring(rotation * side, { frequency: 1, dampingRatio: 0.5 }));
-
 		setHeadPosition({
 			x: new Spring(head.X * scale),
 			y: new Spring(head.Y * scale),
 		});
-	}, [head, angle, radius, scale]);
+	}, [head, angle, radius, scale, side]);
+
+	useEffect(() => {
+		const rotation = math.clamp(30 * (head.X - previousHead.X), -45, 45);
+		setNameRotation(new Spring(rotation * side, { frequency: 1, dampingRatio: 0.5 }));
+	}, [head, previousHead, headOffset, side]);
 
 	return (
 		<Group anchorPoint={new Vector2(0.5, 0.5)} size={size} position={offset} zIndex={0}>
