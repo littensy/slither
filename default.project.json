@@ -32,6 +32,15 @@
 					"$path": "out/client"
 				}
 			}
+		},
+		"TestService": {
+			"$properties": {
+				"ExecuteWithStudioRun": true
+			},
+			"$className": "TestService",
+			"TS": {
+				"$path": "scripts/run-tests.server.lua"
+			}
 		}
 	}
 }
