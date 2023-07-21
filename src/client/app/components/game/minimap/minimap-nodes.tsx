@@ -3,13 +3,14 @@ import { useSelector } from "@rbxts/react-reflex";
 import Roact, { Element, useState } from "@rbxts/roact";
 import { CanvasGroup } from "client/app/common/canvas-group";
 import { useDefined, useStore } from "client/app/hooks";
+import { selectSnakeFromWorldSubject } from "client/store/world";
 import { LOCAL_USER } from "shared/constants";
-import { selectLocalSnake, selectSnakesById } from "shared/store/snakes";
+import { selectSnakesById } from "shared/store/snakes";
 import { MinimapNode } from "./minimap-node";
 
 export function MinimapNodes() {
 	const store = useStore();
-	const snake = useDefined(useSelector(selectLocalSnake));
+	const snake = useDefined(useSelector(selectSnakeFromWorldSubject));
 	const [nodes, setNodes] = useState<Element[]>([]);
 
 	useInterval(

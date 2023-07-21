@@ -2,11 +2,11 @@ import { Spring, lerpBinding, useMotor } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
-import { selectHasLocalSnake } from "shared/store/snakes";
+import { selectWorldSubject } from "client/store/world";
 import { Minimap } from "./minimap";
 
 export function Game() {
-	const inGame = useSelector(selectHasLocalSnake);
+	const inGame = useSelector(selectWorldSubject) !== undefined;
 	const [transition, setTransition] = useMotor(0);
 
 	useEffect(() => {
