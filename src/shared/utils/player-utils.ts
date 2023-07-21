@@ -1,3 +1,4 @@
+import { Players } from "@rbxts/services";
 import { promiseTree } from "@rbxts/validate-tree";
 
 const characterTree = {
@@ -22,4 +23,8 @@ export interface Character extends Model {
 
 export async function promiseCharacter(character: Model): Promise<Character> {
 	return promiseTree(character, characterTree).timeout(30, "Character timed out");
+}
+
+export async function promisePlayerDisconnected(player: Player): Promise<void> {
+	await Promise.fromEvent(Players.PlayerRemoving, (playerWhoLeft) => playerWhoLeft === player);
 }

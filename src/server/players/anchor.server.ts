@@ -1,5 +1,5 @@
 import { Players } from "@rbxts/services";
-import { Character, promiseCharacter } from "shared/utils/player-utils";
+import { Character, promiseCharacter, promisePlayerDisconnected } from "shared/utils/player-utils";
 
 /**
  * Disable death and animations for the character to allow clients to
@@ -12,18 +12,12 @@ function onSpawn(character: Character) {
 	character.Humanoid.SetStateEnabled(Enum.HumanoidStateType.Dead, false);
 }
 
-function onPlayerAdded(player: Player) {
+Players.PlayerAdded.Connect((player) => {
 	const characterAdded = player.CharacterAdded.Connect((character) => {
 		promiseCharacter(character).then(onSpawn);
 	});
 
-	Promise.fromEvent(Players.PlayerRemoving, (playerLeft) => player === playerLeft).then(() => {
+	promisePlayerDisconnected(player).then(() => {
 		characterAdded.Disconnect();
 	});
-}
-
-Players.PlayerAdded.Connect(onPlayerAdded);
-
-for (const player of Players.GetPlayers()) {
-	onPlayerAdded(player);
-}
+});
