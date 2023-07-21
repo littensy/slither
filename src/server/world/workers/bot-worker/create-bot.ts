@@ -15,9 +15,10 @@ export function createBots(amount: number) {
 
 export function createBot() {
 	const id = `bot-${nextBotId++}`;
+	const name = `🐍  Bot ${nextBotId}`;
 
 	store.addSnake(id, {
-		name: id,
+		name,
 		head: getSafePointInWorld(),
 		skin: getRandomDefaultSnakeSkin().id,
 	});
