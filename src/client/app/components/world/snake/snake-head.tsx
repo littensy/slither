@@ -1,5 +1,5 @@
 import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
-import Roact, { useEffect } from "@rbxts/roact";
+import Roact, { memo, useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useContinuousAngle, useRem } from "client/app/hooks";
 import { images } from "shared/assets";
@@ -19,7 +19,7 @@ interface SnakeHeadProps {
 	readonly dead: boolean;
 }
 
-export function SnakeHead({ position, scale, angle, targetAngle, size, skin, boost, dead }: SnakeHeadProps) {
+function SnakeHeadComponent({ position, scale, angle, targetAngle, size, skin, boost, dead }: SnakeHeadProps) {
 	const { texture, tint } = getSnakeTracerSkin(skin.id, 0);
 
 	const rem = useRem();
@@ -77,3 +77,5 @@ export function SnakeHead({ position, scale, angle, targetAngle, size, skin, boo
 		</Image>
 	);
 }
+
+export const SnakeHead = memo(SnakeHeadComponent);

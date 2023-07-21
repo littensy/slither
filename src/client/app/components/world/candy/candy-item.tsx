@@ -1,5 +1,5 @@
 import { Spring, blend, lerp, map, useMotor, useTimer } from "@rbxts/pretty-react-hooks";
-import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
+import Roact, { joinBindings, memo, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useRem, useSeed } from "client/app/hooks";
@@ -13,7 +13,7 @@ interface CandyItemProps {
 	readonly eatenAt?: Vector2;
 }
 
-export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
+function CandyItemComponent({ size, point, color, eatenAt }: CandyItemProps) {
 	const rem = useRem();
 	const timer = useTimer();
 	const seed = useSeed();
@@ -73,3 +73,5 @@ export function CandyItem({ size, point, color, eatenAt }: CandyItemProps) {
 		</Image>
 	);
 }
+
+export const CandyItem = memo(CandyItemComponent);

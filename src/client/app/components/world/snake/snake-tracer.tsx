@@ -1,5 +1,5 @@
 import { Spring, blend, lerpBinding, useMotor } from "@rbxts/pretty-react-hooks";
-import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
+import Roact, { joinBindings, memo, useEffect, useMemo } from "@rbxts/roact";
 import { DelayRender } from "client/app/common/delay-render";
 import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
@@ -19,7 +19,7 @@ interface SnakeTracerProps {
 	readonly dead: boolean;
 }
 
-export function SnakeTracer({ from, to, scale, size, index, skin, boost, dead }: SnakeTracerProps) {
+function SnakeTracerComponent({ from, to, scale, size, index, skin, boost, dead }: SnakeTracerProps) {
 	const { texture, tint } = getSnakeTracerSkin(skin.id, index);
 
 	const rem = useRem();
@@ -93,3 +93,5 @@ export function SnakeTracer({ from, to, scale, size, index, skin, boost, dead }:
 		</Image>
 	);
 }
+
+export const SnakeTracer = memo(SnakeTracerComponent);
