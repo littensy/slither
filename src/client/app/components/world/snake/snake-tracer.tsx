@@ -74,7 +74,7 @@ function SnakeTracerComponent({ from, to, scale, size, index, skin, boost, dead 
 			size={length.map((length) => new UDim2(0, rem(size * scale), 0, rem(size * scale + length)))}
 			position={position.map((position) => new UDim2(0, rem(position.X), 0, rem(position.Y)))}
 			rotation={angle.map(math.deg)}
-			zIndex={-index}
+			zIndex={-index - 1}
 		>
 			<DelayRender shouldRender={boost} unmountDelay={0.5}>
 				<Image

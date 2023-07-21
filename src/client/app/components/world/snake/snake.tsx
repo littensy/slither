@@ -3,10 +3,12 @@ import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
+import { LOCAL_USER } from "shared/constants";
 import { getSnakeSkin } from "shared/data/skins";
 import { describeSnakeFromScore, selectSnakeById, selectSnakeIsBoosting } from "shared/store/snakes";
 import { SNAKE_ON_SCREEN_MARGIN } from "./constants";
 import { SnakeHead } from "./snake-head";
+import { SnakeName } from "./snake-name";
 import { SnakeTracer } from "./snake-tracer";
 
 interface SnakeProps {
@@ -64,6 +66,19 @@ export function Snake({ id, offset, scale }: SnakeProps) {
 				boost={boosting}
 				dead={snake.dead}
 			/>
+
+			{id !== LOCAL_USER + "=" && (
+				<SnakeName
+					key="nametag"
+					name={snake.name}
+					head={snake.head}
+					headOffset={offset}
+					angle={snake.angle}
+					radius={radius}
+					scale={scale}
+					skin={skin.id}
+				/>
+			)}
 
 			{snake.tracers.mapFiltered((tracer, index) => {
 				const previous = snake.tracers[index - 1] || snake.head;

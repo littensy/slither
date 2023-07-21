@@ -3,15 +3,15 @@ import { Group } from "client/app/common/group";
 import { Backdrop } from "./backdrop";
 import { Candy } from "./candy";
 import { WorldBorder } from "./world-border";
-import { WorldFocus } from "./world-focus";
 import { WorldSnakes } from "./world-snakes";
+import { WorldSubject } from "./world-subject";
 
 export function World() {
 	return (
 		<Group>
 			<Backdrop />
 			<Candy />
-			<WorldFocus />
+			<WorldSubject />
 			<WorldSnakes />
 			<WorldBorder />
 		</Group>
