@@ -56,13 +56,11 @@ export function WorldBorder() {
 			rotation={rotation}
 			zIndex={3}
 		>
-			<uipadding PaddingLeft={new UDim(0, rem(2))} PaddingRight={new UDim(0, rem(2))} />
-
 			<Frame
 				backgroundColor={palette.red}
 				backgroundTransparency={0.5}
-				size={new UDim2(0.5, 0, 1, 0)}
-				position={new UDim2(0.5, 0, 0, 0)}
+				size={new UDim2(0.5, rem(-2), 1, 0)}
+				position={new UDim2(0.5, rem(2), 0, 0)}
 			>
 				<uistroke Color={palette.red} Thickness={rem(2)} Transparency={0.5} />
 

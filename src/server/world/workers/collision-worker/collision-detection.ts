@@ -4,7 +4,8 @@ import { SnakeEntity, describeSnakeFromScore } from "shared/store/snakes";
 import { snakeGrid } from "../snake-worker";
 
 export function isCollidingWithWall(snake: SnakeEntity) {
-	return snake.head.Magnitude > WORLD_BOUNDS;
+	const radius = describeSnakeFromScore(snake.score).radius;
+	return snake.head.Magnitude + radius > WORLD_BOUNDS;
 }
 
 export function isCollidingWithSnake(snake: SnakeEntity) {
