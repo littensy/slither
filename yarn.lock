@@ -243,6 +243,11 @@
   resolved "https://registry.yarnpkg.com/@rbxts/types/-/types-1.0.705.tgz#d76f13adc9695fe54692ad211ad5318dc932aedf"
   integrity sha512-Syve7Dn2il1QSBk60Z/WN6Eim8FaICyEiS823cvmJMjxmbiyQpb61UH0vlENJdFkz9iUY4VBtp7H4YpxFgp2VQ==
 
+"@rbxts/validate-tree@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@rbxts/validate-tree/-/validate-tree-2.0.2.tgz#2a1807eaa391a482822207177ff5dcd4b8f811b2"
+  integrity sha512-OA0E9ZjEeOpPa3XeV5/oC51aro2QFcL5dItufbagYZW8TOsX8C+FDXLx+A/ulMwcF42WcFNcQybxzcWSS/QSrA==
+
 "@roblox-ts/luau-ast@^1.0.8":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@roblox-ts/luau-ast/-/luau-ast-1.0.8.tgz#00c2c7592a4d5a6e44d18f6dd3cb111c0a0f393e"
