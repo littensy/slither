@@ -4,16 +4,18 @@ import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useRem, useSeed } from "client/app/hooks";
 import { images } from "shared/assets";
+import { CandyType } from "shared/store/candy";
 import { mapStrict } from "shared/utils/math-utils";
 
 interface CandyItemProps {
+	readonly variant: CandyType;
 	readonly size: number;
 	readonly point: Vector2;
 	readonly color: Color3;
 	readonly eatenAt?: Vector2;
 }
 
-function CandyItemComponent({ size, point, color, eatenAt }: CandyItemProps) {
+function CandyItemComponent({ variant, size, point, color, eatenAt }: CandyItemProps) {
 	const rem = useRem();
 	const timer = useTimer();
 	const seed = useSeed();
@@ -43,7 +45,9 @@ function CandyItemComponent({ size, point, color, eatenAt }: CandyItemProps) {
 		return { position, glow, transparency };
 	}, [rem]);
 
-	const diameter = mapStrict(size, 1, 20, rem(0.75), rem(3.5));
+	const diameter = useMemo(() => {
+		return variant === "loot" ? rem(2 + 1.5 * math.random()) : mapStrict(size, 1, 20, rem(0.75), rem(3.5));
+	}, [variant, rem]);
 
 	useEffect(() => {
 		const position = eatenAt || point;

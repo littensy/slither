@@ -31,7 +31,7 @@ export function connectCandyWorker() {
 		// when the snake dies, create candy on the snake's tracers
 		return () => {
 			disconnect();
-			createCandyOnSnake(id);
+			dropCandyOnDeath(id);
 		};
 	});
 
@@ -81,7 +81,7 @@ function dropCandyWhileBoosting(id: string) {
 	});
 }
 
-function createCandyOnSnake(id: string): void {
+function dropCandyOnDeath(id: string): void {
 	const snake = getSnake(id);
 
 	if (!snake) {
@@ -89,15 +89,43 @@ function createCandyOnSnake(id: string): void {
 	}
 
 	const tracers = [...snake.tracers, snake.head];
+	const tracerRadius = describeSnakeFromScore(snake.score).radius;
+	const candyPositions: Vector2[] = [];
+	let lastTracer: Vector2 | undefined;
 
-	const candies = tracers.map((tracer, index) => {
+	for (const tracer of tracers) {
+		// to prevent candy bunching up in certain areas, don't insert the
+		// position of the tracer if it's too close to the last spawned candy
+		if (lastTracer && tracer.sub(lastTracer).Magnitude < 0.25 * tracerRadius) {
+			continue;
+		}
+
+		lastTracer = tracer;
+
+		// create multiple candies on this tracer based on radius
+		const amount = math.round(random.NextNumber(1, math.max(tracerRadius, 1)));
+
+		for (const _ of $range(1, amount)) {
+			const x = random.NextNumber(-1, 1) * tracerRadius;
+			const y = random.NextNumber(-1, 1) * tracerRadius;
+
+			candyPositions.push(tracer.add(new Vector2(x, y)));
+		}
+	}
+
+	// the total worth of the loot should scale logarithmically with the
+	// snake's score, but not exceed the score itself
+	const sum = math.min(2048 * math.log10(snake.score / 512 + 1), snake.score);
+	const total = candyPositions.size();
+
+	const candies = candyPositions.mapFiltered((position, index) => {
 		const skin = getSnakeTracerSkin(snake.skin, index);
 
 		return createCandy({
-			size: random.NextInteger(5, 20),
-			position: tracer,
-			color: skin.tint,
+			position,
 			type: "loot",
+			size: math.ceil(sum / total),
+			color: skin.tint,
 		});
 	});
 

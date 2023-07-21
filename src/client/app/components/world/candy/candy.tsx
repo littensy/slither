@@ -30,6 +30,7 @@ export function Candy() {
 			return (
 				<CandyItem
 					key={`candy-${entity.id}`}
+					variant={entity.type}
 					size={entity.size}
 					point={entity.position.mul(world.scale)}
 					color={entity.color}

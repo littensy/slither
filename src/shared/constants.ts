@@ -7,7 +7,7 @@ export const WORLD_TICK = 1 / 12;
 export const CANDY_LIMITS: { readonly [K in CandyType]: number } = {
 	default: 4096,
 	dropping: 256,
-	loot: 256,
+	loot: 384,
 };
 
 export const SNAKE_SPEED = 5;
