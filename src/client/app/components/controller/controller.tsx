@@ -5,6 +5,7 @@ import { useInputDevice } from "client/app/hooks";
 import { REMOTE_TICK, WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
 import { selectLocalSnake } from "shared/store/snakes";
+import { Gamepad } from "./gamepad";
 import { Mouse } from "./mouse";
 import { Touch } from "./touch";
 import { useToggleTouchControls } from "./use-toggle-touch-controls";
@@ -37,6 +38,7 @@ export function Controller() {
 		<>
 			{device === "keyboard" && <Mouse updateAngle={updateAngle.run} setBoost={setBoost.run} />}
 			{device === "touch" && <Touch updateAngle={updateAngle.run} setBoost={setBoost.run} />}
+			{device === "gamepad" && <Gamepad updateAngle={updateAngle.run} setBoost={setBoost.run} />}
 		</>
 	);
 }
