@@ -12,18 +12,10 @@ import { MinimapNodes } from "./minimap-nodes";
 
 export function Minimap() {
 	const rem = useRem({ minimum: MINIMUM_MINIMAP_REM });
-	const device = useInputDevice();
+	const touch = useInputDevice() === "touch";
 
-	const isTouch = device === "touch";
-	const isPhone = isTouch && rem(1) === MINIMUM_MINIMAP_REM;
-
-	// top-right corner on phone
-	// right-middle on larger touch devices
-	// bottom-right corner on desktop
-	const { anchorPoint, position } = isPhone
-		? { anchorPoint: new Vector2(1, 0), position: new UDim2(1, -rem(4), 0, rem(4)) }
-		: isTouch
-		? { anchorPoint: new Vector2(1, 0.5), position: new UDim2(1, -rem(4), 0.5, 0) }
+	const { anchorPoint, position } = touch
+		? { anchorPoint: new Vector2(1, 0.5), position: new UDim2(1, -rem(3.5), 0.5, 0) }
 		: { anchorPoint: new Vector2(1, 1), position: new UDim2(1, -rem(4), 1, -rem(4)) };
 
 	return (
