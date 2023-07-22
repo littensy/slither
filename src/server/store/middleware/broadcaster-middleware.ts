@@ -1,5 +1,6 @@
 import { BroadcastAction, createBroadcaster } from "@rbxts/reflex";
 import { Players } from "@rbxts/services";
+import { WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
 import { slices } from "shared/store";
 import { createScheduler } from "shared/utils/scheduler";
@@ -43,7 +44,7 @@ export function broadcasterMiddleware() {
 
 	createScheduler({
 		name: "broadcaster",
-		interval: 1 / 12,
+		interval: WORLD_TICK,
 		onTick: () => {
 			for (const [id, actions] of queue) {
 				const player = Players.GetPlayerByUserId(id);
