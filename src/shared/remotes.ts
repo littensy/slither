@@ -5,7 +5,9 @@ import { WORLD_TICK } from "./constants";
 
 export const remotes = createRemotes({
 	store: namespace({
-		dispatch: remote<Client, [actions: BroadcastAction[]]>(),
+		dispatch1: remote<Client, [actions: BroadcastAction[]]>(),
+		dispatch2: remote<Client, [actions: BroadcastAction[]]>(),
+		dispatch3: remote<Client, [actions: BroadcastAction[]]>(),
 		start: remote<Server>(),
 	}),
 
