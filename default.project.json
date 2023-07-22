@@ -26,6 +26,13 @@
 		},
 		"StarterPlayer": {
 			"$className": "StarterPlayer",
+			"$properties": {
+				"CameraMinZoomDistance": 10,
+				"DevTouchMovementMode": {
+					"Enum": 6
+				},
+				"EnableMouseLockOption": false
+			},
 			"StarterPlayerScripts": {
 				"$className": "StarterPlayerScripts",
 				"TS": {
@@ -33,11 +40,47 @@
 				}
 			}
 		},
+		"StarterGui": {
+			"$className": "StarterGui",
+			"$properties": {
+				"ScreenOrientation": {
+					"Enum": 4
+				},
+				"VirtualCursorMode": {
+					"Enum": 2
+				}
+			}
+		},
+		"Lighting": {
+			"$className": "Lighting",
+			"$properties": {
+				"Technology": {
+					"Enum": 2
+				},
+				"GlobalShadows": false
+			}
+		},
+		"Workspace": {
+			"$className": "Workspace",
+			"$properties": {
+				"SignalBehavior2": {
+					"Enum": 2
+				}
+			}
+		},
+		"TextChatService": {
+			"$className": "TextChatService",
+			"$properties": {
+				"ChatVersion": {
+					"Enum": 1
+				}
+			}
+		},
 		"TestService": {
+			"$className": "TestService",
 			"$properties": {
 				"ExecuteWithStudioRun": true
 			},
-			"$className": "TestService",
 			"TS": {
 				"$path": "scripts/run-tests.server.lua"
 			}
