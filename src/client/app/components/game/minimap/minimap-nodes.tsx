@@ -27,7 +27,7 @@ export function MinimapNodes() {
 
 				nodes.push(<MinimapNode key={snake.id} point={snake.head} />);
 
-				for (const index of $range(0, snake.tracers.size() - 1, 5)) {
+				for (const index of $range(0, snake.tracers.size() - 1, 6)) {
 					const tracer = snake.tracers[index];
 					nodes.push(<MinimapNode key={`${snake.id}-${index}`} point={tracer} />);
 				}

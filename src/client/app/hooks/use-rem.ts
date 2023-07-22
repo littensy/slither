@@ -10,6 +10,12 @@ type ScaleFunctions = {
 	[K in keyof CheckableTypes]?: (value: CheckableTypes[K], rem: number) => CheckableTypes[K];
 };
 
+interface RemCallback {
+	// overload to prevent useRem type returning the same exact number
+	(value: number): number;
+	<T>(value: T): T;
+}
+
 const scaleFunctions: ScaleFunctions = {
 	UDim2: (value, rem) => {
 		return new UDim2(value.X.Scale, value.X.Offset * rem, value.Y.Scale, value.Y.Offset * rem);
@@ -28,7 +34,7 @@ const scaleFunctions: ScaleFunctions = {
 	},
 };
 
-export function useRem(options?: RemOptions): <T>(value: T) => T;
+export function useRem(options?: RemOptions): RemCallback;
 
 export function useRem(options?: RemOptions) {
 	const rem = useRemContext(options);

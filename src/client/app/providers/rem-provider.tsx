@@ -4,6 +4,8 @@ import Roact, { createContext, useCallback } from "@rbxts/roact";
 export interface RemProviderProps extends Roact.PropsWithChildren {
 	baseRem?: number;
 	remOverride?: number;
+	minimumRem?: number;
+	maximumRem?: number;
 }
 
 export const BASE_REM_RESOLUTION = new Vector2(1920, 1020);
@@ -11,7 +13,13 @@ export const BASE_REM = 16;
 
 export const RemContext = createContext<number>(BASE_REM);
 
-export function RemProvider({ baseRem = BASE_REM, remOverride, children }: RemProviderProps) {
+export function RemProvider({
+	baseRem = BASE_REM,
+	minimumRem = 10,
+	maximumRem,
+	remOverride,
+	children,
+}: RemProviderProps) {
 	const camera = useCamera();
 
 	const getRem = useCallback(() => {
@@ -26,7 +34,17 @@ export function RemProvider({ baseRem = BASE_REM, remOverride, children }: RemPr
 			scale = map(scale, 0, 1, 0.25, 1);
 		}
 
-		return math.round(baseRem * scale);
+		let rem = math.round(baseRem * scale);
+
+		if (maximumRem !== undefined) {
+			rem = math.min(rem, maximumRem);
+		}
+
+		if (minimumRem !== undefined) {
+			rem = math.max(rem, minimumRem);
+		}
+
+		return rem;
 	}, [camera]);
 
 	const [rem, setRem] = useDebounceState(getRem(), { wait: 0.5, leading: true });

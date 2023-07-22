@@ -1,7 +1,7 @@
 import { hoarcekat, useInterval } from "@rbxts/pretty-react-hooks";
 import Roact, { useEffect } from "@rbxts/roact";
+import { Controller } from "client/app/components/controller";
 import { Game } from "client/app/components/game";
-import { SnakeController } from "client/app/components/snake-controller";
 import { World } from "client/app/components/world";
 import { RootProvider } from "client/app/providers/root-provider";
 import { store } from "client/store";
@@ -65,7 +65,7 @@ export = hoarcekat(() => {
 		<RootProvider>
 			<World />
 			<Game />
-			<SnakeController />
+			<Controller />
 		</RootProvider>
 	);
 });

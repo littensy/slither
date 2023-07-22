@@ -40,7 +40,9 @@ export function MinimapNode({ point, rotation = 0, isClient = false }: MinimapNo
 			imageColor={isClient ? palette.text : palette.lavender}
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={
-				isClient ? new UDim2(0, rem(28 / BASE_REM), 0, rem(28 / BASE_REM)) : new UDim2(0, rem(0.4), 0, rem(0.4))
+				isClient
+					? new UDim2(0, rem(28 / BASE_REM), 0, rem(28 / BASE_REM))
+					: new UDim2(0, rem(0.25), 0, rem(0.25))
 			}
 			rotation={smoothRotation}
 			position={position}

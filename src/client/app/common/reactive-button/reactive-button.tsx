@@ -1,8 +1,10 @@
 import { Spring, blend, joinAnyBindings, lerpBinding, useMotor, useUpdateEffect } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { useButtonAnimation, useButtonState, useRem } from "../hooks";
-import { Button } from "./button";
-import { Frame } from "./frame";
+import { useRem } from "client/app/hooks";
+import { Button } from "../button";
+import { Frame } from "../frame";
+import { useButtonAnimation } from "./use-button-animation";
+import { useButtonState } from "./use-button-state";
 
 interface ReactiveButtonProps extends Roact.PropsWithChildren {
 	onClick?: () => void;
