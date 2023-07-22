@@ -1,9 +1,9 @@
 import Roact from "@rbxts/roact";
 import { Root } from "../common/root";
+import { Controller } from "./controller";
 import { Game } from "./game";
 import { Menu } from "./menu";
 import { Preloader } from "./preloader";
-import { SnakeController } from "./snake-controller";
 import { World } from "./world";
 
 export function App() {
@@ -12,7 +12,7 @@ export function App() {
 			<Preloader />
 
 			<Root>
-				<SnakeController />
+				<Controller />
 				<World />
 				<Game />
 			</Root>

@@ -5,7 +5,7 @@ import { Players } from "@rbxts/services";
 import { Frame } from "client/app/common/frame";
 import { Group } from "client/app/common/group";
 import { Text } from "client/app/common/text";
-import { SnakeController } from "client/app/components/snake-controller";
+import { Controller } from "client/app/components/controller";
 import { World } from "client/app/components/world/world";
 import { useRem } from "client/app/hooks";
 import { RootProvider } from "client/app/providers/root-provider";
@@ -101,7 +101,7 @@ export = hoarcekat(() => {
 	return (
 		<RootProvider>
 			<World />
-			<SnakeController />
+			<Controller />
 			<Debugger />
 		</RootProvider>
 	);

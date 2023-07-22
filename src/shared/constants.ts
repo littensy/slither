@@ -4,6 +4,9 @@ import { CandyType } from "./store/candy";
 export const WORLD_BOUNDS = 196;
 export const WORLD_TICK = 1 / 15;
 
+// Remotes can fire up to 20 times per second
+export const REMOTE_TICK = 1 / 20;
+
 export const CANDY_LIMITS: { readonly [K in CandyType]: number } = {
 	default: 4096,
 	dropping: 256,
