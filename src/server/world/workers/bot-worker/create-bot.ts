@@ -16,7 +16,7 @@ export function createBots(amount: number) {
 
 export function createBot() {
 	const id = `bot-${nextBotId++}`;
-	const name = `🐍  ${generateBotName()}`;
+	const name = generateBotName();
 
 	store.addSnake(id, {
 		name,
