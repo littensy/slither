@@ -1,0 +1,62 @@
+owner:
+  group: 4918739
+payments: group
+state:
+  remote:
+    region: us-west-1
+    bucket: slither-mantle-state
+    key: slither
+
+environments:
+  - label: canary
+    targetNamePrefix: environmentLabel
+    targetAccess: friends
+    targetOverrides:
+      icon: assets/marketing/game_icon_canary.png
+      thumbnails: [assets/marketing/game_thumbnail_canary.png]
+      places:
+        start:
+          file: slither-canary.rbxlx
+          configuration:
+            name: 🚧 Slither Testing
+            description: |
+              This is a development build of Slither. It may be unstable, so let me know if you find any bugs!
+
+              🐍  Defeat other players by cutting them off with your tail!
+
+              🏆  Eat and fight to increase your score, and rise to the top!
+
+              🤝  This game is a work-in-progress! Feedback is appreciated.
+            maxPlayerCount: 50
+  - label: production
+    branches: [main]
+    targetAccess: public
+
+target:
+  experience:
+    icon: assets/marketing/game_icon.png
+    thumbnails: [assets/marketing/game_thumbnail.png]
+    socialLinks:
+      - title: Community
+        url: https://discord.gg/tyjBaP44sK
+    configuration:
+      playableDevices: [computer, console, phone, tablet]
+      privateServers:
+        price: 10
+      enableStudioAccessToApis: true
+      avatarType: playerChoice
+      avatarAnimationType: playerChoice
+    places:
+      start:
+        file: slither-production.rbxlx
+        configuration:
+          name: 🐍 Slither
+          description: |
+            Slither is a casual multiplayer game where you control a snake and grow by eating glowing orbs. If your head bumps into another snake's tail, you're out!
+
+            🐍  Defeat other players by cutting them off with your tail!
+
+            🏆  Eat and fight to increase your score, and rise to the top!
+
+            🤝  This game is a work-in-progress! Feedback is appreciated.
+          maxPlayerCount: 24

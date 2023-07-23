@@ -14,14 +14,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: GitHub Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
+      - uses: ok-nick/setup-aftman@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup NPM
-        uses: bahmutov/npm-install@v1
+      - name: Lint
+        run: |
+          yarn eslint src
+          yarn prettier --check src
 
-      - name: Run ESLint
-        run: yarn eslint src
-
-      - name: Build & Compile
+      - name: Compile
         run: yarn build --verbose
+
+      - name: Build project
+        run: rojo build --output place.rbxlx

@@ -2,4 +2,7 @@
 /out
 /include
 *.tsbuildinfo
+*.rbxl
+*.rbxlx
 .DS_Store
+.env
