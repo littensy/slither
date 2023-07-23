@@ -4,6 +4,7 @@ import { getRandomPointInWorld, getSafePointInWorld } from "server/world/utils/s
 import { getSnake } from "server/world/utils/world-utils";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { selectSnakeIsDead } from "shared/store/snakes";
+import { generateBotName } from "./generate-name";
 
 let nextBotId = 0;
 
@@ -15,7 +16,7 @@ export function createBots(amount: number) {
 
 export function createBot() {
 	const id = `bot-${nextBotId++}`;
-	const name = `🐍  Bot ${nextBotId}`;
+	const name = generateBotName();
 
 	store.addSnake(id, {
 		name,
