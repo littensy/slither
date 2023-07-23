@@ -9,7 +9,7 @@ on:
       - "scripts/**"
       - ".github/**"
   release:
-    types: [prereleased]
+    types: [released, prereleased]
   workflow_dispatch:
     inputs:
       environment:
