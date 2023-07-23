@@ -12,10 +12,10 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 env:
   ENVIRONMENT: ${{ github.event.inputs.environment || 'production' }}
-  PROJECT_NAME: slither-${{ env.ENVIRONMENT }}
 
 jobs:
   build:
@@ -33,13 +33,13 @@ jobs:
         run: yarn build --verbose
 
       - name: Build project
-        run: rojo build --output ${{ env.PROJECT_NAME }}.rbxlx
+        run: rojo build --output place.rbxlx
 
       - name: Upload place artifact
         uses: actions/upload-artifact@v3
         with:
           name: place
-          path: ${{ env.PROJECT_NAME }}.rbxlx
+          path: place.rbxlx
 
   deploy:
     runs-on: ubuntu-latest
