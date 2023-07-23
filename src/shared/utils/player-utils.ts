@@ -26,5 +26,9 @@ export async function promiseCharacter(character: Model): Promise<Character> {
 }
 
 export async function promisePlayerDisconnected(player: Player): Promise<void> {
+	if (!player.IsDescendantOf(Players)) {
+		return;
+	}
+
 	await Promise.fromEvent(Players.PlayerRemoving, (playerWhoLeft) => playerWhoLeft === player);
 }

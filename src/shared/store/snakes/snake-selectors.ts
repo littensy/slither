@@ -36,6 +36,10 @@ export const selectLocalSnake = (state: SharedState) => {
 	return state.snakes[LOCAL_USER];
 };
 
+export const selectLocalSnakeScore = (state: SharedState) => {
+	return state.snakes[LOCAL_USER]?.score;
+};
+
 export const selectHasLocalSnake = (state: SharedState) => {
 	return LOCAL_USER in state.snakes;
 };
@@ -98,4 +102,38 @@ export const selectSnakeIsBoosting = (id: string) => {
 		const snake = state.snakes[id];
 		return snake ? snakeIsBoosting(snake) : false;
 	};
+};
+
+export const selectSnakeRanking = (id: string) => {
+	const comparator = (current: SnakeEntity, existing: SnakeEntity) => {
+		return current.score > existing.score;
+	};
+
+	return createSelector(selectSnakesSorted(comparator), (snakes) => {
+		return snakes.findIndex((snake) => snake.id === id) + 1;
+	});
+};
+
+export const selectLocalSnakeRanking = selectSnakeRanking(LOCAL_USER);
+
+export const selectRankForDisplay = (state: SharedState) => {
+	const ranking = selectLocalSnakeRanking(state);
+	const lastDigit = ranking % 10;
+	const lastTwoDigits = ranking % 100;
+
+	if (ranking === 0) {
+		return;
+	}
+
+	if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
+		return `${ranking}th`;
+	} else if (lastDigit === 1) {
+		return `${ranking}st`;
+	} else if (lastDigit === 2) {
+		return `${ranking}nd`;
+	} else if (lastDigit === 3) {
+		return `${ranking}rd`;
+	} else {
+		return `${ranking}th`;
+	}
 };
