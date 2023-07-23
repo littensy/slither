@@ -5,6 +5,7 @@ export type FontFamily = keyof typeof fontIdsByName;
 const fontIdsByName = {
 	Inter: "rbxassetid://12187365364",
 	Pacifico: "rbxassetid://12187367362",
+	Rubik: "rbxassetid://12187365977",
 };
 
 /**
