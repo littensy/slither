@@ -1,7 +1,9 @@
 const adjectives = [
+	// base words
 	"Funky",
 	"Funny",
-
+	// taken from https://gist.github.com/hugsy/8910dc78d208e40de42deb29e62df913
+	// modified/shortened with a python script
 	"Adventurous",
 	"Accurate",
 	"Admirable",
@@ -26,12 +28,14 @@ const adjectives = [
 ];
 
 const nouns = [
+	// base words
 	"Rhythm",
 	"Viper",
 	"Cobra",
 	"Python",
 	"Snake",
-
+	// taken from https://gist.github.com/atduskgreg/3cf8ef48cb0d29cf151bedad81553a54
+	// some subspecies removed, etc.
 	"Alligator",
 	"Ant",
 	"Anteater",
