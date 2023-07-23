@@ -1,14 +1,14 @@
-name: Release
+name: Release Canary
 
 on:
   release:
-    types: [published]
+    types: [prereleased]
   workflow_dispatch:
     inputs:
       environment:
         description: The environment to deploy to (canary, production)
         required: true
-        default: production
+        default: canary
 
 permissions:
   contents: write
@@ -17,7 +17,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: production
+    environment: canary
 
     steps:
       - uses: actions/checkout@v2
@@ -40,7 +40,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: canary
     needs: build
 
     steps:
