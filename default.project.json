@@ -31,7 +31,8 @@
 				"DevTouchMovementMode": {
 					"Enum": 6
 				},
-				"EnableMouseLockOption": false
+				"EnableMouseLockOption": false,
+				"AutoJumpEnabled": false
 			},
 			"StarterPlayerScripts": {
 				"$className": "StarterPlayerScripts",
