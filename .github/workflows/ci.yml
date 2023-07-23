@@ -14,14 +14,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: GitHub Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
 
-      - name: Setup NPM
-        uses: bahmutov/npm-install@v1
-
-      - name: Run ESLint
-        run: yarn eslint src
+      - name: Lint
+        run: |
+          yarn eslint src
+          yarn prettier --check src
 
       - name: Build & Compile
         run: yarn build --verbose

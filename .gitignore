@@ -5,3 +5,4 @@
 *.rbxl
 *.rbxlx
 .DS_Store
+.env

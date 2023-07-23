@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: The environment to deploy to (canary, production)
+        required: true
+        default: production
+
+permissions:
+  contents: write
+
+env:
+  ENVIRONMENT: ${{ github.event.inputs.environment || 'production' }}
+  PROJECT_NAME: slither-${{ env.ENVIRONMENT }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ${{ env.ENVIRONMENT }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bahmutov/npm-install@v1
+      - uses: ok-nick/setup-aftman@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compile
+        run: yarn build --verbose
+
+      - name: Build project
+        run: rojo build --output ${{ env.PROJECT_NAME }}.rbxlx
+
+      - name: Upload place artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: place
+          path: ${{ env.PROJECT_NAME }}.rbxlx
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ env.ENVIRONMENT }}
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bahmutov/npm-install@v1
+      - uses: ok-nick/setup-aftman@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download place artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: place
+          path: ./
+
+      - name: Deploy project
+        run: mantle deploy --allow-purchases --environment ${{ env.ENVIRONMENT }}
+        env:
+          ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+          MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

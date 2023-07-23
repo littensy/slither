@@ -1,13 +1,14 @@
 {
 	"name": "roblox-slither",
-	"version": "1.0.0",
-	"main": "index.js",
+	"version": "0.1.0",
 	"license": "MIT",
 	"scripts": {
-		"build": "rbxtsc",
+		"compile": "rbxtsc --verbose",
 		"watch": "rbxtsc -w",
 		"tarmac": "tarmac sync --target roblox",
-		"serve": "rojo serve"
+		"serve": "rojo serve",
+		"build": "rm -rf out && yarn compile && rojo build --output slither-canary.rbxlx",
+		"deploy": "yarn build && mantle deploy --environment canary"
 	},
 	"devDependencies": {
 		"@rbxts/compiler-types": "^2.1.1-types.0",
