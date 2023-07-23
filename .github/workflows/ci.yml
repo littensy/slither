@@ -16,11 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: bahmutov/npm-install@v1
+      - uses: ok-nick/setup-aftman@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Lint
         run: |
           yarn eslint src
           yarn prettier --check src
 
-      - name: Build & Compile
+      - name: Compile
         run: yarn build --verbose
+
+      - name: Build project
+        run: rojo build --output place.rbxlx
