@@ -16,9 +16,8 @@ environments:
       thumbnails: [assets/marketing/game_thumbnail_canary.png]
       places:
         start:
-          file: slither-canary.rbxlx
           configuration:
-            name: 🚧 Slither Testing
+            name: 🛠️ Slither Testing
             description: |
               This is a development build of Slither. It may be unstable, so let me know if you find any bugs!
 
@@ -48,7 +47,7 @@ target:
       avatarAnimationType: playerChoice
     places:
       start:
-        file: slither-production.rbxlx
+        file: place.rbxlx
         configuration:
           name: 🐍 Slither
           description: |
