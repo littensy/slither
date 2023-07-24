@@ -1,5 +1,5 @@
 import { store } from "server/store";
-import { getCandy } from "server/world/utils/world-utils";
+import { getCandy } from "server/world/utils";
 import { describeSnakeFromScore, selectSnakesById } from "shared/store/snakes";
 import { candyGrid, eatCandy } from "./candy-helpers";
 

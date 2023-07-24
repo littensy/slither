@@ -89,7 +89,7 @@ export = hoarcekat(() => {
 
 		return createScheduler({
 			name: "world-tick",
-			interval: WORLD_TICK,
+			tick: WORLD_TICK,
 			onTick: store.snakeTick,
 		});
 	}, []);

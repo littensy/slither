@@ -2,7 +2,7 @@
 
 import { store } from "server/store";
 import { getSnake } from "server/world";
-import { onSnakeTick } from "server/world/workers/snake-worker";
+import { onSnakeTick } from "server/world/services/snake-service";
 
 export = () => {
 	it("should update snake target angle", () => {

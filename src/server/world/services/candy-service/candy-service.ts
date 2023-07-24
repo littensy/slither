@@ -1,7 +1,8 @@
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { getSnake } from "server/world/utils/world-utils";
-import { CANDY_LIMITS } from "shared/constants";
+import { CANDY_TICK_PHASE } from "server/world/constants";
+import { getSnake } from "server/world/utils";
+import { CANDY_LIMITS, WORLD_TICK } from "shared/constants";
 import { getSnakeTracerSkin } from "shared/data/skins";
 import { selectCandyCount } from "shared/store/candy";
 import {
@@ -10,20 +11,22 @@ import {
 	selectAliveSnakesById,
 	selectSnakeIsBoosting,
 } from "shared/store/snakes";
+import { createScheduler } from "shared/utils/scheduler";
 import { createCandy, populateCandy, removeCandyIfAtLimit } from "./candy-helpers";
+import { onCandyTick } from "./candy-tick";
 
 const random = new Random();
 
-export function connectCandyWorker() {
+export async function initCandyService() {
 	// keep the amount of candy in the world at a constant size
 	// if the amount of candy is less than the max, create more
-	const controlPopulation = store.subscribe(
+	store.subscribe(
 		selectCandyCount("default"),
 		(count) => count < CANDY_LIMITS.default,
 		(count) => populateCandy(CANDY_LIMITS.default - count),
 	);
 
-	const snakeObserver = store.observe(selectAliveSnakesById, identifySnake, ({ id }) => {
+	store.observe(selectAliveSnakesById, identifySnake, ({ id }) => {
 		// while boosting, decrement the snake's score and create candy
 		// on the snake's tail
 		const disconnect = dropCandyWhileBoosting(id);
@@ -35,12 +38,14 @@ export function connectCandyWorker() {
 		};
 	});
 
-	populateCandy(CANDY_LIMITS.default);
+	createScheduler({
+		name: "candy",
+		tick: WORLD_TICK,
+		phase: CANDY_TICK_PHASE,
+		onTick: onCandyTick,
+	});
 
-	return () => {
-		controlPopulation();
-		snakeObserver();
-	};
+	populateCandy(CANDY_LIMITS.default);
 }
 
 function dropCandyWhileBoosting(id: string) {

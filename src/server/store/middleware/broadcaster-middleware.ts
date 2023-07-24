@@ -44,7 +44,7 @@ export function broadcasterMiddleware() {
 
 	createScheduler({
 		name: "broadcaster",
-		interval: WORLD_TICK,
+		tick: WORLD_TICK,
 		onTick: () => {
 			for (const [id, actions] of queue) {
 				const player = Players.GetPlayerByUserId(id);
