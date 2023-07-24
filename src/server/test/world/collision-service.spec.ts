@@ -2,8 +2,8 @@
 
 import { store } from "server/store";
 import { getSnake } from "server/world";
-import { onCollisionTick } from "server/world/workers/collision-worker";
-import { onSnakeTick } from "server/world/workers/snake-worker";
+import { onCollisionTick } from "server/world/services/collision-service";
+import { onSnakeTick } from "server/world/services/snake-service";
 import { WORLD_BOUNDS } from "shared/constants";
 
 export = () => {

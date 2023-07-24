@@ -1,8 +1,8 @@
 import { store } from "server/store";
 import { getSafePointInWorld } from "server/world";
-import { candyGrid, createCandy, onCandyTick } from "server/world/workers/candy-worker";
-import { onCollisionTick } from "server/world/workers/collision-worker";
-import { onSnakeTick } from "server/world/workers/snake-worker";
+import { candyGrid, createCandy, onCandyTick } from "server/world/services/candy-service";
+import { onCollisionTick } from "server/world/services/collision-service";
+import { onSnakeTick } from "server/world/services/snake-service";
 import { CANDY_LIMITS, WORLD_BOUNDS } from "shared/constants";
 import { benchmark } from "shared/utils/benchmark";
 import { fillArray } from "shared/utils/object-utils";

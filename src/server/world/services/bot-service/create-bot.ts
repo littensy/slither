@@ -1,7 +1,6 @@
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { getRandomPointInWorld, getSafePointInWorld } from "server/world/utils/spawn-utils";
-import { getSnake } from "server/world/utils/world-utils";
+import { getRandomPointInWorld, getSafePointInWorld, getSnake } from "server/world/utils";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { selectSnakeIsDead } from "shared/store/snakes";
 import { generateBotName } from "./generate-name";

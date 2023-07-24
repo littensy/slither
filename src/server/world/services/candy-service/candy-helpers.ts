@@ -1,7 +1,6 @@
 import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { getRandomPointNearWorldOrigin } from "server/world/utils/spawn-utils";
-import { getCandy, getSnake } from "server/world/utils/world-utils";
+import { getCandy, getRandomPointNearWorldOrigin, getSnake } from "server/world/utils";
 import { CANDY_LIMITS } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
 import { CandyEntity, CandyType, selectCandyById, selectCandyCount, selectStaleCandyOfType } from "shared/store/candy";

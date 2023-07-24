@@ -2,14 +2,12 @@
 
 import { store } from "server/store";
 import { getSnake } from "server/world";
-import { connectCandyWorker, createCandy, onCandyTick, removeCandyIfAtLimit } from "server/world/workers/candy-worker";
+import { createCandy, onCandyTick, removeCandyIfAtLimit } from "server/world/services/candy-service";
 import { CANDY_LIMITS } from "shared/constants";
 import { CandyType, selectCandies, selectCandyById, selectCandyCount } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 
 export = () => {
-	let worker: (() => void) | undefined;
-
 	const countCandy = (candyType?: CandyType) => {
 		return store.getState(selectCandyCount(candyType));
 	};
@@ -18,14 +16,6 @@ export = () => {
 		const candy = store.getState(selectCandyById(id));
 		return !candy || candy.eatenAt !== undefined;
 	};
-
-	beforeEach(() => {
-		worker = connectCandyWorker();
-	});
-
-	afterEach(() => {
-		worker?.();
-	});
 
 	it("should populate the state with candy", () => {
 		expect(countCandy()).to.equal(CANDY_LIMITS.default);
