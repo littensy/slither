@@ -8,7 +8,8 @@
 		"tarmac": "tarmac sync --target roblox",
 		"serve": "rojo serve",
 		"build": "rm -rf out && yarn compile && rojo build --output place.rbxlx",
-		"deploy": "yarn build && mantle deploy --environment canary"
+		"deploy:dev": "yarn build && mantle deploy --environment canary",
+		"deploy:prod": "yarn build && mantle deploy --environment production"
 	},
 	"devDependencies": {
 		"@rbxts/compiler-types": "^2.1.1-types.0",
