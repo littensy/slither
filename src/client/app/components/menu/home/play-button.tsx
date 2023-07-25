@@ -9,13 +9,13 @@ import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 import { gradient } from "./utils";
 
-interface HomePlayButtonProps {
+interface PlayButtonProps {
 	readonly anchorPoint: Vector2;
 	readonly size: UDim2;
 	readonly position: UDim2;
 }
 
-export function HomePlayButton({ anchorPoint, size, position }: HomePlayButtonProps) {
+export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	const rem = useRem();
 	const timer = useTimer();
 	const [hover, setHover] = useMotor(0);
@@ -52,6 +52,7 @@ export function HomePlayButton({ anchorPoint, size, position }: HomePlayButtonPr
 				cornerRadius={new UDim(0, rem(0.5))}
 				size={new UDim2(1, 0, 1, 0)}
 			>
+				<uigradient Transparency={new NumberSequence(0, 0.4)} Rotation={90} />
 				<uistroke Color={palette.subtext0} Transparency={0.5} Thickness={rem(0.25)} />
 			</Frame>
 

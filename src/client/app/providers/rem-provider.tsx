@@ -10,12 +10,13 @@ export interface RemProviderProps extends Roact.PropsWithChildren {
 
 export const BASE_REM_RESOLUTION = new Vector2(1920, 1020);
 export const BASE_REM = 16;
+export const MINIMUM_REM = 10;
 
 export const RemContext = createContext<number>(BASE_REM);
 
 export function RemProvider({
 	baseRem = BASE_REM,
-	minimumRem = 10,
+	minimumRem = MINIMUM_REM,
 	maximumRem,
 	remOverride,
 	children,
