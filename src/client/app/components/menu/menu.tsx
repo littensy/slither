@@ -1,10 +1,13 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
+import { Text } from "client/app/common/text";
 import { useRem, useStore } from "client/app/hooks";
+import { palette } from "shared/data/palette";
 import { selectHasLocalSnake } from "shared/store/snakes";
 import { Home } from "./home";
-import { MenuPage } from "./menu-page";
+import { MenuContainer } from "./menu-container";
 import { MenuVignette } from "./menu-vignette";
+import { Navigation } from "./navigation";
 
 export function Menu() {
 	const store = useStore();
@@ -18,9 +21,22 @@ export function Menu() {
 	return (
 		<>
 			<MenuVignette />
-			<MenuPage page="home" transitionFrom={new UDim2(0, 0, 0, rem(2))}>
+
+			<MenuContainer>
+				<Navigation />
+			</MenuContainer>
+
+			<MenuContainer page="home">
 				<Home />
-			</MenuPage>
+			</MenuContainer>
+
+			<MenuContainer page="support">
+				<Text text="TODO" textColor={palette.text} size={new UDim2(1, 0, 1, 0)} />
+			</MenuContainer>
+
+			<MenuContainer page="skins">
+				<Text text="TODO" textColor={palette.text} size={new UDim2(1, 0, 1, 0)} />
+			</MenuContainer>
 		</>
 	);
 }

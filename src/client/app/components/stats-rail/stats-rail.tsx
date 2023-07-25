@@ -5,9 +5,9 @@ import { useDefined, useRem } from "client/app/hooks";
 import { LOCAL_USER } from "shared/constants";
 import { selectPlayerBalance } from "shared/store/saves";
 import { selectLocalSnakeScore, selectRankForDisplay } from "shared/store/snakes";
-import { StatCard } from "./stat-card";
+import { StatsCard } from "./stats-card";
 
-export function StatRail() {
+export function StatsRail() {
 	const rem = useRem();
 
 	const currentScore = useSelector(selectLocalSnakeScore);
@@ -32,7 +32,7 @@ export function StatRail() {
 				SortOrder="LayoutOrder"
 			/>
 
-			<StatCard
+			<StatsCard
 				key="rank"
 				emoji="🏆"
 				label="RANK"
@@ -43,7 +43,7 @@ export function StatRail() {
 				order={0}
 			/>
 
-			<StatCard
+			<StatsCard
 				key="score"
 				emoji="💯"
 				label="SCORE"
@@ -54,7 +54,7 @@ export function StatRail() {
 				order={1}
 			/>
 
-			<StatCard
+			<StatsCard
 				key="balance"
 				emoji="💵"
 				label="BALANCE"

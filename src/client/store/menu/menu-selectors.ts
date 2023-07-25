@@ -12,3 +12,7 @@ export const selectIsMenuOpen = (state: RootState) => {
 export const selectIsPage = (page: MenuPage) => {
 	return (state: RootState) => state.menu.page === page;
 };
+
+export const selectMenuTransition = (state: RootState) => {
+	return state.menu.transition;
+};
