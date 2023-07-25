@@ -5,7 +5,7 @@ import { PlayerSave, defaultPlayerSave, selectPlayerSave } from "shared/store/sa
 import { promisePlayerDisconnected } from "shared/utils/player-utils";
 import { validateSave } from "./validation";
 
-const collection = createCollection<PlayerSave>("data-v1", {
+const collection = createCollection<PlayerSave>("player-saves", {
 	defaultData: defaultPlayerSave,
 	validate: validateSave,
 });
