@@ -1,1 +1,1 @@
-export const MIN_NAV_REM = 12;
+export const MIN_NAV_REM = 10;

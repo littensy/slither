@@ -9,7 +9,7 @@ export function Home() {
 
 	return (
 		<>
-			<HomeTitle position={new UDim2(0.5, 0, 0.5, rem(-10))} />
+			<HomeTitle position={new UDim2(0.5, 0, 0.4, rem(-3))} />
 			<PlayButton
 				anchorPoint={new Vector2(0.5, 0.5)}
 				size={new UDim2(0, rem(18), 0, rem(3.5))}

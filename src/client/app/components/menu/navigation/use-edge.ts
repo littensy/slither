@@ -12,7 +12,7 @@ export function useEdge() {
 	const [edge, setEdge] = useState<"top" | "bottom">("top");
 
 	useEffect(() => {
-		const hasSpaceOnTop = rem(1) > MINIMUM_REM || viewport.Y > viewport.X || viewport.Y > rem(42);
+		const hasSpaceOnTop = rem(1) > MINIMUM_REM || viewport.Y > viewport.X || viewport.Y > rem(54);
 		setEdge(hasSpaceOnTop ? "top" : "bottom");
 	}, [rem, viewport]);
 

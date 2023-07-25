@@ -35,9 +35,9 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 
 	const size = useMemo(() => {
 		return textWidth.map(({ label, value }) => {
-			const content = math.max(label, value) / rem(1);
-			const width = CARD_EMOJI_WIDTH + CARD_PADDING + content + 2 * CARD_MARGIN;
-			return new UDim2(0, rem(width), 0, rem(CARD_HEIGHT));
+			const content = math.max(label, value);
+			const width = CARD_EMOJI_WIDTH + CARD_PADDING + 2 * CARD_MARGIN;
+			return new UDim2(0, rem(width) + content, 0, rem(CARD_HEIGHT));
 		});
 	}, [rem]);
 
