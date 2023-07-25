@@ -1,13 +1,13 @@
 name: Release Canary
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "README.md"
-      - "LICENSE.md"
-      - "scripts/**"
-      - ".github/**"
+  # push:
+  #   branches: [main]
+  #   paths-ignore:
+  #     - "README.md"
+  #     - "LICENSE.md"
+  #     - "scripts/**"
+  #     - ".github/**"
   release:
     types: [released, prereleased]
   workflow_dispatch:
