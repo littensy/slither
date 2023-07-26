@@ -3,6 +3,7 @@ import Roact, { useEffect } from "@rbxts/roact";
 import { Controller } from "client/app/components/controller";
 import { World } from "client/app/components/world/world";
 import { RootProvider } from "client/app/providers/root-provider";
+import { profileAllComponents } from "client/app/utils/profiler";
 import { store } from "client/store";
 import { LOCAL_USER, WORLD_TICK } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
@@ -12,6 +13,8 @@ import { createScheduler } from "shared/utils/scheduler";
 import { useMockRemotes } from "../utils/use-mock-remotes";
 
 const IDS = [LOCAL_USER, ...fillArray(10, (index) => `${index}`)];
+
+profileAllComponents();
 
 export = hoarcekat(() => {
 	useMockRemotes();

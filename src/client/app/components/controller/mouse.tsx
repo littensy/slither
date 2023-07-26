@@ -21,18 +21,14 @@ export function Mouse({ updateAngle, setBoost }: MouseProps) {
 				updateAngle(angle);
 			}}
 			onInputBegan={(frame, input) => {
-				if (input.UserInputType !== Enum.UserInputType.MouseButton1) {
-					return;
+				if (input.UserInputType === Enum.UserInputType.MouseButton1) {
+					setBoost(true);
 				}
-
-				setBoost(true);
 			}}
 			onInputEnded={(frame, input) => {
-				if (input.UserInputType !== Enum.UserInputType.MouseButton1) {
-					return;
+				if (input.UserInputType === Enum.UserInputType.MouseButton1) {
+					setBoost(false);
 				}
-
-				setBoost(false);
 			}}
 		/>
 	);

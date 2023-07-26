@@ -3,8 +3,8 @@ import { Group } from "client/app/common/group";
 import { RemProvider } from "client/app/providers/rem-provider";
 import { Backdrop } from "./backdrop";
 import { Candy } from "./candy";
+import { Snakes } from "./snakes";
 import { WorldBorder } from "./world-border";
-import { WorldSnakes } from "./world-snakes";
 import { WorldSubject } from "./world-subject";
 
 export function World() {
@@ -13,8 +13,8 @@ export function World() {
 			<Group>
 				<Backdrop />
 				<Candy />
+				<Snakes />
 				<WorldSubject />
-				<WorldSnakes />
 				<WorldBorder />
 			</Group>
 		</RemProvider>

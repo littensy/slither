@@ -1,5 +1,4 @@
-import { usePrevious } from "@rbxts/pretty-react-hooks";
-import { useEffect, useRef } from "@rbxts/roact";
+import { useMemo, useRef } from "@rbxts/roact";
 import { subtractRadians } from "shared/utils/math-utils";
 
 /**
@@ -8,11 +7,12 @@ import { subtractRadians } from "shared/utils/math-utils";
  * 360 degrees.
  */
 export function useContinuousAngle(angle: number) {
-	const previousAngle = usePrevious(angle) ?? angle;
+	const previousAngle = useRef(angle);
 	const continuousAngle = useRef(angle);
 
-	useEffect(() => {
-		continuousAngle.current += subtractRadians(angle, previousAngle);
+	useMemo(() => {
+		continuousAngle.current += subtractRadians(angle, previousAngle.current);
+		previousAngle.current = angle;
 	}, [angle]);
 
 	return continuousAngle.current;
