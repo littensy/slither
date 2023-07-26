@@ -12,8 +12,8 @@ interface HomeVersionProps {
 
 const GIT = $git();
 const VERSION = GIT.LatestTag !== "" ? GIT.LatestTag : "v0.1.0";
-const REPOSITORY = "littensy/roblox-slither";
-const DIVIDER = "—";
+const BRANCH = `roblox-slither/${GIT.Branch}`;
+const COMMIT = GIT.Commit;
 
 export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 	const rem = useRem();
@@ -37,25 +37,46 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 				textSize={rem(1.1)}
 			/>
 
+			<Divider />
+
 			<Text
+				richText
 				font="Inter"
-				fontWeight={Enum.FontWeight.Bold}
-				text={DIVIDER}
+				fontWeight={Enum.FontWeight.Medium}
+				text={BRANCH}
 				testAutoResize="X"
 				textColor={palette.text}
-				textTransparency={0.75}
+				textTransparency={0.5}
 				textSize={rem(1.1)}
 			/>
+
+			<Divider />
 
 			<Text
 				font="Inter"
 				fontWeight={Enum.FontWeight.Medium}
-				text={REPOSITORY}
+				text={COMMIT}
 				testAutoResize="X"
 				textColor={palette.text}
 				textTransparency={0.5}
 				textSize={rem(1.1)}
 			/>
 		</Group>
+	);
+}
+
+function Divider() {
+	const rem = useRem();
+
+	return (
+		<Text
+			font="Inter"
+			fontWeight={Enum.FontWeight.Bold}
+			text="—"
+			testAutoResize="X"
+			textColor={palette.text}
+			textTransparency={0.75}
+			textSize={rem(1.1)}
+		/>
 	);
 }
