@@ -1,5 +1,5 @@
 import { Spring, useDebounceState, useMotor, usePrevious } from "@rbxts/pretty-react-hooks";
-import Roact, { joinBindings, useEffect, useMemo, useRef } from "@rbxts/roact";
+import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
 import { Frame } from "client/app/common/frame";
 import { Shadow } from "client/app/common/shadow";
@@ -8,7 +8,7 @@ import { useRem } from "client/app/hooks";
 import { palette } from "shared/data/palette";
 import { getSnakeTracerSkin } from "shared/data/skins";
 
-interface SnakeNameProps {
+interface SnakeNameTagProps {
 	readonly name: string;
 	readonly head: Vector2;
 	readonly headOffset: Vector2;
@@ -31,7 +31,7 @@ function minBrightness(color: Color3, min: number) {
 	return Color3.fromHSV(h, s, math.max(v, min));
 }
 
-export function SnakeName({ name, head, headOffset, angle, scale, radius, skin, visible }: SnakeNameProps) {
+export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, skin, visible }: SnakeNameTagProps) {
 	const rem = useRem();
 	const previousHead = usePrevious(head) || head;
 	const { tint } = getSnakeTracerSkin(skin, 0);
@@ -44,7 +44,6 @@ export function SnakeName({ name, head, headOffset, angle, scale, radius, skin, 
 	const [nameHeight, setNameHeight] = useMotor(0);
 	const [nameRotation, setNameRotation] = useMotor(0);
 	const [nameTransparency, setNameTransparency] = useMotor(1);
-	const [headPosition, setHeadPosition] = useMotor({ x: head.X * scale, y: head.Y * scale });
 
 	const { size, position, tail } = useMemo(() => {
 		const size = nameSize.map(({ x, y }) => {
@@ -53,8 +52,8 @@ export function SnakeName({ name, head, headOffset, angle, scale, radius, skin, 
 			return new UDim2(0, width, 0, height);
 		});
 
-		const position = joinBindings({ nameHeight, headPosition }).map(({ nameHeight, headPosition }) => {
-			return new UDim2(0, rem(headPosition.x), 0, rem(nameHeight + headPosition.y));
+		const position = nameHeight.map((height) => {
+			return new UDim2(0.5, 0, 0.5, rem(height));
 		});
 
 		const tail = sideTransition.map((side) => {
@@ -84,14 +83,8 @@ export function SnakeName({ name, head, headOffset, angle, scale, radius, skin, 
 
 	useEffect(() => {
 		const height = scale * radius * 1.25 + (TEXT_PADDING + 2);
-
 		setNameHeight(new Spring(height * side, { frequency: 1, dampingRatio: 0.5 }));
-
-		setHeadPosition({
-			x: new Spring(head.X * scale),
-			y: new Spring(head.Y * scale),
-		});
-	}, [head, angle, radius, scale, side]);
+	}, [angle, radius, scale, side]);
 
 	// rotate the name tag to simulate dragging behind the snake
 	useEffect(() => {

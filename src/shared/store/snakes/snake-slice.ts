@@ -21,6 +21,9 @@ export interface SnakeEntity {
 	readonly dead: boolean;
 }
 
+// Used to prevent tracers from overlapping
+const TINY = 0.0001;
+
 const initialState: SnakesState = {};
 
 const initialSnake: SnakeEntity = {
@@ -77,12 +80,12 @@ export const snakesSlice = createProducer(initialState, {
 
 				// the alpha of the interpolation that will decide the space between
 				// the current tracer and the previous tracer
-				const alpha = math.clamp((deltaTime * speed) / spacing, 0, 1);
+				const alpha = math.clamp((deltaTime * speed) / spacing, TINY, 1 - TINY);
 
 				if (index === desiredLength - 1) {
 					// the tail's spacing from the previous tracer should be proportional
 					// to the score needed to reach the next length
-					tail = tail.Lerp(tracer.Lerp(previous, alpha), description.length % 1);
+					tail = tail.Lerp(tracer.Lerp(previous, alpha), math.max(description.length % 1, TINY));
 				} else {
 					tail = tracer.Lerp(previous, alpha);
 				}
@@ -91,8 +94,8 @@ export const snakesSlice = createProducer(initialState, {
 			});
 
 			if (currentLength < desiredLength) {
-				for (const _ of $range(currentLength, desiredLength)) {
-					tracers.push(tail);
+				for (const index of $range(currentLength, desiredLength - 1)) {
+					tracers.push(tail.add(new Vector2(TINY * index, 0)));
 				}
 			}
 

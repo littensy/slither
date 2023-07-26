@@ -1,6 +1,6 @@
 import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
+import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
 import { selectWorldCamera } from "client/store/world";
@@ -16,6 +16,7 @@ export function Candy() {
 		x: world.offset.X,
 		y: world.offset.Y,
 	});
+	const [scale, setScale] = useBinding(world.scale);
 
 	const children = useMemo(() => {
 		let length = 0;
@@ -32,9 +33,10 @@ export function Candy() {
 					key={`candy-${entity.id}`}
 					variant={entity.type}
 					size={entity.size}
-					point={entity.position.mul(world.scale)}
+					point={entity.position}
 					color={entity.color}
-					eatenAt={entity.eatenAt?.mul(world.scale)}
+					eatenAt={entity.eatenAt}
+					worldScale={scale}
 				/>
 			);
 		});
@@ -46,6 +48,10 @@ export function Candy() {
 			y: new Spring(world.offset.Y),
 		});
 	}, [world.offset]);
+
+	useEffect(() => {
+		setScale(world.scale);
+	}, [world.scale]);
 
 	return (
 		<Group

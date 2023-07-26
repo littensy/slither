@@ -4,6 +4,7 @@ import { mapStrict } from "shared/utils/math-utils";
 import { RootState } from "../";
 
 export interface WorldCamera {
+	readonly subject?: string;
 	readonly offset: Vector2;
 	readonly scale: number;
 }
@@ -23,6 +24,7 @@ export const selectWorldCamera = createSelector(
 	(snake) => {
 		if (!snake) {
 			return {
+				subject: undefined,
 				offset: new Vector2(),
 				scale: WORLD_SCALE,
 			};
@@ -31,6 +33,7 @@ export const selectWorldCamera = createSelector(
 		const { radius } = describeSnakeFromScore(snake.score);
 
 		return {
+			subject: snake.id,
 			offset: snake.head.mul(-1),
 			scale: mapStrict(radius, 0.5, 3, WORLD_SCALE, WORLD_SCALE * 0.5),
 		};

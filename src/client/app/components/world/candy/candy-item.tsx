@@ -12,10 +12,11 @@ interface CandyItemProps {
 	readonly size: number;
 	readonly point: Vector2;
 	readonly color: Color3;
+	readonly worldScale: Roact.Binding<number>;
 	readonly eatenAt?: Vector2;
 }
 
-function CandyItemComponent({ variant, size, point, color, eatenAt }: CandyItemProps) {
+function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }: CandyItemProps) {
 	const rem = useRem();
 	const timer = useTimer();
 	const seed = useSeed();
@@ -28,8 +29,9 @@ function CandyItemComponent({ variant, size, point, color, eatenAt }: CandyItemP
 			const x = 4 * math.noise(t, seed);
 			const y = 4 * math.noise(-seed, t);
 			const point = pointSmooth.getValue();
+			const scale = worldScale.getValue();
 
-			return new UDim2(0, rem(point.x + x), 0, rem(point.y + y));
+			return new UDim2(0, rem(point.x * scale + x), 0, rem(point.y * scale + y));
 		});
 
 		const glow = timer.value.map((t) => {
