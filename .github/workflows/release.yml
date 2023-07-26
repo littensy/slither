@@ -59,9 +59,10 @@ jobs:
           name: place
           path: ./
 
-      - name: Deploy project
-        run: mantle deploy --allow-purchases --environment ${{ env.ENVIRONMENT }}
-        env:
-          ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
-          MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      # fixme: #19
+      # - name: Deploy project
+      #   run: mantle deploy --allow-purchases --environment ${{ env.ENVIRONMENT }}
+      #   env:
+      #     ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+      #     MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
