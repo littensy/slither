@@ -1,5 +1,5 @@
 import { useBindingListener, useUnmountEffect } from "@rbxts/pretty-react-hooks";
-import Roact, { Portal, useEffect, useMemo, useState } from "@rbxts/roact";
+import Roact, { Portal, useLayoutEffect, useMemo, useState } from "@rbxts/roact";
 import { CanvasGroup, CanvasGroupProps } from "./canvas-group";
 import { Frame } from "./frame";
 import { Group } from "./group";
@@ -35,7 +35,7 @@ export function CanvasOrFrame(props: CanvasOrFrameProps) {
 		setVisible(t < 1);
 	});
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		container.Parent = renderMode === "canvas" ? canvas : frame;
 	}, [renderMode, canvas, frame]);
 
@@ -47,11 +47,11 @@ export function CanvasOrFrame(props: CanvasOrFrameProps) {
 		<Group>
 			<Portal target={container}>{props.children}</Portal>
 
-			<CanvasGroup {...propsWithoutChildren} visible={visible} ref={canvasRef}>
+			<CanvasGroup {...propsWithoutChildren} visible={visible && renderMode === "canvas"} ref={canvasRef}>
 				{props.directChildren}
 			</CanvasGroup>
 
-			<Frame {...propsWithoutChildren} visible={visible} ref={frameRef}>
+			<Frame {...propsWithoutChildren} visible={visible && renderMode === "frame"} ref={frameRef}>
 				{props.directChildren}
 			</Frame>
 		</Group>
