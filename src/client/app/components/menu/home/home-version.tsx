@@ -31,7 +31,7 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 				font="Inter"
 				fontWeight={Enum.FontWeight.Medium}
 				text={VERSION}
-				testAutoResize="X"
+				textAutoResize="X"
 				textColor={palette.text}
 				textTransparency={0.5}
 				textSize={rem(1.1)}
@@ -44,7 +44,7 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 				font="Inter"
 				fontWeight={Enum.FontWeight.Medium}
 				text={BRANCH}
-				testAutoResize="X"
+				textAutoResize="X"
 				textColor={palette.text}
 				textTransparency={0.5}
 				textSize={rem(1.1)}
@@ -56,7 +56,7 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 				font="Inter"
 				fontWeight={Enum.FontWeight.Medium}
 				text={COMMIT}
-				testAutoResize="X"
+				textAutoResize="X"
 				textColor={palette.text}
 				textTransparency={0.5}
 				textSize={rem(1.1)}
@@ -73,7 +73,7 @@ function Divider() {
 			font="Inter"
 			fontWeight={Enum.FontWeight.Bold}
 			text="—"
-			testAutoResize="X"
+			textAutoResize="X"
 			textColor={palette.text}
 			textTransparency={0.75}
 			textSize={rem(1.1)}

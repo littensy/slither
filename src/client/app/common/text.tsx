@@ -16,7 +16,7 @@ export interface TextProps<T extends Instance = TextLabel> extends FrameProps<T>
 	textTruncate?: Roact.InferEnumNames<Enum.TextTruncate>;
 	textScaled?: boolean | Roact.Binding<boolean>;
 	textHeight?: number | Roact.Binding<number>;
-	testAutoResize?: "X" | "Y" | "XY";
+	textAutoResize?: "X" | "Y" | "XY";
 	richText?: boolean | Roact.Binding<boolean>;
 }
 
@@ -40,7 +40,7 @@ export function Text(props: TextProps) {
 			LineHeight={props.textHeight}
 			RichText={props.richText}
 			Size={props.size}
-			AutomaticSize={props.testAutoResize}
+			AutomaticSize={props.textAutoResize}
 			Position={props.position}
 			AnchorPoint={props.anchorPoint}
 			BackgroundColor3={props.backgroundColor}
