@@ -1,7 +1,4 @@
 const adjectives = [
-	// base words
-	"Funky",
-	"Funny",
 	// taken mostly from https://gist.github.com/hugsy/8910dc78d208e40de42deb29e62df913
 	"Adventurous",
 	"Accurate",
@@ -51,6 +48,8 @@ const adjectives = [
 	"Fearless",
 	"Flashy",
 	"Flawless",
+	"Funky",
+	"Funny",
 	"Fuzzy",
 	"Genuine",
 	"Giant",
