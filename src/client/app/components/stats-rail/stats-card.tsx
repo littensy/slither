@@ -66,7 +66,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					key="drop-shadow"
 					shadowColor={primary.Lerp(secondary, 0.5)}
 					shadowBlur={0.3}
-					shadowOffset={rem(0.5)}
+					shadowPosition={rem(0.5)}
 					shadowSize={rem(4)}
 					shadowTransparency={0.7}
 				/>

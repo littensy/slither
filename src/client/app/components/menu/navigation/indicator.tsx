@@ -66,7 +66,7 @@ export function Indicator({ colors, order, edge }: IndicatorProps) {
 		>
 			<Shadow
 				key="glow"
-				shadowOffset={rem(0)}
+				shadowPosition={rem(0)}
 				shadowSize={rem(0)}
 				shadowColor={style.color}
 				shadowTransparency={0.8}

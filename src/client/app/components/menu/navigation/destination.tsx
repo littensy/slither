@@ -43,7 +43,7 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 			<Shadow
 				key="glow"
 				shadowBlur={0.3}
-				shadowOffset={rem(0.5)}
+				shadowPosition={rem(0.5)}
 				shadowSize={rem(4)}
 				shadowColor={color}
 				shadowTransparency={lerpBinding(transition, 1, 0.7)}

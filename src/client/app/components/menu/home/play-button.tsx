@@ -41,7 +41,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 				shadowColor={Color3.fromRGB(255, 255, 255)}
 				shadowTransparency={0.1}
 				shadowSize={rem(1.25)}
-				shadowOffset={rem(0.25)}
+				shadowPosition={rem(0.25)}
 			>
 				<uigradient Color={gradient} Rotation={shimmer} />
 			</Shadow>

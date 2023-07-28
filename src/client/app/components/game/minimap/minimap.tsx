@@ -4,7 +4,7 @@ import { Group } from "client/app/common/group";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useInputDevice, useRem } from "client/app/hooks";
-import { BASE_REM, RemProvider } from "client/app/providers/rem-provider";
+import { RemProvider } from "client/app/providers/rem-provider";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { MINIMUM_MINIMAP_REM } from "./constants";
@@ -25,7 +25,7 @@ export function Minimap() {
 					key="drop-shadow"
 					shadowColor={palette.black}
 					shadowSize={rem(5)}
-					shadowOffset={rem(1.5)}
+					shadowPosition={rem(1.5)}
 					shadowTransparency={0}
 				/>
 
@@ -57,7 +57,7 @@ export function Minimap() {
 					key="crosshair"
 					image={images.ui.map_crosshair}
 					anchorPoint={new Vector2(0.5, 0.5)}
-					size={new UDim2(0, rem(16 / BASE_REM), 0, rem(16 / BASE_REM))}
+					size={new UDim2(0, rem(1), 0, rem(1))}
 					position={new UDim2(0.5, 0, 0.5, 0)}
 				/>
 

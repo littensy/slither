@@ -1,5 +1,5 @@
-import { map, useCamera, useDebounceState, useEventListener } from "@rbxts/pretty-react-hooks";
-import Roact, { createContext, useCallback } from "@rbxts/roact";
+import { map, useDebounceState, useViewport } from "@rbxts/pretty-react-hooks";
+import Roact, { createContext } from "@rbxts/roact";
 
 export interface RemProviderProps extends Roact.PropsWithChildren {
 	baseRem?: number;
@@ -8,50 +8,36 @@ export interface RemProviderProps extends Roact.PropsWithChildren {
 	maximumRem?: number;
 }
 
-export const BASE_REM_RESOLUTION = new Vector2(1920, 1020);
-export const BASE_REM = 16;
-export const MINIMUM_REM = 8;
+export const DEFAULT_REM = 16;
+export const MIN_REM = 8;
+const BASE_RESOLUTION = new Vector2(1920, 1020);
+const MAX_ASPECT_RATIO = 19 / 9;
 
-export const RemContext = createContext<number>(BASE_REM);
+export const RemContext = createContext<number>(DEFAULT_REM);
 
 export function RemProvider({
-	baseRem = BASE_REM,
-	minimumRem = MINIMUM_REM,
-	maximumRem,
+	baseRem = DEFAULT_REM,
+	minimumRem = MIN_REM,
+	maximumRem = math.huge,
 	remOverride,
 	children,
 }: RemProviderProps) {
-	const camera = useCamera();
+	const [rem, setRem] = useDebounceState(DEFAULT_REM, { wait: 0.5, leading: true });
 
-	const getRem = useCallback(() => {
-		if (remOverride !== undefined) return remOverride;
-
-		const cameraSize = camera.ViewportSize;
-		const size = new Vector2(math.min(cameraSize.X, cameraSize.Y * (19 / 9)), cameraSize.Y);
-		let scale = size.Magnitude / BASE_REM_RESOLUTION.Magnitude;
-
-		// portrait mode should downscale slower
-		if (size.Y > size.X && scale < 1) {
-			scale = map(scale, 0, 1, 0.25, 1);
+	useViewport((viewport: Vector2) => {
+		if (remOverride !== undefined) {
+			return remOverride;
 		}
 
-		let rem = math.round(baseRem * scale);
+		// wide screens should not scale beyond iPhone aspect ratio
+		const resolution = new Vector2(math.min(viewport.X, viewport.Y * MAX_ASPECT_RATIO), viewport.Y);
+		const scale = resolution.Magnitude / BASE_RESOLUTION.Magnitude;
+		const desktop = resolution.X > resolution.Y || scale >= 1;
 
-		if (maximumRem !== undefined) {
-			rem = math.min(rem, maximumRem);
-		}
+		// portrait mode should downscale slower than landscape
+		const factor = desktop ? scale : map(scale, 0, 1, 0.25, 1);
 
-		if (minimumRem !== undefined) {
-			rem = math.max(rem, minimumRem);
-		}
-
-		return rem;
-	}, [camera]);
-
-	const [rem, setRem] = useDebounceState(getRem(), { wait: 0.5, leading: true });
-
-	useEventListener(camera.GetPropertyChangedSignal("ViewportSize"), () => {
-		setRem(getRem());
+		setRem(math.clamp(math.round(baseRem * factor), minimumRem, maximumRem));
 	});
 
 	return <RemContext.Provider value={rem}>{children}</RemContext.Provider>;

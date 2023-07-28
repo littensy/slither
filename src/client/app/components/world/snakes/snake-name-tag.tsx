@@ -117,7 +117,7 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 				key="drop-shadow"
 				shadowBlur={0.75}
 				shadowColor={palette.crust}
-				shadowOffset={rem(0.5)}
+				shadowPosition={rem(0.5)}
 				shadowTransparency={0.5}
 			/>
 

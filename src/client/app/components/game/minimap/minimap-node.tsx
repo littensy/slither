@@ -2,7 +2,6 @@ import { Spring, map, useMotor } from "@rbxts/pretty-react-hooks";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
-import { BASE_REM } from "client/app/providers/rem-provider";
 import { images } from "shared/assets";
 import { WORLD_BOUNDS } from "shared/constants";
 import { palette } from "shared/data/palette";
@@ -41,7 +40,7 @@ export function MinimapNode({ point, rotation = 0, isClient = false }: MinimapNo
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={
 				isClient
-					? new UDim2(0, rem(28 / BASE_REM), 0, rem(28 / BASE_REM))
+					? new UDim2(0, rem(28, "relative"), 0, rem(28, "relative"))
 					: new UDim2(0, rem(0.25), 0, rem(0.25))
 			}
 			rotation={smoothRotation}

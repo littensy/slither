@@ -1,56 +1,56 @@
 import { useCallback, useContext } from "@rbxts/roact";
-import { RemContext } from "../providers/rem-provider";
+import { DEFAULT_REM, RemContext } from "../providers/rem-provider";
 
 export interface RemOptions {
 	minimum?: number;
 	maximum?: number;
 }
 
-type ScaleFunctions = {
-	[K in keyof CheckableTypes]?: (value: CheckableTypes[K], rem: number) => CheckableTypes[K];
-};
-
 interface RemCallback {
-	// overload to prevent useRem type returning the same exact number
-	(value: number): number;
-	<T>(value: T): T;
+	(value: number, mode?: RemScaleMode): number;
+	(value: UDim2, mode?: RemScaleMode): UDim2;
+	(value: UDim, mode?: RemScaleMode): UDim;
+	(value: Vector2, mode?: RemScaleMode): Vector2;
 }
 
-const scaleFunctions: ScaleFunctions = {
-	UDim2: (value, rem) => {
+type RemScaleMode = "relative" | "unit";
+
+const scaleFunctions = {
+	number: (value: number, rem: number): number => {
+		return value * rem;
+	},
+
+	UDim2: (value: UDim2, rem: number): UDim2 => {
 		return new UDim2(value.X.Scale, value.X.Offset * rem, value.Y.Scale, value.Y.Offset * rem);
 	},
 
-	UDim: (value, rem) => {
+	UDim: (value: UDim, rem: number): UDim => {
 		return new UDim(value.Scale, value.Offset * rem);
 	},
 
-	Vector2: (value, rem) => {
+	Vector2: (value: Vector2, rem: number): Vector2 => {
 		return new Vector2(value.X * rem, value.Y * rem);
-	},
-
-	number: (value, rem) => {
-		return value * rem;
 	},
 };
 
-export function useRem(options?: RemOptions): RemCallback;
+function useRemContext({ minimum = 0, maximum = math.huge }: RemOptions = {}) {
+	const rem = useContext(RemContext);
+	return math.clamp(rem, minimum, maximum);
+}
 
-export function useRem(options?: RemOptions) {
+export function useRem(options?: RemOptions): RemCallback {
 	const rem = useRemContext(options);
 
 	return useCallback(
-		(value: never) => {
-			const scale = scaleFunctions[typeOf(value)];
-			return scale ? scale(value, rem) : value;
+		<T>(value: T, mode: RemScaleMode = "unit"): T => {
+			const scale = scaleFunctions[typeOf(value) as never] as <T>(value: T, rem: number) => T;
+
+			if (!scale) {
+				return value;
+			}
+
+			return mode === "unit" ? scale(value, rem) : scale(value, rem / DEFAULT_REM);
 		},
 		[rem],
 	);
-}
-
-function useRemContext({ minimum, maximum }: RemOptions = {}) {
-	let rem = useContext(RemContext);
-	if (minimum !== undefined) rem = math.max(rem, minimum);
-	if (maximum !== undefined) rem = math.min(rem, maximum);
-	return rem;
 }

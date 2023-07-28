@@ -74,7 +74,7 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 				shadowColor={color}
 				shadowSize={glow}
 				shadowTransparency={transparency.map((t) => blend(0.5, t))}
-				shadowOffset={0}
+				shadowPosition={0}
 			/>
 		</Image>
 	);
