@@ -18,13 +18,6 @@ export function useTouchMove() {
 	const [direction, setDirection] = useState(Vector2.zero);
 	const [jumping, setJumping] = useState(false);
 
-	// Only set direction if the input caused the player to move
-	const isMoving = () => {
-		return character?.Humanoid.MoveDirection !== Vector3.zero;
-	};
-
-	// Only set direction if this input started on the left side
-	// of the screen
 	const getSide = (input: InputObject): "left" | "right" => {
 		return input.Position.X < camera.ViewportSize.X / 2 ? "left" : "right";
 	};
