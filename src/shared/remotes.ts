@@ -2,10 +2,12 @@ import { BroadcastAction } from "@rbxts/reflex";
 import { Client, Server, createRemotes, namespace, remote, throttleMiddleware } from "@rbxts/remo";
 import { t } from "@rbxts/t";
 import { WORLD_TICK } from "./constants";
+import { SharedState } from "./store";
 
 export const remotes = createRemotes({
 	store: namespace({
 		dispatch: remote<Client, [actions: BroadcastAction[]]>(),
+		hydrate: remote<Client, [state: SharedState]>(),
 		start: remote<Server>(),
 	}),
 

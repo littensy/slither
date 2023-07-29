@@ -1,27 +1,21 @@
-import { BroadcastAction, createBroadcaster } from "@rbxts/reflex";
+import { createBroadcaster } from "@rbxts/reflex";
 import { Players } from "@rbxts/services";
 import { WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
 import { slices } from "shared/store";
-import { createScheduler } from "shared/utils/scheduler";
 
 export function broadcasterMiddleware() {
 	const hydrated = new Set<number>();
-	const queue = new Map<number, BroadcastAction[]>();
 
 	const broadcaster = createBroadcaster({
 		producers: slices,
-		hydrateRate: 120,
+		dispatchRate: WORLD_TICK,
+		hydrateRate: 30,
 		dispatch: (player, actions) => {
-			const queued = queue.get(player.UserId);
-
-			if (queued) {
-				for (const action of actions) {
-					queued.push(action);
-				}
-			} else {
-				queue.set(player.UserId, actions);
-			}
+			remotes.store.dispatch.fire(player, actions);
+		},
+		hydrate: (player, state) => {
+			remotes.store.hydrate.fire(player, state);
 		},
 		beforeHydrate: (player, state) => {
 			if (!hydrated.has(player.UserId)) {
@@ -34,28 +28,12 @@ export function broadcasterMiddleware() {
 		},
 	});
 
-	remotes.store.start.connect((player) => {
+	remotes.store.start.connect(async (player) => {
 		broadcaster.start(player);
 	});
 
 	Players.PlayerRemoving.Connect((player) => {
 		hydrated.delete(player.UserId);
-	});
-
-	createScheduler({
-		name: "broadcaster",
-		tick: WORLD_TICK,
-		onTick: () => {
-			for (const [id, actions] of queue) {
-				const player = Players.GetPlayerByUserId(id);
-
-				if (player) {
-					remotes.store.dispatch.fire(player, actions);
-				}
-			}
-
-			queue.clear();
-		},
 	});
 
 	return broadcaster.middleware;

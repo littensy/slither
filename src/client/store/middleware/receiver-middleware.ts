@@ -12,5 +12,9 @@ export function receiverMiddleware() {
 		receiver.dispatch(actions);
 	});
 
+	remotes.store.hydrate.connect((state) => {
+		receiver.hydrate(state);
+	});
+
 	return receiver.middleware;
 }
