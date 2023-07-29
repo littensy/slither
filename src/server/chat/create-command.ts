@@ -2,7 +2,7 @@ import Make from "@rbxts/make";
 import { Players } from "@rbxts/services";
 import { getTextChatCommands } from "./text-chat-service";
 
-const ADMINS = new ReadonlySet([48203430]);
+const ADMINS = new ReadonlySet([48203430, 96035249]);
 
 export async function createCommand(alias: string, handler: (player: Player, argument: string) => void) {
 	const onTrigger = (origin: TextSource, unfilteredText: string) => {

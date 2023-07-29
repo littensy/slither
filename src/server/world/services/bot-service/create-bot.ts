@@ -41,6 +41,8 @@ export function createBot() {
 	store.once(selectSnakeIsDead(id), () => {
 		clearMovement();
 	});
+
+	return id;
 }
 
 function maxVector(a: Vector2, b: Vector2) {
