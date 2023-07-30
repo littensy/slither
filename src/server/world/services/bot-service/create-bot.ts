@@ -1,10 +1,9 @@
-import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { getRandomPointInWorld, getSafePointInWorld, getSnake } from "server/world/utils";
+import { getSafePointInWorld } from "server/world/utils";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { selectSnakeIsDead } from "shared/store/snakes";
+import { BotBehavior } from "./bot-behavior";
 import { generateBotName } from "./generate-name";
-import { BehaviorMode, BotBehavior } from "./bot-behavior";
 
 let nextBotId = 0;
 
@@ -17,7 +16,7 @@ export function createBots(amount: number) {
 export function createBot() {
 	const id = `bot-${nextBotId++}`;
 	const name = generateBotName();
-	const behavior = new BotBehavior(BehaviorMode.Idle);
+	const behavior = new BotBehavior(id);
 
 	store.addSnake(id, {
 		name,
@@ -25,12 +24,8 @@ export function createBot() {
 		skin: getRandomDefaultSnakeSkin().id,
 	});
 
-	const clearMovement = setInterval(() => {
-		behavior.update(id);
-	}, 1);
-
 	store.once(selectSnakeIsDead(id), () => {
-		clearMovement();
+		behavior.destroy();
 	});
 
 	return id;
