@@ -1,5 +1,8 @@
-import { Spring, useMotor, useUpdateEffect } from "@rbxts/pretty-react-hooks";
+import { useUpdateEffect } from "@rbxts/pretty-react-hooks";
+import { spring } from "@rbxts/ripple";
 import Roact, { useMemo } from "@rbxts/roact";
+import { useMotion } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 
 export interface ButtonAnimation {
 	/**
@@ -36,52 +39,40 @@ export interface ButtonAnimation {
  * @returns A `ButtonAnimation` object.
  */
 export function useButtonAnimation(pressedState: boolean, hoveredState: boolean): ButtonAnimation {
-	const [press, setPress] = useMotor(0);
-	const [hover, setHover] = useMotor(0);
-	const [hoverExclusive, setHoverExclusive] = useMotor(0);
-	const [position, setPosition, positionApi] = useMotor(0);
+	const [press, pressMotion] = useMotion(0);
+	const [hover, hoverMotion] = useMotion(0);
+	const [hoverExclusive, hoverExclusiveMotion] = useMotion(0);
+	const [position, positionMotion] = useMotion(0);
 
 	useUpdateEffect(() => {
-		setPress(new Spring(pressedState ? 1 : 0, { frequency: 3 }));
-		setHoverExclusive(
-			new Spring(hoveredState && !pressedState ? 1 : 0, {
-				frequency: hoveredState ? 3 : 1,
-				dampingRatio: hoveredState ? 1 : 1.5,
-			}),
-		);
+		pressMotion.to(spring(pressedState ? 1 : 0, springs.responsive));
+		hoverExclusiveMotion.to(spring(hoveredState && !pressedState ? 1 : 0, springs.responsive));
 	}, [pressedState, hoveredState]);
 
 	useUpdateEffect(() => {
-		setHover(
-			new Spring(hoveredState ? 1 : 0, {
-				frequency: hoveredState ? 3 : 1,
-				dampingRatio: hoveredState ? 1 : 1.5,
-			}),
-		);
+		hoverMotion.to(spring(hoveredState ? 1 : 0, springs.responsive));
 	}, [hoveredState]);
 
 	useUpdateEffect(() => {
 		if (pressedState) {
 			// hovered -> pressed
-			setPosition(new Spring(1, { frequency: 5 }));
+			positionMotion.to(spring(1, springs.responsive));
 		} else if (hoveredState) {
 			// pressed -> hovered
-			setPosition(new Spring(-1, { frequency: 3, dampingRatio: 0.4 }));
-			positionApi.impulse(-100);
+			positionMotion.to(spring(-1, { ...springs.bubbly, impulse: -0.1 }));
 		} else {
 			// pressed -> unhovered, but 'hover' was not true
-			setPosition(new Spring(0, { frequency: 3, dampingRatio: 0.4 }));
-			positionApi.impulse(-75);
+			positionMotion.to(spring(0, { ...springs.bubbly, impulse: -0.07 }));
 		}
 	}, [pressedState]);
 
 	useUpdateEffect(() => {
 		if (hoveredState) {
 			// unhovered -> hovered
-			setPosition(new Spring(-1, { frequency: 5 }));
+			positionMotion.to(spring(-1, springs.responsive));
 		} else {
 			// hovered -> unhovered
-			setPosition(new Spring(0, { frequency: 5 }));
+			positionMotion.to(spring(0, springs.responsive));
 		}
 	}, [hoveredState]);
 

@@ -1,10 +1,12 @@
-import { Spring, useDebounceState, useMotor, usePrevious } from "@rbxts/pretty-react-hooks";
+import { useDebounceState, usePrevious } from "@rbxts/pretty-react-hooks";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
 import { Frame } from "client/app/common/frame";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { palette } from "shared/data/palette";
 import { getSnakeTracerSkin } from "shared/data/skins";
 
@@ -38,17 +40,17 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 
 	const currentSide = useRef(1);
 	const [side, setSide] = useDebounceState(1, { wait: 2 });
-	const [sideTransition, setSideTransition] = useMotor(1);
+	const [sideTransition, sideTransitionMotion] = useMotion(1);
 
-	const [nameSize, setNameSize] = useMotor({ x: 0, y: 0 });
-	const [nameHeight, setNameHeight] = useMotor(0);
-	const [nameRotation, setNameRotation] = useMotor(0);
-	const [nameTransparency, setNameTransparency] = useMotor(1);
+	const [nameSize, nameSizeMotion] = useMotion(Vector2.one);
+	const [nameHeight, nameHeightMotion] = useMotion(0);
+	const [nameRotation, nameRotationMotion] = useMotion(0);
+	const [nameTransparency, nameTransparencyMotion] = useMotion(1);
 
 	const { size, position, tail } = useMemo(() => {
-		const size = nameSize.map(({ x, y }) => {
-			const width = x + rem((TEXT_PADDING + CANVAS_MARGIN) * 2);
-			const height = y + rem((TEXT_PADDING + CANVAS_MARGIN) * 2);
+		const size = nameSize.map(({ X, Y }) => {
+			const width = X + rem((TEXT_PADDING + CANVAS_MARGIN) * 2);
+			const height = Y + rem((TEXT_PADDING + CANVAS_MARGIN) * 2);
 			return new UDim2(0, width, 0, height);
 		});
 
@@ -78,22 +80,22 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 	// without a separate effect, this may run regardless of whether
 	// the debounce is still waiting
 	useEffect(() => {
-		setSideTransition(new Spring(math.max(side, 0), { frequency: 2 }));
+		sideTransitionMotion.to(spring(math.max(side, 0)));
 	}, [side]);
 
 	useEffect(() => {
 		const height = scale * radius * 1.25 + (TEXT_PADDING + 2);
-		setNameHeight(new Spring(height * side, { frequency: 1, dampingRatio: 0.5 }));
+		nameHeightMotion.to(spring(height * side, { tension: 150, friction: 18 }));
 	}, [angle, radius, scale, side]);
 
 	// rotate the name tag to simulate dragging behind the snake
 	useEffect(() => {
 		const rotation = math.clamp(30 * (head.X - previousHead.X), -45, 45);
-		setNameRotation(new Spring(rotation * side, { frequency: 1, dampingRatio: 0.5 }));
+		nameRotationMotion.to(spring(rotation * side, { tension: 150, friction: 18 }));
 	}, [head, previousHead, headOffset, side]);
 
 	useEffect(() => {
-		setNameTransparency(new Spring(visible ? 0 : 1, { frequency: 0.5 }));
+		nameTransparencyMotion.to(spring(visible ? 0 : 1, springs.slow));
 	}, [visible]);
 
 	return (
@@ -147,10 +149,7 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 				position={new UDim2(0.5, 0, 0.5, 0)}
 				change={{
 					TextBounds: (rbx) => {
-						setNameSize({
-							x: new Spring(rbx.TextBounds.X),
-							y: new Spring(rbx.TextBounds.Y),
-						});
+						nameSizeMotion.to(spring(rbx.TextBounds, springs.responsive));
 					},
 				}}
 			/>

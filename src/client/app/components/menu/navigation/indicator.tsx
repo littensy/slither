@@ -1,10 +1,11 @@
-import { Spring, useEventListener, useMotor } from "@rbxts/pretty-react-hooks";
+import { useEventListener } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
+import { spring } from "@rbxts/ripple";
 import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { Frame } from "client/app/common/frame";
 import { Shadow } from "client/app/common/shadow";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
 import { MenuPage, selectCurrentPage } from "client/store/menu";
 import { map } from "shared/utils/math-utils";
 import { MIN_NAV_REM } from "./constants";
@@ -22,13 +23,12 @@ export function Indicator({ colors, order, edge }: IndicatorProps) {
 	const currentIndex = order.indexOf(page);
 	const currentColor = colors[currentIndex];
 
-	const [color, setColor] = useMotor({ r: 1, g: 1, b: 1 });
-	const [position, setPosition, positionApi] = useMotor(0);
+	const [color, colorMotion] = useMotion(Color3.fromRGB(255, 255, 255));
+	const [position, positionMotion] = useMotion(0);
 	const [velocity, setVelocity] = useBinding(0);
 
 	const style = useMemo(() => {
 		return {
-			color: color.map(({ r, g, b }) => new Color3(r, g, b)),
 			position: position.map((x) => {
 				return edge === "top"
 					? new UDim2(0.5, math.round(rem(x)), 0, 0)
@@ -40,25 +40,21 @@ export function Indicator({ colors, order, edge }: IndicatorProps) {
 
 	useEffect(() => {
 		const x = map(currentIndex, 0, 2, -8, 8);
-		setPosition(new Spring(x, { frequency: 3 }));
+		positionMotion.to(spring(x));
 	}, [page, rem]);
 
 	useEffect(() => {
-		setColor({
-			r: new Spring(currentColor.R),
-			g: new Spring(currentColor.G),
-			b: new Spring(currentColor.B),
-		});
+		colorMotion.to(spring(currentColor));
 	}, [currentColor]);
 
 	useEventListener(RunService.Heartbeat, () => {
-		const velocity = math.abs(positionApi.getState().velocity ?? 0);
-		setVelocity(0.05 * velocity);
+		const velocity = math.abs(positionMotion.getVelocity());
+		setVelocity(50 * velocity);
 	});
 
 	return (
 		<Frame
-			backgroundColor={style.color}
+			backgroundColor={color}
 			cornerRadius={new UDim(0.5, 0)}
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={style.size}
@@ -68,7 +64,7 @@ export function Indicator({ colors, order, edge }: IndicatorProps) {
 				key="glow"
 				shadowPosition={rem(0)}
 				shadowSize={rem(0)}
-				shadowColor={style.color}
+				shadowColor={color}
 				shadowTransparency={0.8}
 			/>
 		</Frame>

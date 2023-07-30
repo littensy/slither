@@ -10,7 +10,7 @@ interface SnakeProps {
 	readonly snakeOnScreen: SnakeOnScreen;
 	readonly scale: number;
 	readonly offset: Vector2;
-	readonly offsetSmooth: Roact.Binding<{ x: number; y: number }>;
+	readonly offsetSmooth: Roact.Binding<Vector2>;
 	readonly subject?: string;
 }
 

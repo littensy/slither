@@ -1,7 +1,8 @@
-import { Spring, map, useMotor } from "@rbxts/pretty-react-hooks";
+import { map } from "@rbxts/pretty-react-hooks";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
 import { images } from "shared/assets";
 import { WORLD_BOUNDS } from "shared/constants";
 import { palette } from "shared/data/palette";
@@ -14,23 +15,19 @@ interface MinimapNodeProps {
 
 export function MinimapNode({ point, rotation = 0, isClient = false }: MinimapNodeProps) {
 	const rem = useRem();
-	const [smoothPoint, setSmoothPoint] = useMotor({ x: point.X, y: point.Y });
-	const [smoothRotation, setSmoothRotation] = useMotor(rotation);
+	const [smoothPoint, smoothPointMotion] = useMotion(point);
+	const [smoothRotation, smoothRotationMotion] = useMotion(rotation);
 
 	const position = smoothPoint.map((point) => {
 		return UDim2.fromScale(
-			map(point.x, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
-			map(point.y, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
+			map(point.X, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
+			map(point.Y, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
 		);
 	});
 
 	useEffect(() => {
-		setSmoothPoint({
-			x: new Spring(point.X, { frequency: 2 }),
-			y: new Spring(point.Y, { frequency: 2 }),
-		});
-
-		setSmoothRotation(new Spring(rotation, { frequency: 2 }));
+		smoothPointMotion.to(spring(point));
+		smoothRotationMotion.to(spring(rotation));
 	}, [point, rotation]);
 
 	return (

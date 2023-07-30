@@ -1,11 +1,13 @@
-import { Spring, lerpBinding, useMotor } from "@rbxts/pretty-react-hooks";
+import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
-import { useRem, useStore } from "client/app/hooks";
+import { useMotion, useRem, useStore } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { MenuPage, selectIsPage } from "client/store/menu";
 import { palette } from "shared/data/palette";
 import { MIN_NAV_REM } from "./constants";
@@ -23,10 +25,10 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 	const rem = useRem({ minimum: MIN_NAV_REM });
 	const store = useStore();
 	const isPage = useSelectorCreator(selectIsPage, page);
-	const [transition, setTransition] = useMotor(0);
+	const [transition, transitionMotion] = useMotion(0);
 
 	useEffect(() => {
-		setTransition(new Spring(isPage ? 1 : 0));
+		transitionMotion.to(spring(isPage ? 1 : 0, springs.stiff));
 	}, [isPage]);
 
 	return (
