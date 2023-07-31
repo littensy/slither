@@ -1,6 +1,7 @@
-import { Spring, blend, joinAnyBindings, lerpBinding, useMotor, useUpdateEffect } from "@rbxts/pretty-react-hooks";
+import { blend, joinAnyBindings, lerpBinding, useUpdateEffect } from "@rbxts/pretty-react-hooks";
+import { spring } from "@rbxts/ripple";
 import Roact from "@rbxts/roact";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
 import { Button } from "../button";
 import { Frame } from "../frame";
 import { useButtonAnimation } from "./use-button-animation";
@@ -59,16 +60,15 @@ export function ReactiveButton({
 	children,
 }: ReactiveButtonProps) {
 	const rem = useRem();
-	const [sizeAnimation, setSizeAnimation, sizeAnimationApi] = useMotor(0);
+	const [sizeAnimation, sizeMotion] = useMotion(0);
 	const [press, hover, buttonEvents] = useButtonState();
 	const animation = useButtonAnimation(press, hover);
 
 	useUpdateEffect(() => {
 		if (press) {
-			setSizeAnimation(new Spring(-0.1));
+			sizeMotion.to(spring(-0.1, { tension: 300 }));
 		} else {
-			sizeAnimationApi.setState({ velocity: 30 });
-			setSizeAnimation(new Spring(0));
+			sizeMotion.to(spring(0, { impulse: 0.01, tension: 300 }));
 		}
 	}, [press]);
 

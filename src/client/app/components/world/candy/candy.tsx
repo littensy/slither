@@ -1,8 +1,9 @@
-import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
+import { spring } from "@rbxts/ripple";
 import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { selectWorldCamera } from "client/store/world";
 import { CandyItem } from "./candy-item";
 import { useCandyOnScreen } from "./use-candy-on-screen";
@@ -12,10 +13,7 @@ export function Candy() {
 	const world = useSelector(selectWorldCamera);
 	const candyOnScreen = useCandyOnScreen(world.offset, world.scale);
 
-	const [smoothOffset, setSmoothOffset] = useMotor({
-		x: world.offset.X,
-		y: world.offset.Y,
-	});
+	const [smoothOffset, offsetMotion] = useMotion(world.offset);
 	const [scale, setScale] = useBinding(world.scale);
 
 	const children = useMemo(() => {
@@ -43,10 +41,7 @@ export function Candy() {
 	}, [candyOnScreen]);
 
 	useEffect(() => {
-		setSmoothOffset({
-			x: new Spring(world.offset.X),
-			y: new Spring(world.offset.Y),
-		});
+		offsetMotion.to(spring(world.offset, springs.world));
 	}, [world.offset]);
 
 	useEffect(() => {
@@ -56,7 +51,7 @@ export function Candy() {
 	return (
 		<Group
 			position={smoothOffset.map(
-				(offset) => new UDim2(0.5, rem(offset.x * world.scale), 0.5, rem(offset.y * world.scale)),
+				(offset) => new UDim2(0.5, rem(offset.X * world.scale), 0.5, rem(offset.Y * world.scale)),
 			)}
 		>
 			{children}

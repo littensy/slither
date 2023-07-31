@@ -1,9 +1,11 @@
-import { Spring, lerpBinding, useMotor } from "@rbxts/pretty-react-hooks";
+import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
 import { DelayRender } from "client/app/common/delay-render";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { MenuPage, selectCurrentPage, selectIsMenuOpen, selectMenuTransition } from "client/store/menu";
 
 interface MenuContainerProps extends Roact.PropsWithChildren {
@@ -23,10 +25,10 @@ export function MenuContainer({ page, children }: MenuContainerProps) {
 
 	const menuTransition = useSelector(selectMenuTransition);
 	const transitionFrom = useRef(rem(TRANSITION_DEFAULT));
-	const [transition, setTransition] = useMotor(0);
+	const [transition, transitionMotion] = useMotion(0);
 
 	useEffect(() => {
-		setTransition(new Spring(visible ? 1 : 0, { frequency: 3 }));
+		transitionMotion.to(spring(visible ? 1 : 0, springs.gentle));
 	}, [visible]);
 
 	// wrapped in useMemo instead of an effect so that it can update

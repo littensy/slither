@@ -1,20 +1,23 @@
-import { Spring, lerpBinding, useMotor } from "@rbxts/pretty-react-hooks";
+import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
+import { useMotion } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { selectIsMenuOpen } from "client/store/menu";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
 
 export function MenuVignette() {
 	const open = useSelector(selectIsMenuOpen);
-	const [transition, setTransition] = useMotor(0);
+	const [transition, transitionMotion] = useMotion(0);
 
 	useEffect(() => {
 		if (open) {
-			setTransition(new Spring(1, { frequency: 0.5 }));
+			transitionMotion.to(spring(1, springs.molasses));
 		} else {
-			setTransition(new Spring(0, { frequency: 0.5 }));
+			transitionMotion.to(spring(0, springs.molasses));
 		}
 	}, [open]);
 

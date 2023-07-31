@@ -1,16 +1,18 @@
-import { Spring, lerpBinding, useMotor } from "@rbxts/pretty-react-hooks";
+import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
+import { useMotion } from "client/app/hooks";
 import { selectWorldSubject } from "client/store/world";
 import { Minimap } from "./minimap";
 
 export function Game() {
 	const inGame = useSelector(selectWorldSubject) !== undefined;
-	const [transition, setTransition] = useMotor(0);
+	const [transition, transitionMotion] = useMotion(0);
 
 	useEffect(() => {
-		setTransition(new Spring(inGame ? 1 : 0, { frequency: 1 }));
+		transitionMotion.to(spring(inGame ? 1 : 0));
 	}, [inGame]);
 
 	return (

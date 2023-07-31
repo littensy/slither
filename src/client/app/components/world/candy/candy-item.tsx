@@ -1,8 +1,10 @@
-import { Spring, blend, lerp, map, useMotor, useTimer } from "@rbxts/pretty-react-hooks";
+import { blend, lerp, map, useTimer } from "@rbxts/pretty-react-hooks";
+import { spring } from "@rbxts/ripple";
 import Roact, { joinBindings, memo, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
-import { useRem, useSeed } from "client/app/hooks";
+import { useMotion, useRem, useSeed } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { CandyType } from "shared/store/candy";
 import { mapStrict } from "shared/utils/math-utils";
@@ -21,8 +23,8 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 	const timer = useTimer();
 	const seed = useSeed();
 
-	const [pointSmooth, setPointSmooth] = useMotor({ x: point.X, y: point.Y });
-	const [transition, setTransition] = useMotor(1);
+	const [pointSmooth, pointMotion] = useMotion(point);
+	const [transition, transitionMotion] = useMotion(1);
 
 	const { position, glow, transparency } = useMemo(() => {
 		const position = timer.value.map((t) => {
@@ -31,7 +33,7 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 			const point = pointSmooth.getValue();
 			const scale = worldScale.getValue();
 
-			return new UDim2(0, rem(point.x * scale + x), 0, rem(point.y * scale + y));
+			return new UDim2(0, rem(point.X * scale + x), 0, rem(point.Y * scale + y));
 		});
 
 		const glow = timer.value.map((t) => {
@@ -54,12 +56,8 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 	useEffect(() => {
 		const position = eatenAt || point;
 
-		setPointSmooth({
-			x: new Spring(position.X),
-			y: new Spring(position.Y),
-		});
-
-		setTransition(new Spring(eatenAt ? 1 : 0));
+		pointMotion.to(spring(position, springs.world));
+		transitionMotion.to(spring(eatenAt ? 1 : 0));
 	}, [point, eatenAt]);
 
 	return (

@@ -1,10 +1,11 @@
-import { Spring, lerpBinding, useMotor, useTimer } from "@rbxts/pretty-react-hooks";
+import { lerpBinding, useTimer } from "@rbxts/pretty-react-hooks";
+import { spring } from "@rbxts/ripple";
 import Roact from "@rbxts/roact";
 import { Frame } from "client/app/common/frame";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
 import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 import { gradient } from "./utils";
@@ -18,7 +19,7 @@ interface PlayButtonProps {
 export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	const rem = useRem();
 	const timer = useTimer();
-	const [hover, setHover] = useMotor(0);
+	const [hover, hoverMotion] = useMotion(0);
 
 	const shimmer = timer.value.map((t) => {
 		return 30 * t;
@@ -31,7 +32,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	return (
 		<ReactiveButton
 			onClick={onClick}
-			onHover={(hovered) => setHover(new Spring(hovered ? 1 : 0))}
+			onHover={(hovered) => hoverMotion.to(spring(hovered ? 1 : 0))}
 			backgroundTransparency={1}
 			anchorPoint={anchorPoint}
 			size={size}
@@ -39,7 +40,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 		>
 			<Shadow
 				shadowColor={Color3.fromRGB(255, 255, 255)}
-				shadowTransparency={0.1}
+				shadowTransparency={lerpBinding(hover, 0.2, 0)}
 				shadowSize={rem(1.25)}
 				shadowPosition={rem(0.25)}
 			>
@@ -48,7 +49,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 
 			<Frame
 				backgroundColor={palette.white0}
-				backgroundTransparency={lerpBinding(hover, 0.05, 0.2)}
+				backgroundTransparency={lerpBinding(hover, 0.1, 0)}
 				cornerRadius={new UDim(0, rem(0.5))}
 				size={new UDim2(1, 0, 1, 0)}
 			>

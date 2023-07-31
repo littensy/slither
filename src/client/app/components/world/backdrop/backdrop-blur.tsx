@@ -1,10 +1,12 @@
 import Object from "@rbxts/object-utils";
-import { Spring, map, useCamera, useEventListener, useMotor } from "@rbxts/pretty-react-hooks";
+import { map, useCamera, useEventListener } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
+import { spring } from "@rbxts/ripple";
 import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { Image } from "client/app/common/image";
-import { useSeed } from "client/app/hooks";
+import { useMotion, useSeed } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { selectWorldCamera } from "client/store/world";
 import { images } from "shared/assets";
 import { accents } from "shared/data/palette";
@@ -22,7 +24,7 @@ export function BackdropBlur() {
 	const world = useSelector(selectWorldCamera);
 	const seed = useSeed();
 	const [timer, setTimer] = useBinding(0);
-	const [smoothOffset, setSmoothOffset] = useMotor({ x: world.offset.X, y: world.offset.Y });
+	const [smoothOffset, smoothOffsetMotion] = useMotion(world.offset);
 
 	const color = useMemo(() => {
 		const colors = Object.values(accents);
@@ -37,8 +39,8 @@ export function BackdropBlur() {
 			const noiseX = map(math.noise(t, seed), -0.5, 0.5, -3, 4);
 			const noiseY = map(math.noise(seed, t + 100), -0.5, 0.5, -3, 4);
 
-			const x = mod(noiseX + 0.02 * offset.x, -1, 2);
-			const y = mod(noiseY + 0.02 * offset.y * aspectRatio, -1, 2);
+			const x = mod(noiseX + 0.02 * offset.X, -1, 2);
+			const y = mod(noiseY + 0.02 * offset.Y * aspectRatio, -1, 2);
 
 			return new UDim2(x, 0, y, 0);
 		});
@@ -60,10 +62,7 @@ export function BackdropBlur() {
 	});
 
 	useEffect(() => {
-		setSmoothOffset({
-			x: new Spring(world.offset.X),
-			y: new Spring(world.offset.Y),
-		});
+		smoothOffsetMotion.to(spring(world.offset, springs.world));
 	}, [world.offset]);
 
 	return (

@@ -1,11 +1,12 @@
-import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { CanvasGroup } from "client/app/common/canvas-group";
 import { Frame } from "client/app/common/frame";
 import { Group } from "client/app/common/group";
 import { Image } from "client/app/common/image";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { selectWorldCamera } from "client/store/world";
 import { images } from "shared/assets";
 import { WORLD_BOUNDS } from "shared/constants";
@@ -15,7 +16,7 @@ export function WorldBorder() {
 	const rem = useRem();
 	const world = useSelector(selectWorldCamera);
 
-	const [smoothPosition, setSmoothPosition] = useMotor({
+	const [worldCamera, worldCameraMotion] = useMotion({
 		x: -world.offset.X,
 		y: -world.offset.Y,
 		scale: world.scale,
@@ -24,14 +25,14 @@ export function WorldBorder() {
 	// Render a world border by getting the direction from the world origin
 	// and creating a rectangle WORLD_BOUNDS units away from the origin
 	const { position, rotation } = useMemo(() => {
-		const position = smoothPosition.map(({ x, y, scale }) => {
+		const position = worldCamera.map(({ x, y, scale }) => {
 			const offset = new Vector2(x, y);
 			const direction = offset !== Vector2.zero ? offset.Unit : new Vector2(1, 0);
 			const position = direction.mul(rem(WORLD_BOUNDS * scale)).sub(rem(offset.mul(scale)));
 			return new UDim2(0.5, position.X, 0.5, position.Y);
 		});
 
-		const rotation = smoothPosition.map(({ x, y }) => {
+		const rotation = worldCamera.map(({ x, y }) => {
 			const offset = new Vector2(x, y);
 			const direction = offset !== Vector2.zero ? offset.Unit : new Vector2(1, 0);
 			return math.deg(math.atan2(direction.Y, direction.X));
@@ -41,11 +42,16 @@ export function WorldBorder() {
 	}, [rem]);
 
 	useEffect(() => {
-		setSmoothPosition({
-			x: new Spring(-world.offset.X),
-			y: new Spring(-world.offset.Y),
-			scale: new Spring(world.scale),
-		});
+		worldCameraMotion.to(
+			spring(
+				{
+					x: -world.offset.X,
+					y: -world.offset.Y,
+					scale: world.scale,
+				},
+				springs.world,
+			),
+		);
 	}, [world]);
 
 	return (

@@ -1,9 +1,10 @@
-import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo, useState } from "@rbxts/roact";
 import { setTimeout } from "@rbxts/set-timeout";
 import { Group } from "client/app/common/group";
 import { Image } from "client/app/common/image";
-import { useContinuousAngle, useRem } from "client/app/hooks";
+import { useContinuousAngle, useMotion, useRem } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { getSnakeSkin, getSnakeTracerSkin } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
@@ -17,7 +18,7 @@ interface SnakeHeadProps extends Roact.PropsWithChildren {
 	readonly line: SnakeLineBinding;
 	readonly effects: SnakeEffectBinding;
 	readonly skinId: string;
-	readonly offsetSmooth: Roact.Binding<{ x: number; y: number }>;
+	readonly offsetSmooth: Roact.Binding<Vector2>;
 	readonly isSubject: boolean;
 }
 
@@ -40,8 +41,8 @@ export function SnakeHead({
 	const style = useTracerStyle(line, effects, 0, tracerSkin.tint);
 
 	const [isSubjectDelayed, setIsSubjectDelayed] = useState(false);
-	const [rotation, setRotation] = useMotor(math.deg(currentAngle + SNAKE_ANGLE_OFFSET));
-	const [look, setLook] = useMotor(0);
+	const [rotation, rotationMotion] = useMotion(math.deg(currentAngle + SNAKE_ANGLE_OFFSET));
+	const [look, lookMotion] = useMotion(0);
 
 	const { size, position } = useMemo(() => {
 		const size = line.map(({ diameter }) => {
@@ -51,15 +52,15 @@ export function SnakeHead({
 		// if this is the subject, we calculate the position based
 		// on the actual offset because there is a slight desync
 		const position = isSubjectDelayed
-			? offsetSmooth.map(({ x, y }) => new UDim2(0, rem(-x), 0, rem(-y)))
+			? offsetSmooth.map(({ X, Y }) => new UDim2(0, rem(-X), 0, rem(-Y)))
 			: line.map(({ fromX, fromY }) => new UDim2(0, rem(fromX), 0, rem(fromY)));
 
 		return { size, position };
 	}, [rem, isSubjectDelayed]);
 
 	useEffect(() => {
-		setRotation(new Spring(math.deg(currentAngle + SNAKE_ANGLE_OFFSET)));
-		setLook(new Spring(math.deg(angleDifference)));
+		rotationMotion.to(spring(math.deg(currentAngle + SNAKE_ANGLE_OFFSET), springs.world));
+		lookMotion.to(spring(math.deg(angleDifference)));
 	}, [currentAngle, angleDifference]);
 
 	useEffect(() => {

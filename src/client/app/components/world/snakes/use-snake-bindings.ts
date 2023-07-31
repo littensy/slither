@@ -1,13 +1,14 @@
-import { GroupMotor, Instant, Spring } from "@rbxts/flipper";
 import { useSelectorCreator } from "@rbxts/react-reflex";
+import { createMotion, immediate, spring } from "@rbxts/ripple";
 import Roact, { createBinding, useEffect, useMemo, useRef } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
+import { springs } from "client/app/utils/springs";
 import { SnakeEntity, describeSnakeFromScore, selectSnakeIsBoosting } from "shared/store/snakes";
 import { SnakeOnScreen } from "./use-snakes-on-screen";
 
-export type SnakeLineBinding = Roact.Binding<LineMotorValues>;
+export type SnakeLineBinding = Roact.Binding<LineMotionValues>;
 
-export type SnakeEffectBinding = Roact.Binding<EffectMotorValues>;
+export type SnakeEffectBinding = Roact.Binding<EffectMotionValues>;
 
 interface SnakeBindings {
 	readonly bindings: Map<number, TracerBindingController>;
@@ -24,7 +25,7 @@ interface TracerBindingController {
 	readonly destroy: () => void;
 }
 
-type LineMotorValues = {
+type LineMotionValues = {
 	readonly diameter: number;
 	readonly fromX: number;
 	readonly fromY: number;
@@ -32,7 +33,7 @@ type LineMotorValues = {
 	readonly toY: number;
 };
 
-type EffectMotorValues = {
+type EffectMotionValues = {
 	readonly boost: number;
 	readonly dead: number;
 };
@@ -50,40 +51,34 @@ function createSnakeBindings(snake: SnakeEntity, scale: number): SnakeBindings {
 		scale: number,
 		tracer: Vector2,
 	): TracerBindingController => {
-		const lineMotor = new GroupMotor<LineMotorValues>(
-			{
-				diameter: getSize(snake) * scale,
-				fromX: tracer.X * scale,
-				fromY: tracer.Y * scale,
-				toX: tracer.X * scale,
-				toY: tracer.Y * scale,
-			},
-			false,
-		);
+		const lineMotion = createMotion<LineMotionValues>({
+			diameter: getSize(snake) * scale,
+			fromX: tracer.X * scale,
+			fromY: tracer.Y * scale,
+			toX: tracer.X * scale,
+			toY: tracer.Y * scale,
+		});
 
-		const effectMotor = new GroupMotor<EffectMotorValues>(
-			{
-				boost: snake.boost ? 1 : 0,
-				dead: snake.dead ? 1 : 0,
-			},
-			false,
-		);
+		const effectMotion = createMotion<EffectMotionValues>({
+			boost: snake.boost ? 1 : 0,
+			dead: snake.dead ? 1 : 0,
+		});
 
-		const [line, setLine] = createBinding(lineMotor.getValue());
-		const [effects, setEffects] = createBinding(effectMotor.getValue());
+		const [line, setLine] = createBinding(lineMotion.get());
+		const [effects, setEffects] = createBinding(effectMotion.get());
 
 		const connection = RunService.Heartbeat.Connect((deltaTime) => {
-			if (!lineMotor.step(deltaTime)) {
-				setLine(lineMotor.getValue());
+			if (!lineMotion.isComplete()) {
+				setLine(lineMotion.step(deltaTime));
 			}
 
-			if (!effectMotor.step(deltaTime)) {
-				setEffects(effectMotor.getValue());
+			if (!effectMotion.isComplete()) {
+				setEffects(effectMotion.step(deltaTime));
 			}
 		});
 
 		const createGoal = (goal: number, isSubject: boolean) => {
-			return isSubject ? new Spring(goal) : new Spring(goal, { frequency: 3 });
+			return spring(goal, isSubject ? springs.world : springs.default);
 		};
 
 		const update = (snake: SnakeEntity, scale: number, boosting: boolean, isSubject: boolean) => {
@@ -94,24 +89,24 @@ function createSnakeBindings(snake: SnakeEntity, scale: number): SnakeBindings {
 				return;
 			}
 
-			lineMotor.setGoal({
-				diameter: new Instant(getSize(snake) * scale),
+			lineMotion.to({
+				diameter: immediate(getSize(snake) * scale),
 				fromX: createGoal(previousTracer.X * scale, isSubject),
 				fromY: createGoal(previousTracer.Y * scale, isSubject),
 				toX: createGoal(tracer.X * scale, isSubject),
 				toY: createGoal(tracer.Y * scale, isSubject),
 			});
 
-			effectMotor.setGoal({
-				boost: new Spring(boosting ? 1 : 0, { frequency: 1 }),
-				dead: new Spring(snake.dead ? 1 : 0, { frequency: 1 }),
+			effectMotion.to({
+				boost: spring(boosting ? 1 : 0, springs.slow),
+				dead: spring(snake.dead ? 1 : 0, springs.slow),
 			});
 		};
 
 		const destroy = () => {
 			connection.Disconnect();
-			lineMotor.destroy();
-			effectMotor.destroy();
+			lineMotion.destroy();
+			effectMotion.destroy();
 		};
 
 		return { index, line, effects, update, destroy };
@@ -159,12 +154,11 @@ function createSnakeBindings(snake: SnakeEntity, scale: number): SnakeBindings {
 }
 
 export function useSnakeBindings(snakeOnScreen: SnakeOnScreen, scale: number, isSubject: boolean): SnakeBindings {
-	const skipNext = useRef(false);
-	const boosting = useSelectorCreator(selectSnakeIsBoosting, snakeOnScreen.snake.id);
-
 	const bindings = useMemo(() => {
 		return createSnakeBindings(snakeOnScreen.snake, scale);
 	}, []);
+	const skipNext = useRef(false);
+	const boosting = useSelectorCreator(selectSnakeIsBoosting, snakeOnScreen.snake.id);
 
 	useEffect(() => {
 		// if this is not the subject, skip every other frame

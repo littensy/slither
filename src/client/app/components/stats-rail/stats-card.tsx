@@ -1,4 +1,4 @@
-import { Spring, useMotor } from "@rbxts/pretty-react-hooks";
+import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
 import { Frame } from "client/app/common/frame";
@@ -6,7 +6,8 @@ import { Group } from "client/app/common/group";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
-import { useRem } from "client/app/hooks";
+import { useMotion, useRem } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { palette } from "shared/data/palette";
 
 interface StatsCardProps {
@@ -30,8 +31,8 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 	const secondaryDark = secondary.Lerp(palette.crust, 0.75);
 
 	const rem = useRem();
-	const [transparency, setTransparency] = useMotor(1);
-	const [textWidth, setTextWidth] = useMotor({ label: 0, value: 0 });
+	const [transparency, transparencyMotion] = useMotion(1);
+	const [textWidth, textWidthMotion] = useMotion({ label: 0, value: 0 });
 
 	const size = useMemo(() => {
 		return textWidth.map(({ label, value }) => {
@@ -42,7 +43,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 	}, [rem]);
 
 	useEffect(() => {
-		setTransparency(new Spring(enabled ? 0 : 0.5, { frequency: 1 }));
+		transparencyMotion.to(spring(enabled ? 0 : 0.5, springs.slow));
 	}, [enabled]);
 
 	return (
@@ -111,7 +112,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					position={new UDim2(0, rem(CARD_MARGIN + CARD_EMOJI_WIDTH + CARD_PADDING), 0.5, -rem(0.25))}
 					change={{
 						TextBounds: (rbx) => {
-							setTextWidth({ label: new Spring(rbx.TextBounds.X) });
+							textWidthMotion.to({ label: spring(rbx.TextBounds.X) });
 						},
 					}}
 				/>
@@ -128,7 +129,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					position={new UDim2(0, rem(CARD_MARGIN + CARD_EMOJI_WIDTH + CARD_PADDING), 0.5, -rem(0.25))}
 					change={{
 						TextBounds: (rbx) => {
-							setTextWidth({ value: new Spring(rbx.TextBounds.X) });
+							textWidthMotion.to({ value: spring(rbx.TextBounds.X) });
 						},
 					}}
 				/>
