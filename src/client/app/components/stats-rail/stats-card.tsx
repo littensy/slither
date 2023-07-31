@@ -7,6 +7,7 @@ import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
+import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { palette } from "shared/data/palette";
 
@@ -101,8 +102,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 
 				<Text
 					key="label"
-					font="Inter"
-					fontWeight={Enum.FontWeight.SemiBold}
+					font={fonts.inter.bold}
 					text={label}
 					textColor={primary}
 					textTransparency={0.05}
@@ -119,7 +119,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 
 				<Text
 					key="value"
-					font="Rubik"
+					font={fonts.rubik.regular}
 					text={value}
 					textColor={palette.white1}
 					textTransparency={0.05}

@@ -1,11 +1,10 @@
 import Roact from "@rbxts/roact";
-import { FontFamily, useFontFace, useRem } from "client/app/hooks";
+import { useRem } from "client/app/hooks";
+import { fonts } from "../utils/fonts";
 import { FrameProps } from "./frame";
 
 export interface TextProps<T extends Instance = TextLabel> extends FrameProps<T> {
-	font?: FontFamily;
-	fontWeight?: Enum.FontWeight;
-	fontStyle?: Enum.FontStyle;
+	font?: Font;
 	text?: string | Roact.Binding<string>;
 	textColor?: Color3 | Roact.Binding<Color3>;
 	textSize?: number | Roact.Binding<number>;
@@ -22,12 +21,11 @@ export interface TextProps<T extends Instance = TextLabel> extends FrameProps<T>
 
 export function Text(props: TextProps) {
 	const rem = useRem();
-	const fontFace = useFontFace(props.font, props.fontWeight, props.fontStyle);
 
 	return (
 		<textlabel
 			Font={Enum.Font.Unknown}
-			FontFace={fontFace}
+			FontFace={props.font || fonts.inter.regular}
 			Text={props.text}
 			TextColor3={props.textColor}
 			TextSize={props.textSize ?? rem(1)}

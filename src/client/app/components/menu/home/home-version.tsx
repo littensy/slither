@@ -2,6 +2,7 @@ import Roact from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { Text } from "client/app/common/text";
 import { useRem } from "client/app/hooks";
+import { fonts } from "client/app/utils/fonts";
 import { $git } from "rbxts-transform-debug";
 import { palette } from "shared/data/palette";
 
@@ -28,8 +29,7 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 			/>
 
 			<Text
-				font="Inter"
-				fontWeight={Enum.FontWeight.Medium}
+				font={fonts.inter.medium}
 				text={VERSION}
 				textAutoResize="X"
 				textColor={palette.text}
@@ -41,8 +41,7 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 
 			<Text
 				richText
-				font="Inter"
-				fontWeight={Enum.FontWeight.Medium}
+				font={fonts.inter.medium}
 				text={BRANCH}
 				textAutoResize="X"
 				textColor={palette.text}
@@ -53,8 +52,7 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 			<Divider />
 
 			<Text
-				font="Inter"
-				fontWeight={Enum.FontWeight.Medium}
+				font={fonts.inter.medium}
 				text={COMMIT}
 				textAutoResize="X"
 				textColor={palette.text}
@@ -70,8 +68,7 @@ function Divider() {
 
 	return (
 		<Text
-			font="Inter"
-			fontWeight={Enum.FontWeight.Bold}
+			font={fonts.inter.bold}
 			text="—"
 			textAutoResize="X"
 			textColor={palette.text}

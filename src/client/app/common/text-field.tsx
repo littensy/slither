@@ -1,5 +1,5 @@
 import Roact, { useEffect, useState } from "@rbxts/roact";
-import { useFontFace } from "client/app/hooks";
+
 import { Group } from "./group";
 import { TextProps } from "./text";
 
@@ -12,8 +12,6 @@ interface TextFieldProps extends TextProps<TextBox> {
 }
 
 export function TextField(props: TextFieldProps) {
-	const fontFace = useFontFace(props.font, props.fontWeight, props.fontStyle);
-
 	const [childRef, setChildRef] = useState<Frame | undefined>(undefined);
 
 	useEffect(() => {
@@ -29,7 +27,7 @@ export function TextField(props: TextFieldProps) {
 			ClearTextOnFocus={props.clearTextOnFocus}
 			MultiLine={props.multiLine}
 			Font={Enum.Font.Unknown}
-			FontFace={fontFace}
+			FontFace={props.font}
 			TextColor3={props.textColor}
 			TextSize={props.textSize}
 			TextTransparency={props.textTransparency}
