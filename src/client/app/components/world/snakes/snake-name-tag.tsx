@@ -6,6 +6,7 @@ import { Frame } from "client/app/common/frame";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
+import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { palette } from "shared/data/palette";
 import { getSnakeTracerSkin } from "shared/data/skins";
@@ -141,8 +142,7 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 			/>
 
 			<Text
-				font="Inter"
-				fontWeight={Enum.FontWeight.Medium}
+				font={fonts.inter.medium}
 				text={name}
 				textSize={rem(1.5)}
 				textColor={minBrightness(tint, 0.5)}

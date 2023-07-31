@@ -6,6 +6,7 @@ import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
+import { fonts } from "client/app/utils/fonts";
 import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 import { gradient } from "./utils";
@@ -58,8 +59,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 			</Frame>
 
 			<Text
-				font="Inter"
-				fontWeight={Enum.FontWeight.Medium}
+				font={fonts.inter.medium}
 				text="Start Playing →"
 				textColor={palette.mantle}
 				textSize={rem(1.4)}

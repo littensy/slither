@@ -7,6 +7,7 @@ import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem, useStore } from "client/app/hooks";
+import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { MenuPage, selectIsPage } from "client/store/menu";
 import { palette } from "shared/data/palette";
@@ -63,8 +64,7 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 
 			<Text
 				key="label"
-				font="Rubik"
-				fontWeight={Enum.FontWeight.SemiBold}
+				font={fonts.rubik.medium}
 				text={label.upper()}
 				textColor={lerpBinding(transition, palette.text, color)}
 				textSize={rem(1.25)}
