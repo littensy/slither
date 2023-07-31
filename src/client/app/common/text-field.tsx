@@ -1,5 +1,5 @@
 import Roact, { useEffect, useState } from "@rbxts/roact";
-
+import { fonts } from "../utils/fonts";
 import { Group } from "./group";
 import { TextProps } from "./text";
 
@@ -27,7 +27,7 @@ export function TextField(props: TextFieldProps) {
 			ClearTextOnFocus={props.clearTextOnFocus}
 			MultiLine={props.multiLine}
 			Font={Enum.Font.Unknown}
-			FontFace={props.font}
+			FontFace={props.font || fonts.inter.regular}
 			TextColor3={props.textColor}
 			TextSize={props.textSize}
 			TextTransparency={props.textTransparency}
