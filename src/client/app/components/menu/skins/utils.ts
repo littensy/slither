@@ -1,6 +1,8 @@
 import { darken } from "client/app/utils/color-utils";
 import { getSnakeSkin } from "shared/data/skins";
 
+export const RANDOM_SKIN = "__random__";
+
 export function getPalette(id: string) {
 	const skin = getSnakeSkin(id);
 

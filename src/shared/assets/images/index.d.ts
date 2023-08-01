@@ -12,6 +12,7 @@ export const images: {
 		readonly nav_heart_alt: string;
 		readonly nav_home: string;
 		readonly nav_home_alt: string;
+		readonly skin_card_gradient: string;
 		readonly vignette: string;
 		readonly tile_stripes: string;
 	};

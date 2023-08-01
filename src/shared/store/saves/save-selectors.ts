@@ -19,3 +19,7 @@ export const selectPlayerSkins = (id: string) => {
 export const selectCurrentPlayerSkin = (id: string) => {
 	return (state: SharedState) => state.saves[id]?.skin;
 };
+
+export const selectCurrentPlayerSkinIs = (id: string, skin: string) => {
+	return (state: SharedState) => state.saves[id]?.skin === skin;
+};

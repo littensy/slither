@@ -19,6 +19,7 @@ return {
 			nav_heart_alt = "rbxassetid://14183565469",
 			nav_home = "rbxassetid://14183565573",
 			nav_home_alt = "rbxassetid://14183565737",
+			skin_card_gradient = "rbxassetid://14271107508",
 			tile_stripes = "rbxassetid://14137143166",
 			vignette = "rbxassetid://14120516929",
 		},

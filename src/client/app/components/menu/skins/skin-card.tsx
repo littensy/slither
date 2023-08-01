@@ -1,7 +1,10 @@
 import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
-import { Group } from "client/app/common/group";
+import { Image } from "client/app/common/image";
+import { ReactiveButton } from "client/app/common/reactive-button";
+import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem } from "client/app/hooks";
+import { images } from "shared/assets";
 import { getPalette } from "./utils";
 
 interface SkinCardProps {
@@ -14,36 +17,53 @@ const SIZE = 12;
 const SIZE_INACTIVE = 10;
 const PADDING = 3;
 
+function getPosition(rem: number, index: number) {
+	const offset = math.sign(index) * (SIZE_INACTIVE - SIZE) * 0.5;
+	const position = index * (SIZE + PADDING);
+
+	return new UDim2(0.5, (position + offset) * rem, 1, 0);
+}
+
+function getSize(rem: number, active: boolean) {
+	const sizeActive = new UDim2(0, SIZE * rem, 0, SIZE * rem);
+	const sizeInactive = new UDim2(0, SIZE_INACTIVE * rem, 0, SIZE_INACTIVE * rem);
+
+	return active ? sizeActive : sizeInactive;
+}
+
 export function SkinCard({ id, index, onClick }: SkinCardProps) {
 	const palette = getPalette(id);
 
 	const rem = useRem();
-
-	const getPosition = (index: number) => {
-		const offset = math.sign(index) * (SIZE_INACTIVE - SIZE) * 0.5;
-		const position = index * (SIZE + PADDING);
-
-		return new UDim2(0.5, rem(position + offset), 1, 0);
-	};
-
-	const getSize = (active: boolean) => {
-		const sizeActive = new UDim2(0, rem(SIZE), 0, rem(SIZE));
-		const sizeInactive = new UDim2(0, rem(SIZE_INACTIVE), 0, rem(SIZE_INACTIVE));
-
-		return active ? sizeActive : sizeInactive;
-	};
-
-	const [position, positionMotion] = useMotion(getPosition(index));
-	const [size, sizeMotion] = useMotion(getSize(false));
+	const [position, positionMotion] = useMotion(getPosition(rem(1), index));
+	const [size, sizeMotion] = useMotion(getSize(rem(1), false));
 
 	useEffect(() => {
-		positionMotion.spring(getPosition(index));
-		sizeMotion.spring(getSize(index === 0));
-	}, [index]);
+		positionMotion.spring(getPosition(rem(1), index));
+		sizeMotion.spring(getSize(rem(1), index === 0));
+	}, [rem, index]);
 
 	return (
-		<Group anchorPoint={new Vector2(0.5, 1)} size={size} position={position}>
-			{/* todo */}
-		</Group>
+		<ReactiveButton
+			onClick={onClick}
+			backgroundTransparency={1}
+			anchorPoint={new Vector2(0.5, 1)}
+			size={size}
+			position={position}
+		>
+			<Shadow key="drop-shadow" shadowColor={palette.secondary} />
+
+			<Image
+				key="background"
+				backgroundColor={palette.primary}
+				backgroundTransparency={0}
+				image={images.ui.skin_card_gradient}
+				imageColor={palette.secondary}
+				cornerRadius={new UDim(0, rem(3))}
+				size={new UDim2(1, 0, 1, 0)}
+			>
+				<uistroke key="stroke" Color={palette.primary} Thickness={rem(0.5)} />
+			</Image>
+		</ReactiveButton>
 	);
 }

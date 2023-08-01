@@ -19,4 +19,8 @@ export const remotes = createRemotes({
 			throttleMiddleware({ throttle: WORLD_TICK, trailing: true }),
 		),
 	}),
+
+	save: namespace({
+		setSkin: remote<Server, [skin?: string]>(t.optional(t.string)),
+	}),
 });
