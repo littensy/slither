@@ -40,11 +40,11 @@ export function Indicator({ colors, order, edge }: IndicatorProps) {
 
 	useEffect(() => {
 		const x = map(currentIndex, 0, 2, -8, 8);
-		positionMotion.to(spring(x));
+		positionMotion.spring(x);
 	}, [page, rem]);
 
 	useEffect(() => {
-		colorMotion.to(spring(currentColor));
+		colorMotion.spring(currentColor);
 	}, [currentColor]);
 
 	useEventListener(RunService.Heartbeat, () => {

@@ -62,7 +62,7 @@ export function BackdropBlur() {
 	});
 
 	useEffect(() => {
-		smoothOffsetMotion.to(spring(world.offset, springs.world));
+		smoothOffsetMotion.spring(world.offset, springs.world);
 	}, [world.offset]);
 
 	return (

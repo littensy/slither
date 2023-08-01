@@ -15,9 +15,9 @@ export function MenuVignette() {
 
 	useEffect(() => {
 		if (open) {
-			transitionMotion.to(spring(1, springs.molasses));
+			transitionMotion.spring(1, springs.molasses);
 		} else {
-			transitionMotion.to(spring(0, springs.molasses));
+			transitionMotion.spring(0, springs.molasses);
 		}
 	}, [open]);
 

@@ -33,7 +33,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	return (
 		<ReactiveButton
 			onClick={onClick}
-			onHover={(hovered) => hoverMotion.to(spring(hovered ? 1 : 0))}
+			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
 			backgroundTransparency={1}
 			anchorPoint={anchorPoint}
 			size={size}

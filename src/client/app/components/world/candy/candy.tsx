@@ -41,7 +41,7 @@ export function Candy() {
 	}, [candyOnScreen]);
 
 	useEffect(() => {
-		offsetMotion.to(spring(world.offset, springs.world));
+		offsetMotion.spring(world.offset, springs.world);
 	}, [world.offset]);
 
 	useEffect(() => {

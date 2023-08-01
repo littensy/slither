@@ -44,7 +44,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 	}, [rem]);
 
 	useEffect(() => {
-		transparencyMotion.to(spring(enabled ? 0 : 0.5, springs.slow));
+		transparencyMotion.spring(enabled ? 0 : 0.5, springs.slow);
 	}, [enabled]);
 
 	return (
@@ -112,7 +112,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					position={new UDim2(0, rem(CARD_MARGIN + CARD_EMOJI_WIDTH + CARD_PADDING), 0.5, -rem(0.25))}
 					change={{
 						TextBounds: (rbx) => {
-							textWidthMotion.to({ label: spring(rbx.TextBounds.X) });
+							textWidthMotion.spring({ label: rbx.TextBounds.X });
 						},
 					}}
 				/>
@@ -129,7 +129,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					position={new UDim2(0, rem(CARD_MARGIN + CARD_EMOJI_WIDTH + CARD_PADDING), 0.5, -rem(0.25))}
 					change={{
 						TextBounds: (rbx) => {
-							textWidthMotion.to({ value: spring(rbx.TextBounds.X) });
+							textWidthMotion.spring({ value: rbx.TextBounds.X });
 						},
 					}}
 				/>

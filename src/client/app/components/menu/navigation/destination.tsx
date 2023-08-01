@@ -29,7 +29,7 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 	const [transition, transitionMotion] = useMotion(0);
 
 	useEffect(() => {
-		transitionMotion.to(spring(isPage ? 1 : 0, springs.stiff));
+		transitionMotion.spring(isPage ? 1 : 0, springs.stiff);
 	}, [isPage]);
 
 	return (

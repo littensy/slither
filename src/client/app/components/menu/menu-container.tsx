@@ -28,7 +28,7 @@ export function MenuContainer({ page, children }: MenuContainerProps) {
 	const [transition, transitionMotion] = useMotion(0);
 
 	useEffect(() => {
-		transitionMotion.to(spring(visible ? 1 : 0, springs.gentle));
+		transitionMotion.spring(visible ? 1 : 0, springs.gentle);
 	}, [visible]);
 
 	// wrapped in useMemo instead of an effect so that it can update

@@ -37,8 +37,8 @@ export function SkinCard({ id, index, onClick }: SkinCardProps) {
 	const [size, sizeMotion] = useMotion(getSize(false));
 
 	useEffect(() => {
-		positionMotion.to(spring(getPosition(index)));
-		sizeMotion.to(spring(getSize(index === 0)));
+		positionMotion.spring(getPosition(index));
+		sizeMotion.spring(getSize(index === 0));
 	}, [index]);
 
 	return (

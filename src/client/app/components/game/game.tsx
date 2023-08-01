@@ -12,7 +12,7 @@ export function Game() {
 	const [transition, transitionMotion] = useMotion(0);
 
 	useEffect(() => {
-		transitionMotion.to(spring(inGame ? 1 : 0));
+		transitionMotion.spring(inGame ? 1 : 0);
 	}, [inGame]);
 
 	return (

@@ -26,8 +26,8 @@ export function MinimapNode({ point, rotation = 0, isClient = false }: MinimapNo
 	});
 
 	useEffect(() => {
-		smoothPointMotion.to(spring(point));
-		smoothRotationMotion.to(spring(rotation));
+		smoothPointMotion.spring(point);
+		smoothRotationMotion.spring(rotation);
 	}, [point, rotation]);
 
 	return (
