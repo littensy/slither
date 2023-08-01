@@ -11,3 +11,11 @@ export const selectPlayerSave = (id: string) => {
 export const selectPlayerBalance = (id: string) => {
 	return (state: SharedState) => state.saves[id]?.balance;
 };
+
+export const selectPlayerSkins = (id: string) => {
+	return (state: SharedState) => state.saves[id]?.skins;
+};
+
+export const selectCurrentPlayerSkin = (id: string) => {
+	return (state: SharedState) => state.saves[id]?.skin;
+};
