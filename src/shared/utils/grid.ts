@@ -8,8 +8,16 @@ interface Grid<T> {
 		range: number,
 		predicate?: (point: GridPoint<T>) => boolean,
 	) => GridPoint<T> | undefined;
-	readonly queryBox: (position: Vector2, size: Vector2) => GridPoint<T>[];
-	readonly queryRange: (position: Vector2, range: number) => GridPoint<T>[];
+	readonly queryBox: (
+		position: Vector2,
+		size: Vector2,
+		predicate?: (point: GridPoint<T>) => boolean,
+	) => GridPoint<T>[];
+	readonly queryRange: (
+		position: Vector2,
+		range: number,
+		predicate?: (point: GridPoint<T>) => boolean,
+	) => GridPoint<T>[];
 	readonly clear: () => void;
 }
 
@@ -125,7 +133,7 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		return nearestPoint;
 	};
 
-	const queryBox = (position: Vector2, size: Vector2) => {
+	const queryBox = (position: Vector2, size: Vector2, predicate?: (point: GridPoint<T>) => boolean) => {
 		const cellsInBox = getCellsInBox(position, size);
 		const points: GridPoint<T>[] = [];
 
@@ -137,7 +145,7 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 					point.position.X <= position.X + size.X &&
 					point.position.Y <= position.Y + size.Y;
 
-				if (isInsideRect) {
+				if (isInsideRect && (!predicate || predicate(point))) {
 					points.push(point);
 				}
 			}
@@ -146,7 +154,7 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		return points;
 	};
 
-	const queryRange = (position: Vector2, range: number) => {
+	const queryRange = (position: Vector2, range: number, predicate?: (point: GridPoint<T>) => boolean) => {
 		const cellsInRange = getCellsInRange(position, range);
 		const points: GridPoint<T>[] = [];
 
@@ -154,7 +162,7 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 			for (const [, point] of cell) {
 				const distance = position.sub(point.position).Magnitude;
 
-				if (distance <= range) {
+				if (distance <= range && (!predicate || predicate(point))) {
 					points.push(point);
 				}
 			}

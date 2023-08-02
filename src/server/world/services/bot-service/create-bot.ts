@@ -1,8 +1,8 @@
-import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { getRandomPointInWorld, getSafePointInWorld, getSnake } from "server/world/utils";
+import { getSafePointInWorld } from "server/world/utils";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { selectSnakeIsDead } from "shared/store/snakes";
+import { BotBehavior } from "./bot-behavior";
 import { generateBotName } from "./generate-name";
 
 let nextBotId = 0;
@@ -16,6 +16,7 @@ export function createBots(amount: number) {
 export function createBot() {
 	const id = `bot-${nextBotId++}`;
 	const name = generateBotName();
+	const behavior = new BotBehavior(id);
 
 	store.addSnake(id, {
 		name,
@@ -23,28 +24,9 @@ export function createBot() {
 		skin: getRandomDefaultSnakeSkin().id,
 	});
 
-	const clearMovement = setInterval(() => {
-		const snake = getSnake(id);
-
-		if (!snake) {
-			return;
-		}
-
-		// prefer points that are further away
-		const goal = maxVector(getRandomPointInWorld(), getRandomPointInWorld());
-		const head = snake.head;
-		const angle = math.atan2(goal.Y - head.Y, goal.X - head.X);
-
-		store.turnSnake(id, angle);
-	}, 1);
-
 	store.once(selectSnakeIsDead(id), () => {
-		clearMovement();
+		behavior.destroy();
 	});
 
 	return id;
-}
-
-function maxVector(a: Vector2, b: Vector2) {
-	return a.Magnitude > b.Magnitude ? a : b;
 }
