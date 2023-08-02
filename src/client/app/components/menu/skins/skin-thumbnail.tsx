@@ -42,13 +42,13 @@ export function SkinThumbnail({ tints, textures, textureSize, active, transparen
 	const [offset, offsetMotion] = useMotion(new UDim());
 
 	useEffect(() => {
-		offsetMotion.spring(active ? new UDim(0, rem(-1)) : new UDim(0, rem(1)));
+		offsetMotion.spring(active ? new UDim(0, rem(-0.5)) : new UDim(0, rem(2)));
 	}, [active, rem]);
 
 	return (
 		<CanvasGroup
 			backgroundTransparency={1}
-			cornerRadius={new UDim(0, rem(3))}
+			cornerRadius={new UDim(0, rem(2.5))}
 			groupTransparency={transparency}
 			size={new UDim2(1, 0, 1, 0)}
 		>
@@ -99,11 +99,12 @@ export function SkinThumbnail({ tints, textures, textureSize, active, transparen
 						key="gradient"
 						Color={
 							new ColorSequence(
-								darken(tints[index % tints.size()], (index + 1) / 20, 0.5),
 								tints[index % tints.size()],
+								darken(tints[(index + 1) % tints.size()], (index + 1) / 50, 1),
 							)
 						}
-						Rotation={-90}
+						Offset={new Vector2(0, 0.25)}
+						Rotation={90}
 					/>
 				</Image>
 			))}

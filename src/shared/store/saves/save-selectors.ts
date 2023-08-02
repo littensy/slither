@@ -20,6 +20,10 @@ export const selectCurrentPlayerSkin = (id: string) => {
 	return (state: SharedState) => state.saves[id]?.skin;
 };
 
-export const selectCurrentPlayerSkinIs = (id: string, skin: string) => {
-	return (state: SharedState) => state.saves[id]?.skin === skin;
+export const selectPlayerOwnsSkin = (id: string, skinId: string) => {
+	return (state: SharedState) => state.saves[id]?.skins.includes(skinId);
+};
+
+export const selectPlayerEquippedSkin = (id: string, skinId: string) => {
+	return (state: SharedState) => state.saves[id]?.skin === skinId;
 };

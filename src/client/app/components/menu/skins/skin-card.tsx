@@ -7,6 +7,7 @@ import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem } from "client/app/hooks";
 import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
+import { SkinIndicator } from "./skin-indicator";
 import { SkinThumbnail } from "./skin-thumbnail";
 import { DIRECTIONS_TO_HIDE, usePalette } from "./utils";
 
@@ -81,7 +82,7 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 				image={images.ui.skin_card_gradient}
 				imageColor={palette.secondary}
 				imageTransparency={transparency}
-				cornerRadius={new UDim(0, rem(3))}
+				cornerRadius={new UDim(0, rem(2.5))}
 				size={new UDim2(1, 0, 1, 0)}
 			>
 				<uistroke
@@ -100,6 +101,8 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 				textureSize={palette.skin.size}
 				transparency={transparency}
 			/>
+
+			<SkinIndicator key="indicator" id={id} primary={palette.primary} transparency={transparency} />
 		</ReactiveButton>
 	);
 }

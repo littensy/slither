@@ -78,6 +78,16 @@ hash = "7ca3caba207e589aaffbb0087cd0da5a1970be6825ec18d3ef9bf515da350f29"
 id = 14271107508
 packable = false
 
+[inputs."assets/images/ui/skin_indicator.png"]
+hash = "b44e81a1842b4b0c699f57f18e4033ffff9135e87d29a150b4fee4fa5305f05f"
+id = 14282707759
+packable = false
+
+[inputs."assets/images/ui/skin_indicator_locked.png"]
+hash = "aeef0862af12b91eae150cd7f0ec1f429e8d58c4b183d8fd83ac21e3fbfed18c"
+id = 14282707833
+packable = false
+
 [inputs."assets/images/ui/tile_stripes.png"]
 hash = "f579f8ad1ad2b59967bcf7c31e758b7e103b0267177352175cf57f7d184eecf0"
 id = 14137143166
