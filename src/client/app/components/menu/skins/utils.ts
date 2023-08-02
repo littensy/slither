@@ -10,8 +10,8 @@ export function usePalette(id: string, shuffle?: readonly string[]) {
 	const [skin, setSkin] = useState(getSnakeSkin(id));
 
 	useInterval(() => {
-		if (shuffle) {
-			const skinId = shuffle[math.random(1, shuffle.size())];
+		if (shuffle && !shuffle.isEmpty()) {
+			const skinId = shuffle[math.random(0, shuffle.size() - 1)];
 			setSkin(getSnakeSkin(skinId));
 		}
 	}, 1);
