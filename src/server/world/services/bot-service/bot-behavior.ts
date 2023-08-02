@@ -2,9 +2,10 @@ import Object from "@rbxts/object-utils";
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { getCandy, getRandomPointInWorld, getSnake } from "server/world/utils";
-import { SnakeEntity } from "shared/store/snakes";
+import { SnakeEntity, describeSnakeFromScore } from "shared/store/snakes";
 import { map } from "shared/utils/math-utils";
 import { candyGrid } from "../candy-service";
+import { snakeGrid } from "../snake-service";
 
 export enum BehaviorMode {
 	Idle,
@@ -15,15 +16,12 @@ const BEHAVIORS = Object.values(BehaviorMode);
 
 export class BotBehavior {
 	public readonly id: string;
-	public isFleeing: boolean;
 	private readonly seed: number;
 	private readonly cleanup: () => void;
 
 	constructor(id: string) {
 		this.id = id;
 		this.seed = math.random() * 255;
-
-		this.isFleeing = false;
 
 		this.cleanup = setInterval(() => {
 			this.update();
@@ -60,7 +58,10 @@ export class BotBehavior {
 		store.turnSnake(this.id, angle);
 	}
 
-	private flee(snake: SnakeEntity) {
+	private flee(snake: SnakeEntity, incomingAngle: Vector2) {
+		// Go 180 degrees in opposite direction
+		const angle = math.atan2(incomingAngle.Y, incomingAngle.X) + math.rad(180);
+		store.turnSnake(snake.id, angle);
 		return;
 	}
 
@@ -69,6 +70,13 @@ export class BotBehavior {
 		const behavior = this.getBehavior();
 
 		if (!snake) {
+			return;
+		}
+
+		const nearbyEnemy = this.directionToNearestEnemy(snake);
+		// Do not shorten condition; angle may return as 0
+		if (nearbyEnemy !== undefined) {
+			this.flee(snake, nearbyEnemy);
 			return;
 		}
 
@@ -84,10 +92,28 @@ export class BotBehavior {
 		}
 	}
 
-	private directionToNearestEnemy(): number | undefined {
-		// override normal behavior to move away?
-		// see src/server/world/services/collision-service/collision-tick.ts
-		return;
+	private directionToNearestEnemy(snake: SnakeEntity): Vector2 | undefined {
+		const radius = describeSnakeFromScore(snake.score).radius;
+
+		const nearest = snakeGrid.nearest(snake.head, radius * 10 + 3, (hit) => {
+			const enemy = getSnake(hit.metadata.id);
+			return enemy !== undefined && !enemy.dead && enemy.id !== snake.id;
+		});
+
+		const enemy = nearest && getSnake(nearest.metadata.id);
+		if (!enemy) {
+			return;
+		}
+
+		const enemyRadius = describeSnakeFromScore(enemy.score).radius;
+		const direction = nearest.position.sub(snake.head);
+		const distance = direction.Magnitude;
+
+		if (distance <= 5 * (radius + enemyRadius)) {
+			return direction.Unit;
+		}
+
+		return undefined;
 	}
 
 	private getBehavior() {
