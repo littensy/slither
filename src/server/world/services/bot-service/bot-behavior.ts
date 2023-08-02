@@ -43,17 +43,23 @@ export class BotBehavior {
 
 	private scavenge(snake: SnakeEntity) {
 		const head = snake.head;
-		const target = candyGrid.nearest(head, 15, (point) => {
+		let target = candyGrid.nearest(head, 15, (point) => {
 			const candy = getCandy(point.metadata.id);
-			return candy !== undefined && !candy.eatenAt;
+			return candy !== undefined && !candy.eatenAt && candy.type === "loot";
 		});
+
+		if (!target) {
+			target = candyGrid.nearest(head, 15, (point) => {
+				const candy = getCandy(point.metadata.id);
+				return candy !== undefined && !candy.eatenAt;
+			});
+		}
 
 		const candy = target && getCandy(target.metadata.id);
 		if (!candy) {
 			return;
 		}
 
-		// Yeah... You wanna play with your Mario games?
 		const angle = math.atan2(candy.position.Y - head.Y, candy.position.X - head.X);
 		store.turnSnake(this.id, angle);
 	}
