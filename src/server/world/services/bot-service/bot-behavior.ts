@@ -43,6 +43,7 @@ export class BotBehavior {
 
 	private scavenge(snake: SnakeEntity) {
 		const head = snake.head;
+
 		let target = candyGrid.nearest(head, 15, (point) => {
 			const candy = getCandy(point.metadata.id);
 			return candy !== undefined && !candy.eatenAt && candy.type === "loot";
@@ -64,11 +65,10 @@ export class BotBehavior {
 		store.turnSnake(this.id, angle);
 	}
 
-	private flee(snake: SnakeEntity, incomingAngle: Vector2) {
+	private flee(snake: SnakeEntity, direction: Vector2) {
 		// Go 180 degrees in opposite direction
-		const angle = math.atan2(incomingAngle.Y, incomingAngle.X) + math.rad(180);
+		const angle = math.atan2(direction.Y, direction.X) + math.rad(180);
 		store.turnSnake(snake.id, angle);
-		return;
 	}
 
 	private update() {
@@ -80,8 +80,7 @@ export class BotBehavior {
 		}
 
 		const nearbyEnemy = this.directionToNearestEnemy(snake);
-		// Do not shorten condition; angle may return as 0
-		if (nearbyEnemy !== undefined) {
+		if (nearbyEnemy) {
 			this.flee(snake, nearbyEnemy);
 			return;
 		}
@@ -118,8 +117,6 @@ export class BotBehavior {
 		if (distance <= 5 * (radius + enemyRadius)) {
 			return direction.Unit;
 		}
-
-		return undefined;
 	}
 
 	private getBehavior() {
