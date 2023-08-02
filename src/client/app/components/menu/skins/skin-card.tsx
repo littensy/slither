@@ -61,8 +61,9 @@ export function SkinCard({ id, index, shuffle, onClick }: SkinCardProps) {
 			<Shadow
 				key="drop-shadow"
 				shadowColor={palette.secondary}
-				shadowSize={rem(9)}
-				shadowPosition={rem(0.5)}
+				shadowBlur={0.6}
+				shadowSize={rem(7)}
+				shadowPosition={rem(1)}
 				shadowTransparency={transparency}
 			/>
 
