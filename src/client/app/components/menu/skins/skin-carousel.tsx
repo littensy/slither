@@ -10,6 +10,7 @@ import { SkinCard } from "./skin-card";
 import { DIRECTIONS } from "./utils";
 
 const SKIN_LIST = [RANDOM_SKIN, ...snakeSkins.map((skin) => skin.id)];
+const SKIN_LENGTH = SKIN_LIST.size();
 
 export function SkinCarousel() {
 	const rem = useRem();
@@ -19,7 +20,6 @@ export function SkinCarousel() {
 	const equippedSkin = useSelectorCreator(selectCurrentPlayerSkin, LOCAL_USER) ?? RANDOM_SKIN;
 	const currentSkin = useSelector(selectMenuCurrentSkin);
 
-	const skinsLength = SKIN_LIST.size();
 	const currentIndex = SKIN_LIST.indexOf(currentSkin);
 
 	useEffect(() => {
@@ -29,7 +29,7 @@ export function SkinCarousel() {
 	return (
 		<Group size={new UDim2(1, 0, 1, -rem(3))}>
 			{DIRECTIONS.map((direction) => {
-				const index = (currentIndex + direction) % skinsLength;
+				const index = (currentIndex + direction) % SKIN_LENGTH;
 				const skin = SKIN_LIST[index] ?? RANDOM_SKIN;
 
 				return (
