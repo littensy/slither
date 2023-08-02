@@ -37,6 +37,7 @@ export function SkinCarousel() {
 						key={skin}
 						id={skin}
 						index={direction}
+						active={skin === currentSkin}
 						shuffle={skin === RANDOM_SKIN ? skinInventory : undefined}
 						onClick={() => {
 							store.setMenuSkin(skin);

@@ -4,7 +4,7 @@ import { SkinCarousel } from "./skin-carousel";
 export function Skins() {
 	return (
 		<>
-			<SkinCarousel />
+			<SkinCarousel key="carousel" />
 		</>
 	);
 }

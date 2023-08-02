@@ -35,7 +35,7 @@
 		"@rbxts/react-roblox": "^0.1.0",
 		"@rbxts/reflex": "^4.2.0",
 		"@rbxts/remo": "^1.1.0",
-		"@rbxts/ripple": "0.5.0",
+		"@rbxts/ripple": "0.6.0",
 		"@rbxts/roact": "npm:@rbxts/react-ts@0.9.0",
 		"@rbxts/services": "^1.5.1",
 		"@rbxts/set-timeout": "^1.1.2",

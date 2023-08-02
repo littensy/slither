@@ -1,12 +1,18 @@
 import { useInterval } from "@rbxts/pretty-react-hooks";
 import { useState } from "@rbxts/roact";
 import { darken } from "client/app/utils/color-utils";
-import { getSnakeSkin } from "shared/data/skins";
+import { SnakeSkin, getSnakeSkin } from "shared/data/skins";
+
+export interface SnakePalette {
+	readonly skin: SnakeSkin;
+	readonly primary: Color3;
+	readonly secondary: Color3;
+}
 
 export const DIRECTIONS = [-3, -2, -1, 0, 1, 2, 3];
 export const DIRECTIONS_TO_HIDE = [-3, 3];
 
-export function usePalette(id: string, shuffle?: readonly string[]) {
+export function usePalette(id: string, shuffle?: readonly string[]): SnakePalette {
 	const [skin, setSkin] = useState(getSnakeSkin(id));
 
 	useInterval(() => {

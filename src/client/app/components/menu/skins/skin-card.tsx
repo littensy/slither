@@ -5,12 +5,15 @@ import { Image } from "client/app/common/image";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
+import { SkinThumbnail } from "./skin-thumbnail";
 import { DIRECTIONS_TO_HIDE, usePalette } from "./utils";
 
 interface SkinCardProps {
 	readonly id: string;
 	readonly index: number;
+	readonly active: boolean;
 	readonly shuffle?: readonly string[];
 	readonly onClick: () => void;
 }
@@ -33,17 +36,20 @@ function getSize(rem: number, active: boolean) {
 	return active ? sizeActive : sizeInactive;
 }
 
-export function SkinCard({ id, index, shuffle, onClick }: SkinCardProps) {
+export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps) {
 	const hidden = DIRECTIONS_TO_HIDE.includes(index);
 
 	const rem = useRem();
 	const palette = usePalette(id, shuffle);
-	const [position, positionMotion] = useMotion(getPosition(rem(1), math.sign(index) * 5));
+	const [position, positionMotion] = useMotion(getPosition(rem(1), math.sign(index) * 3));
 	const [size, sizeMotion] = useMotion(getSize(rem(1), false));
 	const [transparency, transparencyMotion] = useMotion(1);
 
 	useEffect(() => {
-		positionMotion.spring(getPosition(rem(1), index));
+		positionMotion.spring(getPosition(rem(1), index), {
+			...springs.wobbly,
+			mass: 1 + math.abs(index / 4),
+		});
 		sizeMotion.spring(getSize(rem(1), index === 0));
 		transparencyMotion.spring(hidden ? 1 : 0);
 	}, [rem, index]);
@@ -57,6 +63,7 @@ export function SkinCard({ id, index, shuffle, onClick }: SkinCardProps) {
 			anchorPoint={new Vector2(0.5, 1)}
 			size={size}
 			position={position}
+			zIndex={-math.abs(index)}
 		>
 			<Shadow
 				key="drop-shadow"
@@ -84,6 +91,15 @@ export function SkinCard({ id, index, shuffle, onClick }: SkinCardProps) {
 					Transparency={transparency.map((t) => blend(t, 0.8))}
 				/>
 			</Image>
+
+			<SkinThumbnail
+				key="thumbnail"
+				active={active}
+				tints={palette.skin.tint}
+				textures={palette.skin.texture}
+				textureSize={palette.skin.size}
+				transparency={transparency}
+			/>
 		</ReactiveButton>
 	);
 }
