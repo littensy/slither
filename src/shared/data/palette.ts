@@ -47,6 +47,7 @@ const base = {
 };
 
 /**
+ * Catppuccin Mocha Palette
  * @see https://github.com/catppuccin/catppuccin
  */
 export const palette = {
@@ -54,6 +55,26 @@ export const palette = {
 	...neutrals,
 	...base,
 } as const;
+
+/**
+ * An ordered list of all the accent colors
+ */
+export const accentList = [
+	"rosewater",
+	"flamingo",
+	"pink",
+	"mauve",
+	"red",
+	"maroon",
+	"peach",
+	"yellow",
+	"green",
+	"teal",
+	"sky",
+	"sapphire",
+	"blue",
+	"lavender",
+] as const;
 
 export function getRandomAccent(): Color3 {
 	const values = Object.values(accents);

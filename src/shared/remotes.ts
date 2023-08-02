@@ -21,6 +21,6 @@ export const remotes = createRemotes({
 	}),
 
 	save: namespace({
-		setSkin: remote<Server, [skin?: string]>(t.optional(t.string)),
+		setSkin: remote<Server, [skin: string]>(t.string),
 	}),
 });

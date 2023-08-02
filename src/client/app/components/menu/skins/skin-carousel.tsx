@@ -1,38 +1,45 @@
-import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact from "@rbxts/roact";
+import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
+import Roact, { useEffect } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
-import { useRem } from "client/app/hooks";
+import { useRem, useStore } from "client/app/hooks";
+import { selectMenuCurrentSkin } from "client/store/menu";
 import { LOCAL_USER } from "shared/constants";
-import { remotes } from "shared/remotes";
-import { selectCurrentPlayerSkin, selectPlayerSkins } from "shared/store/saves";
+import { snakeSkins } from "shared/data/skins";
+import { RANDOM_SKIN, selectCurrentPlayerSkin, selectPlayerSkins } from "shared/store/saves";
 import { SkinCard } from "./skin-card";
-import { RANDOM_SKIN } from "./utils";
+import { DIRECTIONS } from "./utils";
 
-const DIRECTIONS = [-3, -2, -1, 0, 1, 2, 3];
+const SKIN_LIST = [RANDOM_SKIN, ...snakeSkins.map((skin) => skin.id)];
 
 export function SkinCarousel() {
 	const rem = useRem();
-	const skinInventory = useSelectorCreator(selectPlayerSkins, LOCAL_USER) || [];
-	const currentSkin = useSelectorCreator(selectCurrentPlayerSkin, LOCAL_USER) ?? RANDOM_SKIN;
+	const store = useStore();
 
-	const skins = [RANDOM_SKIN, ...skinInventory];
-	const skinsLength = skins.size();
-	const currentIndex = skins.indexOf(currentSkin);
+	const skinInventory = useSelectorCreator(selectPlayerSkins, LOCAL_USER) || [];
+	const equippedSkin = useSelectorCreator(selectCurrentPlayerSkin, LOCAL_USER) ?? RANDOM_SKIN;
+	const currentSkin = useSelector(selectMenuCurrentSkin);
+
+	const skinsLength = SKIN_LIST.size();
+	const currentIndex = SKIN_LIST.indexOf(currentSkin);
+
+	useEffect(() => {
+		store.setMenuSkin(equippedSkin);
+	}, []);
 
 	return (
 		<Group size={new UDim2(1, 0, 1, -rem(3))}>
 			{DIRECTIONS.map((direction) => {
 				const index = (currentIndex + direction) % skinsLength;
-				const skin = skins[index] ?? RANDOM_SKIN;
-				const id = skin !== RANDOM_SKIN ? skin : undefined;
+				const skin = SKIN_LIST[index] ?? RANDOM_SKIN;
 
 				return (
 					<SkinCard
 						key={skin}
 						id={skin}
 						index={direction}
+						shuffle={skin === RANDOM_SKIN ? skinInventory : undefined}
 						onClick={() => {
-							remotes.save.setSkin.fire(id);
+							store.setMenuSkin(skin);
 						}}
 					/>
 				);

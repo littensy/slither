@@ -17,6 +17,10 @@ export function useMockRemotes() {
 			remotes.snake.spawn.test.onFire(() => {
 				store.addSnake(LOCAL_USER);
 			}),
+
+			remotes.save.setSkin.test.onFire((skin) => {
+				store.setPlayerSkin(LOCAL_USER, skin);
+			}),
 		];
 
 		return () => {

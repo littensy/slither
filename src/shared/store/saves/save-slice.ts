@@ -8,7 +8,7 @@ export interface SaveState {
 export interface PlayerSave {
 	readonly balance: number;
 	readonly skins: readonly string[];
-	readonly skin?: string;
+	readonly skin: string;
 }
 
 const initialState: SaveState = {};

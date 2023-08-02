@@ -1,14 +1,24 @@
+import { useInterval } from "@rbxts/pretty-react-hooks";
+import { useState } from "@rbxts/roact";
 import { darken } from "client/app/utils/color-utils";
 import { getSnakeSkin } from "shared/data/skins";
 
-export const RANDOM_SKIN = "__random__";
+export const DIRECTIONS = [-3, -2, -1, 0, 1, 2, 3];
+export const DIRECTIONS_TO_HIDE = [-3, 3];
 
-export function getPalette(id: string) {
-	const skin = getSnakeSkin(id);
+export function usePalette(id: string, shuffle?: readonly string[]) {
+	const [skin, setSkin] = useState(getSnakeSkin(id));
+
+	useInterval(() => {
+		if (shuffle) {
+			const skinId = shuffle[math.random(1, shuffle.size())];
+			setSkin(getSnakeSkin(skinId));
+		}
+	}, 1);
 
 	return {
-		primary: skin.primary || darken(skin.tint[0], 0.5),
-		secondary: skin.secondary || darken(skin.tint[0], 0.7),
-		tint: skin.tint,
+		skin,
+		primary: skin.primary || darken(skin.tint[0], 0.5, 0.5),
+		secondary: skin.secondary || darken(skin.tint[0], 0.7, 0.5),
 	};
 }
