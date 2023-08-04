@@ -106,10 +106,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/flipper/-/flipper-2.0.1.tgz#25bd840441055da419c234a9d045309e40ac3ad2"
   integrity sha512-kxb5AZizP05XSmo3waS/QkcfNMD5b6HX4gGwyHOyBow260R5MIT4L/ZUPLvleXXyb9b67X4NVmHoac1tPXOLNA==
 
-"@rbxts/lapis@0.2.0-ts.3":
-  version "0.2.0-ts.3"
-  resolved "https://registry.yarnpkg.com/@rbxts/lapis/-/lapis-0.2.0-ts.3.tgz#ce7e9d17b43f973e0d19509f9f858c148fab458e"
-  integrity sha512-m/SrNDJMD2LI+kR1m2iGeQXTfwMhi9EYNDxl3zi4IojzGgC8G5wNlcpxcEDjHMZA6+TqiMkAOXcYRL1r0yUSWg==
+"@rbxts/lapis@0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@rbxts/lapis/-/lapis-0.2.4.tgz#a0d4f96de69e009871fbaebf70b442c8c5d682a1"
+  integrity sha512-2e0kjVM8HPUtlc3eK1XzksMsE2jTxLF3YcoZvf6vvS4/k7Q/f+GNy1zM78IWwy2da7tsQgxe8F+syl1XeAiMqA==
 
 "@rbxts/luau-polyfill-internal@1.2.3-ts.0":
   version "1.2.3-ts.0"
@@ -249,9 +249,9 @@
   integrity sha512-8Q+OG9ddTD2P3aARCuRKpPqUBvuifgSnHvQMZ6jBMqUzxhIysnb0l4c3vnnaQnvdyZ1OW9tKxcdEHMGTb67uOw==
 
 "@rbxts/types@^1.0.537", "@rbxts/types@^1.0.704":
-  version "1.0.707"
-  resolved "https://registry.yarnpkg.com/@rbxts/types/-/types-1.0.707.tgz#8007f5eb0f0368ec25ff1c4d313bd80c30bbed33"
-  integrity sha512-sagAruDm8kVQpZ610S4YQYgq/3LvHqGzgTEgpnuwzPOax+ZsAZ1G5R1s5wPiWogs54tNjAKQ4e+Zonn16nOS1g==
+  version "1.0.708"
+  resolved "https://registry.yarnpkg.com/@rbxts/types/-/types-1.0.708.tgz#e3f82b561c1f1ed796ae7f9a58363f973f6bb094"
+  integrity sha512-h6fpdlP6xVvSvJQ+8u081XbdONW4sX46uKu3PBtSvkNnxDlDNMaXKyuCLSq3bpjCvGM5FwaOFxy2hmIUw4tSqQ==
 
 "@rbxts/validate-tree@^2.0.2":
   version "2.0.2"
@@ -619,9 +619,9 @@ escape-string-regexp@^4.0.0:
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
 eslint-config-prettier@^8.8.0:
-  version "8.9.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.9.0.tgz#094b6254b2804b0544f7cee535f802b6d29ee10b"
-  integrity sha512-+sbni7NfVXnOpnRadUA8S28AUlsZt9GjgFvABIRL9Hkn8KqNzOp+7Lw4QWtrwn20KzU3wqu1QoOj2m+7rKRqkA==
+  version "8.10.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.10.0.tgz#3a06a662130807e2502fc3ff8b4143d8a0658e11"
+  integrity sha512-SM8AMJdeQqRYT9O9zguiruQZaN7+z+E4eAP9oiLNGKMtomwaB1E9dcgUD6ZAn/eQAb52USbvezbiljfZUhbJcg==
 
 eslint-plugin-prettier@5.0.0-alpha.2:
   version "5.0.0-alpha.2"
@@ -1331,9 +1331,9 @@ prettier-linter-helpers@^1.0.0:
     fast-diff "^1.1.2"
 
 prettier@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.0.tgz#e7b19f691245a21d618c68bc54dc06122f6105ae"
-  integrity sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.1.tgz#65271fc9320ce4913c57747a70ce635b30beaa40"
+  integrity sha512-fcOWSnnpCrovBsmFZIGIy9UqK2FaI7Hqax+DIO0A9UxeVoY4iweyaFjS5TavZN97Hfehph0nhsZnjlVKzEQSrQ==
 
 prompts@^2.4.2:
   version "2.4.2"
