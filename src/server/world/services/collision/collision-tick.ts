@@ -2,7 +2,7 @@ import { store } from "server/store";
 import { getSnake, killSnake } from "server/world/utils";
 import { WORLD_BOUNDS } from "shared/constants";
 import { SnakeEntity, describeSnakeFromScore, selectSnakesSorted } from "shared/store/snakes";
-import { snakeGrid } from "../snake-service";
+import { snakeGrid } from "../snakes";
 
 export function onCollisionTick() {
 	// in a head-on collision, the snake with the lowest score is killed

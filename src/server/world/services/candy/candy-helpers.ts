@@ -1,54 +1,84 @@
-import { setInterval } from "@rbxts/set-timeout";
+import { setInterval, setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { CANDY_TICK_PHASE } from "server/world/constants";
-import { getSnake } from "server/world/utils";
-import { CANDY_LIMITS, WORLD_TICK } from "shared/constants";
+import { getCandy, getRandomPointNearWorldOrigin, getSnake } from "server/world/utils";
+import { CANDY_LIMITS } from "shared/constants";
+import { getRandomAccent } from "shared/data/palette";
 import { getSnakeTracerSkin } from "shared/data/skins";
-import { selectCandyCount } from "shared/store/candy";
-import {
-	describeSnakeFromScore,
-	identifySnake,
-	selectAliveSnakesById,
-	selectSnakeIsBoosting,
-} from "shared/store/snakes";
-import { createScheduler } from "shared/utils/scheduler";
-import { createCandy, populateCandy, removeCandyIfAtLimit } from "./candy-helpers";
-import { onCandyTick } from "./candy-tick";
+import { CandyEntity, CandyType, selectCandyById, selectCandyCount, selectStaleCandyOfType } from "shared/store/candy";
+import { describeSnakeFromScore, selectSnakeIsBoosting } from "shared/store/snakes";
+import { createGrid } from "shared/utils/grid";
+import { fillArray } from "shared/utils/object-utils";
 
 const random = new Random();
 
-export async function initCandyService() {
-	// keep the amount of candy in the world at a constant size
-	// if the amount of candy is less than the max, create more
-	store.subscribe(
-		selectCandyCount("default"),
-		(count) => count < CANDY_LIMITS.default,
-		(count) => populateCandy(CANDY_LIMITS.default - count),
-	);
+export const candyGrid = createGrid<{ id: string }>(5);
 
-	store.observe(selectAliveSnakesById, identifySnake, ({ id }) => {
-		// while boosting, decrement the snake's score and create candy
-		// on the snake's tail
-		const disconnect = dropCandyWhileBoosting(id);
+let nextCandyId = 0;
 
-		// when the snake dies, create candy on the snake's tracers
-		return () => {
-			disconnect();
-			dropCandyOnDeath(id);
-		};
-	});
+export function createCandy(patch?: Partial<CandyEntity>): CandyEntity {
+	const random = new Random();
 
-	createScheduler({
-		name: "candy",
-		tick: WORLD_TICK,
-		phase: CANDY_TICK_PHASE,
-		onTick: onCandyTick,
-	});
+	const candy: CandyEntity = {
+		id: `${nextCandyId++}`,
+		type: "default",
+		size: math.min(random.NextInteger(1, 6), random.NextInteger(1, 6)),
+		position: getRandomPointNearWorldOrigin(0.95),
+		color: getRandomAccent(),
+		...patch,
+	};
 
-	populateCandy(CANDY_LIMITS.default);
+	candyGrid.insert(candy.position, { id: candy.id });
+
+	return candy;
 }
 
-function dropCandyWhileBoosting(id: string) {
+export function removeCandy(id: string, eatenAt?: Vector2) {
+	const candy = store.getState(selectCandyById(id));
+
+	if (!candy) {
+		return;
+	}
+
+	store.setCandyEatenAt(id, eatenAt ?? candy.position);
+	candyGrid.remove(candy.position);
+
+	setTimeout(() => {
+		store.removeCandy(id);
+	}, 5);
+}
+
+export function eatCandy(candyId: string, snakeId: string) {
+	const candy = getCandy(candyId);
+	const snake = getSnake(snakeId);
+
+	if (snake && candy && !candy.eatenAt) {
+		removeCandy(candy.id, snake.head);
+		store.incrementSnakeScore(snake.id, candy.size);
+	}
+}
+
+export function populateCandy(amount: number) {
+	store.populateCandy(fillArray(amount, () => createCandy()));
+}
+
+export function removeCandyIfAtLimit(candyType: CandyType) {
+	const max = CANDY_LIMITS[candyType];
+	const count = store.getState(selectCandyCount(candyType));
+
+	if (count <= max) {
+		return;
+	}
+
+	for (const _ of $range(max, count - 1)) {
+		const candy = store.getState(selectStaleCandyOfType(candyType));
+
+		if (candy) {
+			removeCandy(candy.id);
+		}
+	}
+}
+
+export function dropCandyWhileBoosting(id: string) {
 	return store.observeWhile(selectSnakeIsBoosting(id), () => {
 		let previousTail = Vector2.zero;
 
@@ -86,7 +116,7 @@ function dropCandyWhileBoosting(id: string) {
 	});
 }
 
-function dropCandyOnDeath(id: string): void {
+export function dropCandyOnDeath(id: string): void {
 	const snake = getSnake(id);
 
 	if (!snake) {

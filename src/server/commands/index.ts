@@ -1,18 +1,17 @@
 import { store } from "server/store";
-import { getSnake, killSnake } from "server/world";
-import { createBot } from "server/world/services/bot-service";
+import { createBot, getSnake, killSnake } from "server/world";
 import { selectSnakes } from "shared/store/snakes";
 import { createCommand } from "./create-command";
 
 createCommand("/score", (player, argument) => {
-	const score = tonumber(argument);
-	store.patchSnake(player.Name, { score });
+	store.patchSnake(player.Name, { score: tonumber(argument) });
 });
 
 createCommand("/bot", (player, argument) => {
 	const score = tonumber(argument);
 	const snake = getSnake(player.Name);
 	const id = createBot();
+
 	store.patchSnake(id, {
 		score,
 		head: snake ? snake.head.add(new Vector2(0, 7)) : undefined,
@@ -36,6 +35,5 @@ createCommand("/purge", (player, argument) => {
 });
 
 createCommand("/money", (player, argument) => {
-	const money = tonumber(argument) ?? 0;
-	store.givePlayerBalance(player.Name, money);
+	store.givePlayerBalance(player.Name, tonumber(argument) ?? 0);
 });

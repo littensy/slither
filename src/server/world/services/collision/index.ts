@@ -1,9 +1,10 @@
-import { WORLD_TICK } from "shared/constants";
+import { COLLISION_TICK_PHASE, WORLD_TICK } from "shared/constants";
 import { createScheduler } from "shared/utils/scheduler";
-import { COLLISION_TICK_PHASE } from "../../constants";
 import { onCollisionTick } from "./collision-tick";
 
-export async function initCollisionService() {
+export * from "./collision-tick";
+
+export async function registerCollisionService() {
 	createScheduler({
 		name: "collision",
 		tick: WORLD_TICK,

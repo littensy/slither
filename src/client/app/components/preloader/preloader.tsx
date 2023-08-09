@@ -2,8 +2,8 @@ import { useAsyncEffect, useDeferState } from "@rbxts/pretty-react-hooks";
 import Roact, { useMemo } from "@rbxts/roact";
 import { ContentProvider } from "@rbxts/services";
 import { images, sounds } from "shared/assets";
-import { Text } from "../common/text";
-import { useRem } from "../hooks";
+import { Text } from "../../common/text";
+import { useRem } from "../../hooks";
 
 interface Assets {
 	[key: string]: string | Assets;

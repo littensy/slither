@@ -4,8 +4,8 @@ import { store } from "server/store";
 import { getCandy, getRandomPointInWorld, getSnake } from "server/world/utils";
 import { SnakeEntity, describeSnakeFromScore } from "shared/store/snakes";
 import { map } from "shared/utils/math-utils";
-import { candyGrid } from "../candy-service";
-import { snakeGrid } from "../snake-service";
+import { candyGrid } from "../candy";
+import { snakeGrid } from "../snakes";
 
 export enum BehaviorMode {
 	Idle,

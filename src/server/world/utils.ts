@@ -3,7 +3,7 @@ import { store } from "server/store";
 import { WORLD_BOUNDS } from "shared/constants";
 import { selectCandyById } from "shared/store/candy";
 import { selectSnakeById } from "shared/store/snakes";
-import { snakeGrid } from "./services/snake-service/snake-grid";
+import { snakeGrid } from "./services/snakes/snake-grid";
 
 const MIN_SAFE_DISTANCE = 10;
 

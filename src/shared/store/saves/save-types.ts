@@ -1,3 +1,4 @@
+import { t } from "@rbxts/t";
 import { defaultSnakeSkins } from "shared/data/skins";
 import { PlayerSave } from "./save-slice";
 
@@ -8,3 +9,9 @@ export const defaultPlayerSave: PlayerSave = {
 	skins: [RANDOM_SKIN, ...defaultSnakeSkins.map((skin) => skin.id)],
 	skin: RANDOM_SKIN,
 };
+
+export const playerSaveSchema: t.check<PlayerSave> = t.interface({
+	balance: t.number,
+	skins: t.array(t.string),
+	skin: t.string,
+});

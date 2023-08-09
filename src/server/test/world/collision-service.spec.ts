@@ -1,9 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { getSnake } from "server/world";
-import { onCollisionTick } from "server/world/services/collision-service";
-import { onSnakeTick } from "server/world/services/snake-service";
+import { getSnake, onCollisionTick, onSnakeTick } from "server/world";
 import { WORLD_BOUNDS } from "shared/constants";
 
 export = () => {
