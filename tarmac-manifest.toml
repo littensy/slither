@@ -23,6 +23,11 @@ hash = "d1b211a8eaaf1a834836d63b984aaf85538b10e34a714d06fc65ba0faf440af6"
 id = 14120516187
 packable = false
 
+[inputs."assets/images/ui/button_glow_top.png"]
+hash = "e121274fed0760cf0d12ad9d0ca76dfeb14a3ec473699ea0aefd5864a9cb008f"
+id = 14367671668
+packable = false
+
 [inputs."assets/images/ui/circle.png"]
 hash = "f09bf69c83b01c4545a27118082cf0aa4eab4d930d8b30a50f633e023536ebe8"
 id = 14120516288

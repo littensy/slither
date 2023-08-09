@@ -5,7 +5,6 @@ import { Image } from "client/app/common/image";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem } from "client/app/hooks";
-import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { SkinIndicator } from "./skin-indicator";
 import { SkinThumbnail } from "./skin-thumbnail";
@@ -48,8 +47,9 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 
 	useEffect(() => {
 		positionMotion.spring(getPosition(rem(1), index), {
-			...springs.wobbly,
-			mass: 1 + math.abs(index / 4),
+			tension: 250,
+			friction: 22,
+			mass: 1 + math.abs(index / 2),
 		});
 		sizeMotion.spring(getSize(rem(1), index === 0));
 		transparencyMotion.spring(hidden ? 1 : 0);

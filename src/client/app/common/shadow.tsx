@@ -36,7 +36,7 @@ export function Shadow({
 			imageColor={shadowColor}
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={mapBinding(shadowSize, (size) => {
-				const sizeOffsetScaled = rem(BLUR_RADIUS * shadowBlur, "relative");
+				const sizeOffsetScaled = rem(BLUR_RADIUS * shadowBlur, "pixel");
 
 				if (typeIs(size, "UDim2")) {
 					return new UDim2(1, sizeOffsetScaled, 1, sizeOffsetScaled).add(size);
@@ -47,7 +47,7 @@ export function Shadow({
 			position={mapBinding(shadowPosition, (offset) => new UDim2(0.5, 0, 0.5, offset))}
 			scaleType="Slice"
 			sliceCenter={new Rect(IMAGE_SIZE.div(2), IMAGE_SIZE.div(2))}
-			sliceScale={rem(shadowBlur, "relative")}
+			sliceScale={rem(shadowBlur, "pixel")}
 			zIndex={zIndex}
 		>
 			{children}

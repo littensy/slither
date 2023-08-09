@@ -1,3 +1,4 @@
+import { RANDOM_SKIN } from "shared/store/saves";
 import { RootState } from "../";
 import { MenuPage } from "./menu-slice";
 
@@ -19,4 +20,10 @@ export const selectMenuTransition = (state: RootState) => {
 
 export const selectMenuCurrentSkin = (state: RootState) => {
 	return state.menu.skins.current;
+};
+
+export const selectSkinOverride = (state: RootState) => {
+	return state.menu.page === "skins" && state.menu.skins.current !== RANDOM_SKIN
+		? state.menu.skins.current
+		: undefined;
 };

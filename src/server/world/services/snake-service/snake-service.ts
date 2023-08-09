@@ -5,6 +5,7 @@ import { getSafePointInWorld, killSnake, playerIsSpawned } from "server/world/ut
 import { WORLD_TICK } from "shared/constants";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { remotes } from "shared/remotes";
+import { selectCurrentPlayerSkin } from "shared/store/saves";
 import { createScheduler } from "shared/utils/scheduler";
 import { deleteSnakeInput, onSnakeTick, registerSnakeInput } from "./snake-tick";
 
@@ -19,10 +20,13 @@ export async function initSnakeService() {
 			return;
 		}
 
+		const currentSkin = store.getState(selectCurrentPlayerSkin(player.Name));
+		const randomSkin = getRandomDefaultSnakeSkin().id;
+
 		store.addSnake(player.Name, {
 			name: player.DisplayName,
 			head: getSafePointInWorld(),
-			skin: getRandomDefaultSnakeSkin().id,
+			skin: currentSkin ?? randomSkin,
 			score: 10,
 		});
 	});

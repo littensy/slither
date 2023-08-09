@@ -15,6 +15,7 @@ export = hoarcekat(() => {
 		store.setMenuPage("skins");
 		store.setPlayerSave(LOCAL_USER, {
 			...defaultPlayerSave,
+			balance: 45,
 		});
 	});
 

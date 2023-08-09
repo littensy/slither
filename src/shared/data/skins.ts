@@ -57,6 +57,13 @@ export function getSnakeSkin(id: string): SnakeSkin {
 }
 
 /**
+ * Returns the snake skin with the given id, or undefined.
+ */
+export function findSnakeSkin(id: string): SnakeSkin | undefined {
+	return snakeSkinMap.get(id);
+}
+
+/**
  * Returns the texture and tint of a snake tracer at this index.
  * Used to apply repeating patterns to the snake.
  */

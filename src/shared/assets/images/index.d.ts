@@ -2,6 +2,7 @@ export const images: {
 	readonly ui: {
 		readonly backdrop: string;
 		readonly blur: string;
+		readonly button_glow_top: string;
 		readonly circle: string;
 		readonly map_crosshair: string;
 		readonly map_cursor: string;

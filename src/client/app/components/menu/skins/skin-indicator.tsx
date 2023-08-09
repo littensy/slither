@@ -25,7 +25,7 @@ export function SkinIndicator({ id, primary, transparency }: SkinIndicatorProps)
 	const [indicator, indicatorMotion] = useMotion(new UDim2());
 
 	useEffect(() => {
-		const padding = rem(12, "relative") + 4; // 6px - 2px
+		const padding = rem(12, "pixel") + 4; // 6px - 2px
 
 		indicatorMotion.spring(
 			equipped ? new UDim2(0, rem(2) - padding, 0, rem(2) - padding) : new UDim2(),
@@ -45,7 +45,7 @@ export function SkinIndicator({ id, primary, transparency }: SkinIndicatorProps)
 			<Image
 				key="indicator"
 				image={images.ui.circle}
-				imageColor={palette.white0}
+				imageColor={palette.offwhite}
 				imageTransparency={transparency}
 				anchorPoint={new Vector2(0.5, 0.5)}
 				size={indicator}

@@ -37,7 +37,7 @@ export function MinimapNode({ point, rotation = 0, isClient = false }: MinimapNo
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={
 				isClient
-					? new UDim2(0, rem(28, "relative"), 0, rem(28, "relative"))
+					? new UDim2(0, rem(28, "pixel"), 0, rem(28, "pixel"))
 					: new UDim2(0, rem(0.25), 0, rem(0.25))
 			}
 			rotation={smoothRotation}

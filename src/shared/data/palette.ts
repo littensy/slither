@@ -41,8 +41,8 @@ export const neutrals = {
 } as const;
 
 const base = {
-	white1: Color3.fromRGB(255, 255, 255),
-	white0: Color3.fromRGB(234, 238, 253),
+	white: Color3.fromRGB(255, 255, 255),
+	offwhite: Color3.fromRGB(234, 238, 253),
 	black: Color3.fromRGB(0, 0, 0),
 };
 

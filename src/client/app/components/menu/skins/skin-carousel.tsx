@@ -23,7 +23,9 @@ export function SkinCarousel() {
 	const currentIndex = SKIN_LIST.indexOf(currentSkin);
 
 	useEffect(() => {
-		store.setMenuSkin(equippedSkin);
+		if (currentSkin === RANDOM_SKIN) {
+			store.setMenuSkin(equippedSkin);
+		}
 	}, []);
 
 	return (

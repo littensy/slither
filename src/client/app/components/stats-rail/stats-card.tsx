@@ -76,7 +76,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 				<Frame
 					key="background"
 					backgroundTransparency={0.3}
-					backgroundColor={palette.white1}
+					backgroundColor={palette.white}
 					cornerRadius={new UDim(0, rem(0.5))}
 					size={new UDim2(1, 0, 1, 0)}
 				>
@@ -121,7 +121,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					key="value"
 					font={fonts.rubik.regular}
 					text={value}
-					textColor={palette.white1}
+					textColor={palette.white}
 					textTransparency={0.05}
 					textSize={rem(1.5)}
 					textXAlignment="Left"
