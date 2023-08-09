@@ -31,7 +31,7 @@ export function Minimap() {
 
 				<Frame
 					key="background"
-					backgroundColor={palette.white1}
+					backgroundColor={palette.white}
 					cornerRadius={new UDim(1, 0)}
 					size={new UDim2(1, 0, 1, 0)}
 				>

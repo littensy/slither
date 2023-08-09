@@ -66,9 +66,9 @@ export function ReactiveButton({
 
 	useUpdateEffect(() => {
 		if (press) {
-			sizeMotion.to(spring(-0.1, { tension: 300 }));
+			sizeMotion.spring(-0.1, { tension: 300 });
 		} else {
-			sizeMotion.to(spring(0, { impulse: 0.01, tension: 300 }));
+			sizeMotion.spring(0, { impulse: 0.01, tension: 300 });
 		}
 	}, [press]);
 

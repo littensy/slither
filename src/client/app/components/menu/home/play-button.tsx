@@ -33,7 +33,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	return (
 		<ReactiveButton
 			onClick={onClick}
-			onHover={(hovered) => hoverMotion.to(spring(hovered ? 1 : 0))}
+			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
 			backgroundTransparency={1}
 			anchorPoint={anchorPoint}
 			size={size}
@@ -49,7 +49,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 			</Shadow>
 
 			<Frame
-				backgroundColor={palette.white0}
+				backgroundColor={palette.offwhite}
 				backgroundTransparency={lerpBinding(hover, 0.1, 0)}
 				cornerRadius={new UDim(0, rem(0.5))}
 				size={new UDim2(1, 0, 1, 0)}

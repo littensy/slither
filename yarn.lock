@@ -188,10 +188,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/remo/-/remo-1.2.1.tgz#fc6924c03a3e25072d93f4da21eacee04ec0868a"
   integrity sha512-S/eh9zr7fysgsR5Ft5nnO2LgueegMduXOoCVv6l1Flg2Vdbhs1sgTzuSJsJAbxMpvfTWLml9063DzHqP1N0T6g==
 
-"@rbxts/ripple@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@rbxts/ripple/-/ripple-0.4.0.tgz#b362c30185b9a3c0d7f365b7b10bbbdce250c3f8"
-  integrity sha512-KuYrzV6Na8c+NMskhr5VWzjVMFYeL6fBnOU0t3yXNWr5c3iEg3XCEEsEUuXIL+cQYf7x6v9ox4uZIX6Ur72H2Q==
+"@rbxts/ripple@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@rbxts/ripple/-/ripple-0.6.0.tgz#9e98381eae83168f068459171fbbd5c4aed0d74d"
+  integrity sha512-vbpkZIyWLE+XWQo+oC3gzdzuzq4qqPzaKmF2lWzULtuf89FYGPbx2jTz3Z1wC8qgLBTroJ3hVH3gS/5YmiH92A==
 
 "@rbxts/roact-compat-internal@^0.3.0":
   version "0.3.0"
@@ -203,10 +203,10 @@
     "@rbxts/react-roblox" "^0.1.0"
     "@rbxts/shared-internal" "^0.2.0"
 
-"@rbxts/roact@npm:@rbxts/react-ts@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@rbxts/react-ts/-/react-ts-0.9.0.tgz#5d9c81f56a79ea135b2f1b114778ca8f187cbad8"
-  integrity sha512-u8sSmEpGio+udmXPnfHMoTENgI/PkAPeqs4qwagkntiMiqo/EbTSh7HJHaYh5pFcRgdaTxOvtcZyfjfr4lhgiA==
+"@rbxts/roact@npm:@rbxts/react-ts@latest":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@rbxts/react-ts/-/react-ts-1.0.0.tgz#4f584427624d52001bc3fe4376db20135b712bf6"
+  integrity sha512-Qi4dDr7KO2vSfWNP7sWx0pGVDkjqxjdVy0JiCKxEGgfcMJr/nBhbVEo89Pzpnp9Z+dBfKv7D2p1X8UA+zFE1LQ==
   dependencies:
     "@rbxts/react-internal" "^0.2.1"
     "@rbxts/roact-compat-internal" "^0.3.0"
@@ -999,10 +999,10 @@ is-binary-path@~2.1.0:
   dependencies:
     binary-extensions "^2.0.0"
 
-is-core-module@^2.12.0:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.12.1.tgz#0c0b6885b6f80011c71541ce15c8d66cf5a4f9fd"
-  integrity sha512-Q4ZuBAe2FUsKtyQJoQHlvP8OvBERxO3jEmy1I7hcRXcJBGGHFh/aJBswbXuS9sgrDH2QUO8ilkwNPHvHMd8clg==
+is-core-module@^2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.13.0.tgz#bb52aa6e2cbd49a30c2ba68c42bf3435ba6072db"
+  integrity sha512-Z7dk6Qo8pOCp3l4tsX2C5ZVas4V+UxwQodwZhLopL91TX8UyyHEXafPcyoeeWuLrwzHcr3igO78wNLwHJHsMCQ==
   dependencies:
     has "^1.0.3"
 
@@ -1389,11 +1389,11 @@ resolve-from@^4.0.0:
   integrity sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==
 
 resolve@^1.22.3:
-  version "1.22.3"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.3.tgz#4b4055349ffb962600972da1fdc33c46a4eb3283"
-  integrity sha512-P8ur/gp/AmbEzjr729bZnLjXK5Z+4P0zhIJgBgzqRih7hL7BOukHGtSTA3ACMY467GRFz3duQsi0bDZdR7DKdw==
+  version "1.22.4"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.4.tgz#1dc40df46554cdaf8948a486a10f6ba1e2026c34"
+  integrity sha512-PXNdCiPqDqeUou+w1C2eTQbNfxKSuMxqTCuvlmmMsk1NWHL5fRrhY6Pl0qEYYc6+QqGClco1Qj8XnjPego4wfg==
   dependencies:
-    is-core-module "^2.12.0"
+    is-core-module "^2.13.0"
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
 

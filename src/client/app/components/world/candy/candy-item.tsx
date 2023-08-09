@@ -56,8 +56,8 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 	useEffect(() => {
 		const position = eatenAt || point;
 
-		pointMotion.to(spring(position, springs.world));
-		transitionMotion.to(spring(eatenAt ? 1 : 0));
+		pointMotion.spring(position, springs.world);
+		transitionMotion.spring(eatenAt ? 1 : 0);
 	}, [point, eatenAt]);
 
 	return (

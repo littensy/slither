@@ -3,8 +3,8 @@ import { store } from "server/store";
 import { SNAKE_TICK_PHASE } from "server/world/constants";
 import { getSafePointInWorld, killSnake, playerIsSpawned } from "server/world/utils";
 import { WORLD_TICK } from "shared/constants";
-import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { remotes } from "shared/remotes";
+import { RANDOM_SKIN, defaultPlayerSave, selectPlayerSave } from "shared/store/saves";
 import { createScheduler } from "shared/utils/scheduler";
 import { deleteSnakeInput, onSnakeTick, registerSnakeInput } from "./snake-tick";
 
@@ -19,10 +19,16 @@ export async function initSnakeService() {
 			return;
 		}
 
+		const save = store.getState(selectPlayerSave(player.Name)) || defaultPlayerSave;
+
+		// random skin starts at one because zero is reserved
+		const randomSkin = save.skins[math.random(1, save.skins.size() - 1)];
+		const currentSkin = save.skin;
+
 		store.addSnake(player.Name, {
 			name: player.DisplayName,
 			head: getSafePointInWorld(),
-			skin: getRandomDefaultSnakeSkin().id,
+			skin: currentSkin !== RANDOM_SKIN ? currentSkin : randomSkin,
 			score: 10,
 		});
 	});

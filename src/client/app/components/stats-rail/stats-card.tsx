@@ -44,7 +44,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 	}, [rem]);
 
 	useEffect(() => {
-		transparencyMotion.to(spring(enabled ? 0 : 0.5, springs.slow));
+		transparencyMotion.spring(enabled ? 0 : 0.5, springs.slow);
 	}, [enabled]);
 
 	return (
@@ -76,7 +76,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 				<Frame
 					key="background"
 					backgroundTransparency={0.3}
-					backgroundColor={palette.white1}
+					backgroundColor={palette.white}
 					cornerRadius={new UDim(0, rem(0.5))}
 					size={new UDim2(1, 0, 1, 0)}
 				>
@@ -112,7 +112,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					position={new UDim2(0, rem(CARD_MARGIN + CARD_EMOJI_WIDTH + CARD_PADDING), 0.5, -rem(0.25))}
 					change={{
 						TextBounds: (rbx) => {
-							textWidthMotion.to({ label: spring(rbx.TextBounds.X) });
+							textWidthMotion.spring({ label: rbx.TextBounds.X });
 						},
 					}}
 				/>
@@ -121,7 +121,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					key="value"
 					font={fonts.rubik.regular}
 					text={value}
-					textColor={palette.white1}
+					textColor={palette.white}
 					textTransparency={0.05}
 					textSize={rem(1.5)}
 					textXAlignment="Left"
@@ -129,7 +129,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 					position={new UDim2(0, rem(CARD_MARGIN + CARD_EMOJI_WIDTH + CARD_PADDING), 0.5, -rem(0.25))}
 					change={{
 						TextBounds: (rbx) => {
-							textWidthMotion.to({ value: spring(rbx.TextBounds.X) });
+							textWidthMotion.spring({ value: rbx.TextBounds.X });
 						},
 					}}
 				/>

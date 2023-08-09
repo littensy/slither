@@ -1,4 +1,6 @@
+import { useSelector } from "@rbxts/react-reflex";
 import Roact, { memo, useMemo } from "@rbxts/roact";
+import { selectSkinOverride } from "client/store/menu";
 import { describeSnakeFromScore } from "shared/store/snakes";
 import { SnakeHead } from "./snake-head";
 import { SnakeNameTag } from "./snake-name-tag";
@@ -17,9 +19,11 @@ interface SnakeProps {
 function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }: SnakeProps) {
 	const snake = snakeOnScreen.snake;
 	const snakeBindings = useSnakeBindings(snakeOnScreen, scale, snake.id === subject);
+	const snakeSkinOverride = useSelector(selectSkinOverride);
 
 	const radius = describeSnakeFromScore(snake.score).radius;
 	const distance = snake.head.sub(offset.mul(-1)).Magnitude;
+	const skin = snake.id !== subject ? snake.skin : snakeSkinOverride ?? snake.skin;
 	const showNameTag = snake.id !== subject && !snake.dead && distance < 16;
 
 	const children = useMemo(() => {
@@ -37,7 +41,7 @@ function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }:
 					line={bindings.line}
 					effects={bindings.effects}
 					index={index}
-					skinId={snake.skin}
+					skinId={skin}
 				/>
 			);
 		});
@@ -47,11 +51,12 @@ function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }:
 		<>
 			{snakeOnScreen.head && (
 				<SnakeHead
+					key="head"
 					angle={snake.angle}
 					desiredAngle={snake.desiredAngle}
 					line={snakeBindings.head.line}
 					effects={snakeBindings.head.effects}
-					skinId={snake.skin}
+					skinId={skin}
 					offsetSmooth={offsetSmooth}
 					isSubject={snake.id === subject}
 				>
@@ -63,7 +68,7 @@ function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }:
 						angle={snake.angle}
 						radius={radius}
 						scale={scale}
-						skin={snake.skin}
+						skin={skin}
 						visible={showNameTag}
 					/>
 				</SnakeHead>

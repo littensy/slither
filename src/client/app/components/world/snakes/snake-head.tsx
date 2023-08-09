@@ -59,8 +59,8 @@ export function SnakeHead({
 	}, [rem, isSubjectDelayed]);
 
 	useEffect(() => {
-		rotationMotion.to(spring(math.deg(currentAngle + SNAKE_ANGLE_OFFSET), springs.world));
-		lookMotion.to(spring(math.deg(angleDifference)));
+		rotationMotion.spring(math.deg(currentAngle + SNAKE_ANGLE_OFFSET), springs.world);
+		lookMotion.spring(math.deg(angleDifference));
 	}, [currentAngle, angleDifference]);
 
 	useEffect(() => {

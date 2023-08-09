@@ -41,12 +41,13 @@ export const neutrals = {
 } as const;
 
 const base = {
-	white1: Color3.fromRGB(255, 255, 255),
-	white0: Color3.fromRGB(234, 238, 253),
+	white: Color3.fromRGB(255, 255, 255),
+	offwhite: Color3.fromRGB(234, 238, 253),
 	black: Color3.fromRGB(0, 0, 0),
 };
 
 /**
+ * Catppuccin Mocha Palette
  * @see https://github.com/catppuccin/catppuccin
  */
 export const palette = {
@@ -54,6 +55,26 @@ export const palette = {
 	...neutrals,
 	...base,
 } as const;
+
+/**
+ * An ordered list of all the accent colors
+ */
+export const accentList = [
+	"rosewater",
+	"flamingo",
+	"pink",
+	"mauve",
+	"red",
+	"maroon",
+	"peach",
+	"yellow",
+	"green",
+	"teal",
+	"sky",
+	"sapphire",
+	"blue",
+	"lavender",
+] as const;
 
 export function getRandomAccent(): Color3 {
 	const values = Object.values(accents);

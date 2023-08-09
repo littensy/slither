@@ -45,34 +45,34 @@ export function useButtonAnimation(pressedState: boolean, hoveredState: boolean)
 	const [position, positionMotion] = useMotion(0);
 
 	useUpdateEffect(() => {
-		pressMotion.to(spring(pressedState ? 1 : 0, springs.responsive));
-		hoverExclusiveMotion.to(spring(hoveredState && !pressedState ? 1 : 0, springs.responsive));
+		pressMotion.spring(pressedState ? 1 : 0, springs.responsive);
+		hoverExclusiveMotion.spring(hoveredState && !pressedState ? 1 : 0, springs.responsive);
 	}, [pressedState, hoveredState]);
 
 	useUpdateEffect(() => {
-		hoverMotion.to(spring(hoveredState ? 1 : 0, springs.responsive));
+		hoverMotion.spring(hoveredState ? 1 : 0, springs.responsive);
 	}, [hoveredState]);
 
 	useUpdateEffect(() => {
 		if (pressedState) {
 			// hovered -> pressed
-			positionMotion.to(spring(1, springs.responsive));
+			positionMotion.spring(1, springs.responsive);
 		} else if (hoveredState) {
 			// pressed -> hovered
-			positionMotion.to(spring(-1, { ...springs.bubbly, impulse: -0.1 }));
+			positionMotion.spring(-1, { ...springs.bubbly, impulse: -0.1 });
 		} else {
 			// pressed -> unhovered, but 'hover' was not true
-			positionMotion.to(spring(0, { ...springs.bubbly, impulse: -0.07 }));
+			positionMotion.spring(0, { ...springs.bubbly, impulse: -0.07 });
 		}
 	}, [pressedState]);
 
 	useUpdateEffect(() => {
 		if (hoveredState) {
 			// unhovered -> hovered
-			positionMotion.to(spring(-1, springs.responsive));
+			positionMotion.spring(-1, springs.responsive);
 		} else {
 			// hovered -> unhovered
-			positionMotion.to(spring(0, springs.responsive));
+			positionMotion.spring(0, springs.responsive);
 		}
 	}, [hoveredState]);
 

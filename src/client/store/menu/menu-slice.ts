@@ -1,4 +1,5 @@
 import { createProducer } from "@rbxts/reflex";
+import { RANDOM_SKIN } from "shared/store/saves";
 import { getMenuDirection } from "./menu-utils";
 
 export interface MenuState {
@@ -7,6 +8,9 @@ export interface MenuState {
 	readonly transition: {
 		readonly direction: "left" | "right";
 		readonly counter: number;
+	};
+	readonly skins: {
+		readonly current: string;
 	};
 }
 
@@ -18,6 +22,9 @@ const initialState: MenuState = {
 	transition: {
 		direction: "left",
 		counter: 0,
+	},
+	skins: {
+		current: RANDOM_SKIN,
 	},
 };
 
@@ -34,5 +41,13 @@ export const menuSlice = createProducer(initialState, {
 	setMenuOpen: (state, open: boolean) => ({
 		...state,
 		open,
+	}),
+
+	setMenuSkin: (state, skin: string) => ({
+		...state,
+		skins: {
+			...state.skins,
+			current: skin,
+		},
 	}),
 });

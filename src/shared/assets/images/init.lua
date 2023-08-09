@@ -9,6 +9,7 @@ return {
 		ui = {
 			backdrop = "rbxassetid://14136965139",
 			blur = "rbxassetid://14120516187",
+			button_glow_top = "rbxassetid://14367671668",
 			circle = "rbxassetid://14120516288",
 			map_crosshair = "rbxassetid://14127467312",
 			map_cursor = "rbxassetid://14127465927",
@@ -19,6 +20,9 @@ return {
 			nav_heart_alt = "rbxassetid://14183565469",
 			nav_home = "rbxassetid://14183565573",
 			nav_home_alt = "rbxassetid://14183565737",
+			skin_card_gradient = "rbxassetid://14271107508",
+			skin_indicator = "rbxassetid://14282707759",
+			skin_indicator_locked = "rbxassetid://14282707833",
 			tile_stripes = "rbxassetid://14137143166",
 			vignette = "rbxassetid://14120516929",
 		},

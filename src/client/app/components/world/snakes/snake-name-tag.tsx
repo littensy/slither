@@ -81,22 +81,22 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 	// without a separate effect, this may run regardless of whether
 	// the debounce is still waiting
 	useEffect(() => {
-		sideTransitionMotion.to(spring(math.max(side, 0)));
+		sideTransitionMotion.spring(math.max(side, 0));
 	}, [side]);
 
 	useEffect(() => {
 		const height = scale * radius * 1.25 + (TEXT_PADDING + 2);
-		nameHeightMotion.to(spring(height * side, { tension: 150, friction: 18 }));
+		nameHeightMotion.spring(height * side, { tension: 150, friction: 18 });
 	}, [angle, radius, scale, side]);
 
 	// rotate the name tag to simulate dragging behind the snake
 	useEffect(() => {
 		const rotation = math.clamp(30 * (head.X - previousHead.X), -45, 45);
-		nameRotationMotion.to(spring(rotation * side, { tension: 150, friction: 18 }));
+		nameRotationMotion.spring(rotation * side, { tension: 150, friction: 18 });
 	}, [head, previousHead, headOffset, side]);
 
 	useEffect(() => {
-		nameTransparencyMotion.to(spring(visible ? 0 : 1, springs.slow));
+		nameTransparencyMotion.spring(visible ? 0 : 1, springs.slow);
 	}, [visible]);
 
 	return (
@@ -149,7 +149,7 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 				position={new UDim2(0.5, 0, 0.5, 0)}
 				change={{
 					TextBounds: (rbx) => {
-						nameSizeMotion.to(spring(rbx.TextBounds, springs.responsive));
+						nameSizeMotion.spring(rbx.TextBounds, springs.responsive);
 					},
 				}}
 			/>

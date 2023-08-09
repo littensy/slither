@@ -64,6 +64,7 @@ function SnakeTracerComponent({ line, effects, skinId, index }: SnakeTracerProps
 		>
 			{style.boostActive && (
 				<Image
+					key="glow"
 					image={images.ui.blur}
 					imageColor={glowStyle.color}
 					imageTransparency={glowStyle.transparency}

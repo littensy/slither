@@ -21,7 +21,7 @@ export function Snakes() {
 	}, [rem]);
 
 	useEffect(() => {
-		offsetMotion.to(spring(world.offset.mul(world.scale), springs.world));
+		offsetMotion.spring(world.offset.mul(world.scale), springs.world);
 	}, [world.offset, world.scale]);
 
 	return (

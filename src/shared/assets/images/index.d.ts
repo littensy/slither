@@ -2,6 +2,7 @@ export const images: {
 	readonly ui: {
 		readonly backdrop: string;
 		readonly blur: string;
+		readonly button_glow_top: string;
 		readonly circle: string;
 		readonly map_crosshair: string;
 		readonly map_cursor: string;
@@ -12,6 +13,9 @@ export const images: {
 		readonly nav_heart_alt: string;
 		readonly nav_home: string;
 		readonly nav_home_alt: string;
+		readonly skin_card_gradient: string;
+		readonly skin_indicator: string;
+		readonly skin_indicator_locked: string;
 		readonly vignette: string;
 		readonly tile_stripes: string;
 	};

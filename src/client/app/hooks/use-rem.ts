@@ -7,13 +7,15 @@ export interface RemOptions {
 }
 
 interface RemCallback {
+	(x: number, y: number): UDim2;
+	(xScale: number, xOffset: number, yScale: number, yOffset: number): UDim2;
 	(value: number, mode?: RemScaleMode): number;
 	(value: UDim2, mode?: RemScaleMode): UDim2;
 	(value: UDim, mode?: RemScaleMode): UDim;
 	(value: Vector2, mode?: RemScaleMode): Vector2;
 }
 
-type RemScaleMode = "relative" | "unit";
+type RemScaleMode = "pixel" | "unit";
 
 const scaleFunctions = {
 	number: (value: number, rem: number): number => {
@@ -41,16 +43,39 @@ function useRemContext({ minimum = 0, maximum = math.huge }: RemOptions = {}) {
 export function useRem(options?: RemOptions): RemCallback {
 	const rem = useRemContext(options);
 
-	return useCallback(
-		<T>(value: T, mode: RemScaleMode = "unit"): T => {
+	const callback: RemCallback = <T>(
+		first: T,
+		second?: RemScaleMode | number,
+		yScale?: number,
+		yOffset?: number,
+	): T | UDim2 => {
+		if (typeIs(second, "string") || second === undefined) {
+			const value = first;
+			const mode = second || "unit";
 			const scale = scaleFunctions[typeOf(value) as never] as <T>(value: T, rem: number) => T;
 
-			if (!scale) {
+			if (scale) {
+				return mode === "unit" ? scale(value, rem) : scale(value, rem / DEFAULT_REM);
+			} else {
 				return value;
 			}
+		} else if (typeIs(first, "number") && typeIs(second, "number") && yScale === undefined) {
+			const x = first;
+			const y = second;
+			return new UDim2(0, x * rem, 0, y * rem);
+		} else if (
+			typeIs(first, "number") &&
+			typeIs(second, "number") &&
+			typeIs(yScale, "number") &&
+			typeIs(yOffset, "number")
+		) {
+			const xScale = first;
+			const xOffset = second;
+			return new UDim2(xScale, xOffset * rem, yScale, yOffset * rem);
+		} else {
+			return first;
+		}
+	};
 
-			return mode === "unit" ? scale(value, rem) : scale(value, rem / DEFAULT_REM);
-		},
-		[rem],
-	);
+	return useCallback(callback, [rem]);
 }
