@@ -1,6 +1,6 @@
 {
 	"name": "roblox-slither",
-	"version": "0.3.0",
+	"version": "0.4.0-canary.0",
 	"license": "MIT",
 	"scripts": {
 		"compile": "rbxtsc --verbose",
