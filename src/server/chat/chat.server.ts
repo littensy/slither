@@ -34,3 +34,8 @@ createCommand("/purge", (player, argument) => {
 		killSnake(snake.id);
 	}
 });
+
+createCommand("/money", (player, argument) => {
+	const money = tonumber(argument) ?? 0;
+	store.givePlayerBalance(player.Name, money);
+});
