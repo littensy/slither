@@ -28,7 +28,6 @@
 	"dependencies": {
 		"@rbxts/flipper": "^2.0.1",
 		"@rbxts/lapis": "0.2.4",
-		"@rbxts/make": "^1.0.6",
 		"@rbxts/object-utils": "^1.0.4",
 		"@rbxts/pretty-react-hooks": "0.2.0",
 		"@rbxts/react-reflex": "0.2.0",

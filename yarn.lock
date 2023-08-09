@@ -91,11 +91,6 @@
     picocolors "^1.0.0"
     tslib "^2.6.0"
 
-"@rbxts/compiler-types@^1.2.3-types.1":
-  version "1.2.3-types.1"
-  resolved "https://registry.yarnpkg.com/@rbxts/compiler-types/-/compiler-types-1.2.3-types.1.tgz#d7945531c917d62bafadd2b5aa6c2f2e88a2036a"
-  integrity sha512-SXXIBazyJ7N6d2xcy471/kqZZpCv7EDOWrRJ45jcv3g00VQaZwYl4Elr10woqRloIblQanwJ7yUqGXAsWv7iuQ==
-
 "@rbxts/compiler-types@^2.1.1-types.0":
   version "2.1.1-types.0"
   resolved "https://registry.yarnpkg.com/@rbxts/compiler-types/-/compiler-types-2.1.1-types.0.tgz#a1f02b57402dffec474dd6656ec1d8a897b9756b"
@@ -115,14 +110,6 @@
   version "1.2.3-ts.0"
   resolved "https://registry.yarnpkg.com/@rbxts/luau-polyfill-internal/-/luau-polyfill-internal-1.2.3-ts.0.tgz#01fec60c39e800d8b786d089648c54b1ecbf9606"
   integrity sha512-LG1h4uf+MpMxu6RfOLowRe+NOs2SWXzCmYd49WvfR8ZKVUNHvT0BeVIL9rS9q//mTlz8BXDyl5EVIyjnKgsekA==
-
-"@rbxts/make@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@rbxts/make/-/make-1.0.6.tgz#9fbed42cd263b6ce997cdb6a840f77fdeb9e6b36"
-  integrity sha512-ZL1FMxDqWv1TIzE064JFen75rgybV7ulQHTUVqXuvngDBa3lP3btFiIdUO2MMJAOZpHKinC9jFudcCenrprcPg==
-  dependencies:
-    "@rbxts/compiler-types" "^1.2.3-types.1"
-    "@rbxts/types" "^1.0.537"
 
 "@rbxts/object-utils@^1.0.4":
   version "1.0.4"
@@ -248,7 +235,7 @@
   resolved "https://registry.yarnpkg.com/@rbxts/testez/-/testez-0.4.2-ts.0.tgz#4475183d317182ac7099bffee6492ffcb7bcaf0b"
   integrity sha512-8Q+OG9ddTD2P3aARCuRKpPqUBvuifgSnHvQMZ6jBMqUzxhIysnb0l4c3vnnaQnvdyZ1OW9tKxcdEHMGTb67uOw==
 
-"@rbxts/types@^1.0.537", "@rbxts/types@^1.0.704":
+"@rbxts/types@^1.0.704":
   version "1.0.708"
   resolved "https://registry.yarnpkg.com/@rbxts/types/-/types-1.0.708.tgz#e3f82b561c1f1ed796ae7f9a58363f973f6bb094"
   integrity sha512-h6fpdlP6xVvSvJQ+8u081XbdONW4sX46uKu3PBtSvkNnxDlDNMaXKyuCLSq3bpjCvGM5FwaOFxy2hmIUw4tSqQ==
@@ -277,9 +264,9 @@
   integrity sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==
 
 "@types/node@^16.10.4":
-  version "16.18.39"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.39.tgz#aa39a1a87a40ef6098ee69689a1acb0c1b034832"
-  integrity sha512-8q9ZexmdYYyc5/cfujaXb4YOucpQxAV4RMG0himLyDUOEr8Mr79VrqsFI+cQ2M2h89YIuy95lbxuYjxT4Hk4kQ==
+  version "16.18.40"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.40.tgz#968d64746d20cac747a18ca982c0f1fe518c031c"
+  integrity sha512-+yno3ItTEwGxXiS/75Q/aHaa5srkpnJaH+kdkTVJ3DtJEwv92itpKbxU+FjPoh2m/5G9zmUQfrL4A4C13c+iGA==
 
 "@types/semver@^7.3.12":
   version "7.5.0"

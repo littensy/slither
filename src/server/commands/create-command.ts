@@ -1,4 +1,3 @@
-import Make from "@rbxts/make";
 import { Players } from "@rbxts/services";
 import { getTextChatCommands } from "./text-chat-service";
 
@@ -14,9 +13,10 @@ export async function createCommand(alias: string, handler: (player: Player, arg
 		}
 	};
 
-	Make("TextChatCommand", {
-		PrimaryAlias: alias,
-		Parent: await getTextChatCommands(),
-		Triggered: onTrigger,
-	});
+	const command = new Instance("TextChatCommand");
+
+	command.Name = `GameCommand_${alias}`;
+	command.PrimaryAlias = alias;
+	command.Triggered.Connect(onTrigger);
+	command.Parent = await getTextChatCommands();
 }
