@@ -62,7 +62,13 @@ export function MinimapNodes() {
 				{nodes}
 			</CanvasGroup>
 
-			{snake && <MinimapCursor key="map-cursor" point={snake.head} rotation={math.deg(snake.angle)} />}
+			{snake && (
+				<MinimapCursor
+					key="map-cursor"
+					point={normalizeToWorldBounds(snake.head)}
+					rotation={math.deg(snake.angle)}
+				/>
+			)}
 		</>
 	);
 }

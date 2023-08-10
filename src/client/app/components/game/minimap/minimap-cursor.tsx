@@ -1,11 +1,8 @@
-import { map } from "@rbxts/pretty-react-hooks";
 import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useMotion, useRem } from "client/app/hooks";
-import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
-import { WORLD_BOUNDS } from "shared/constants";
 import { palette } from "shared/data/palette";
 
 interface MinimapCursorProps {
@@ -15,20 +12,11 @@ interface MinimapCursorProps {
 
 export function MinimapCursor({ point, rotation = 0 }: MinimapCursorProps) {
 	const rem = useRem();
-	const [smoothPoint, smoothPointMotion] = useMotion(point);
 	const [smoothRotation, smoothRotationMotion] = useMotion(rotation);
 
-	const position = smoothPoint.map((point) => {
-		return UDim2.fromScale(
-			map(point.X, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
-			map(point.Y, -WORLD_BOUNDS, WORLD_BOUNDS, 0, 1),
-		);
-	});
-
 	useEffect(() => {
-		smoothPointMotion.spring(point, springs.world);
 		smoothRotationMotion.spring(rotation);
-	}, [point, rotation]);
+	}, [rotation]);
 
 	return (
 		<Image
@@ -36,7 +24,7 @@ export function MinimapCursor({ point, rotation = 0 }: MinimapCursorProps) {
 			imageColor={palette.text}
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={new UDim2(0, rem(28, "pixel"), 0, rem(28, "pixel"))}
-			position={position}
+			position={new UDim2(point.X, 0, point.Y, 0)}
 			rotation={smoothRotation}
 		/>
 	);
