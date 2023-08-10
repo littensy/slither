@@ -28,7 +28,7 @@ export function MinimapNodes() {
 				}
 
 				const size = snake.tracers.size();
-				const step = map(size, 0, 100, 5, 20);
+				const step = math.floor(map(size, 0, 100, 5, 20));
 				let previous = snake.head;
 
 				for (const index of $range(0, size - 1, step)) {

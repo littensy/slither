@@ -3,6 +3,7 @@ import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useMotion, useRem } from "client/app/hooks";
+import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { WORLD_BOUNDS } from "shared/constants";
 import { palette } from "shared/data/palette";
@@ -25,7 +26,7 @@ export function MinimapCursor({ point, rotation = 0 }: MinimapCursorProps) {
 	});
 
 	useEffect(() => {
-		smoothPointMotion.spring(point);
+		smoothPointMotion.spring(point, springs.world);
 		smoothRotationMotion.spring(rotation);
 	}, [point, rotation]);
 

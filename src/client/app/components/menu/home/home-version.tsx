@@ -13,7 +13,7 @@ interface HomeVersionProps {
 
 const GIT = $git();
 const VERSION = GIT.LatestTag !== "" ? GIT.LatestTag : "v0.1.0";
-const BRANCH = `roblox-slither/${GIT.Branch}`;
+const BRANCH = `@${GIT.Branch}`;
 const COMMIT = GIT.Commit;
 
 export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
