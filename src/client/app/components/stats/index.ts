@@ -1,1 +1,1 @@
-export * from "./stats-rail";
+export * from "./stats";

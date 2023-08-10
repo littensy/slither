@@ -6,9 +6,7 @@ export interface RemOptions {
 	maximum?: number;
 }
 
-interface RemCallback {
-	(x: number, y: number): UDim2;
-	(xScale: number, xOffset: number, yScale: number, yOffset: number): UDim2;
+interface RemFunction {
 	(value: number, mode?: RemScaleMode): number;
 	(value: UDim2, mode?: RemScaleMode): UDim2;
 	(value: UDim, mode?: RemScaleMode): UDim;
@@ -40,42 +38,18 @@ function useRemContext({ minimum = 0, maximum = math.huge }: RemOptions = {}) {
 	return math.clamp(rem, minimum, maximum);
 }
 
-export function useRem(options?: RemOptions): RemCallback {
+export function useRem(options?: RemOptions): RemFunction {
 	const rem = useRemContext(options);
 
-	const callback: RemCallback = <T>(
-		first: T,
-		second?: RemScaleMode | number,
-		yScale?: number,
-		yOffset?: number,
-	): T | UDim2 => {
-		if (typeIs(second, "string") || second === undefined) {
-			const value = first;
-			const mode = second || "unit";
-			const scale = scaleFunctions[typeOf(value) as never] as <T>(value: T, rem: number) => T;
+	const remFunction: RemFunction = <T>(value: T, mode: RemScaleMode = "unit"): T => {
+		const scale = scaleFunctions[typeOf(value) as never] as <T>(value: T, rem: number) => T;
 
-			if (scale) {
-				return mode === "unit" ? scale(value, rem) : scale(value, rem / DEFAULT_REM);
-			} else {
-				return value;
-			}
-		} else if (typeIs(first, "number") && typeIs(second, "number") && yScale === undefined) {
-			const x = first;
-			const y = second;
-			return new UDim2(0, x * rem, 0, y * rem);
-		} else if (
-			typeIs(first, "number") &&
-			typeIs(second, "number") &&
-			typeIs(yScale, "number") &&
-			typeIs(yOffset, "number")
-		) {
-			const xScale = first;
-			const xOffset = second;
-			return new UDim2(xScale, xOffset * rem, yScale, yOffset * rem);
+		if (scale) {
+			return mode === "unit" ? scale(value, rem) : scale(value, rem / DEFAULT_REM);
 		} else {
-			return first;
+			return value;
 		}
 	};
 
-	return useCallback(callback, [rem]);
+	return useCallback(remFunction, [rem]);
 }
