@@ -3,6 +3,7 @@ import { CANDY_LIMITS, CANDY_TICK_PHASE, WORLD_TICK } from "shared/constants";
 import { selectCandyCount } from "shared/store/candy";
 import { identifySnake, selectAliveSnakesById } from "shared/store/snakes";
 import { createScheduler } from "shared/utils/scheduler";
+
 import { dropCandyOnDeath, dropCandyWhileBoosting, populateCandy } from "./candy-helpers";
 import { onCandyTick } from "./candy-tick";
 

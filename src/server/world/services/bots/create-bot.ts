@@ -2,6 +2,7 @@ import { store } from "server/store";
 import { getSafePointInWorld } from "server/world/utils";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { selectSnakeIsDead } from "shared/store/snakes";
+
 import { BotBehavior } from "./bot-behavior";
 import { generateBotName } from "./generate-name";
 

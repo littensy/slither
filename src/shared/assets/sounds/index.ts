@@ -4,8 +4,8 @@ type SoundProperties = {
 	[K in WritablePropertyNames<Sound>]?: Sound[K];
 };
 
-export * from "./sounds";
 export * from "./sound-groups";
+export * from "./sounds";
 
 export function createSound(soundId: string, soundGroup?: SoundGroup, properties?: SoundProperties) {
 	const sound = new Instance("Sound");

@@ -1,4 +1,3 @@
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useMotion, useRem } from "client/app/hooks";

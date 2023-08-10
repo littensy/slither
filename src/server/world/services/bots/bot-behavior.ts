@@ -2,8 +2,9 @@ import Object from "@rbxts/object-utils";
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { getCandy, getRandomPointInWorld, getSnake } from "server/world/utils";
-import { SnakeEntity, describeSnakeFromScore } from "shared/store/snakes";
+import { describeSnakeFromScore, SnakeEntity } from "shared/store/snakes";
 import { map } from "shared/utils/math-utils";
+
 import { candyGrid } from "../candy";
 import { snakeGrid } from "../snakes";
 

@@ -1,7 +1,6 @@
 import Object from "@rbxts/object-utils";
 import { map, useCamera, useEventListener } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
-import { spring } from "@rbxts/ripple";
 import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { Image } from "client/app/common/image";

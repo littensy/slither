@@ -1,5 +1,4 @@
 import { useUpdateEffect } from "@rbxts/pretty-react-hooks";
-import { spring } from "@rbxts/ripple";
 import Roact, { useMemo } from "@rbxts/roact";
 import { useMotion } from "client/app/hooks";
 import { springs } from "client/app/utils/springs";

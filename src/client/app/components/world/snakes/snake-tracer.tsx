@@ -4,6 +4,7 @@ import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
 import { images } from "shared/assets";
 import { getSnakeSkin, getSnakeTracerSkin } from "shared/data/skins";
+
 import { SnakeEffectBinding, SnakeLineBinding } from "./use-snake-bindings";
 import { useTracerStyle } from "./use-tracer-style";
 

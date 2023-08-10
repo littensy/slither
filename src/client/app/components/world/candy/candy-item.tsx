@@ -1,5 +1,4 @@
 import { blend, lerp, map, useTimer } from "@rbxts/pretty-react-hooks";
-import { spring } from "@rbxts/ripple";
 import Roact, { joinBindings, memo, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";

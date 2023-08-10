@@ -3,6 +3,7 @@ import { Group } from "client/app/common/group";
 import { useRem } from "client/app/hooks";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
+
 import { MIN_NAV_REM } from "./constants";
 import { Destination } from "./destination";
 import { Indicator } from "./indicator";

@@ -1,4 +1,5 @@
 import Roact from "@rbxts/roact";
+
 import { FrameProps } from "./frame";
 
 export interface ImageProps extends FrameProps<ImageLabel> {

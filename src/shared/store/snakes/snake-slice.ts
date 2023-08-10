@@ -2,6 +2,7 @@ import { createProducer } from "@rbxts/reflex";
 import { SNAKE_BOOST_SPEED, SNAKE_SPEED, WORLD_TICK } from "shared/constants";
 import { map, turnRadians } from "shared/utils/math-utils";
 import { mapObject, mapProperty } from "shared/utils/object-utils";
+
 import { describeSnakeFromScore, snakeIsBoosting } from "./snake-utils";
 
 export interface SnakesState {

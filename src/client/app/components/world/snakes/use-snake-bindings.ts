@@ -3,7 +3,8 @@ import { createMotion, immediate, spring } from "@rbxts/ripple";
 import Roact, { createBinding, useEffect, useMemo, useRef } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { springs } from "client/app/utils/springs";
-import { SnakeEntity, describeSnakeFromScore, selectSnakeIsBoosting } from "shared/store/snakes";
+import { describeSnakeFromScore, selectSnakeIsBoosting, SnakeEntity } from "shared/store/snakes";
+
 import { SnakeOnScreen } from "./use-snakes-on-screen";
 
 export type SnakeLineBinding = Roact.Binding<LineMotionValues>;

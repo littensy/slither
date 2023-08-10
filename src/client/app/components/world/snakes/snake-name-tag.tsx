@@ -1,5 +1,4 @@
 import { useDebounceState, usePrevious } from "@rbxts/pretty-react-hooks";
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
 import { Frame } from "client/app/common/frame";

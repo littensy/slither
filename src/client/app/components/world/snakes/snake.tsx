@@ -2,6 +2,7 @@ import { useSelector } from "@rbxts/react-reflex";
 import Roact, { memo, useMemo } from "@rbxts/roact";
 import { selectSkinOverride } from "client/store/menu";
 import { describeSnakeFromScore } from "shared/store/snakes";
+
 import { SnakeHead } from "./snake-head";
 import { SnakeNameTag } from "./snake-name-tag";
 import { SnakeTracer } from "./snake-tracer";

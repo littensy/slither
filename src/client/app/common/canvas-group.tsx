@@ -1,4 +1,5 @@
-import Roact, { Ref, forwardRef } from "@rbxts/roact";
+import Roact, { forwardRef, Ref } from "@rbxts/roact";
+
 import { FrameProps } from "./frame";
 
 export interface CanvasGroupProps extends FrameProps<CanvasGroup> {

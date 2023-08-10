@@ -3,6 +3,7 @@ import { useEffect, useMemo } from "@rbxts/roact";
 import { setTimeout } from "@rbxts/set-timeout";
 import { useRem } from "client/app/hooks";
 import { brighten } from "client/app/utils/color-utils";
+
 import { SNAKE_ANGLE_OFFSET } from "./constants";
 import { SnakeEffectBinding, SnakeLineBinding } from "./use-snake-bindings";
 

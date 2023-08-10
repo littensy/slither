@@ -16,6 +16,7 @@ import { palette } from "shared/data/palette";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { describeSnakeFromScore, selectLocalSnake } from "shared/store/snakes";
 import { createScheduler } from "shared/utils/scheduler";
+
 import { useMockRemotes } from "../utils/use-mock-remotes";
 
 const START_SIZE = 0;

@@ -1,4 +1,5 @@
 import { Players, RunService } from "@rbxts/services";
+
 import { CandyType } from "./store/candy";
 
 export const WORLD_BOUNDS = 196;

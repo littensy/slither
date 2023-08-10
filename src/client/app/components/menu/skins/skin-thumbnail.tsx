@@ -5,6 +5,7 @@ import { useMotion, useRem } from "client/app/hooks";
 import { darken } from "client/app/utils/color-utils";
 import { images } from "shared/assets";
 import { fillArray } from "shared/utils/object-utils";
+
 import { SNAKE_ANGLE_OFFSET } from "../../world/snakes";
 
 interface SkinThumbnailProps {

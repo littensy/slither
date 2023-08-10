@@ -1,6 +1,7 @@
 import { createSelector } from "@rbxts/reflex";
 import { describeSnakeFromScore } from "shared/store/snakes";
 import { mapStrict } from "shared/utils/math-utils";
+
 import { RootState } from "../";
 
 export interface WorldCamera {

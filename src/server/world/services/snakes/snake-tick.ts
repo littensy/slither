@@ -1,4 +1,5 @@
 import { store } from "server/store";
+
 import { updateSnakeGrid } from "./snake-grid";
 
 const nextSnakeInputs = new Map<string, number>();

@@ -6,6 +6,7 @@ import { useDefined, useStore } from "client/app/hooks";
 import { selectSnakeFromWorldSubject } from "client/store/world";
 import { LOCAL_USER } from "shared/constants";
 import { selectSnakesById } from "shared/store/snakes";
+
 import { MinimapCursor } from "./minimap-cursor";
 import { MinimapTracer } from "./minimap-tracer";
 import { normalizeToWorldBounds } from "./utils";

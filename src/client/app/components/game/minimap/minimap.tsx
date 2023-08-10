@@ -7,6 +7,7 @@ import { useInputDevice, useRem } from "client/app/hooks";
 import { RemProvider } from "client/app/providers/rem-provider";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
+
 import { MinimapNodes } from "./minimap-nodes";
 import { MINIMUM_MINIMAP_REM } from "./utils";
 

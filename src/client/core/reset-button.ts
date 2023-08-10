@@ -1,5 +1,6 @@
 import { StarterGui } from "@rbxts/services";
 import { remotes } from "shared/remotes";
+
 import { retry } from "./utils";
 
 const resetBindable = new Instance("BindableEvent");

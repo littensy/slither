@@ -1,4 +1,3 @@
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
 import { Frame } from "client/app/common/frame";

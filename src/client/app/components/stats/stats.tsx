@@ -5,6 +5,7 @@ import { useDefined, useRem } from "client/app/hooks";
 import { LOCAL_USER } from "shared/constants";
 import { selectPlayerBalance } from "shared/store/saves";
 import { selectLocalSnakeScore, selectRankForDisplay } from "shared/store/snakes";
+
 import { StatsCard } from "./stats-card";
 
 export function Stats() {

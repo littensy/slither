@@ -1,5 +1,6 @@
 import { useBindingListener, useUnmountEffect } from "@rbxts/pretty-react-hooks";
 import Roact, { Portal, useMemo, useState } from "@rbxts/roact";
+
 import { CanvasGroup, CanvasGroupProps } from "./canvas-group";
 import { Frame } from "./frame";
 import { Group } from "./group";

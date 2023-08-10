@@ -3,8 +3,9 @@ import { store } from "server/store";
 import { getSafePointInWorld, killSnake, playerIsSpawned } from "server/world/utils";
 import { SNAKE_TICK_PHASE, WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
-import { RANDOM_SKIN, defaultPlayerSave, selectPlayerSave } from "shared/store/saves";
+import { defaultPlayerSave, RANDOM_SKIN, selectPlayerSave } from "shared/store/saves";
 import { createScheduler } from "shared/utils/scheduler";
+
 import { deleteSnakeInput, onSnakeTick, registerSnakeInput } from "./snake-tick";
 
 createScheduler({

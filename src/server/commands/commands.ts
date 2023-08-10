@@ -1,6 +1,7 @@
 import { store } from "server/store";
 import { createBot, getSnake, killSnake } from "server/world";
 import { selectSnakes } from "shared/store/snakes";
+
 import { createCommand } from "./create-command";
 
 createCommand("/score", (player, argument) => {

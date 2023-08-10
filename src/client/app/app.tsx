@@ -1,4 +1,5 @@
 import Roact from "@rbxts/roact";
+
 import { Root } from "./common/root";
 import { Controller } from "./components/controller";
 import { Game } from "./components/game";

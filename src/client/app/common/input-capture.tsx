@@ -1,4 +1,5 @@
 import Roact from "@rbxts/roact";
+
 import { Group } from "./group";
 
 interface InputCaptureProps {
