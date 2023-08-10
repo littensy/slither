@@ -7,13 +7,12 @@ import { images } from "shared/assets";
 import { WORLD_BOUNDS } from "shared/constants";
 import { palette } from "shared/data/palette";
 
-interface MinimapNodeProps {
+interface MinimapCursorProps {
 	readonly point: Vector2;
-	readonly rotation?: number;
-	readonly isClient?: boolean;
+	readonly rotation: number;
 }
 
-export function MinimapNode({ point, rotation = 0, isClient = false }: MinimapNodeProps) {
+export function MinimapCursor({ point, rotation = 0 }: MinimapCursorProps) {
 	const rem = useRem();
 	const [smoothPoint, smoothPointMotion] = useMotion(point);
 	const [smoothRotation, smoothRotationMotion] = useMotion(rotation);
@@ -32,14 +31,12 @@ export function MinimapNode({ point, rotation = 0, isClient = false }: MinimapNo
 
 	return (
 		<Image
-			image={isClient ? images.ui.map_cursor : images.ui.circle}
-			imageColor={isClient ? palette.text : palette.lavender}
+			image={images.ui.map_cursor}
+			imageColor={palette.text}
 			anchorPoint={new Vector2(0.5, 0.5)}
-			size={
-				isClient ? new UDim2(0, rem(28, "pixel"), 0, rem(28, "pixel")) : new UDim2(0, rem(0.25), 0, rem(0.25))
-			}
-			rotation={smoothRotation}
+			size={new UDim2(0, rem(28, "pixel"), 0, rem(28, "pixel"))}
 			position={position}
+			rotation={smoothRotation}
 		/>
 	);
 }
