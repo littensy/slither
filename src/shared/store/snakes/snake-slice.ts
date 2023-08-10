@@ -1,7 +1,7 @@
 import { createProducer } from "@rbxts/reflex";
 import { SNAKE_BOOST_SPEED, SNAKE_SPEED, WORLD_TICK } from "shared/constants";
 import { map, turnRadians } from "shared/utils/math-utils";
-import { mapObject } from "shared/utils/object-utils";
+import { mapObject, mapProperty } from "shared/utils/object-utils";
 import { describeSnakeFromScore, snakeIsBoosting } from "./snake-utils";
 
 export interface SnakesState {
@@ -24,9 +24,7 @@ export interface SnakeEntity {
 // Used to prevent tracers from overlapping
 const TINY = 0.0001;
 
-const initialState: SnakesState = {};
-
-const initialSnake: SnakeEntity = {
+const defaultEntity: SnakeEntity = {
 	id: "",
 	name: "",
 	head: new Vector2(),
@@ -39,10 +37,12 @@ const initialSnake: SnakeEntity = {
 	dead: false,
 };
 
+const initialState: SnakesState = {};
+
 export const snakesSlice = createProducer(initialState, {
 	addSnake: (state, id: string, patch?: Partial<SnakeEntity>) => ({
 		...state,
-		[id]: { ...initialSnake, id, name: id, ...patch },
+		[id]: { ...defaultEntity, id, name: id, ...patch },
 	}),
 
 	removeSnake: (state, id: string) => ({
@@ -104,32 +104,32 @@ export const snakesSlice = createProducer(initialState, {
 	},
 
 	turnSnake: (state, id: string, desiredAngle: number) => {
-		return mapObject(state, (snake) => {
-			return snake.id === id ? { ...snake, desiredAngle } : snake;
+		return mapProperty(state, id, (snake) => {
+			return { ...snake, desiredAngle };
 		});
 	},
 
 	boostSnake: (state, id: string, boost: boolean) => {
-		return mapObject(state, (snake) => {
-			return snake.id === id ? { ...snake, boost } : snake;
+		return mapProperty(state, id, (snake) => {
+			return { ...snake, boost };
 		});
 	},
 
 	setSnakeIsDead: (state, id: string) => {
-		return mapObject(state, (snake) => {
-			return snake.id === id ? { ...snake, dead: true } : snake;
+		return mapProperty(state, id, (snake) => {
+			return { ...snake, dead: true };
 		});
 	},
 
 	patchSnake: (state, id: string, intersection: Partial<SnakeEntity>) => {
-		return mapObject(state, (snake) => {
-			return snake.id === id ? { ...snake, ...intersection } : snake;
+		return mapProperty(state, id, (snake) => {
+			return { ...snake, ...intersection };
 		});
 	},
 
 	incrementSnakeScore: (state, id: string, amount: number) => {
-		return mapObject(state, (snake) => {
-			return snake.id === id ? { ...snake, score: math.max(snake.score + amount, 0) } : snake;
+		return mapProperty(state, id, (snake) => {
+			return { ...snake, score: math.max(snake.score + amount, 0) };
 		});
 	},
 });

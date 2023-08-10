@@ -1,5 +1,5 @@
 import { createProducer } from "@rbxts/reflex";
-import { mapObject } from "shared/utils/object-utils";
+import { mapProperty } from "shared/utils/object-utils";
 
 export interface SaveState {
 	readonly [id: string]: PlayerSave | undefined;
@@ -25,41 +25,25 @@ export const saveSlice = createProducer(initialState, {
 	}),
 
 	patchPlayerSave: (state, player: string, patch: Partial<PlayerSave>) => {
-		return mapObject(state, (save, key) => {
-			if (key !== player) {
-				return save;
-			}
-
+		return mapProperty(state, player, (save) => {
 			return { ...save, ...patch };
 		});
 	},
 
 	givePlayerBalance: (state, player: string, amount: number) => {
-		return mapObject(state, (save, key) => {
-			if (key !== player) {
-				return save;
-			}
-
-			return { ...save, balance: save.balance + amount };
+		return mapProperty(state, player, (save) => {
+			return { ...save, balance: math.max(save.balance + amount, 0) };
 		});
 	},
 
 	givePlayerSkin: (state, player: string, skin: string) => {
-		return mapObject(state, (save, key) => {
-			if (key !== player) {
-				return save;
-			}
-
+		return mapProperty(state, player, (save) => {
 			return { ...save, skins: [...save.skins, skin] };
 		});
 	},
 
 	setPlayerSkin: (state, player: string, skin: string) => {
-		return mapObject(state, (save, key) => {
-			if (key !== player) {
-				return save;
-			}
-
+		return mapProperty(state, player, (save) => {
 			return { ...save, skin };
 		});
 	},

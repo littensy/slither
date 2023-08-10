@@ -5,10 +5,10 @@ import { RemProvider, RemProviderProps } from "./rem-provider";
 
 interface RootProviderProps extends RemProviderProps {}
 
-export function RootProvider({ baseRem, remOverride: override, children }: RootProviderProps) {
+export function RootProvider({ baseRem, remOverride, children }: RootProviderProps) {
 	return (
 		<ReflexProvider producer={store}>
-			<RemProvider baseRem={baseRem} remOverride={override}>
+			<RemProvider baseRem={baseRem} remOverride={remOverride}>
 				{children}
 			</RemProvider>
 		</ReflexProvider>

@@ -26,6 +26,25 @@ export function mapObject<K extends string, V, T>(
 }
 
 /**
+ * Replaces a property on an object with a new value. Only changes the
+ * property if the value is not undefined.
+ */
+export function mapProperty<T, K extends keyof T>(
+	object: T,
+	key: K,
+	mapper: (value: NonNullable<T[K]>) => T[K] | undefined,
+): T {
+	if (object[key] === undefined) {
+		return object;
+	}
+
+	return {
+		...object,
+		[key]: mapper(object[key]!),
+	};
+}
+
+/**
  * Creates a new array of values given a length and a mapper function.
  */
 export function fillArray<T extends defined>(length: number, mapper: (index: number) => T): T[] {

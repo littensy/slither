@@ -4,7 +4,7 @@ import { Controller } from "./components/controller";
 import { Game } from "./components/game";
 import { Menu } from "./components/menu";
 import { Preloader } from "./components/preloader";
-import { StatsRail } from "./components/stats-rail";
+import { Stats } from "./components/stats";
 import { World } from "./components/world";
 
 export function App() {
@@ -20,7 +20,7 @@ export function App() {
 
 			<Root>
 				<Menu />
-				<StatsRail />
+				<Stats />
 			</Root>
 		</>
 	);

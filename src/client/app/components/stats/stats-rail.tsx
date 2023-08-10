@@ -7,7 +7,7 @@ import { selectPlayerBalance } from "shared/store/saves";
 import { selectLocalSnakeScore, selectRankForDisplay } from "shared/store/snakes";
 import { StatsCard } from "./stats-card";
 
-export function StatsRail() {
+export function Stats() {
 	const rem = useRem();
 
 	const currentScore = useSelector(selectLocalSnakeScore);
