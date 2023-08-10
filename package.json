@@ -20,6 +20,8 @@
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-prettier": "5.0.0-alpha.2",
 		"eslint-plugin-roblox-ts": "^0.0.35",
+		"eslint-plugin-simple-import-sort": "^10.0.0",
+		"eslint-plugin-unused-imports": "^3.0.0",
 		"prettier": "^3.0.0",
 		"rbxts-transform-debug": "^2.1.0-beta.0",
 		"roblox-ts": "^2.1.1",
@@ -28,7 +30,6 @@
 	"dependencies": {
 		"@rbxts/flipper": "^2.0.1",
 		"@rbxts/lapis": "0.2.4",
-		"@rbxts/make": "^1.0.6",
 		"@rbxts/object-utils": "^1.0.4",
 		"@rbxts/pretty-react-hooks": "0.2.0",
 		"@rbxts/react-reflex": "0.2.0",

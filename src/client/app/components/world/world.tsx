@@ -1,6 +1,7 @@
 import Roact from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { RemProvider } from "client/app/providers/rem-provider";
+
 import { Backdrop } from "./backdrop";
 import { Candy } from "./candy";
 import { Snakes } from "./snakes";

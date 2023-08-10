@@ -1,6 +1,5 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { ReactiveButton } from "client/app/common/reactive-button";
@@ -11,6 +10,7 @@ import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { MenuPage, selectIsPage } from "client/store/menu";
 import { palette } from "shared/data/palette";
+
 import { MIN_NAV_REM } from "./constants";
 
 interface DestinationProps {

@@ -1,6 +1,7 @@
 import { BroadcastAction } from "@rbxts/reflex";
-import { Client, Server, createRemotes, namespace, remote, throttleMiddleware } from "@rbxts/remo";
+import { Client, createRemotes, namespace, remote, Server, throttleMiddleware } from "@rbxts/remo";
 import { t } from "@rbxts/t";
+
 import { WORLD_TICK } from "./constants";
 import { SharedState } from "./store";
 

@@ -1,4 +1,3 @@
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo, useState } from "@rbxts/roact";
 import { setTimeout } from "@rbxts/set-timeout";
 import { Group } from "client/app/common/group";
@@ -8,6 +7,7 @@ import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { getSnakeSkin, getSnakeTracerSkin } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
+
 import { SNAKE_ANGLE_OFFSET } from "./constants";
 import { SnakeEffectBinding, SnakeLineBinding } from "./use-snake-bindings";
 import { useTracerStyle } from "./use-tracer-style";

@@ -1,5 +1,6 @@
 import Roact from "@rbxts/roact";
 import { IS_EDIT } from "shared/constants";
+
 import { Group } from "./group";
 
 interface RootProps extends Roact.PropsWithChildren {

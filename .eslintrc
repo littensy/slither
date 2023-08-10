@@ -13,7 +13,9 @@
 	"plugins": [
 		"@typescript-eslint",
 		"roblox-ts",
-		"prettier"
+		"prettier",
+		"unused-imports",
+		"simple-import-sort"
 	],
 	"extends": [
 		"eslint:recommended",
@@ -22,6 +24,9 @@
 		"plugin:prettier/recommended"
 	],
 	"rules": {
-		"prettier/prettier": "warn"
+		"prettier/prettier": "warn",
+		"unused-imports/no-unused-imports": "warn",
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn"
 	}
 }

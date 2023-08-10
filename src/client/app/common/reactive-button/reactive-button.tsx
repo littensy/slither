@@ -1,7 +1,7 @@
 import { blend, joinAnyBindings, lerpBinding, useUpdateEffect } from "@rbxts/pretty-react-hooks";
-import { spring } from "@rbxts/ripple";
 import Roact from "@rbxts/roact";
 import { useMotion, useRem } from "client/app/hooks";
+
 import { Button } from "../button";
 import { Frame } from "../frame";
 import { useButtonAnimation } from "./use-button-animation";

@@ -5,6 +5,7 @@ import { useInputDevice } from "client/app/hooks";
 import { REMOTE_TICK, WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
 import { selectLocalSnake } from "shared/store/snakes";
+
 import { Gamepad } from "./gamepad";
 import { Mouse } from "./mouse";
 import { Touch } from "./touch";

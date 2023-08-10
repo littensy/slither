@@ -1,10 +1,10 @@
 import { useSelector } from "@rbxts/react-reflex";
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useMotion, useRem } from "client/app/hooks";
 import { springs } from "client/app/utils/springs";
 import { selectWorldCamera } from "client/store/world";
+
 import { Snake } from "./snake";
 import { useSnakesOnScreen } from "./use-snakes-on-screen";
 

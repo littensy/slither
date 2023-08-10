@@ -1,4 +1,4 @@
-import Roact, { Ref, forwardRef } from "@rbxts/roact";
+import Roact, { forwardRef, Ref } from "@rbxts/roact";
 
 export interface FrameProps<T extends Instance = Frame> extends Roact.PropsWithChildren {
 	ref?: Roact.Ref<T>;

@@ -1,5 +1,6 @@
 import { useComposedRef, useDeferState } from "@rbxts/pretty-react-hooks";
 import Roact, { useEffect, useState } from "@rbxts/roact";
+
 import { Group } from "./group";
 
 interface RenderInViewProps extends Roact.PropsWithChildren {

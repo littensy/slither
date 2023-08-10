@@ -1,4 +1,5 @@
 import Roact, { useEffect } from "@rbxts/roact";
+
 import { useTouchMove } from "./use-touch-move";
 
 interface TouchProps {

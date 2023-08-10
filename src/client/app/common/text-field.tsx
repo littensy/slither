@@ -1,4 +1,5 @@
 import Roact, { useEffect, useState } from "@rbxts/roact";
+
 import { fonts } from "../utils/fonts";
 import { Group } from "./group";
 import { TextProps } from "./text";

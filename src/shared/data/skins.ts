@@ -1,4 +1,3 @@
-import Object from "@rbxts/object-utils";
 import { images } from "shared/assets";
 import { accentList, accents } from "shared/data/palette";
 

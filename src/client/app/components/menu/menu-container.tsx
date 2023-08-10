@@ -1,6 +1,5 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
 import { DelayRender } from "client/app/common/delay-render";

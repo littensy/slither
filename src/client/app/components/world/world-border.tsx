@@ -1,5 +1,4 @@
 import { useSelector } from "@rbxts/react-reflex";
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { CanvasGroup } from "client/app/common/canvas-group";
 import { Frame } from "client/app/common/frame";
@@ -42,15 +41,13 @@ export function WorldBorder() {
 	}, [rem]);
 
 	useEffect(() => {
-		worldCameraMotion.to(
-			spring(
-				{
-					x: -world.offset.X,
-					y: -world.offset.Y,
-					scale: world.scale,
-				},
-				springs.world,
-			),
+		worldCameraMotion.spring(
+			{
+				x: -world.offset.X,
+				y: -world.offset.Y,
+				scale: world.scale,
+			},
+			springs.world,
 		);
 	}, [world]);
 

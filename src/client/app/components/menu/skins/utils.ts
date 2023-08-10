@@ -1,7 +1,7 @@
 import { useInterval } from "@rbxts/pretty-react-hooks";
 import { useState } from "@rbxts/roact";
 import { darken } from "client/app/utils/color-utils";
-import { SnakeSkin, getSnakeSkin } from "shared/data/skins";
+import { getSnakeSkin, SnakeSkin } from "shared/data/skins";
 
 export interface SnakePalette {
 	readonly skin: SnakeSkin;

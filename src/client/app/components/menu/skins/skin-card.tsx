@@ -1,11 +1,11 @@
 import { blend } from "@rbxts/pretty-react-hooks";
-import { spring } from "@rbxts/ripple";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem } from "client/app/hooks";
 import { images } from "shared/assets";
+
 import { SkinIndicator } from "./skin-indicator";
 import { SkinThumbnail } from "./skin-thumbnail";
 import { DIRECTIONS_TO_HIDE, usePalette } from "./utils";

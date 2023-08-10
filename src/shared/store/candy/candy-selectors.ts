@@ -1,6 +1,7 @@
 import Object from "@rbxts/object-utils";
 import { createSelector } from "@rbxts/reflex";
 import { mapObject } from "shared/utils/object-utils";
+
 import { SharedState } from "../";
 import { CandyEntity, CandyType } from "./candy-slice";
 

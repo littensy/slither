@@ -3,6 +3,7 @@ import { createSelector, shallowEqual } from "@rbxts/reflex";
 import { LOCAL_USER } from "shared/constants";
 import { SharedState } from "shared/store";
 import { mapObject } from "shared/utils/object-utils";
+
 import { SnakeEntity } from "./snake-slice";
 import { snakeIsBoosting } from "./snake-utils";
 

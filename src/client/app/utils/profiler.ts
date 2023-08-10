@@ -1,4 +1,4 @@
-import Roact, { FunctionComponent, createElement } from "@rbxts/roact";
+import Roact, { createElement, FunctionComponent } from "@rbxts/roact";
 
 export function profiler<P extends object>(name: string, render: FunctionComponent<P>): FunctionComponent<P> {
 	return (props: P) => {

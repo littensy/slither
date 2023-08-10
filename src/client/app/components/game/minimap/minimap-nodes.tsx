@@ -1,4 +1,4 @@
-import { useInterval } from "@rbxts/pretty-react-hooks";
+import { map, useInterval } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { Element, useState } from "@rbxts/roact";
 import { CanvasGroup } from "client/app/common/canvas-group";
@@ -6,7 +6,10 @@ import { useDefined, useStore } from "client/app/hooks";
 import { selectSnakeFromWorldSubject } from "client/store/world";
 import { LOCAL_USER } from "shared/constants";
 import { selectSnakesById } from "shared/store/snakes";
-import { MinimapNode } from "./minimap-node";
+
+import { MinimapCursor } from "./minimap-cursor";
+import { MinimapTracer } from "./minimap-tracer";
+import { normalizeToWorldBounds } from "./utils";
 
 export function MinimapNodes() {
 	const store = useStore();
@@ -25,17 +28,26 @@ export function MinimapNodes() {
 					continue;
 				}
 
-				nodes.push(<MinimapNode key={snake.id} point={snake.head} />);
+				const size = snake.tracers.size();
+				const step = math.floor(map(size, 0, 100, 5, 20));
+				let previous = snake.head;
 
-				for (const index of $range(0, snake.tracers.size() - 1, 6)) {
+				for (const index of $range(0, size - 1, step)) {
 					const tracer = snake.tracers[index];
-					nodes.push(<MinimapNode key={`${snake.id}-${index}`} point={tracer} />);
+					nodes.push(
+						<MinimapTracer
+							key={`${snake.id}-${index}`}
+							from={normalizeToWorldBounds(previous)}
+							to={normalizeToWorldBounds(tracer)}
+						/>,
+					);
+					previous = tracer;
 				}
 			}
 
 			setNodes(nodes);
 		},
-		1,
+		2,
 		{ immediate: true },
 	);
 
@@ -51,7 +63,13 @@ export function MinimapNodes() {
 				{nodes}
 			</CanvasGroup>
 
-			{snake && <MinimapNode key="client-node" point={snake.head} rotation={math.deg(snake.angle)} isClient />}
+			{snake && (
+				<MinimapCursor
+					key="map-cursor"
+					point={normalizeToWorldBounds(snake.head)}
+					rotation={math.deg(snake.angle)}
+				/>
+			)}
 		</>
 	);
 }

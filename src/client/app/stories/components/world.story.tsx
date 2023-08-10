@@ -10,6 +10,7 @@ import { getRandomAccent } from "shared/data/palette";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
 import { fillArray } from "shared/utils/object-utils";
 import { createScheduler } from "shared/utils/scheduler";
+
 import { useMockRemotes } from "../utils/use-mock-remotes";
 
 const IDS = [LOCAL_USER, ...fillArray(10, (index) => `${index}`)];

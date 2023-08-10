@@ -4,6 +4,7 @@ import { Text } from "client/app/common/text";
 import { useRem, useStore } from "client/app/hooks";
 import { palette } from "shared/data/palette";
 import { selectHasLocalSnake } from "shared/store/snakes";
+
 import { Home } from "./home";
 import { MenuContainer } from "./menu-container";
 import { MenuVignette } from "./menu-vignette";

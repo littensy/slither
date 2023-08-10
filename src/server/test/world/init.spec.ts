@@ -1,8 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
-import "server/world/services";
 import { store } from "server/store";
-import { candyGrid } from "server/world/services/candy-service";
+import { candyGrid } from "server/world";
 
 export = () => {
 	/**

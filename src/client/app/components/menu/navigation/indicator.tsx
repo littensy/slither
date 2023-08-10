@@ -1,6 +1,5 @@
 import { useEventListener } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
-import { spring } from "@rbxts/ripple";
 import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { Frame } from "client/app/common/frame";
@@ -8,6 +7,7 @@ import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem } from "client/app/hooks";
 import { MenuPage, selectCurrentPage } from "client/store/menu";
 import { map } from "shared/utils/math-utils";
+
 import { MIN_NAV_REM } from "./constants";
 
 interface IndicatorProps {

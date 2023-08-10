@@ -9,5 +9,8 @@ const initialState: WorldState = {
 };
 
 export const worldSlice = createProducer(initialState, {
-	setWorldSubject: (state, snake: string) => ({ ...state, subject: snake }),
+	setWorldSubject: (state, snake: string) => ({
+		...state,
+		subject: snake,
+	}),
 });

@@ -1,5 +1,5 @@
 import { createProducer } from "@rbxts/reflex";
-import { mapObject } from "shared/utils/object-utils";
+import { mapProperty } from "shared/utils/object-utils";
 
 export interface CandyState {
 	readonly [id: string]: CandyEntity | undefined;
@@ -38,10 +38,7 @@ export const candySlice = createProducer(initialState, {
 	}),
 
 	setCandyEatenAt: (state, id: string, eatenAt: Vector2) => {
-		return mapObject(state, (candy) => {
-			if (candy.id !== id) {
-				return candy;
-			}
+		return mapProperty(state, id, (candy) => {
 			return { ...candy, eatenAt };
 		});
 	},

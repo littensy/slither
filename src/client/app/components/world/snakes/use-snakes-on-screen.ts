@@ -2,8 +2,9 @@ import { useCamera, usePrevious, useUnmountEffect } from "@rbxts/pretty-react-ho
 import { useSelector } from "@rbxts/react-reflex";
 import { useEffect, useMemo, useState } from "@rbxts/roact";
 import { useRem } from "client/app/hooks";
-import { SnakeEntity, selectSnakesById } from "shared/store/snakes";
+import { selectSnakesById, SnakeEntity } from "shared/store/snakes";
 import { createGrid } from "shared/utils/grid";
+
 import { SNAKE_ON_SCREEN_MARGIN } from "./constants";
 
 export interface SnakeOnScreen {

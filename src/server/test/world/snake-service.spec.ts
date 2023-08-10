@@ -1,8 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { getSnake } from "server/world";
-import { onSnakeTick } from "server/world/services/snake-service";
+import { getSnake, onSnakeTick } from "server/world";
 
 export = () => {
 	it("should update snake target angle", () => {
