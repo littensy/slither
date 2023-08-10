@@ -6,6 +6,20 @@ import { promisePlayerDisconnected } from "shared/utils/player-utils";
 
 const dataStore = DataStoreService.GetDataStore("saves", "v1");
 
+async function main() {
+	Players.PlayerAdded.Connect(loadPlayerSave);
+
+	for (const player of Players.GetPlayers()) {
+		loadPlayerSave(player);
+	}
+
+	setTimeout(() => {
+		for (const player of Players.GetPlayers()) {
+			saveToDataStore(player);
+		}
+	}, 60);
+}
+
 async function loadPlayerSave(player: Player) {
 	try {
 		const [save = defaultPlayerSave] = dataStore.GetAsync(`${player.UserId}`);
@@ -54,20 +68,6 @@ async function saveToDataStore(player: Player) {
 	} catch (e) {
 		warn(`Failed to auto-save data for ${player.Name}: ${e}`);
 	}
-}
-
-async function main() {
-	Players.PlayerAdded.Connect(loadPlayerSave);
-
-	for (const player of Players.GetPlayers()) {
-		loadPlayerSave(player);
-	}
-
-	setTimeout(() => {
-		for (const player of Players.GetPlayers()) {
-			saveToDataStore(player);
-		}
-	}, 60);
 }
 
 main();

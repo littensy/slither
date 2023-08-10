@@ -1,6 +1,7 @@
-import { registerServices } from "./services";
-
 export * from "./utils";
-export * from "./services";
 
-registerServices();
+// initialize services
+export * from "./services/bots";
+export * from "./services/candy";
+export * from "./services/collision";
+export * from "./services/snakes";
