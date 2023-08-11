@@ -1,6 +1,7 @@
 /node_modules
 /out
 /include
+/.vscode
 *.tsbuildinfo
 *.rbxl
 *.rbxlx
