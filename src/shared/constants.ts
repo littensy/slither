@@ -13,9 +13,9 @@ export const CANDY_TICK_PHASE = 0.33 * WORLD_TICK;
 export const COLLISION_TICK_PHASE = 0.66 * WORLD_TICK;
 
 export const CANDY_LIMITS: { readonly [K in CandyType]: number } = {
-	default: 4096,
-	dropping: 256,
-	loot: 384,
+	[CandyType.Default]: 4096,
+	[CandyType.Dropping]: 256,
+	[CandyType.Loot]: 384,
 };
 
 export const SNAKE_SPEED = 5;

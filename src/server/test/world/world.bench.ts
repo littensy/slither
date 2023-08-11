@@ -9,6 +9,7 @@ import {
 	snakeGrid,
 } from "server/world";
 import { CANDY_LIMITS, WORLD_BOUNDS } from "shared/constants";
+import { CandyType } from "shared/store/candy";
 import { benchmark } from "shared/utils/benchmark";
 import { fillArray } from "shared/utils/object-utils";
 import { disconnectAllSchedulers } from "shared/utils/scheduler";
@@ -43,7 +44,7 @@ async function setup() {
 	}
 
 	// Generate the maximum number of candies
-	store.populateCandy(fillArray(CANDY_LIMITS.default, () => createCandy()));
+	store.populateCandy(fillArray(CANDY_LIMITS[CandyType.Default], () => createCandy()));
 
 	// Schedulers may persist after the benchmark is complete, so we need to
 	// disconnect them manually.

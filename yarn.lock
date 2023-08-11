@@ -91,6 +91,11 @@
     picocolors "^1.0.0"
     tslib "^2.6.0"
 
+"@rbxts/bitbuffer2@^1.0.0-ts.0":
+  version "1.0.0-ts.0"
+  resolved "https://registry.yarnpkg.com/@rbxts/bitbuffer2/-/bitbuffer2-1.0.0-ts.0.tgz#83f5576b40877e952d04506980fdd16657b9f78f"
+  integrity sha512-Ly4y6gO5oVUubCFQLJZe9bc8u9jRGPKFoR0R4KSH689PxFQcKf5M5XMQG90DsAbhMk0KXZ2jKYiZuXb6ONBNuQ==
+
 "@rbxts/compiler-types@^2.1.1-types.0":
   version "2.1.1-types.0"
   resolved "https://registry.yarnpkg.com/@rbxts/compiler-types/-/compiler-types-2.1.1-types.0.tgz#a1f02b57402dffec474dd6656ec1d8a897b9756b"

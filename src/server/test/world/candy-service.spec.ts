@@ -17,7 +17,7 @@ export = () => {
 	};
 
 	it("should populate the state with candy", () => {
-		expect(countCandy()).to.equal(CANDY_LIMITS.default);
+		expect(countCandy()).to.equal(CANDY_LIMITS[CandyType.Default]);
 	});
 
 	it("should create new candy when the amount decreases", () => {
@@ -28,11 +28,11 @@ export = () => {
 			store.removeCandy(candy.id);
 		}
 
-		expect(countCandy()).to.equal(CANDY_LIMITS.default - candiesToRemove.size());
+		expect(countCandy()).to.equal(CANDY_LIMITS[CandyType.Default] - candiesToRemove.size());
 		store.flush();
 
 		const newCandies = store.getState(selectCandies);
-		expect(countCandy()).to.equal(CANDY_LIMITS.default);
+		expect(countCandy()).to.equal(CANDY_LIMITS[CandyType.Default]);
 		expect(newCandies.every((candy) => !candiesToRemove.has(candy))).to.equal(true);
 	});
 
@@ -43,9 +43,9 @@ export = () => {
 			store.addCandy({ ...template, id: `__test__${index}` });
 		}
 
-		expect(countCandy()).to.equal(CANDY_LIMITS.default + 10);
+		expect(countCandy()).to.equal(CANDY_LIMITS[CandyType.Default] + 10);
 		store.flush();
-		expect(countCandy()).to.equal(CANDY_LIMITS.default + 10);
+		expect(countCandy()).to.equal(CANDY_LIMITS[CandyType.Default] + 10);
 	});
 
 	it("should create candy when a snake dies", () => {
@@ -65,7 +65,7 @@ export = () => {
 		store.setSnakeIsDead("__test__");
 		store.flush();
 
-		expect(countCandy() > CANDY_LIMITS.default).to.equal(true);
+		expect(countCandy() > CANDY_LIMITS[CandyType.Default]).to.equal(true);
 
 		for (const index of $range(1, 50)) {
 			const candy = initialCandy[index];
@@ -74,7 +74,7 @@ export = () => {
 
 		store.flush();
 
-		expect(countCandy() > CANDY_LIMITS.default).to.equal(true);
+		expect(countCandy() > CANDY_LIMITS[CandyType.Default]).to.equal(true);
 	});
 
 	it("should eat candy when a snake is close", () => {
@@ -97,13 +97,13 @@ export = () => {
 	});
 
 	it("should remove excess droppings", () => {
-		const candies = fillArray(CANDY_LIMITS.dropping + 1, () => {
-			return createCandy({ type: "dropping" });
+		const candies = fillArray(CANDY_LIMITS[CandyType.Dropping] + 1, () => {
+			return createCandy({ type: CandyType.Dropping });
 		});
 		store.populateCandy(candies);
-		expect(countCandy("dropping")).to.equal(CANDY_LIMITS.dropping + 1);
-		removeCandyIfAtLimit("dropping");
-		removeCandyIfAtLimit("dropping");
-		expect(countCandy("dropping")).to.equal(CANDY_LIMITS.dropping);
+		expect(countCandy(CandyType.Dropping)).to.equal(CANDY_LIMITS[CandyType.Dropping] + 1);
+		removeCandyIfAtLimit(CandyType.Dropping);
+		removeCandyIfAtLimit(CandyType.Dropping);
+		expect(countCandy(CandyType.Dropping)).to.equal(CANDY_LIMITS[CandyType.Dropping]);
 	});
 };

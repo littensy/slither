@@ -3,12 +3,12 @@ import { Client, createRemotes, namespace, remote, Server, throttleMiddleware } 
 import { t } from "@rbxts/t";
 
 import { WORLD_TICK } from "./constants";
-import { SharedState } from "./store";
+import { SharedStateSerialized } from "./serdes";
 
 export const remotes = createRemotes({
 	store: namespace({
 		dispatch: remote<Client, [actions: BroadcastAction[]]>(),
-		hydrate: remote<Client, [state: SharedState]>(),
+		hydrate: remote<Client, [state: SharedStateSerialized]>(),
 		start: remote<Server>(),
 	}),
 

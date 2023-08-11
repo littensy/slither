@@ -2,7 +2,8 @@ import { createBroadcaster } from "@rbxts/reflex";
 import { Players } from "@rbxts/services";
 import { WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
-import { slices } from "shared/store";
+import { serializeState, SharedStateSerialized } from "shared/serdes";
+import { SharedState, slices } from "shared/store";
 
 export function broadcasterMiddleware() {
 	const hydrated = new Set<number>();
@@ -15,16 +16,21 @@ export function broadcasterMiddleware() {
 			remotes.store.dispatch.fire(player, actions);
 		},
 		hydrate: (player, state) => {
-			remotes.store.hydrate.fire(player, state);
+			remotes.store.hydrate.fire(player, state as unknown as SharedStateSerialized);
 		},
 		beforeHydrate: (player, state) => {
+			const serialized = serializeState(state) as unknown as SharedState;
+
 			if (!hydrated.has(player.UserId)) {
 				hydrated.add(player.UserId);
-				return state;
+				return serialized;
 			}
 
 			// exclude candy to reduce network traffic
-			return { ...state, candy: undefined };
+			return {
+				...serialized,
+				candy: undefined,
+			};
 		},
 	});
 
