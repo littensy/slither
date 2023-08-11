@@ -3,16 +3,16 @@ import { Frame } from "client/app/common/frame";
 import { Group } from "client/app/common/group";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
-import { useInputDevice, useRem } from "client/app/hooks";
+import { useInputDevice } from "client/app/hooks";
 import { RemProvider } from "client/app/providers/rem-provider";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
 
 import { MinimapNodes } from "./minimap-nodes";
-import { MINIMUM_MINIMAP_REM } from "./utils";
+import { MINIMUM_MINIMAP_REM, useMinimapRem } from "./utils";
 
 export function Minimap() {
-	const rem = useRem({ minimum: MINIMUM_MINIMAP_REM });
+	const rem = useMinimapRem();
 	const touch = useInputDevice() === "touch";
 
 	const { anchorPoint, position } = touch

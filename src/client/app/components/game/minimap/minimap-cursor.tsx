@@ -1,8 +1,10 @@
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
-import { useMotion, useRem } from "client/app/hooks";
+import { useMotion } from "client/app/hooks";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
+
+import { useMinimapRem } from "./utils";
 
 interface MinimapCursorProps {
 	readonly point: Vector2;
@@ -10,7 +12,7 @@ interface MinimapCursorProps {
 }
 
 export function MinimapCursor({ point, rotation = 0 }: MinimapCursorProps) {
-	const rem = useRem();
+	const rem = useMinimapRem();
 	const [smoothRotation, smoothRotationMotion] = useMotion(rotation);
 
 	useEffect(() => {
