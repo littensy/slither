@@ -20,7 +20,7 @@ export function createCandy(patch?: Partial<CandyEntity>): CandyEntity {
 
 	const candy: CandyEntity = {
 		id: `${nextCandyId++}`,
-		type: "default",
+		type: CandyType.Default,
 		size: math.min(random.NextInteger(1, 6), random.NextInteger(1, 6)),
 		position: getRandomPointNearWorldOrigin(0.95),
 		color: getRandomAccent(),
@@ -101,10 +101,10 @@ export function dropCandyWhileBoosting(id: string) {
 			const candy = createCandy({
 				size: random.NextInteger(1, 5),
 				position: tail,
-				type: "dropping",
+				type: CandyType.Dropping,
 			});
 
-			removeCandyIfAtLimit("dropping");
+			removeCandyIfAtLimit(CandyType.Dropping);
 
 			store.addCandy(candy);
 		};
@@ -158,13 +158,13 @@ export function dropCandyOnDeath(id: string): void {
 
 		return createCandy({
 			position,
-			type: "loot",
+			type: CandyType.Loot,
 			size: math.ceil(sum / total),
 			color: skin.tint,
 		});
 	});
 
-	removeCandyIfAtLimit("loot");
+	removeCandyIfAtLimit(CandyType.Loot);
 
 	store.populateCandy(candies);
 }

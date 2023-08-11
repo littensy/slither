@@ -8,6 +8,7 @@ import { store } from "client/store";
 import { LOCAL_USER, WORLD_TICK } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
+import { CandyType } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 import { createScheduler } from "shared/utils/scheduler";
 
@@ -36,7 +37,7 @@ export = hoarcekat(() => {
 				position: new Vector2(math.random(-50, 50), math.random(-25, 25)),
 				size: math.random(1, 50),
 				color: getRandomAccent(),
-				type: "default",
+				type: CandyType.Default,
 			})),
 		);
 

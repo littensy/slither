@@ -1,6 +1,6 @@
 import { store } from "server/store";
 import { CANDY_LIMITS, CANDY_TICK_PHASE, WORLD_TICK } from "shared/constants";
-import { selectCandyCount } from "shared/store/candy";
+import { CandyType, selectCandyCount } from "shared/store/candy";
 import { identifySnake, selectAliveSnakesById } from "shared/store/snakes";
 import { createScheduler } from "shared/utils/scheduler";
 
@@ -17,9 +17,9 @@ createScheduler({
 // keep the amount of candy in the world at a constant size
 // if the amount of candy is less than the max, create more
 store.subscribe(
-	selectCandyCount("default"),
-	(count) => count < CANDY_LIMITS.default,
-	(count) => populateCandy(CANDY_LIMITS.default - count),
+	selectCandyCount(CandyType.Default),
+	(count) => count < CANDY_LIMITS[CandyType.Default],
+	(count) => populateCandy(CANDY_LIMITS[CandyType.Default] - count),
 );
 
 store.observe(selectAliveSnakesById, identifySnake, ({ id }) => {
@@ -34,4 +34,4 @@ store.observe(selectAliveSnakesById, identifySnake, ({ id }) => {
 	};
 });
 
-populateCandy(CANDY_LIMITS.default);
+populateCandy(CANDY_LIMITS[CandyType.Default]);

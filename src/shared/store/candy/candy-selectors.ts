@@ -34,7 +34,7 @@ export const selectCandyCount = (filter?: CandyType) => {
 		let size = 0;
 
 		for (const [, candy] of pairs(byId)) {
-			if (candy.eatenAt || (filter && candy.type !== filter)) {
+			if (candy.eatenAt || (filter !== undefined && candy.type !== filter)) {
 				continue;
 			}
 

@@ -2,6 +2,7 @@ import Object from "@rbxts/object-utils";
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { getCandy, getRandomPointInWorld, getSnake } from "server/world/utils";
+import { CandyType } from "shared/store/candy";
 import { describeSnakeFromScore, SnakeEntity } from "shared/store/snakes";
 import { map } from "shared/utils/math-utils";
 
@@ -47,7 +48,7 @@ export class BotBehavior {
 
 		let target = candyGrid.nearest(head, 15, (point) => {
 			const candy = getCandy(point.metadata.id);
-			return candy !== undefined && !candy.eatenAt && candy.type === "loot";
+			return candy !== undefined && !candy.eatenAt && candy.type === CandyType.Loot;
 		});
 
 		if (!target) {

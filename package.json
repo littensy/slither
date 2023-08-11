@@ -28,6 +28,7 @@
 		"typescript": "~5.0"
 	},
 	"dependencies": {
+		"@rbxts/bitbuffer2": "^1.0.0-ts.0",
 		"@rbxts/flipper": "^2.0.1",
 		"@rbxts/lapis": "0.2.4",
 		"@rbxts/object-utils": "^1.0.4",

@@ -14,7 +14,11 @@ export interface CandyEntity {
 	readonly eatenAt?: Vector2;
 }
 
-export type CandyType = "default" | "loot" | "dropping";
+export enum CandyType {
+	Default,
+	Loot,
+	Dropping,
+}
 
 const initialState: CandyState = {};
 

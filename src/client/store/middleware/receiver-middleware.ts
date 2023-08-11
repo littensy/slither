@@ -1,5 +1,6 @@
 import { createBroadcastReceiver } from "@rbxts/reflex";
 import { remotes } from "shared/remotes";
+import { deserializeState } from "shared/serdes";
 
 export function receiverMiddleware() {
 	const receiver = createBroadcastReceiver({
@@ -13,7 +14,7 @@ export function receiverMiddleware() {
 	});
 
 	remotes.store.hydrate.connect((state) => {
-		receiver.hydrate(state);
+		receiver.hydrate(deserializeState(state));
 	});
 
 	return receiver.middleware;

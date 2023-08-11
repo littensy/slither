@@ -8,6 +8,7 @@ import { store } from "client/store";
 import { LOCAL_USER, WORLD_BOUNDS, WORLD_TICK } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
 import { getRandomDefaultSnakeSkin } from "shared/data/skins";
+import { CandyType } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 import { createScheduler } from "shared/utils/scheduler";
 
@@ -37,7 +38,7 @@ export = hoarcekat(() => {
 		store.populateCandy(
 			fillArray(512, (index) => ({
 				id: `test-${index}`,
-				type: "default",
+				type: CandyType.Default,
 				position: new Vector2(
 					(math.random() * 2 - 1) * WORLD_BOUNDS * 0.2,
 					(math.random() * 2 - 1) * WORLD_BOUNDS * 0.2,
