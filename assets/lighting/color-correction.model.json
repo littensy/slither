@@ -1,0 +1,6 @@
+{
+	"ClassName": "ColorCorrectionEffect",
+	"Properties": {
+		"TintColor": [0, 0, 0]
+	}
+}

@@ -54,6 +54,7 @@
 		},
 		"Lighting": {
 			"$className": "Lighting",
+			"$path": "assets/lighting",
 			"$properties": {
 				"Technology": {
 					"Enum": 2
