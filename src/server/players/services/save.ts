@@ -1,5 +1,5 @@
 import { DataStoreService, Players } from "@rbxts/services";
-import { setTimeout } from "@rbxts/set-timeout";
+import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import { defaultPlayerSave, playerSaveSchema, selectPlayerSave } from "shared/store/saves";
 import { promisePlayerDisconnected } from "shared/utils/player-utils";
@@ -12,12 +12,6 @@ async function main() {
 	for (const player of Players.GetPlayers()) {
 		loadPlayerSave(player);
 	}
-
-	setTimeout(() => {
-		for (const player of Players.GetPlayers()) {
-			saveToDataStore(player);
-		}
-	}, 60);
 }
 
 async function loadPlayerSave(player: Player) {
@@ -33,8 +27,13 @@ async function loadPlayerSave(player: Player) {
 			return fallbackPlayerSave(player, save);
 		}
 
+		const disconnect = setInterval(() => {
+			saveToDataStore(player);
+		}, 60);
+
 		promisePlayerDisconnected(player).then(() => {
 			store.deletePlayerSave(player.Name);
+			disconnect();
 			saveToDataStore(player);
 		});
 
