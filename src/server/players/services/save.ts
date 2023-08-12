@@ -1,6 +1,8 @@
 import { DataStoreService, Players } from "@rbxts/services";
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
+import { palette } from "shared/data/palette";
+import { remotes } from "shared/remotes";
 import { defaultPlayerSave, playerSaveSchema, selectPlayerSave } from "shared/store/saves";
 import { promisePlayerDisconnected } from "shared/utils/player-utils";
 
@@ -52,6 +54,20 @@ async function fallbackPlayerSave(player: Player, save?: unknown) {
 
 	promisePlayerDisconnected(player).then(() => {
 		store.deletePlayerSave(player.Name);
+	});
+
+	remotes.client.alert.fire(player, {
+		emoji: "✅",
+		color: palette.green,
+		message: "Your data is safe! But we're having trouble loading it.",
+		duration: 10,
+	});
+
+	remotes.client.alert.fire(player, {
+		emoji: "🚨",
+		color: palette.red,
+		message: "Roblox may be experiencing issues. Sorry for the inconvenience!",
+		duration: 10,
 	});
 }
 

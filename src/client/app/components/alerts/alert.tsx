@@ -8,13 +8,15 @@ import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
-import { darken } from "client/app/utils/color-utils";
+import { brightenIfDark, darken } from "client/app/utils/color-utils";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { Alert } from "client/store/alert";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { mapStrict } from "shared/utils/math-utils";
+
+import { AlertTimer } from "./alert-timer";
 
 interface AlertProps {
 	readonly alert: Alert;
@@ -41,8 +43,11 @@ export function Alert({ alert, index }: AlertProps) {
 		sizeMotion.spring(new UDim2(0, width, 0, height), springs.gentle);
 	};
 
+	const isGradient = alert.colorSecondary !== undefined;
 	const highlight = joinBindings([hover, transition]).map(([a, b]) => a * b);
 	const backgroundColor = darken(alert.color.Lerp(palette.base, 0.25), 0.5);
+	const backgroundColorSecondary = darken(alert.colorSecondary?.Lerp(palette.base, 0.25) || palette.white, 0.5);
+	const messageColor = brightenIfDark(alert.colorMessage || alert.color);
 
 	useEffect(() => {
 		transitionMotion.spring(alert.visible ? 1 : 0, springs.gentle);
@@ -73,18 +78,32 @@ export function Alert({ alert, index }: AlertProps) {
 		>
 			<Shadow
 				key="drop-shadow"
-				shadowColor={lerpBinding(transition, alert.color, backgroundColor)}
+				shadowColor={isGradient ? palette.white : lerpBinding(transition, alert.color, backgroundColor)}
 				shadowTransparency={lerpBinding(transition, 1, 0.3)}
 				shadowSize={rem(3)}
-			/>
+			>
+				{isGradient && (
+					<uigradient
+						key="drop-shadow-gradient"
+						Color={new ColorSequence(backgroundColor, backgroundColorSecondary)}
+					/>
+				)}
+			</Shadow>
 
 			<Frame
 				key="background"
-				backgroundColor={backgroundColor}
+				backgroundColor={isGradient ? palette.white : backgroundColor}
 				backgroundTransparency={lerpBinding(transition, 1, 0.1)}
 				cornerRadius={new UDim(0, rem(1))}
 				size={new UDim2(1, 0, 1, 0)}
-			/>
+			>
+				{isGradient && (
+					<uigradient
+						key="background-gradient"
+						Color={new ColorSequence(backgroundColor, backgroundColorSecondary)}
+					/>
+				)}
+			</Frame>
 
 			<Frame
 				key="highlight"
@@ -96,17 +115,21 @@ export function Alert({ alert, index }: AlertProps) {
 
 			<Outline
 				key="border"
-				innerColor={alert.color}
+				innerColor={isGradient ? palette.white : alert.color}
 				innerTransparency={lerpBinding(transition, 1, 0.85)}
 				outerTransparency={lerpBinding(transition, 1, 0.75)}
 				cornerRadius={new UDim(0, rem(1))}
-			/>
+			>
+				{isGradient && (
+					<uigradient key="border-gradient" Color={new ColorSequence(alert.color, alert.colorSecondary)} />
+				)}
+			</Outline>
 
 			<Text
 				key="icon"
 				font={fonts.inter.regular}
 				text={alert.emoji}
-				textColor={alert.color}
+				textColor={messageColor}
 				textTransparency={lerpBinding(transition, 1, 0)}
 				textSize={rem(2)}
 				textXAlignment="Left"
@@ -118,7 +141,7 @@ export function Alert({ alert, index }: AlertProps) {
 				key="message"
 				font={fonts.inter.medium}
 				text={alert.message}
-				textColor={alert.color}
+				textColor={messageColor}
 				textTransparency={lerpBinding(transition, 1, 0)}
 				textSize={rem(1.5)}
 				textXAlignment="Left"
@@ -133,13 +156,21 @@ export function Alert({ alert, index }: AlertProps) {
 			/>
 
 			<Image
-				key="icon"
+				key="close"
 				image={images.ui.alert_dismiss}
-				imageColor={alert.color}
+				imageColor={brightenIfDark(alert.colorSecondary || alert.colorMessage || alert.color)}
 				imageTransparency={lerpBinding(transition, 1, 0)}
 				anchorPoint={new Vector2(1, 0.5)}
 				size={new UDim2(0, rem(1), 0, rem(1))}
 				position={new UDim2(1, rem(-ALERT_PADDING), 0.5, 0)}
+			/>
+
+			<AlertTimer
+				key="timer"
+				duration={alert.duration}
+				color={alert.color}
+				colorSecondary={alert.colorSecondary}
+				transparency={lerpBinding(transition, 1, 0)}
 			/>
 		</ReactiveButton>
 	);

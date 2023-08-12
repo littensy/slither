@@ -1,5 +1,6 @@
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
+import { sendAlert } from "client/alert";
 import { Frame } from "client/app/common/frame";
 import { Image } from "client/app/common/image";
 import { Outline } from "client/app/common/outline";
@@ -73,6 +74,12 @@ export function ActButton() {
 			remotes.save.buySkin.fire(current);
 		} else if (status.variant === "wear") {
 			remotes.save.setSkin.fire(current);
+		} else if (status.variant === "not-enough-money") {
+			sendAlert({
+				emoji: "🚨",
+				color: palette.red,
+				message: `Sorry, you cannot afford the ${current} skin yet.`,
+			});
 		}
 	};
 

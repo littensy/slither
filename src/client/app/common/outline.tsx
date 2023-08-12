@@ -5,7 +5,7 @@ import { palette } from "shared/data/palette";
 import { useRem } from "../hooks";
 import { Group } from "./group";
 
-interface OutlineProps {
+interface OutlineProps extends Roact.PropsWithChildren {
 	readonly outlineTransparency?: number | Roact.Binding<number>;
 	readonly innerColor?: Color3 | Roact.Binding<Color3>;
 	readonly outerColor?: Color3 | Roact.Binding<Color3>;
@@ -25,6 +25,7 @@ export function Outline({
 	innerThickness,
 	outerThickness,
 	cornerRadius,
+	children,
 }: OutlineProps) {
 	const rem = useRem();
 
@@ -69,7 +70,9 @@ export function Outline({
 					Color={innerColor}
 					Transparency={innerStyle.transparency}
 					Thickness={innerThickness}
-				/>
+				>
+					{children}
+				</uistroke>
 			</Group>
 
 			<Group key="outer-border">
@@ -79,7 +82,9 @@ export function Outline({
 					Color={outerColor}
 					Transparency={outerStyle.transparency}
 					Thickness={outerThickness}
-				/>
+				>
+					{children}
+				</uistroke>
 			</Group>
 		</>
 	);

@@ -9,6 +9,8 @@ export interface Alert {
 	readonly emoji: string;
 	readonly message: string;
 	readonly color: Color3;
+	readonly colorSecondary?: Color3;
+	readonly colorMessage?: Color3;
 	readonly duration: number;
 	readonly visible: boolean;
 }

@@ -28,7 +28,12 @@ export = hoarcekat(() => {
 				sendAlert({ emoji: "🚨", color: palette.red, message: "This is an error alert." });
 				break;
 			case "awesome":
-				sendAlert({ emoji: "🎉", color: palette.mauve, message: "This is an awesome alert." });
+				sendAlert({
+					emoji: "🎉",
+					color: palette.mauve,
+					colorSecondary: palette.blue,
+					message: "This is an awesome alert.",
+				});
 				break;
 		}
 	};
