@@ -1,8 +1,9 @@
 import { blend, lerp, map, useTimer } from "@rbxts/pretty-react-hooks";
-import Roact, { joinBindings, memo, useEffect, useMemo } from "@rbxts/roact";
+import Roact, { memo, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem, useSeed } from "client/app/hooks";
+import { composeBindings } from "client/app/utils/compose-bindings";
 import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { CandyType } from "shared/store/candy";
@@ -40,7 +41,7 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 			return new UDim2(0, rem(diameter), 0, rem(diameter));
 		});
 
-		const transparency = joinBindings([timer.value, transition]).map(([timer, transition]) => {
+		const transparency = composeBindings(timer.value, transition, (timer, transition) => {
 			const flicker = map(math.noise(seed + 4 * timer), -0.5, 0.5, 0.4, 0.7);
 			return lerp(flicker, 1, transition);
 		});
