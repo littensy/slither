@@ -1,8 +1,8 @@
-import { mapBinding } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { images } from "shared/assets";
 
 import { useRem } from "../hooks";
+import { composeBindings } from "../utils/compose-bindings";
 import { Image } from "./image";
 
 interface ShadowProps extends Roact.PropsWithChildren {
@@ -36,7 +36,7 @@ export function Shadow({
 			imageTransparency={shadowTransparency}
 			imageColor={shadowColor}
 			anchorPoint={new Vector2(0.5, 0.5)}
-			size={mapBinding(shadowSize, (size) => {
+			size={composeBindings(shadowSize, (size) => {
 				const sizeOffsetScaled = rem(BLUR_RADIUS * shadowBlur, "pixel");
 
 				if (typeIs(size, "UDim2")) {
@@ -45,7 +45,7 @@ export function Shadow({
 					return new UDim2(1, size + sizeOffsetScaled, 1, size + sizeOffsetScaled);
 				}
 			})}
-			position={mapBinding(shadowPosition, (offset) => new UDim2(0.5, 0, 0.5, offset))}
+			position={composeBindings(shadowPosition, (offset) => new UDim2(0.5, 0, 0.5, offset))}
 			scaleType="Slice"
 			sliceCenter={new Rect(IMAGE_SIZE.div(2), IMAGE_SIZE.div(2))}
 			sliceScale={rem(shadowBlur, "pixel")}

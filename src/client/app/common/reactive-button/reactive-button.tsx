@@ -1,6 +1,7 @@
-import { blend, joinAnyBindings, lerpBinding, useUpdateEffect } from "@rbxts/pretty-react-hooks";
+import { blend, lerpBinding, useUpdateEffect } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { useMotion, useRem } from "client/app/hooks";
+import { composeBindings } from "client/app/utils/compose-bindings";
 
 import { Button } from "../button";
 import { Frame } from "../frame";
@@ -112,14 +113,19 @@ export function ReactiveButton({
 			change={change}
 		>
 			<Frame
-				backgroundColor={joinAnyBindings([animation.hoverOnly, animation.press, backgroundColor] as const).map(
-					([hover, press, color]) => {
+				backgroundColor={composeBindings(
+					animation.hoverOnly,
+					animation.press,
+					backgroundColor,
+					(hover, press, color) => {
 						return color.Lerp(new Color3(1, 1, 1), hover * 0.15).Lerp(new Color3(), press * 0.1);
 					},
 				)}
-				backgroundTransparency={joinAnyBindings([animation.press, backgroundTransparency] as const).map(
-					([t, transparency]) => {
-						return blend(-t * 0.2, transparency);
+				backgroundTransparency={composeBindings(
+					animation.press,
+					backgroundTransparency,
+					(press, transparency) => {
+						return blend(-press * 0.2, transparency);
 					},
 				)}
 				cornerRadius={cornerRadius}
