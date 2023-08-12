@@ -1,6 +1,7 @@
 import Roact from "@rbxts/roact";
 
 import { Root } from "./common/root";
+import { Alerts } from "./components/alerts";
 import { Controller } from "./components/controller";
 import { Game } from "./components/game";
 import { Menu } from "./components/menu";
@@ -22,6 +23,10 @@ export function App() {
 			<Root>
 				<Menu />
 				<Stats />
+			</Root>
+
+			<Root>
+				<Alerts />
 			</Root>
 		</>
 	);

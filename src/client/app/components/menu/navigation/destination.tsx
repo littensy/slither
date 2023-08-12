@@ -1,7 +1,9 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
+import { Frame } from "client/app/common/frame";
 import { Image } from "client/app/common/image";
+import { Outline } from "client/app/common/outline";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
@@ -34,9 +36,7 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 
 	return (
 		<ReactiveButton
-			backgroundColor={color}
-			backgroundTransparency={lerpBinding(transition, 1, 0.9)}
-			cornerRadius={new UDim(0, rem(1))}
+			backgroundTransparency={1}
 			size={new UDim2(0, rem(7), 0, rem(5))}
 			layoutOrder={order}
 			onClick={() => {
@@ -50,6 +50,21 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 				shadowSize={rem(4)}
 				shadowColor={color}
 				shadowTransparency={lerpBinding(transition, 1, 0.7)}
+			/>
+
+			<Frame
+				key="background"
+				backgroundColor={color}
+				backgroundTransparency={lerpBinding(transition, 1, 0.8)}
+				cornerRadius={new UDim(0, rem(1))}
+				size={new UDim2(1, 0, 1, 0)}
+			/>
+
+			<Outline
+				key="outline"
+				outlineTransparency={lerpBinding(transition, 1, 0)}
+				innerColor={color}
+				cornerRadius={new UDim(0, rem(1))}
 			/>
 
 			<Image
