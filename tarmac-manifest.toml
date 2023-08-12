@@ -13,6 +13,11 @@ hash = "1e598a6a305b566bf81f2aae5382b203681277c9525c86a33c84a29a593448c7"
 id = 14035801225
 packable = false
 
+[inputs."assets/images/ui/alert_dismiss.png"]
+hash = "df13be92780e30383b63d718d005351605ad0ab00e836b24aca4e3392f8e05d5"
+id = 14402269904
+packable = false
+
 [inputs."assets/images/ui/backdrop.png"]
 hash = "dbce654530af652776ce0802aba23ee0a9ffd7577fb6271e5993f6ed06cd6b94"
 id = 14136965139

@@ -1,6 +1,7 @@
 import { BroadcastAction } from "@rbxts/reflex";
 import { Client, createRemotes, namespace, remote, Server, throttleMiddleware } from "@rbxts/remo";
 import { t } from "@rbxts/t";
+import type { Alert } from "client/store/alert";
 
 import { WORLD_TICK } from "./constants";
 import { SharedStateSerialized } from "./serdes";
@@ -24,5 +25,9 @@ export const remotes = createRemotes({
 	save: namespace({
 		setSkin: remote<Server, [skin: string]>(t.string),
 		buySkin: remote<Server, [skin: string]>(t.string),
+	}),
+
+	client: namespace({
+		alert: remote<Client, [params: Partial<Alert>]>(),
 	}),
 });

@@ -2,6 +2,7 @@ import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
 import { Frame } from "client/app/common/frame";
 import { Image } from "client/app/common/image";
+import { Outline } from "client/app/common/outline";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
@@ -131,9 +132,14 @@ export function ActButton() {
 				backgroundColor={palette.base}
 				cornerRadius={new UDim(0, rem(1))}
 				size={new UDim2(1, 0, 1, 0)}
-			>
-				<uistroke key="stroke" Color={Color3.fromRGB(156, 218, 233)} Transparency={0.95} Thickness={rem(0.2)} />
-			</Frame>
+			/>
+
+			<Outline
+				key="outline"
+				innerColor={Color3.fromRGB(156, 218, 233)}
+				innerTransparency={0.95}
+				cornerRadius={new UDim(0, rem(1))}
+			/>
 
 			<Text
 				key="text"

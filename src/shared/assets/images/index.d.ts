@@ -1,5 +1,6 @@
 export const images: {
 	readonly ui: {
+		readonly alert_dismiss: string;
 		readonly backdrop: string;
 		readonly blur: string;
 		readonly button_glow_top: string;

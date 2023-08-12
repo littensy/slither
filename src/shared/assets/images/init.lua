@@ -7,6 +7,7 @@ return {
 			snake_main = "rbxassetid://14035801225",
 		},
 		ui = {
+			alert_dismiss = "rbxassetid://14402269904",
 			backdrop = "rbxassetid://14136965139",
 			blur = "rbxassetid://14120516187",
 			button_glow_top = "rbxassetid://14367671668",
