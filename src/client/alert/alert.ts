@@ -13,7 +13,7 @@ const defaultAlert: Alert = {
 
 let nextAlertId = 0;
 
-export async function sendAlert(patch: Partial<Alert>) {
+export function sendAlert(patch: Partial<Alert>) {
 	const alert: Alert = {
 		...defaultAlert,
 		...patch,
@@ -22,9 +22,11 @@ export async function sendAlert(patch: Partial<Alert>) {
 
 	store.addAlert(alert);
 
-	return Promise.delay(alert.duration).then(() => {
+	Promise.delay(alert.duration).then(() => {
 		dismissAlert(alert.id);
 	});
+
+	return alert.id;
 }
 
 export async function dismissAlert(id: number) {
@@ -32,5 +34,6 @@ export async function dismissAlert(id: number) {
 
 	return Promise.delay(0.25).then(() => {
 		store.removeAlert(id);
+		return id;
 	});
 }
