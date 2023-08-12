@@ -1,8 +1,9 @@
-import { blend, joinAnyBindings, mapBinding } from "@rbxts/pretty-react-hooks";
+import { blend } from "@rbxts/pretty-react-hooks";
 import Roact, { useMemo } from "@rbxts/roact";
 import { palette } from "shared/data/palette";
 
 import { useRem } from "../hooks";
+import { composeBindings } from "../utils/compose-bindings";
 import { Group } from "./group";
 
 interface OutlineProps extends Roact.PropsWithChildren {
@@ -34,19 +35,19 @@ export function Outline({
 	cornerRadius ??= new UDim(0, rem(0.5));
 
 	const innerStyle = useMemo(() => {
-		const size = mapBinding(innerThickness!, (thickness) => {
+		const size = composeBindings(innerThickness!, (thickness) => {
 			return new UDim2(1, math.round(-2 * thickness), 1, math.round(-2 * thickness));
 		});
 
-		const position = mapBinding(innerThickness!, (thickness) => {
+		const position = composeBindings(innerThickness!, (thickness) => {
 			return new UDim2(0, thickness, 0, thickness);
 		});
 
-		const radius = joinAnyBindings([cornerRadius!, innerThickness!] as const).map(([radius, thickness]) => {
+		const radius = composeBindings(cornerRadius!, innerThickness!, (radius, thickness) => {
 			return radius.sub(new UDim(0, thickness));
 		});
 
-		const transparency = joinAnyBindings([outlineTransparency, innerTransparency]).map(([a, b]) => {
+		const transparency = composeBindings(outlineTransparency, innerTransparency, (a, b) => {
 			return math.clamp(blend(a, b), 0, 1);
 		});
 
@@ -54,7 +55,7 @@ export function Outline({
 	}, [innerThickness, innerTransparency, cornerRadius, outlineTransparency, rem]);
 
 	const outerStyle = useMemo(() => {
-		const transparency = joinAnyBindings([outlineTransparency, outerTransparency]).map(([a, b]) => {
+		const transparency = composeBindings(outlineTransparency, outerTransparency, (a, b) => {
 			return math.clamp(blend(a, b), 0, 1);
 		});
 

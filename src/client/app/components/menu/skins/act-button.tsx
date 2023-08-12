@@ -1,5 +1,5 @@
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { joinBindings, useEffect, useMemo } from "@rbxts/roact";
+import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { sendAlert } from "client/alert";
 import { Frame } from "client/app/common/frame";
 import { Image } from "client/app/common/image";
@@ -8,6 +8,7 @@ import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
+import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { selectMenuCurrentSkin } from "client/store/menu";
@@ -60,7 +61,7 @@ export function ActButton() {
 			return new UDim2(0, width + rem(3), 0, rem(4));
 		});
 
-		const gradient = joinBindings([primary, secondary]).map(([primary, secondary]) => {
+		const gradient = composeBindings(primary, secondary, (primary, secondary) => {
 			return new ColorSequence(primary, secondary);
 		});
 

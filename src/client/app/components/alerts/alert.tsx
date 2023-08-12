@@ -1,5 +1,5 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
-import Roact, { joinBindings, useEffect } from "@rbxts/roact";
+import Roact, { useEffect } from "@rbxts/roact";
 import { dismissAlert } from "client/alert";
 import { Frame } from "client/app/common/frame";
 import { Image } from "client/app/common/image";
@@ -9,6 +9,7 @@ import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
 import { brightenIfDark, darken } from "client/app/utils/color-utils";
+import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { Alert } from "client/store/alert";
@@ -44,7 +45,7 @@ export function Alert({ alert, index }: AlertProps) {
 	};
 
 	const isGradient = alert.colorSecondary !== undefined;
-	const highlight = joinBindings([hover, transition]).map(([a, b]) => a * b);
+	const highlight = composeBindings(hover, transition, (a, b) => a * b);
 	const backgroundColor = darken(alert.color.Lerp(palette.base, 0.25), 0.5);
 	const backgroundColorSecondary = darken(alert.colorSecondary?.Lerp(palette.base, 0.25) || palette.white, 0.5);
 	const messageColor = brightenIfDark(alert.colorMessage || alert.color);
