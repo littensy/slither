@@ -66,7 +66,7 @@ export function ActButton() {
 		});
 
 		return { size, gradient };
-	}, []);
+	}, [rem]);
 
 	const onClick = () => {
 		spinMotion.spring(spin.getValue() + 180, springs.molasses);

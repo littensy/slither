@@ -47,7 +47,7 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 		});
 
 		return { position, glow, transparency };
-	}, [rem]);
+	}, [rem, worldScale]);
 
 	const diameter = useMemo(() => {
 		return variant === CandyType.Loot ? rem(2 + 1.5 * math.random()) : mapStrict(size, 1, 20, rem(0.75), rem(3.5));
