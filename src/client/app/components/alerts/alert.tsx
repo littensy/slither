@@ -1,5 +1,6 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
-import Roact, { useEffect } from "@rbxts/roact";
+import { useSelector } from "@rbxts/react-reflex";
+import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { dismissAlert } from "client/alert";
 import { Frame } from "client/app/common/frame";
 import { Image } from "client/app/common/image";
@@ -13,6 +14,7 @@ import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { Alert } from "client/store/alert";
+import { selectIsMenuOpen } from "client/store/menu";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { mapStrict } from "shared/utils/math-utils";
@@ -32,10 +34,23 @@ const LIST_PADDING = 1;
 
 export function Alert({ alert, index }: AlertProps) {
 	const rem = useRem();
+	const menuOpen = useSelector(selectIsMenuOpen);
+
 	const [transition, transitionMotion] = useMotion(0);
 	const [hover, hoverMotion] = useMotion(0);
 	const [size, sizeMotion] = useMotion(new UDim2(0, ALERT_WIDTH / 2, 0, ALERT_HEIGHT / 2));
 	const [position, positionMotion] = useMotion(new UDim2(0.5, 0, 0, rem(5)));
+
+	const style = useMemo(() => {
+		const highlight = composeBindings(hover, transition, (a, b) => a * b);
+		const background = darken(alert.color.Lerp(palette.base, 0.25), 0.5);
+		const backgroundSecondary = darken(alert.colorSecondary?.Lerp(palette.base, 0.25) || palette.white, 0.5);
+		const message = brightenIfDark(alert.colorMessage || alert.color);
+
+		return { highlight, background, backgroundSecondary, message };
+	}, [alert, hover, transition]);
+
+	const hasGradient = alert.colorSecondary !== undefined;
 
 	const updateSize = (textWidth: number) => {
 		const width = math.max(textWidth + rem(10), rem(ALERT_WIDTH));
@@ -44,20 +59,15 @@ export function Alert({ alert, index }: AlertProps) {
 		sizeMotion.spring(new UDim2(0, width, 0, height), springs.gentle);
 	};
 
-	const isGradient = alert.colorSecondary !== undefined;
-	const highlight = composeBindings(hover, transition, (a, b) => a * b);
-	const backgroundColor = darken(alert.color.Lerp(palette.base, 0.25), 0.5);
-	const backgroundColorSecondary = darken(alert.colorSecondary?.Lerp(palette.base, 0.25) || palette.white, 0.5);
-	const messageColor = brightenIfDark(alert.colorMessage || alert.color);
-
 	useEffect(() => {
 		transitionMotion.spring(alert.visible ? 1 : 0, springs.gentle);
 	}, [alert.visible]);
 
 	useEffect(() => {
-		const offset = (ALERT_HEIGHT + LIST_PADDING) * index;
+		const position = (ALERT_HEIGHT + LIST_PADDING) * index;
+		const offset = menuOpen ? 10 : 5;
 
-		positionMotion.spring(new UDim2(0.5, 0, 0, rem(offset + 10)), {
+		positionMotion.spring(new UDim2(0.5, 0, 0, rem(position + offset)), {
 			tension: 180,
 			friction: 12,
 			mass: mapStrict(index, 0, MAX_ALERTS, 1, 2),
@@ -66,7 +76,7 @@ export function Alert({ alert, index }: AlertProps) {
 		if (index >= MAX_ALERTS) {
 			dismissAlert(alert.id);
 		}
-	}, [index, rem]);
+	}, [index, menuOpen, rem]);
 
 	return (
 		<ReactiveButton
@@ -79,29 +89,29 @@ export function Alert({ alert, index }: AlertProps) {
 		>
 			<Shadow
 				key="drop-shadow"
-				shadowColor={isGradient ? palette.white : lerpBinding(transition, alert.color, backgroundColor)}
+				shadowColor={hasGradient ? palette.white : lerpBinding(transition, alert.color, style.background)}
 				shadowTransparency={lerpBinding(transition, 1, 0.3)}
 				shadowSize={rem(3)}
 			>
-				{isGradient && (
+				{hasGradient && (
 					<uigradient
 						key="drop-shadow-gradient"
-						Color={new ColorSequence(backgroundColor, backgroundColorSecondary)}
+						Color={new ColorSequence(style.background, style.backgroundSecondary)}
 					/>
 				)}
 			</Shadow>
 
 			<Frame
 				key="background"
-				backgroundColor={isGradient ? palette.white : backgroundColor}
+				backgroundColor={hasGradient ? palette.white : style.background}
 				backgroundTransparency={lerpBinding(transition, 1, 0.1)}
 				cornerRadius={new UDim(0, rem(1))}
 				size={new UDim2(1, 0, 1, 0)}
 			>
-				{isGradient && (
+				{hasGradient && (
 					<uigradient
 						key="background-gradient"
-						Color={new ColorSequence(backgroundColor, backgroundColorSecondary)}
+						Color={new ColorSequence(style.background, style.backgroundSecondary)}
 					/>
 				)}
 			</Frame>
@@ -109,19 +119,19 @@ export function Alert({ alert, index }: AlertProps) {
 			<Frame
 				key="highlight"
 				backgroundColor={alert.color}
-				backgroundTransparency={lerpBinding(highlight, 1, 0.9)}
+				backgroundTransparency={lerpBinding(style.highlight, 1, 0.9)}
 				cornerRadius={new UDim(0, rem(1))}
 				size={new UDim2(1, 0, 1, 0)}
 			/>
 
 			<Outline
 				key="border"
-				innerColor={isGradient ? palette.white : alert.color}
+				innerColor={hasGradient ? palette.white : alert.color}
 				innerTransparency={lerpBinding(transition, 1, 0.85)}
 				outerTransparency={lerpBinding(transition, 1, 0.75)}
 				cornerRadius={new UDim(0, rem(1))}
 			>
-				{isGradient && (
+				{hasGradient && (
 					<uigradient key="border-gradient" Color={new ColorSequence(alert.color, alert.colorSecondary)} />
 				)}
 			</Outline>
@@ -130,7 +140,7 @@ export function Alert({ alert, index }: AlertProps) {
 				key="icon"
 				font={fonts.inter.regular}
 				text={alert.emoji}
-				textColor={messageColor}
+				textColor={style.message}
 				textTransparency={lerpBinding(transition, 1, 0)}
 				textSize={rem(2)}
 				textXAlignment="Left"
@@ -142,7 +152,7 @@ export function Alert({ alert, index }: AlertProps) {
 				key="message"
 				font={fonts.inter.medium}
 				text={alert.message}
-				textColor={messageColor}
+				textColor={style.message}
 				textTransparency={lerpBinding(transition, 1, 0)}
 				textSize={rem(1.5)}
 				textXAlignment="Left"
