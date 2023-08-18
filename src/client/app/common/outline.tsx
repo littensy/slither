@@ -17,6 +17,10 @@ interface OutlineProps extends Roact.PropsWithChildren {
 	readonly cornerRadius?: UDim | Roact.Binding<UDim>;
 }
 
+function ceilEven(n: number) {
+	return math.ceil(n / 2) * 2;
+}
+
 export function Outline({
 	outlineTransparency = 0,
 	innerColor = palette.white,
@@ -36,7 +40,7 @@ export function Outline({
 
 	const innerStyle = useMemo(() => {
 		const size = composeBindings(innerThickness!, (thickness) => {
-			return new UDim2(1, math.round(-2 * thickness), 1, math.round(-2 * thickness));
+			return new UDim2(1, ceilEven(-2 * thickness), 1, ceilEven(-2 * thickness));
 		});
 
 		const position = composeBindings(innerThickness!, (thickness) => {
