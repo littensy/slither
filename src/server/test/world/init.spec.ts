@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { candyGrid } from "server/world";
+import { candyGrid, initWorldServices } from "server/world";
 
 export = () => {
 	/**
@@ -14,6 +14,10 @@ export = () => {
 		store.resetState();
 		store.flush();
 	};
+
+	beforeAll(() => {
+		initWorldServices();
+	});
 
 	beforeEach(() => {
 		reset();

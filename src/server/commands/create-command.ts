@@ -1,6 +1,6 @@
 import { Players } from "@rbxts/services";
 
-import { getTextChatCommands } from "./text-chat-service";
+import { getTextChatCommands } from "./utils";
 
 const ADMINS = new ReadonlySet([
 	48203430, // @LITTENSY

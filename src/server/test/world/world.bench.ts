@@ -3,6 +3,7 @@ import {
 	candyGrid,
 	createCandy,
 	getSafePointInWorld,
+	initWorldServices,
 	onCandyTick,
 	onCollisionTick,
 	onSnakeTick,
@@ -45,6 +46,9 @@ async function setup() {
 
 	// Generate the maximum number of candies
 	store.populateCandy(fillArray(CANDY_LIMITS[CandyType.Default], () => createCandy()));
+
+	// Initialize core services
+	initWorldServices();
 
 	// Schedulers may persist after the benchmark is complete, so we need to
 	// disconnect them manually.

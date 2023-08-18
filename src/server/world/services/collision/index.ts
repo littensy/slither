@@ -1,3 +1,2 @@
-import "./collision";
-
+export * from "./collision";
 export * from "./collision-tick";
