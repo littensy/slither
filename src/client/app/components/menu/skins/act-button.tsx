@@ -79,7 +79,7 @@ export function ActButton() {
 			sendAlert({
 				emoji: "🚨",
 				color: palette.red,
-				message: `Sorry, you cannot afford the ${current} skin yet.`,
+				message: `Sorry, you cannot afford the <font color="#fff">${current}</font> skin yet.`,
 			});
 		}
 	};
