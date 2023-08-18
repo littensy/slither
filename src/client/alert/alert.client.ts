@@ -4,7 +4,7 @@ import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 import { selectLocalSnakeRanking } from "shared/store/snakes";
 
-import { dismissAlert, sendAlert } from "./alert-service";
+import { dismissAlert, sendAlert } from ".";
 
 const FIRST_PLACE = 'Congratulations, you are in <font color="#fff">first place</font>!';
 const SECOND_PLACE = 'Congratulations, you are in <font color="#fff">second place</font>!';
