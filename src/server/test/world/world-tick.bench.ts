@@ -3,7 +3,10 @@ import {
 	candyGrid,
 	createCandy,
 	getSafePointInWorld,
-	initWorldServices,
+	initBotService,
+	initCandyService,
+	initCollisionService,
+	initSnakeService,
 	onCandyTick,
 	onCollisionTick,
 	onSnakeTick,
@@ -48,14 +51,11 @@ async function setup() {
 	store.populateCandy(fillArray(CANDY_LIMITS[CandyType.Default], () => createCandy()));
 
 	// Initialize core services
-	initWorldServices();
-
-	// Schedulers may persist after the benchmark is complete, so we need to
-	// disconnect them manually.
-	task.defer(() => {
-		store.destroy();
-		disconnectAllSchedulers();
-	});
+	initCandyService();
+	initSnakeService();
+	initCollisionService();
+	initBotService();
+	disconnectAllSchedulers();
 }
 
 setup();
