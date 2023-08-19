@@ -8,7 +8,7 @@ import { promisePlayerDisconnected } from "shared/utils/player-utils";
 
 const dataStore = DataStoreService.GetDataStore("saves", "v1");
 
-async function main() {
+export async function initSaveService() {
 	Players.PlayerAdded.Connect(loadPlayerSave);
 
 	for (const player of Players.GetPlayers()) {
@@ -84,5 +84,3 @@ async function saveToDataStore(player: Player) {
 		warn(`Failed to auto-save data for ${player.Name}: ${e}`);
 	}
 }
-
-main();

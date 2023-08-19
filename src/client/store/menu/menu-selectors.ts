@@ -1,6 +1,6 @@
 import { RANDOM_SKIN } from "shared/store/saves";
 
-import { RootState } from "../";
+import { RootState } from "..";
 import { MenuPage } from "./menu-slice";
 
 export const selectCurrentPage = (state: RootState) => {

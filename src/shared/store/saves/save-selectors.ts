@@ -1,4 +1,4 @@
-import { SharedState } from "../";
+import { SharedState } from "..";
 
 export const selectPlayerSaves = (state: SharedState) => {
 	return state.saves;

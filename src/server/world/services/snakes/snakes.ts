@@ -8,45 +8,47 @@ import { createScheduler } from "shared/utils/scheduler";
 
 import { deleteSnakeInput, onSnakeTick, registerSnakeInput } from "./snake-tick";
 
-createScheduler({
-	name: "snake",
-	tick: WORLD_TICK,
-	phase: SNAKE_TICK_PHASE,
-	onTick: onSnakeTick,
-});
-
-remotes.snake.spawn.connect((player) => {
-	if (playerIsSpawned(player)) {
-		return;
-	}
-
-	const save = store.getState(selectPlayerSave(player.Name)) || defaultPlayerSave;
-
-	// random skin starts at one because zero is reserved
-	const randomSkin = save.skins[math.random(1, save.skins.size() - 1)];
-	const currentSkin = save.skin;
-
-	store.addSnake(player.Name, {
-		name: player.DisplayName,
-		head: getSafePointInWorld(),
-		skin: currentSkin !== RANDOM_SKIN ? currentSkin : randomSkin,
-		score: 10,
+export async function initSnakeService() {
+	createScheduler({
+		name: "snake",
+		tick: WORLD_TICK,
+		phase: SNAKE_TICK_PHASE,
+		onTick: onSnakeTick,
 	});
-});
 
-remotes.snake.move.connect((player, angle) => {
-	registerSnakeInput(player.Name, angle);
-});
+	remotes.snake.spawn.connect((player) => {
+		if (playerIsSpawned(player)) {
+			return;
+		}
 
-remotes.snake.boost.connect((player, boost) => {
-	store.boostSnake(player.Name, boost);
-});
+		const save = store.getState(selectPlayerSave(player.Name)) || defaultPlayerSave;
 
-remotes.snake.kill.connect((player) => {
-	killSnake(player.Name);
-});
+		// random skin starts at one because zero is reserved
+		const randomSkin = save.skins[math.random(1, save.skins.size() - 1)];
+		const currentSkin = save.skin;
 
-Players.PlayerRemoving.Connect((player) => {
-	deleteSnakeInput(player.Name);
-	killSnake(player.Name);
-});
+		store.addSnake(player.Name, {
+			name: player.DisplayName,
+			head: getSafePointInWorld(),
+			skin: currentSkin !== RANDOM_SKIN ? currentSkin : randomSkin,
+			score: 10,
+		});
+	});
+
+	remotes.snake.move.connect((player, angle) => {
+		registerSnakeInput(player.Name, angle);
+	});
+
+	remotes.snake.boost.connect((player, boost) => {
+		store.boostSnake(player.Name, boost);
+	});
+
+	remotes.snake.kill.connect((player) => {
+		killSnake(player.Name);
+	});
+
+	Players.PlayerRemoving.Connect((player) => {
+		deleteSnakeInput(player.Name);
+		killSnake(player.Name);
+	});
+}

@@ -150,6 +150,7 @@ export function Alert({ alert, index }: AlertProps) {
 
 			<Text
 				key="message"
+				richText
 				font={fonts.inter.medium}
 				text={alert.message}
 				textColor={style.message}

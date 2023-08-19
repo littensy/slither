@@ -4,7 +4,7 @@ import { slices } from "shared/store";
 
 import { alertSlice } from "./alert";
 import { menuSlice } from "./menu";
-import { receiverMiddleware } from "./middleware/receiver-middleware";
+import { receiverMiddleware } from "./middleware/receiver";
 import { worldSlice } from "./world";
 
 export type RootStore = typeof store;

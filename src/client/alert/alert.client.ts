@@ -4,7 +4,11 @@ import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 import { selectLocalSnakeRanking } from "shared/store/snakes";
 
-import { dismissAlert, sendAlert } from "./alert";
+import { dismissAlert, sendAlert } from ".";
+
+const FIRST_PLACE = 'Congratulations, you are in <font color="#fff">first place</font>!';
+const SECOND_PLACE = 'Congratulations, you are in <font color="#fff">second place</font>!';
+const THIRD_PLACE = 'Congratulations, you are in <font color="#fff">third place</font>!';
 
 let previousAlertId = 0;
 
@@ -23,21 +27,21 @@ store.subscribe(selectLocalSnakeRanking, (ranking) => {
 			emoji: "🏆",
 			color: palette.yellow,
 			colorSecondary: palette.peach,
-			message: "Congratulations, you are in first place!",
+			message: FIRST_PLACE,
 		});
 	} else if (ranking === 2) {
 		sendAlertLimited({
 			emoji: "🥈",
 			color: palette.sapphire,
 			colorSecondary: palette.blue,
-			message: "Congratulations, you are in second place!",
+			message: SECOND_PLACE,
 		});
 	} else if (ranking === 3) {
 		sendAlertLimited({
 			emoji: "🥉",
 			color: palette.maroon,
 			colorSecondary: palette.red,
-			message: "Congratulations, you are in third place!",
+			message: THIRD_PLACE,
 		});
 	}
 });
