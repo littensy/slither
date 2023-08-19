@@ -6,6 +6,7 @@ export interface AlertState {
 
 export interface Alert {
 	readonly id: number;
+	readonly scope?: AlertScope;
 	readonly emoji: string;
 	readonly message: string;
 	readonly color: Color3;
@@ -14,6 +15,8 @@ export interface Alert {
 	readonly duration: number;
 	readonly visible: boolean;
 }
+
+type AlertScope = "ranking" | "money";
 
 const initialState: AlertState = {
 	alerts: [],

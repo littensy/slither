@@ -1,5 +1,5 @@
 import { store } from "client/store";
-import { Alert } from "client/store/alert";
+import { Alert, selectAlerts } from "client/store/alert";
 import { palette } from "shared/data/palette";
 
 const defaultAlert: Alert = {
@@ -20,6 +20,10 @@ export function sendAlert(patch: Partial<Alert>) {
 		id: nextAlertId++,
 	};
 
+	if (alert.scope) {
+		dismissAlertsOfScope(alert.scope);
+	}
+
 	store.addAlert(alert);
 
 	Promise.delay(alert.duration).then(() => {
@@ -36,4 +40,12 @@ export async function dismissAlert(id: number) {
 		store.removeAlert(id);
 		return id;
 	});
+}
+
+function dismissAlertsOfScope(scope: string) {
+	for (const alert of store.getState(selectAlerts)) {
+		if (alert.scope === scope) {
+			dismissAlert(alert.id);
+		}
+	}
 }
