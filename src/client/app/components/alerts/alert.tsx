@@ -1,5 +1,5 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
-import { useSelector } from "@rbxts/react-reflex";
+import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { dismissAlert } from "client/alert";
 import { Frame } from "client/app/common/frame";
@@ -13,7 +13,7 @@ import { brightenIfDark, darken } from "client/app/utils/color-utils";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
-import { Alert } from "client/store/alert";
+import { Alert, selectAlertIndex } from "client/store/alert";
 import { selectIsMenuOpen } from "client/store/menu";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
@@ -26,7 +26,7 @@ interface AlertProps {
 	readonly index: number;
 }
 
-const MAX_ALERTS = 4;
+const MAX_VISIBLE_ALERTS = 5;
 const ALERT_WIDTH = 35;
 const ALERT_HEIGHT = 5;
 const ALERT_PADDING = 2;
@@ -35,6 +35,7 @@ const LIST_PADDING = 1;
 export function Alert({ alert, index }: AlertProps) {
 	const rem = useRem();
 	const menuOpen = useSelector(selectIsMenuOpen);
+	const visibleIndex = useSelectorCreator(selectAlertIndex, index);
 
 	const [transition, transitionMotion] = useMotion(0);
 	const [hover, hoverMotion] = useMotion(0);
@@ -70,13 +71,18 @@ export function Alert({ alert, index }: AlertProps) {
 		positionMotion.spring(new UDim2(0.5, 0, 0, rem(position + offset)), {
 			tension: 180,
 			friction: 12,
-			mass: mapStrict(index, 0, MAX_ALERTS, 1, 2),
+			mass: mapStrict(index, 0, MAX_VISIBLE_ALERTS, 1, 2),
 		});
+	}, [index, menuOpen, rem]);
 
-		if (index >= MAX_ALERTS) {
+	useEffect(() => {
+		// Alerts that are dismissed are still in the list, but are invisible.
+		// Do not count them towards the index of this alert to prevent it from
+		// being dismissed early.
+		if (visibleIndex >= MAX_VISIBLE_ALERTS) {
 			dismissAlert(alert.id);
 		}
-	}, [index, menuOpen, rem]);
+	}, [visibleIndex]);
 
 	return (
 		<ReactiveButton
