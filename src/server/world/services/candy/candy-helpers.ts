@@ -3,7 +3,7 @@ import { store } from "server/store";
 import { getCandy, getRandomPointNearWorldOrigin, getSnake } from "server/world/utils";
 import { CANDY_LIMITS } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
-import { getSnakeTracerSkin } from "shared/data/skins";
+import { getSnakeSkinForTracer } from "shared/data/skins";
 import { CandyEntity, CandyType, selectCandyById, selectCandyCount, selectStaleCandyOfType } from "shared/store/candy";
 import { describeSnakeFromScore, selectSnakeIsBoosting } from "shared/store/snakes";
 import { createGrid } from "shared/utils/grid";
@@ -154,7 +154,7 @@ export function dropCandyOnDeath(id: string): void {
 	const total = candyPositions.size();
 
 	const candies = candyPositions.mapFiltered((position, index) => {
-		const skin = getSnakeTracerSkin(snake.skin, index);
+		const skin = getSnakeSkinForTracer(snake.skin, index);
 
 		return createCandy({
 			position,

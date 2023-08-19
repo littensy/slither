@@ -7,7 +7,7 @@ import { profileAllComponents } from "client/app/utils/profiler";
 import { store } from "client/store";
 import { LOCAL_USER, WORLD_TICK } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
-import { getRandomDefaultSnakeSkin } from "shared/data/skins";
+import { getRandomBaseSnakeSkin } from "shared/data/skins";
 import { CandyType } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 import { createScheduler } from "shared/utils/scheduler";
@@ -26,7 +26,7 @@ export = hoarcekat(() => {
 			store.addSnake(id, {
 				name: id,
 				head: new Vector2(math.random(-10, 10), math.random(-10, 10)),
-				skin: getRandomDefaultSnakeSkin().id,
+				skin: getRandomBaseSnakeSkin().id,
 				score: math.random(0, 8000),
 			});
 		}

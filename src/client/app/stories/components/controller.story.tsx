@@ -13,7 +13,7 @@ import { store } from "client/store";
 import { selectWorldCamera } from "client/store/world";
 import { LOCAL_USER, WORLD_TICK } from "shared/constants";
 import { palette } from "shared/data/palette";
-import { getRandomDefaultSnakeSkin } from "shared/data/skins";
+import { getRandomBaseSnakeSkin } from "shared/data/skins";
 import { describeSnakeFromScore, selectLocalSnake } from "shared/store/snakes";
 import { createScheduler } from "shared/utils/scheduler";
 
@@ -84,7 +84,7 @@ export = hoarcekat(() => {
 	useEffect(() => {
 		store.addSnake(LOCAL_USER, {
 			name: Players.LocalPlayer.DisplayName,
-			skin: getRandomDefaultSnakeSkin().id,
+			skin: getRandomBaseSnakeSkin().id,
 			score: START_SIZE,
 		});
 

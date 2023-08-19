@@ -7,7 +7,7 @@ import { RootProvider } from "client/app/providers/root-provider";
 import { store } from "client/store";
 import { LOCAL_USER, WORLD_BOUNDS, WORLD_TICK } from "shared/constants";
 import { getRandomAccent } from "shared/data/palette";
-import { getRandomDefaultSnakeSkin } from "shared/data/skins";
+import { getRandomBaseSnakeSkin } from "shared/data/skins";
 import { CandyType } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 import { createScheduler } from "shared/utils/scheduler";
@@ -30,7 +30,7 @@ export = hoarcekat(() => {
 								math.random(-WORLD_BOUNDS, WORLD_BOUNDS),
 								math.random(-WORLD_BOUNDS, WORLD_BOUNDS),
 						  ),
-				skin: getRandomDefaultSnakeSkin().id,
+				skin: getRandomBaseSnakeSkin().id,
 				score: math.random(0, 5000),
 			});
 		}
