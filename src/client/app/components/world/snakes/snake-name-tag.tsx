@@ -8,7 +8,7 @@ import { useMotion, useRem } from "client/app/hooks";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { palette } from "shared/data/palette";
-import { getSnakeTracerSkin } from "shared/data/skins";
+import { getSnakeSkinForTracer } from "shared/data/skins";
 
 interface SnakeNameTagProps {
 	readonly name: string;
@@ -36,7 +36,7 @@ function minBrightness(color: Color3, min: number) {
 export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, skin, visible }: SnakeNameTagProps) {
 	const rem = useRem();
 	const previousHead = usePrevious(head) || head;
-	const { tint } = getSnakeTracerSkin(skin, 0);
+	const { tint } = getSnakeSkinForTracer(skin, 0);
 
 	const currentSide = useRef(1);
 	const [side, setSide] = useDebounceState(1, { wait: 2 });

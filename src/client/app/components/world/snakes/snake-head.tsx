@@ -5,7 +5,7 @@ import { Image } from "client/app/common/image";
 import { useContinuousAngle, useMotion, useRem } from "client/app/hooks";
 import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
-import { getSnakeSkin, getSnakeTracerSkin } from "shared/data/skins";
+import { getSnakeSkin, getSnakeSkinForTracer } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 
 import { SNAKE_ANGLE_OFFSET } from "./constants";
@@ -33,7 +33,7 @@ export function SnakeHead({
 	children,
 }: SnakeHeadProps) {
 	const skin = getSnakeSkin(skinId);
-	const tracerSkin = getSnakeTracerSkin(skinId, 0);
+	const tracerSkin = getSnakeSkinForTracer(skinId, 0);
 
 	const rem = useRem();
 	const currentAngle = useContinuousAngle(angle);

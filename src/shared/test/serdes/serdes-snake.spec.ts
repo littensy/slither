@@ -2,7 +2,7 @@
 
 import { shallowEqual } from "@rbxts/reflex";
 import { HttpService } from "@rbxts/services";
-import { getRandomDefaultSnakeSkin } from "shared/data/skins";
+import { getRandomBaseSnakeSkin } from "shared/data/skins";
 import {
 	deserializeSnakeEntity,
 	deserializeSnakes,
@@ -23,7 +23,7 @@ export = () => {
 			score: math.random(0, 10000),
 			boost: math.random() > 0.5,
 			tracers: fillArray(10, () => new Vector2(math.random(), math.random())),
-			skin: getRandomDefaultSnakeSkin().id,
+			skin: getRandomBaseSnakeSkin().id,
 			dead: math.random() > 0.5,
 		};
 	}

@@ -3,7 +3,7 @@ import Roact, { memo, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
 import { images } from "shared/assets";
-import { getSnakeSkin, getSnakeTracerSkin } from "shared/data/skins";
+import { getSnakeSkin, getSnakeSkinForTracer } from "shared/data/skins";
 
 import { SnakeEffectBinding, SnakeLineBinding } from "./use-snake-bindings";
 import { useTracerStyle } from "./use-tracer-style";
@@ -17,7 +17,7 @@ interface SnakeTracerProps {
 
 function SnakeTracerComponent({ line, effects, skinId, index }: SnakeTracerProps) {
 	const skin = getSnakeSkin(skinId);
-	const tracerSkin = getSnakeTracerSkin(skinId, index);
+	const tracerSkin = getSnakeSkinForTracer(skinId, index);
 
 	const rem = useRem();
 	const style = useTracerStyle(line, effects, index, tracerSkin.tint);

@@ -1,6 +1,6 @@
 import { store } from "server/store";
 import { getSafePointInWorld } from "server/world/utils";
-import { getRandomDefaultSnakeSkin } from "shared/data/skins";
+import { getRandomBaseSnakeSkin } from "shared/data/skins";
 import { selectSnakeIsDead } from "shared/store/snakes";
 
 import { BotBehavior } from "./bot-behavior";
@@ -22,7 +22,7 @@ export function createBot() {
 	store.addSnake(id, {
 		name,
 		head: getSafePointInWorld(),
-		skin: getRandomDefaultSnakeSkin().id,
+		skin: getRandomBaseSnakeSkin().id,
 	});
 
 	store.once(selectSnakeIsDead(id), () => {
