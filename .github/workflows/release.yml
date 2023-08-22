@@ -52,8 +52,8 @@ jobs:
           path: ./
 
       - name: Deploy to Roblox
-        run: rbxcloud experience publish -a "$API_KEY" -u "$UNIVERSE_ID" -p "$PLACE_ID" -t published -f "place.rbxlx"
+        run: rbxcloud experience publish -a "$CLOUD_DEPLOY_KEY" -u "$UNIVERSE_ID" -p "$PLACE_ID" -t published -f "place.rbxlx"
         env:
-          API_KEY: ${{ secrets.CLOUD_DEPLOY_KEY }}
+          CLOUD_DEPLOY_KEY: ${{ secrets.CLOUD_DEPLOY_KEY }}
           UNIVERSE_ID: 4902171678
           PLACE_ID: 14162747150
