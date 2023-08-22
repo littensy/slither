@@ -10,6 +10,7 @@ on:
       - ".github/**"
   release:
     types: [released, prereleased]
+  workflow_dispatch:
 
 permissions:
   contents: write
