@@ -1,5 +1,5 @@
+import { RunService } from "@rbxts/services";
 import { store } from "server/store";
-import { IS_EDIT } from "shared/constants";
 import {
 	identifySnake,
 	selectPlayerCountIsAbove,
@@ -37,5 +37,5 @@ function observePlayer(id: string) {
 }
 
 function shouldRewardMilestone() {
-	return IS_EDIT || store.getState(selectPlayerCountIsAbove(5));
+	return RunService.IsStudio() || store.getState(selectPlayerCountIsAbove(5));
 }
