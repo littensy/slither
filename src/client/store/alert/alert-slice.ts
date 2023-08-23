@@ -16,7 +16,7 @@ export interface Alert {
 	readonly visible: boolean;
 }
 
-type AlertScope = "ranking" | "money";
+export type AlertScope = "ranking" | "money";
 
 const initialState: AlertState = {
 	alerts: [],

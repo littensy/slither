@@ -1,5 +1,6 @@
 import Object from "@rbxts/object-utils";
 import { createSelector, shallowEqual } from "@rbxts/reflex";
+import { Players } from "@rbxts/services";
 import { LOCAL_USER } from "shared/constants";
 import { SharedState } from "shared/store";
 import { mapObject } from "shared/utils/object-utils";
@@ -32,6 +33,26 @@ export const selectDeadSnakesById = createSelector(selectSnakesById, (snakesById
 export const selectAliveSnakesById = createSelector(selectSnakesById, (snakesById) => {
 	return mapObject(snakesById, (snake) => (!snake.dead ? snake : undefined));
 });
+
+export const selectPlayerSnakesById = createSelector(selectSnakesById, (snakesById) => {
+	return mapObject(snakesById, (snake) => (Players.FindFirstChild(snake.id) ? snake : undefined));
+});
+
+export const selectPlayerCountIsAbove = (count: number) => {
+	return createSelector(selectPlayerSnakesById, (snakesById) => {
+		let playerCount = 0;
+
+		for (const [,] of pairs(snakesById)) {
+			playerCount++;
+
+			if (playerCount >= count) {
+				return true;
+			}
+		}
+
+		return false;
+	});
+};
 
 export const selectLocalSnake = (state: SharedState) => {
 	return state.snakes[LOCAL_USER];
@@ -91,6 +112,10 @@ export const selectSnakeById = (id: string) => {
 	return (state: SharedState) => state.snakes[id];
 };
 
+export const selectSnakeScore = (id: string) => {
+	return (state: SharedState) => state.snakes[id]?.score;
+};
+
 export const selectSnakeIsDead = (id: string) => {
 	return (state: SharedState) => {
 		const snake = state.snakes[id];
@@ -111,7 +136,9 @@ export const selectSnakeRanking = (id: string) => {
 	};
 
 	return createSelector(selectSnakesSorted(comparator), (snakes) => {
-		return snakes.findIndex((snake) => snake.id === id) + 1;
+		const index = snakes.findIndex((snake) => snake.id === id);
+
+		return index === -1 ? undefined : index + 1;
 	});
 };
 
@@ -119,12 +146,13 @@ export const selectLocalSnakeRanking = selectSnakeRanking(LOCAL_USER);
 
 export const selectRankForDisplay = (state: SharedState) => {
 	const ranking = selectLocalSnakeRanking(state);
-	const lastDigit = ranking % 10;
-	const lastTwoDigits = ranking % 100;
 
-	if (ranking === 0) {
+	if (ranking === undefined) {
 		return;
 	}
+
+	const lastDigit = ranking % 10;
+	const lastTwoDigits = ranking % 100;
 
 	if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
 		return `${ranking}th`;

@@ -1,5 +1,6 @@
+import { throttle } from "@rbxts/set-timeout";
 import { store } from "client/store";
-import { Alert, selectAlerts } from "client/store/alert";
+import { Alert, AlertScope, selectAlerts } from "client/store/alert";
 import { palette } from "shared/data/palette";
 
 const defaultAlert: Alert = {
@@ -13,7 +14,12 @@ const defaultAlert: Alert = {
 
 let nextAlertId = 0;
 
-export function sendAlert(patch: Partial<Alert>) {
+const scopedThrottles: Record<AlertScope, (callback: () => number) => number> = {
+	money: throttle((callback) => callback(), 0.8),
+	ranking: throttle((callback) => callback(), 0.8),
+};
+
+function sendAlertImmediate(patch: Partial<Alert>) {
 	const alert: Alert = {
 		...defaultAlert,
 		...patch,
@@ -31,6 +37,16 @@ export function sendAlert(patch: Partial<Alert>) {
 	});
 
 	return alert.id;
+}
+
+export function sendAlert(patch: Partial<Alert>) {
+	if (!patch.scope) {
+		return sendAlertImmediate(patch);
+	}
+
+	return scopedThrottles[patch.scope](() => {
+		return sendAlertImmediate(patch);
+	});
 }
 
 export async function dismissAlert(id: number) {

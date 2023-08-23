@@ -50,3 +50,17 @@ export function mapProperty<T, K extends keyof T>(
 export function fillArray<T extends defined>(length: number, mapper: (index: number) => T): T[] {
 	return new Array(length, 0).map((_, index) => mapper(index));
 }
+
+/**
+ * Clones the first object and merges the second object into it. Useful
+ * for creating a new object without iterating over the first object.
+ */
+export function assign<K extends string, V>(object: { [key in K]: V }, patch: { [key in K]: V }): { [key in K]: V } {
+	const result = table.clone(object);
+
+	for (const [key, value] of patch as unknown as Map<K, V>) {
+		result[key] = value;
+	}
+
+	return result;
+}

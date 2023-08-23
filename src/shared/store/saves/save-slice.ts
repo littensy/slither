@@ -25,26 +25,30 @@ export const saveSlice = createProducer(initialState, {
 	}),
 
 	patchPlayerSave: (state, player: string, patch: Partial<PlayerSave>) => {
-		return mapProperty(state, player, (save) => {
-			return { ...save, ...patch };
-		});
+		return mapProperty(state, player, (save) => ({
+			...save,
+			...patch,
+		}));
 	},
 
 	givePlayerBalance: (state, player: string, amount: number) => {
-		return mapProperty(state, player, (save) => {
-			return { ...save, balance: math.max(save.balance + amount, 0) };
-		});
+		return mapProperty(state, player, (save) => ({
+			...save,
+			balance: math.max(save.balance + amount, 0),
+		}));
 	},
 
 	givePlayerSkin: (state, player: string, skin: string) => {
-		return mapProperty(state, player, (save) => {
-			return { ...save, skins: [...save.skins, skin] };
-		});
+		return mapProperty(state, player, (save) => ({
+			...save,
+			skins: [...save.skins, skin],
+		}));
 	},
 
 	setPlayerSkin: (state, player: string, skin: string) => {
-		return mapProperty(state, player, (save) => {
-			return { ...save, skin };
-		});
+		return mapProperty(state, player, (save) => ({
+			...save,
+			skin,
+		}));
 	},
 });
