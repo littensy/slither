@@ -14,8 +14,16 @@ export function onCollisionTick() {
 			continue;
 		}
 
-		if (isCollidingWithWall(snake) || isCollidingWithSnake(snake)) {
+		if (isCollidingWithWall(snake)) {
 			killSnake(snake.id);
+			continue;
+		}
+
+		const enemy = isCollidingWithSnake(snake);
+
+		if (enemy) {
+			killSnake(snake.id);
+			store.playerKilledSnake(enemy.id, snake.id);
 		}
 	}
 }
@@ -42,5 +50,7 @@ function isCollidingWithSnake(snake: SnakeEntity) {
 	const enemyRadius = describeSnakeFromScore(enemy.score).radius;
 	const distance = nearest.position.sub(snake.head).Magnitude;
 
-	return distance <= 0.9 * (radius + enemyRadius);
+	if (distance <= 0.9 * (radius + enemyRadius)) {
+		return enemy;
+	}
 }

@@ -57,6 +57,12 @@ export const snakesSlice = createProducer(initialState, {
 				return snake;
 			}
 
+			if (snake.score < 0) {
+				// It's possible for score to be patched to a negative value, so
+				// correct it here
+				snake = { ...snake, score: 0 };
+			}
+
 			const description = describeSnakeFromScore(snake.score);
 
 			const speed = snakeIsBoosting(snake) ? SNAKE_BOOST_SPEED : SNAKE_SPEED;
