@@ -3,7 +3,7 @@ import { Players, RunService } from "@rbxts/services";
 import { CandyType } from "./store/candy";
 
 export const WORLD_BOUNDS = 196;
-export const WORLD_TICK = 1 / 15;
+export const WORLD_TICK = 1 / 20;
 
 // The world updates every world tick, which is less than the server's
 // heartbeat rate. This means that we can schedule different cycles to run
