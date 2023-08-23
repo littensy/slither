@@ -1,5 +1,5 @@
 import { createProducer } from "@rbxts/reflex";
-import { mapProperty } from "shared/utils/object-utils";
+import { assign, mapProperty } from "shared/utils/object-utils";
 
 export interface CandyState {
 	readonly [id: string]: CandyEntity | undefined;
@@ -23,27 +23,28 @@ export enum CandyType {
 const initialState: CandyState = {};
 
 export const candySlice = createProducer(initialState, {
-	populateCandy: (state, candy: CandyEntity[]) => ({
-		...state,
-		...candy.reduce<{ [id: string]: CandyEntity }>((map, candy) => {
-			map[candy.id] = candy;
-			return map;
-		}, {}),
-	}),
+	populateCandy: (state, candy: CandyEntity[]) => {
+		return assign(
+			state,
+			candy.reduce<{ [id: string]: CandyEntity }>((map, candy) => {
+				map[candy.id] = candy;
+				return map;
+			}, {}),
+		);
+	},
 
-	addCandy: (state, candy: CandyEntity) => ({
-		...state,
-		[candy.id]: candy,
-	}),
+	addCandy: (state, candy: CandyEntity) => {
+		return assign(state, { [candy.id]: candy });
+	},
 
-	removeCandy: (state, id: string) => ({
-		...state,
-		[id]: undefined,
-	}),
+	removeCandy: (state, id: string) => {
+		return mapProperty(state, id, () => undefined);
+	},
 
 	setCandyEatenAt: (state, id: string, eatenAt: Vector2) => {
-		return mapProperty(state, id, (candy) => {
-			return { ...candy, eatenAt };
-		});
+		return mapProperty(state, id, (candy) => ({
+			...candy,
+			eatenAt,
+		}));
 	},
 });

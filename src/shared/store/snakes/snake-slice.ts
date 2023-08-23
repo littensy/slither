@@ -105,32 +105,37 @@ export const snakesSlice = createProducer(initialState, {
 	},
 
 	turnSnake: (state, id: string, desiredAngle: number) => {
-		return mapProperty(state, id, (snake) => {
-			return { ...snake, desiredAngle };
-		});
+		return mapProperty(state, id, (snake) => ({
+			...snake,
+			desiredAngle,
+		}));
 	},
 
 	boostSnake: (state, id: string, boost: boolean) => {
-		return mapProperty(state, id, (snake) => {
-			return { ...snake, boost };
-		});
+		return mapProperty(state, id, (snake) => ({
+			...snake,
+			boost,
+		}));
 	},
 
 	setSnakeIsDead: (state, id: string) => {
-		return mapProperty(state, id, (snake) => {
-			return { ...snake, dead: true };
-		});
+		return mapProperty(state, id, (snake) => ({
+			...snake,
+			dead: true,
+		}));
 	},
 
 	patchSnake: (state, id: string, intersection: Partial<SnakeEntity>) => {
-		return mapProperty(state, id, (snake) => {
-			return { ...snake, ...intersection };
-		});
+		return mapProperty(state, id, (snake) => ({
+			...snake,
+			...intersection,
+		}));
 	},
 
 	incrementSnakeScore: (state, id: string, amount: number) => {
-		return mapProperty(state, id, (snake) => {
-			return { ...snake, score: math.max(snake.score + amount, 0) };
-		});
+		return mapProperty(state, id, (snake) => ({
+			...snake,
+			score: math.max(snake.score + amount, 0),
+		}));
 	},
 });
