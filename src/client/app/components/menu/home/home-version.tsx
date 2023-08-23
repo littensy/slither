@@ -12,7 +12,7 @@ interface HomeVersionProps {
 }
 
 const GIT = $git();
-const VERSION = GIT.LatestTag !== "" ? GIT.LatestTag : "v0.1.0";
+const VERSION = GIT.LatestTag !== "" ? GIT.LatestTag : "workflow_dispatch";
 const BRANCH = `@${GIT.Branch}`;
 const COMMIT = GIT.Commit;
 

@@ -11,18 +11,10 @@ on:
   release:
     types: [released, prereleased]
   workflow_dispatch:
-    inputs:
-      environment:
-        description: The environment to deploy to (canary, production)
-        required: true
-        default: canary
 
 permissions:
   contents: write
   packages: write
-
-env:
-  ENVIRONMENT: ${{ github.event.inputs.environment || 'canary' }}
 
 jobs:
   build:
@@ -66,10 +58,9 @@ jobs:
           name: place
           path: ./
 
-      # fixme: #19
-      # - name: Deploy project
-      #   run: mantle deploy --allow-purchases --environment ${{ env.ENVIRONMENT }}
-      #   env:
-      #     ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
-      #     MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to Roblox
+        run: rbxcloud experience publish -a "$CLOUD_DEPLOY_KEY" -u "$UNIVERSE_ID" -p "$PLACE_ID" -t published -f "place.rbxlx"
+        env:
+          CLOUD_DEPLOY_KEY: ${{ secrets.CLOUD_DEPLOY_KEY }}
+          UNIVERSE_ID: 4902016218
+          PLACE_ID: 14162328419
