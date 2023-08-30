@@ -17,7 +17,7 @@ permissions:
   packages: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     environment: canary
 
@@ -39,24 +39,6 @@ jobs:
         with:
           name: place
           path: place.rbxlx
-
-  deploy:
-    runs-on: ubuntu-latest
-    environment: canary
-    needs: build
-
-    steps:
-      - uses: actions/checkout@v3
-      - uses: bahmutov/npm-install@v1
-      - uses: ok-nick/setup-aftman@v0.3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Download place artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: place
-          path: ./
 
       - name: Deploy to Roblox
         run: rojo upload --api_key "$CLOUD_DEPLOY_KEY" --universe_id "$UNIVERSE_ID" --asset_id "$PLACE_ID" -v
