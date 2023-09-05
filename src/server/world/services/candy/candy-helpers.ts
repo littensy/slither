@@ -6,12 +6,12 @@ import { getRandomAccent } from "shared/data/palette";
 import { getSnakeSkinForTracer } from "shared/data/skins";
 import { CandyEntity, CandyType, selectCandyById, selectCandyCount, selectStaleCandyOfType } from "shared/store/candy";
 import { describeSnakeFromScore, selectSnakeIsBoosting } from "shared/store/snakes";
-import { createGrid } from "shared/utils/grid";
+import { Grid } from "shared/utils/grid";
 import { fillArray } from "shared/utils/object-utils";
 
 const random = new Random();
 
-export const candyGrid = createGrid<{ id: string }>(5);
+export const candyGrid = new Grid<{ id: string }>(5);
 
 let nextCandyId = 0;
 

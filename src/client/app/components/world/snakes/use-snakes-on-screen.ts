@@ -3,7 +3,7 @@ import { useSelector } from "@rbxts/react-reflex";
 import { useEffect, useMemo, useState } from "@rbxts/roact";
 import { useRem } from "client/app/hooks";
 import { selectSnakesById, SnakeEntity } from "shared/store/snakes";
-import { createGrid } from "shared/utils/grid";
+import { Grid } from "shared/utils/grid";
 
 import { SNAKE_ON_SCREEN_MARGIN } from "./constants";
 
@@ -31,7 +31,9 @@ export function useSnakesOnScreen(scale: number, offset: Vector2) {
 	const snakes = useSelector(selectSnakesById);
 	const previousSnakes = usePrevious(snakes) || {};
 
-	const grid = useMemo(() => createGrid<TracerCell>(16), []);
+	const grid = useMemo(() => {
+		return new Grid<TracerCell>(16);
+	}, []);
 	const [onScreen, setOnScreen] = useState<SnakeOnScreen[]>([]);
 
 	useEffect(() => {

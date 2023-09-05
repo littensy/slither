@@ -3,7 +3,7 @@ import { useSelector } from "@rbxts/react-reflex";
 import { useEffect, useMemo, useState } from "@rbxts/roact";
 import { useRem } from "client/app/hooks";
 import { CandyEntity, selectCandiesById } from "shared/store/candy";
-import { createGrid } from "shared/utils/grid";
+import { Grid } from "shared/utils/grid";
 
 const MARGIN = 4;
 
@@ -12,7 +12,7 @@ export function useCandyOnScreen(offset: Vector2, scale: number) {
 	const camera = useCamera();
 
 	const grid = useMemo(() => {
-		return createGrid<{ id: string }>(5);
+		return new Grid<{ id: string }>(5);
 	}, []);
 
 	const currentCandies = useSelector(selectCandiesById);
