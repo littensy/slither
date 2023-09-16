@@ -5,6 +5,8 @@ export const images: {
 		readonly blur: string;
 		readonly button_glow_top: string;
 		readonly circle: string;
+		readonly heart: string;
+		readonly heart_glow: string;
 		readonly map_crosshair: string;
 		readonly map_cursor: string;
 		readonly menu_title: string;

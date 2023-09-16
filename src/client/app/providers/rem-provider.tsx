@@ -1,5 +1,5 @@
-import { map, useDebounceState, useViewport } from "@rbxts/pretty-react-hooks";
-import Roact, { createContext } from "@rbxts/roact";
+import { map, useCamera, useDebounceState, useEventListener } from "@rbxts/pretty-react-hooks";
+import Roact, { createContext, useEffect } from "@rbxts/roact";
 
 export interface RemProviderProps extends Roact.PropsWithChildren {
 	baseRem?: number;
@@ -22,9 +22,12 @@ export function RemProvider({
 	remOverride,
 	children,
 }: RemProviderProps) {
-	const [rem, setRem] = useDebounceState(DEFAULT_REM, { wait: 0.5, leading: true });
+	const camera = useCamera();
+	const [rem, setRem] = useDebounceState(baseRem, { wait: 0.2, leading: true });
 
-	useViewport((viewport: Vector2) => {
+	const update = () => {
+		const viewport = camera.ViewportSize;
+
 		if (remOverride !== undefined) {
 			return remOverride;
 		}
@@ -38,7 +41,13 @@ export function RemProvider({
 		const factor = desktop ? scale : map(scale, 0, 1, 0.25, 1);
 
 		setRem(math.clamp(math.round(baseRem * factor), minimumRem, maximumRem));
-	});
+	};
+
+	useEventListener(camera.GetPropertyChangedSignal("ViewportSize"), update);
+
+	useEffect(() => {
+		update();
+	}, [baseRem, minimumRem, maximumRem, remOverride]);
 
 	return <RemContext.Provider value={rem}>{children}</RemContext.Provider>;
 }

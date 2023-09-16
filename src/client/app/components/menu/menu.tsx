@@ -1,8 +1,6 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
-import { Text } from "client/app/common/text";
 import { useRem, useStore } from "client/app/hooks";
-import { palette } from "shared/data/palette";
 import { selectHasLocalSnake } from "shared/store/snakes";
 
 import { Home } from "./home";
@@ -10,6 +8,7 @@ import { MenuContainer } from "./menu-container";
 import { MenuVignette } from "./menu-vignette";
 import { Navigation } from "./navigation";
 import { Skins } from "./skins";
+import { Support } from "./support";
 
 export function Menu() {
 	const store = useStore();
@@ -22,22 +21,22 @@ export function Menu() {
 
 	return (
 		<>
-			<MenuVignette />
+			<MenuVignette key="vignette" />
 
-			<MenuContainer>
-				<Navigation />
+			<MenuContainer key="navbar">
+				<Navigation key="navbar" />
 			</MenuContainer>
 
-			<MenuContainer page="home">
-				<Home />
+			<MenuContainer key="home" page="home">
+				<Home key="home" />
 			</MenuContainer>
 
-			<MenuContainer page="support">
-				<Text text="TODO" textColor={palette.text} size={new UDim2(1, 0, 1, 0)} />
+			<MenuContainer key="support" page="support">
+				<Support key="support" />
 			</MenuContainer>
 
-			<MenuContainer page="skins">
-				<Skins />
+			<MenuContainer key="skins" page="skins">
+				<Skins key="skins" />
 			</MenuContainer>
 		</>
 	);

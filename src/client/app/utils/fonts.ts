@@ -7,5 +7,6 @@ export const fonts = {
 	rubik: {
 		regular: new Font("rbxassetid://12187365977"),
 		medium: new Font("rbxassetid://12187365977", Enum.FontWeight.Medium),
+		semibold: new Font("rbxassetid://12187365977", Enum.FontWeight.SemiBold),
 	},
 };
