@@ -58,7 +58,7 @@ export function Stats() {
 			<StatsCard
 				key="balance"
 				emoji="💵"
-				label="BALANCE"
+				label="MONEY"
 				value={`$${balance}`}
 				primary={Color3.fromRGB(111, 158, 79)}
 				secondary={Color3.fromRGB(153, 181, 107)}

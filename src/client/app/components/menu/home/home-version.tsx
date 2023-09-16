@@ -14,7 +14,6 @@ interface HomeVersionProps {
 const GIT = $git();
 const VERSION = GIT.LatestTag !== "" ? GIT.LatestTag : "workflow_dispatch";
 const BRANCH = `@${GIT.Branch}`;
-const COMMIT = GIT.Commit;
 
 export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 	const rem = useRem();
@@ -34,7 +33,7 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 				textAutoResize="X"
 				textColor={palette.text}
 				textTransparency={0.5}
-				textSize={rem(1.1)}
+				textSize={rem(1.25)}
 			/>
 
 			<Divider />
@@ -46,18 +45,7 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 				textAutoResize="X"
 				textColor={palette.text}
 				textTransparency={0.5}
-				textSize={rem(1.1)}
-			/>
-
-			<Divider />
-
-			<Text
-				font={fonts.inter.medium}
-				text={COMMIT}
-				textAutoResize="X"
-				textColor={palette.text}
-				textTransparency={0.5}
-				textSize={rem(1.1)}
+				textSize={rem(1.25)}
 			/>
 		</Group>
 	);
@@ -73,7 +61,7 @@ function Divider() {
 			textAutoResize="X"
 			textColor={palette.text}
 			textTransparency={0.75}
-			textSize={rem(1.1)}
+			textSize={rem(1.25)}
 		/>
 	);
 }

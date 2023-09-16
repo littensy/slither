@@ -1,18 +1,16 @@
+import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { sendAlert } from "client/alert";
-import { Frame } from "client/app/common/frame";
-import { Image } from "client/app/common/image";
-import { Outline } from "client/app/common/outline";
-import { ReactiveButton } from "client/app/common/reactive-button";
+import { AwesomeButton } from "client/app/common/awesome-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
+import { brighten } from "client/app/utils/color-utils";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { selectMenuCurrentSkin } from "client/store/menu";
-import { images } from "shared/assets";
 import { LOCAL_USER } from "shared/constants";
 import { palette } from "shared/data/palette";
 import { findSnakeSkin } from "shared/data/skins";
@@ -23,6 +21,9 @@ interface Status {
 	readonly variant: "buy" | "not-enough-money" | "wear" | "wearing" | "none";
 	readonly price?: number;
 }
+
+const darkGreen = brighten(palette.green, -3);
+const darkRed = brighten(palette.red, -3);
 
 function getStatus(equipped: string, current: string, inventory: readonly string[] = [], balance = 0): Status {
 	const equippedSkin = findSnakeSkin(equipped);
@@ -54,11 +55,12 @@ export function ActButton() {
 	const [primary, primaryMotion] = useMotion(new Color3());
 	const [secondary, secondaryMotion] = useMotion(new Color3());
 	const [textWidth, textWidthMotion] = useMotion(0);
-	const [spin, spinMotion] = useMotion(0);
+	const [gradientSpin, gradientSpinMotion] = useMotion(0);
+	const [hover, hoverMotion] = useMotion(0);
 
 	const { size, gradient } = useMemo(() => {
 		const size = textWidth.map((width) => {
-			return new UDim2(0, width + rem(3), 0, rem(4));
+			return new UDim2(0, width + rem(4), 0, rem(4.5));
 		});
 
 		const gradient = composeBindings(primary, secondary, (primary, secondary) => {
@@ -69,7 +71,7 @@ export function ActButton() {
 	}, [rem]);
 
 	const onClick = () => {
-		spinMotion.spring(spin.getValue() + 180, springs.molasses);
+		gradientSpinMotion.spring(gradientSpin.getValue() + 180, springs.molasses);
 
 		if (status.variant === "buy") {
 			remotes.save.buySkin.fire(current);
@@ -87,40 +89,42 @@ export function ActButton() {
 	useEffect(() => {
 		switch (status.variant) {
 			case "wearing":
-				primaryMotion.spring(Color3.fromRGB(51, 255, 182));
-				secondaryMotion.spring(Color3.fromRGB(28, 132, 255));
+				primaryMotion.spring(palette.red);
+				secondaryMotion.spring(palette.peach);
 				break;
 			case "wear":
-				primaryMotion.spring(Color3.fromRGB(255, 115, 84));
-				secondaryMotion.spring(Color3.fromRGB(204, 112, 54));
+				primaryMotion.spring(palette.blue);
+				secondaryMotion.spring(palette.mauve);
 				break;
 			case "buy":
-				primaryMotion.spring(Color3.fromRGB(51, 255, 171));
-				secondaryMotion.spring(Color3.fromRGB(43, 255, 107));
+				primaryMotion.spring(palette.teal);
+				secondaryMotion.spring(palette.green);
 				break;
 			case "not-enough-money":
 			case "none":
-				primaryMotion.spring(palette.mantle);
-				secondaryMotion.spring(palette.crust);
+				primaryMotion.spring(palette.red);
+				secondaryMotion.spring(palette.red);
 				break;
 		}
 	}, [status.variant]);
 
 	const text =
 		status.variant === "buy"
-			? `💵  Buy for <font color="#${palette.green.ToHex()}">$${status.price}</font>`
+			? `💵  Buy for <font color="#${darkGreen.ToHex()}">$${status.price}</font>`
 			: status.variant === "wear"
 			? "🎨  Wear"
 			: status.variant === "wearing"
-			? "👕  Wearing"
+			? "🎨  Wearing"
 			: status.variant === "not-enough-money"
-			? `🔒  Buy for <font color="#${palette.red.ToHex()}">$${status.price}</font>`
+			? `🔒  Costs <font color="#${darkRed.ToHex()}">$${status.price}</font>`
 			: "🔒  Locked";
 
 	return (
-		<ReactiveButton
+		<AwesomeButton
 			onClick={onClick}
-			backgroundTransparency={1}
+			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
+			overlayGradient={gradient}
+			overlayRotation={gradientSpin}
 			anchorPoint={new Vector2(0.5, 1)}
 			size={size}
 			position={new UDim2(0.5, 0, 1, -rem(19))}
@@ -128,26 +132,13 @@ export function ActButton() {
 			<Shadow
 				key="glow-background"
 				shadowColor={palette.white}
-				shadowSize={new UDim2()}
-				shadowPosition={rem(-1)}
-				shadowTransparency={0.8}
+				shadowTransparency={lerpBinding(hover, 0.5, 0.2)}
+				shadowSize={rem(1)}
+				shadowPosition={rem(-0.25)}
+				zIndex={0}
 			>
-				<uigradient key="gradient" Color={gradient} Rotation={spin} />
+				<uigradient key="gradient" Color={gradient} Rotation={gradientSpin} />
 			</Shadow>
-
-			<Frame
-				key="background"
-				backgroundColor={palette.base}
-				cornerRadius={new UDim(0, rem(1))}
-				size={new UDim2(1, 0, 1, 0)}
-			/>
-
-			<Outline
-				key="outline"
-				innerColor={Color3.fromRGB(156, 218, 233)}
-				innerTransparency={0.95}
-				cornerRadius={new UDim(0, rem(1))}
-			/>
 
 			<Text
 				key="text"
@@ -159,21 +150,11 @@ export function ActButton() {
 				richText
 				font={fonts.inter.medium}
 				text={text}
-				textColor={palette.text}
+				textColor={palette.base}
 				textSize={rem(1.5)}
 				size={new UDim2(1, 0, 1, 0)}
 				clipsDescendants
 			/>
-
-			<Image
-				key="glow-foreground"
-				image={images.ui.button_glow_top}
-				imageTransparency={0.6}
-				cornerRadius={new UDim(0, rem(1))}
-				size={new UDim2(1, 0, 1, 0)}
-			>
-				<uigradient key="gradient" Color={gradient} Rotation={spin} />
-			</Image>
-		</ReactiveButton>
+		</AwesomeButton>
 	);
 }

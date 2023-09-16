@@ -12,6 +12,8 @@ return {
 			blur = "rbxassetid://14120516187",
 			button_glow_top = "rbxassetid://14367671668",
 			circle = "rbxassetid://14120516288",
+			heart = "rbxassetid://14789182848",
+			heart_glow = "rbxassetid://14789182940",
 			map_crosshair = "rbxassetid://14127467312",
 			map_cursor = "rbxassetid://14127465927",
 			menu_title = "rbxassetid://14120569384",

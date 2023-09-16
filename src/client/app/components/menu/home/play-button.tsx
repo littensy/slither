@@ -1,7 +1,7 @@
 import { lerpBinding, useTimer } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { Frame } from "client/app/common/frame";
-import { ReactiveButton } from "client/app/common/reactive-button";
+import { AwesomeButton } from "client/app/common/awesome-button";
+import { Outline } from "client/app/common/outline";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
@@ -22,7 +22,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	const timer = useTimer();
 	const [hover, hoverMotion] = useMotion(0);
 
-	const shimmer = timer.value.map((t) => {
+	const gradientSpin = timer.value.map((t) => {
 		return 30 * t;
 	});
 
@@ -31,40 +31,35 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	};
 
 	return (
-		<ReactiveButton
+		<AwesomeButton
 			onClick={onClick}
 			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
-			backgroundTransparency={1}
+			overlayGradient={new ColorSequence(palette.mauve, palette.blue)}
 			anchorPoint={anchorPoint}
 			size={size}
 			position={position}
 		>
 			<Shadow
-				shadowColor={Color3.fromRGB(255, 255, 255)}
+				key="rainbow"
+				shadowColor={palette.white}
 				shadowTransparency={lerpBinding(hover, 0.2, 0)}
-				shadowSize={rem(1.25)}
+				shadowSize={rem(1.5)}
 				shadowPosition={rem(0.25)}
+				zIndex={0}
 			>
-				<uigradient Color={gradient} Rotation={shimmer} />
+				<uigradient Color={gradient} Rotation={gradientSpin} />
 			</Shadow>
 
-			<Frame
-				backgroundColor={palette.offwhite}
-				backgroundTransparency={lerpBinding(hover, 0.1, 0)}
-				cornerRadius={new UDim(0, rem(0.5))}
-				size={new UDim2(1, 0, 1, 0)}
-			>
-				<uigradient Transparency={new NumberSequence(0, 0.4)} Rotation={90} />
-				<uistroke Color={palette.subtext0} Transparency={0.5} Thickness={rem(0.25)} />
-			</Frame>
-
 			<Text
+				key="text"
 				font={fonts.inter.medium}
 				text="Start Playing →"
 				textColor={palette.mantle}
-				textSize={rem(1.4)}
+				textSize={rem(1.5)}
 				size={new UDim2(1, 0, 1, 0)}
 			/>
-		</ReactiveButton>
+
+			<Outline key="outline" cornerRadius={new UDim(0, rem(1))} innerTransparency={0} />
+		</AwesomeButton>
 	);
 }
