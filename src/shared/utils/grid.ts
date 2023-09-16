@@ -1,26 +1,3 @@
-interface Grid<T> {
-	readonly cells: ReadonlyMap<Vector3, GridCell<T>>;
-	readonly insert: (vector: Vector2, metadata: T) => void;
-	readonly remove: (vector: Vector2) => void;
-	readonly replace: (oldVector: Vector2, newVector: Vector2, metadata: T) => void;
-	readonly nearest: (
-		vector: Vector2,
-		range: number,
-		predicate?: (point: GridPoint<T>) => boolean,
-	) => GridPoint<T> | undefined;
-	readonly queryBox: (
-		position: Vector2,
-		size: Vector2,
-		predicate?: (point: GridPoint<T>) => boolean,
-	) => GridPoint<T>[];
-	readonly queryRange: (
-		position: Vector2,
-		range: number,
-		predicate?: (point: GridPoint<T>) => boolean,
-	) => GridPoint<T>[];
-	readonly clear: () => void;
-}
-
 type GridCell<T> = Map<Vector3, GridPoint<T>>;
 
 interface GridPoint<T> {
@@ -35,68 +12,29 @@ function vectorize({ X, Y }: Vector2) {
 	return new Vector3(X, Y, 0);
 }
 
-export function createGrid<T = void>(resolution: number): Grid<T> {
-	const cells = new Map<Vector3, GridCell<T>>();
+export class Grid<T = void> {
+	public readonly cells = new Map<Vector3, GridCell<T>>();
+	public readonly resolution: number;
 
-	const snapToGrid = (value: Vector2) => {
-		const x = math.floor(value.X / resolution);
-		const y = math.floor(value.Y / resolution);
-		return new Vector2(x, y);
-	};
+	constructor(resolution: number) {
+		this.resolution = resolution;
+	}
 
-	const roundToGrid = (value: Vector2) => {
-		const x = math.round(value.X / resolution);
-		const y = math.round(value.Y / resolution);
-		return new Vector2(x, y);
-	};
-
-	const getCellsInRange = (vector: Vector2, range: number) => {
-		const cellsInRange: GridCell<T>[] = [];
-
-		vector = snapToGrid(vector);
-		range = math.ceil(range / resolution);
-
-		for (const i of $range(-range, range)) {
-			for (const j of $range(-range, range)) {
-				const cell = cells.get(new Vector3(vector.X + i, vector.Y + j));
-				cellsInRange.push(cell!);
-			}
-		}
-
-		return cellsInRange;
-	};
-
-	const getCellsInBox = (position: Vector2, size: Vector2) => {
-		const cellsInBox: GridCell<T>[] = [];
-
-		position = snapToGrid(position);
-		size = roundToGrid(size);
-
-		for (const i of $range(-1, size.X + 1)) {
-			for (const j of $range(-1, size.Y + 1)) {
-				const cell = cells.get(new Vector3(position.X + i, position.Y + j));
-				cellsInBox.push(cell!);
-			}
-		}
-
-		return cellsInBox;
-	};
-
-	const insert = (vector: Vector2, metadata: T) => {
-		const key = vectorize(snapToGrid(vector));
-		const cell = cells.get(key) || new Map<Vector3, GridPoint<T>>();
+	public insert(vector: Vector2, metadata: T) {
+		const key = vectorize(this.snapToGrid(vector));
+		const cell = this.cells.get(key) || new Map<Vector3, GridPoint<T>>();
 
 		cell.set(vectorize(vector), {
 			position: vector,
 			metadata,
 		});
 
-		cells.set(key, cell);
-	};
+		this.cells.set(key, cell);
+	}
 
-	const remove = (vector: Vector2) => {
-		const key = vectorize(snapToGrid(vector));
-		const cell = cells.get(key);
+	public remove(vector: Vector2) {
+		const key = vectorize(this.snapToGrid(vector));
+		const cell = this.cells.get(key);
 
 		if (!cell) {
 			return;
@@ -105,17 +43,21 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		cell.delete(vectorize(vector));
 
 		if (cell.isEmpty()) {
-			cells.delete(key);
+			this.cells.delete(key);
 		}
-	};
+	}
 
-	const replace = (oldVector: Vector2, newVector: Vector2, metadata: T) => {
-		remove(oldVector);
-		insert(newVector, metadata);
-	};
+	public replace(oldVector: Vector2, newVector: Vector2, metadata: T) {
+		this.remove(oldVector);
+		this.insert(newVector, metadata);
+	}
 
-	const nearest = (vector: Vector2, range: number, predicate?: (point: GridPoint<T>) => boolean) => {
-		const cellsInRange = getCellsInRange(vector, range);
+	public nearest(
+		vector: Vector2,
+		range: number,
+		predicate?: (point: GridPoint<T>) => boolean,
+	): GridPoint<T> | undefined {
+		const cellsInRange = this.getCellsInRange(vector, range);
 		let nearestPoint: GridPoint<T> | undefined;
 		let nearestDistance = range;
 
@@ -131,10 +73,10 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		}
 
 		return nearestPoint;
-	};
+	}
 
-	const queryBox = (position: Vector2, size: Vector2, predicate?: (point: GridPoint<T>) => boolean) => {
-		const cellsInBox = getCellsInBox(position, size);
+	public queryBox(position: Vector2, size: Vector2, predicate?: (point: GridPoint<T>) => boolean): GridPoint<T>[] {
+		const cellsInBox = this.getCellsInBox(position, size);
 		const points: GridPoint<T>[] = [];
 
 		for (const cell of cellsInBox) {
@@ -152,10 +94,10 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		}
 
 		return points;
-	};
+	}
 
-	const queryRange = (position: Vector2, range: number, predicate?: (point: GridPoint<T>) => boolean) => {
-		const cellsInRange = getCellsInRange(position, range);
+	public queryRange(position: Vector2, range: number, predicate?: (point: GridPoint<T>) => boolean): GridPoint<T>[] {
+		const cellsInRange = this.getCellsInRange(position, range);
 		const points: GridPoint<T>[] = [];
 
 		for (const cell of cellsInRange) {
@@ -169,11 +111,53 @@ export function createGrid<T = void>(resolution: number): Grid<T> {
 		}
 
 		return points;
-	};
+	}
 
-	const clear = () => {
-		cells.clear();
-	};
+	public clear() {
+		this.cells.clear();
+	}
 
-	return { cells, insert, remove, replace, nearest, queryBox, queryRange, clear };
+	private snapToGrid(value: Vector2) {
+		const x = math.floor(value.X / this.resolution);
+		const y = math.floor(value.Y / this.resolution);
+		return new Vector2(x, y);
+	}
+
+	private roundToGrid(value: Vector2) {
+		const x = math.round(value.X / this.resolution);
+		const y = math.round(value.Y / this.resolution);
+		return new Vector2(x, y);
+	}
+
+	private getCellsInRange(vector: Vector2, range: number) {
+		const cellsInRange: GridCell<T>[] = [];
+
+		vector = this.snapToGrid(vector);
+		range = math.ceil(range / this.resolution);
+
+		for (const i of $range(-range, range)) {
+			for (const j of $range(-range, range)) {
+				const cell = this.cells.get(new Vector3(vector.X + i, vector.Y + j));
+				cellsInRange.push(cell!);
+			}
+		}
+
+		return cellsInRange;
+	}
+
+	private getCellsInBox(position: Vector2, size: Vector2) {
+		const cellsInBox: GridCell<T>[] = [];
+
+		position = this.snapToGrid(position);
+		size = this.roundToGrid(size);
+
+		for (const i of $range(-1, size.X + 1)) {
+			for (const j of $range(-1, size.Y + 1)) {
+				const cell = this.cells.get(new Vector3(position.X + i, position.Y + j));
+				cellsInBox.push(cell!);
+			}
+		}
+
+		return cellsInBox;
+	}
 }

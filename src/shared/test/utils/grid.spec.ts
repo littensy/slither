@@ -1,10 +1,10 @@
 /// <reference types="@rbxts/testez/globals" />
 
-import { createGrid } from "shared/utils/grid";
+import { Grid } from "shared/utils/grid";
 
 export = () => {
 	it("should insert points", () => {
-		const grid = createGrid(10);
+		const grid = new Grid(10);
 
 		grid.insert(new Vector2(5, 5));
 		expect(grid.cells.size()).to.equal(1);
@@ -22,7 +22,7 @@ export = () => {
 	});
 
 	it("should remove points", () => {
-		const grid = createGrid(10);
+		const grid = new Grid(10);
 		grid.insert(new Vector2(5, 5));
 		grid.insert(new Vector2(6, 6));
 
@@ -36,7 +36,7 @@ export = () => {
 	});
 
 	it("should replace points", () => {
-		const grid = createGrid(10);
+		const grid = new Grid(10);
 		grid.insert(new Vector2(5, 5));
 		grid.replace(new Vector2(5, 5), new Vector2(15, 15));
 		expect(grid.cells.size()).to.equal(1);
@@ -44,7 +44,7 @@ export = () => {
 	});
 
 	it("should find the nearest point", () => {
-		const grid = createGrid(10);
+		const grid = new Grid(10);
 		grid.insert(new Vector2(5, 5));
 		grid.insert(new Vector2(15, 15));
 		grid.insert(new Vector2(100, 100));
@@ -62,7 +62,7 @@ export = () => {
 	});
 
 	it("should query points in a box", () => {
-		const grid = createGrid(5);
+		const grid = new Grid(5);
 		grid.insert(new Vector2(5, 5));
 		grid.insert(new Vector2(15, 15));
 		grid.insert(new Vector2(-3, -3));
@@ -77,7 +77,7 @@ export = () => {
 	});
 
 	it("should query points in a range", () => {
-		const grid = createGrid(5);
+		const grid = new Grid(5);
 		grid.insert(new Vector2(5, 5));
 		grid.insert(new Vector2(15, 15));
 		grid.insert(new Vector2(-3, -3));

@@ -1,8 +1,8 @@
 import { store } from "server/store";
 import { selectSnakesById } from "shared/store/snakes";
-import { createGrid } from "shared/utils/grid";
+import { Grid } from "shared/utils/grid";
 
-export const snakeGrid = createGrid<{ id: string }>(10);
+export const snakeGrid = new Grid<{ id: string }>(10);
 
 export function updateSnakeGrid() {
 	const snakes = store.getState(selectSnakesById);
