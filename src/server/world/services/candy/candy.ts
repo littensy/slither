@@ -1,5 +1,6 @@
 import { store } from "server/store";
-import { CANDY_LIMITS, CANDY_TICK_PHASE, WORLD_TICK } from "shared/constants";
+import { CANDY_LIMITS, CANDY_TICK_PHASE } from "server/world/constants";
+import { WORLD_TICK } from "shared/constants";
 import { CandyType, selectCandyCount } from "shared/store/candy";
 import { identifySnake, selectAliveSnakesById } from "shared/store/snakes";
 import { createScheduler } from "shared/utils/scheduler";
