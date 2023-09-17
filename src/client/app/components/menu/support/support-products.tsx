@@ -1,12 +1,14 @@
 import { useAsync, useViewport } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { Group } from "client/app/common/group";
-import { useOrientation, useRem } from "client/app/hooks";
+import { useOrientation, usePremium, useRem } from "client/app/hooks";
 import { getProducts } from "shared/assets";
+import { PREMIUM_BENEFIT } from "shared/constants";
 import { palette } from "shared/data/palette";
 
 import { SupportHeart } from "./support-heart";
 import { SupportProduct } from "./support-product";
+import { formatInteger } from "./utils";
 
 export function SupportProducts() {
 	const rem = useRem();
@@ -14,7 +16,18 @@ export function SupportProducts() {
 
 	const viewport = useViewport();
 	const orientation = useOrientation();
+	const premium = usePremium();
+
 	const [products] = useAsync(getProducts);
+
+	const getProductTitle = (money: number) => {
+		if (premium) {
+			money = math.floor(money * PREMIUM_BENEFIT);
+			return `$${formatInteger(money)}\u{E001}`;
+		}
+
+		return `$${formatInteger(money)}`;
+	};
 
 	let index = 0;
 
@@ -30,7 +43,7 @@ export function SupportProducts() {
 			ClipsDescendants={false}
 			AnchorPoint={new Vector2(0.5, 0.5)}
 			Size={new UDim2(0, rem(70), 0, rem(36))}
-			Position={new UDim2(0.5, 0, 0.55, 0)}
+			Position={new UDim2(0.5, 0, 0.5, 16)}
 		>
 			<uisizeconstraint key="size-constraint" MaxSize={viewport.map((v) => new Vector2(v.X, math.huge))} />
 
@@ -49,8 +62,9 @@ export function SupportProducts() {
 					key="top-left"
 					index={index++}
 					productId={products.money_100}
-					productTitle="$100"
+					productTitle={getProductTitle(100)}
 					productSubtitle="🍑  PEACH"
+					productDiscount={premium ? "20% BONUS!" : undefined}
 					primaryColor={palette.yellow}
 					secondaryColor={palette.peach}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -60,9 +74,9 @@ export function SupportProducts() {
 					key="bottom-left"
 					index={index++}
 					productId={products.money_250}
-					productTitle="$250"
+					productTitle={getProductTitle(250)}
 					productSubtitle="🍒  MAROON"
-					productDiscount="20% OFF"
+					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
 					primaryColor={palette.maroon}
 					secondaryColor={palette.red}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -72,9 +86,9 @@ export function SupportProducts() {
 					key="top-right"
 					index={index++}
 					productId={products.money_500}
-					productTitle="$500"
+					productTitle={getProductTitle(500)}
 					productSubtitle="🍀  GREEN"
-					productDiscount="20% OFF"
+					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
 					primaryColor={palette.teal}
 					secondaryColor={palette.green}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -84,9 +98,9 @@ export function SupportProducts() {
 					key="bottom-right"
 					index={index++}
 					productId={products.money_1000}
-					productTitle="$1,000"
+					productTitle={getProductTitle(1000)}
 					productSubtitle="🦋  SAPPHIRE"
-					productDiscount="20% OFF"
+					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
 					primaryColor={palette.sapphire}
 					secondaryColor={palette.blue}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -98,9 +112,9 @@ export function SupportProducts() {
 				key="right-product"
 				index={index++}
 				productId={products.money_5000}
-				productTitle="$5,000"
+				productTitle={getProductTitle(5000)}
 				productSubtitle="💜  MAUVE"
-				productDiscount="25% OFF"
+				productDiscount={premium ? "20% BONUS!" : "25% OFF"}
 				primaryColor={palette.mauve}
 				secondaryColor={palette.blue}
 				size={new UDim2(0.4, -padding / 2, 1, 0)}

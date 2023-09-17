@@ -2,8 +2,7 @@ import { Players, RunService } from "@rbxts/services";
 
 // Premium benefit applied when earning money passively
 // during a game or when purchasing a product from the shop.
-export const PASSIVE_PREMIUM_BENEFIT = 1.1;
-export const PRODUCT_PREMIUM_BENEFIT = 1.2;
+export const PREMIUM_BENEFIT = 1.2;
 
 export const WORLD_BOUNDS = 196;
 export const WORLD_TICK = 1 / 20;

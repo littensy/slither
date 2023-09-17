@@ -32,7 +32,3 @@ export async function promisePlayerDisconnected(player: Player): Promise<void> {
 
 	await Promise.fromEvent(Players.PlayerRemoving, (playerWhoLeft) => playerWhoLeft === player);
 }
-
-export function playerIsPremium(player: Player) {
-	return player.MembershipType === Enum.MembershipType.Premium;
-}
