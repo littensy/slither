@@ -24,4 +24,5 @@ export const SNAKE_BOOST_SPEED = 10;
 export const REMOTE_TICK = 1 / 20; // Roblox limits
 
 export const IS_EDIT = RunService.IsStudio() && !RunService.IsRunning();
+
 export const LOCAL_USER = Players.LocalPlayer ? Players.LocalPlayer.Name : "(server)";

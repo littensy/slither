@@ -1,8 +1,8 @@
-import { useViewport } from "@rbxts/pretty-react-hooks";
+import { useAsync, useViewport } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useOrientation, useRem } from "client/app/hooks";
-import { ProductType } from "shared/assets";
+import { getProducts } from "shared/assets";
 import { palette } from "shared/data/palette";
 
 import { SupportHeart } from "./support-heart";
@@ -11,10 +11,16 @@ import { SupportProduct } from "./support-product";
 export function SupportProducts() {
 	const rem = useRem();
 	const padding = rem(1.5);
+
 	const viewport = useViewport();
 	const orientation = useOrientation();
+	const [products] = useAsync(getProducts);
 
 	let index = 0;
+
+	if (!products) {
+		return undefined!;
+	}
 
 	return (
 		<scrollingframe
@@ -42,7 +48,7 @@ export function SupportProducts() {
 				<SupportProduct
 					key="top-left"
 					index={index++}
-					productId={ProductType.MONEY_100}
+					productId={products.money_100}
 					productTitle="$100"
 					productSubtitle="🍑  PEACH"
 					primaryColor={palette.yellow}
@@ -53,7 +59,7 @@ export function SupportProducts() {
 				<SupportProduct
 					key="bottom-left"
 					index={index++}
-					productId={ProductType.MONEY_250}
+					productId={products.money_250}
 					productTitle="$250"
 					productSubtitle="🍒  MAROON"
 					productDiscount="20% OFF"
@@ -65,7 +71,7 @@ export function SupportProducts() {
 				<SupportProduct
 					key="top-right"
 					index={index++}
-					productId={ProductType.MONEY_500}
+					productId={products.money_500}
 					productTitle="$500"
 					productSubtitle="🍀  GREEN"
 					productDiscount="20% OFF"
@@ -77,7 +83,7 @@ export function SupportProducts() {
 				<SupportProduct
 					key="bottom-right"
 					index={index++}
-					productId={ProductType.MONEY_1000}
+					productId={products.money_1000}
 					productTitle="$1,000"
 					productSubtitle="🦋  SAPPHIRE"
 					productDiscount="20% OFF"
@@ -91,7 +97,7 @@ export function SupportProducts() {
 			<SupportProduct
 				key="right-product"
 				index={index++}
-				productId={ProductType.MONEY_5000}
+				productId={products.money_5000}
 				productTitle="$5,000"
 				productSubtitle="💜  MAUVE"
 				productDiscount="25% OFF"
