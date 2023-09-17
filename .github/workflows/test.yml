@@ -18,6 +18,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-tags: true
       - uses: bahmutov/npm-install@v1
       - uses: ok-nick/setup-aftman@v0.3.0
         with:
@@ -25,7 +27,6 @@ jobs:
 
       - name: Output tag
         run: |
-          git fetch -t
           git describe --tags --abbrev=0
           git describe --tags
           git describe --abbrev=0
