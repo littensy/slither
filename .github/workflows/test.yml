@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: canary
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
+      - uses: ok-nick/setup-aftman@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Output tag
+        run: |
+          git describe --tags --abbrev=0
+          git describe --tags
+          git describe --abbrev=0
