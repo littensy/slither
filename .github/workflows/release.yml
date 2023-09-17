@@ -36,9 +36,26 @@ jobs:
           name: place
           path: place.rbxlx
 
-      - name: Deploy to Roblox
-        run: rojo upload --api_key "$CLOUD_DEPLOY_KEY" --universe_id "$UNIVERSE_ID" --asset_id "$PLACE_ID" -v
+  deploy:
+    runs-on: self-hosted
+    environment: production
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ok-nick/setup-aftman@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download place artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: place
+          path: ./
+
+      - name: Deploy game
+        run: mantle deploy --allow-purchases --environment production
         env:
-          CLOUD_DEPLOY_KEY: ${{ secrets.CLOUD_DEPLOY_KEY }}
-          UNIVERSE_ID: 4902171678
-          PLACE_ID: 14162747150
+          ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
+          MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
