@@ -8,16 +8,13 @@ import { useMotion, useRem } from "client/app/hooks";
 import { MenuPage, selectCurrentPage } from "client/store/menu";
 import { map } from "shared/utils/math-utils";
 
-import { MIN_NAV_REM } from "./constants";
-
 interface IndicatorProps {
 	readonly colors: readonly Color3[];
 	readonly order: readonly MenuPage[];
-	readonly edge: "top" | "bottom";
 }
 
-export function Indicator({ colors, order, edge }: IndicatorProps) {
-	const rem = useRem({ minimum: MIN_NAV_REM });
+export function Indicator({ colors, order }: IndicatorProps) {
+	const rem = useRem();
 
 	const page = useSelector(selectCurrentPage);
 	const currentIndex = order.indexOf(page);
@@ -30,13 +27,14 @@ export function Indicator({ colors, order, edge }: IndicatorProps) {
 	const style = useMemo(() => {
 		return {
 			position: position.map((x) => {
-				return edge === "top"
-					? new UDim2(0.5, math.round(rem(x)), 0, 0)
-					: new UDim2(0.5, math.round(rem(x)), 1, 0);
+				return new UDim2(0.5, math.round(rem(x)), 0, 0);
 			}),
-			size: velocity.map((x) => new UDim2(0, math.round(rem(x + 4)), 0, rem(1))),
+
+			size: velocity.map((x) => {
+				return new UDim2(0, math.round(rem(x + 4)), 0, rem(1));
+			}),
 		};
-	}, [edge, rem]);
+	}, [rem]);
 
 	useEffect(() => {
 		const x = map(currentIndex, 0, 2, -8, 8);

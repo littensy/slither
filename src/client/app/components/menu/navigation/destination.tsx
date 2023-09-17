@@ -13,8 +13,6 @@ import { springs } from "client/app/utils/springs";
 import { MenuPage, selectIsPage } from "client/store/menu";
 import { palette } from "shared/data/palette";
 
-import { MIN_NAV_REM } from "./constants";
-
 interface DestinationProps {
 	readonly page: MenuPage;
 	readonly label: string;
@@ -25,7 +23,7 @@ interface DestinationProps {
 }
 
 export function Destination({ page, label, icon, iconAlt, color, order }: DestinationProps) {
-	const rem = useRem({ minimum: MIN_NAV_REM });
+	const rem = useRem();
 	const store = useStore();
 	const isPage = useSelectorCreator(selectIsPage, page);
 	const [transition, transitionMotion] = useMotion(0);
