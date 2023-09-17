@@ -14,12 +14,12 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: canary
 
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-tags: true
+          fetch-depth: 0
       - uses: bahmutov/npm-install@v1
       - uses: ok-nick/setup-aftman@v0.3.0
         with:
