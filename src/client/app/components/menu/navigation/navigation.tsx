@@ -4,33 +4,21 @@ import { useRem } from "client/app/hooks";
 import { images } from "shared/assets";
 import { palette } from "shared/data/palette";
 
-import { MIN_NAV_REM } from "./constants";
 import { Destination } from "./destination";
 import { Indicator } from "./indicator";
-import { useEdge } from "./use-edge";
 
 export function Navigation() {
-	const rem = useRem({ minimum: MIN_NAV_REM });
-	const edge = useEdge();
+	const rem = useRem();
 
 	return (
-		<Group
-			anchorPoint={new Vector2(0, edge === "top" ? 0 : 1)}
-			size={new UDim2(1, 0, 0, rem(7.5))}
-			position={new UDim2(0, 0, edge === "top" ? 0 : 1, 0)}
-		>
+		<Group size={new UDim2(1, 0, 0, rem(7.5))}>
 			<Indicator
 				key="indicator"
 				colors={[palette.red, palette.mauve, palette.blue]}
 				order={["support", "home", "skins"]}
-				edge={edge}
 			/>
 
-			<Group
-				key="destinations"
-				size={new UDim2(1, 0, 0, rem(5))}
-				position={new UDim2(0, 0, 0, edge === "top" ? rem(3) : rem(0))}
-			>
+			<Group key="destinations" size={new UDim2(1, 0, 0, rem(5))} position={new UDim2(0, 0, 0, rem(3))}>
 				<uilistlayout
 					key="layout"
 					SortOrder="LayoutOrder"
