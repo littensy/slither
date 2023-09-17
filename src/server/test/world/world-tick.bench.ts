@@ -1,5 +1,6 @@
 import { store } from "server/store";
 import {
+	CANDY_LIMITS,
 	candyGrid,
 	createCandy,
 	getSafePointInWorld,
@@ -12,7 +13,7 @@ import {
 	onSnakeTick,
 	snakeGrid,
 } from "server/world";
-import { CANDY_LIMITS, WORLD_BOUNDS } from "shared/constants";
+import { WORLD_BOUNDS } from "shared/constants";
 import { CandyType } from "shared/store/candy";
 import { benchmark } from "shared/utils/benchmark";
 import { fillArray } from "shared/utils/object-utils";

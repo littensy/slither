@@ -14,7 +14,9 @@ import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 import { describeSnakeFromScore, selectSnakeRanking } from "shared/store/snakes";
 
-const SCORE_REWARD_TABLE: { readonly [K in ScoreMilestone]: number } = {
+import { grantMoney } from "../utils";
+
+const SCORE_REWARDS: { readonly [K in ScoreMilestone]: number } = {
 	1_000: 20,
 	5_000: 50,
 	10_000: 100,
@@ -26,13 +28,13 @@ const SCORE_REWARD_TABLE: { readonly [K in ScoreMilestone]: number } = {
 	1_000_000: 10_000,
 };
 
-const RANK_REWARD_TABLE: { readonly [ranking: number]: number | undefined } = {
+const RANK_REWARDS: { readonly [ranking: number]: number | undefined } = {
 	1: 200,
 	2: 100,
 	3: 50,
 };
 
-const PASSIVE_RANK_REWARD_TABLE: { readonly [ranking: number]: number | undefined } = {
+const RANK_REWARDS_PASSIVE: { readonly [ranking: number]: number | undefined } = {
 	1: 20,
 	2: 10,
 	3: 5,
@@ -48,20 +50,20 @@ function observeRewards(id: string) {
 	// When the player hits a new top ranking they haven't hit
 	// during their current life, grant them a reward
 	const unsubscribeRanking = store.subscribe(selectMilestoneRanking(id), (ranking = 0) => {
-		const reward = RANK_REWARD_TABLE[ranking];
+		const reward = RANK_REWARDS[ranking];
 
 		if (reward !== undefined) {
-			grantReward(id, reward, `making <font color="#fff">top ${ranking}</font>`);
+			grantMoneyReward(id, reward, `making <font color="#fff">top ${ranking}</font>`);
 		}
 	});
 
 	// When the player hits a new score milestone they haven't hit
 	// during their current life, grant them a reward
 	const unsubscribeScore = store.subscribe(selectMilestoneScore(id), (score) => {
-		const reward = score && SCORE_REWARD_TABLE[score];
+		const reward = score && SCORE_REWARDS[score];
 
 		if (reward !== undefined) {
-			grantReward(id, reward, `hitting a score of <font color="#fff">${score}</font>`);
+			grantMoneyReward(id, reward, `hitting a score of <font color="#fff">${score}</font>`);
 		}
 	});
 
@@ -71,8 +73,8 @@ function observeRewards(id: string) {
 		const enemy = getSnake(enemyId);
 
 		if (enemy) {
-			const length = describeSnakeFromScore(enemy.score).length;
-			grantReward(id, math.ceil(length), `defeating <font color="#fff">${enemy.name}</font>`);
+			const bounty = describeSnakeFromScore(enemy.score).length;
+			grantMoneyReward(id, bounty, `defeating <font color="#fff">${enemy.name}</font>`);
 		}
 
 		store.clearMilestoneKillScore(id);
@@ -86,10 +88,10 @@ function observeRewards(id: string) {
 		() => {
 			return setInterval(() => {
 				const rank = store.getState(selectSnakeRanking(id)) ?? 0;
-				const reward = PASSIVE_RANK_REWARD_TABLE[rank];
+				const reward = RANK_REWARDS_PASSIVE[rank];
 
 				if (reward !== undefined) {
-					grantReward(id, reward, `staying in the <font color="#fff">top ${rank}</font>`);
+					grantMoneyReward(id, reward, `staying in the <font color="#fff">top ${rank}</font>`);
 				}
 			}, 60);
 		},
@@ -103,14 +105,14 @@ function observeRewards(id: string) {
 	};
 }
 
-function grantReward(id: string, reward: number, reason: string) {
+function grantMoneyReward(id: string, amount: number, reason: string) {
 	const player = Players.FindFirstChild(id);
 
 	if (!player?.IsA("Player")) {
 		return;
 	}
 
-	store.givePlayerBalance(id, reward);
+	amount = grantMoney(player, amount);
 
 	// Delay the alert so that it doesn't appear at the same time as
 	// other alerts
@@ -119,7 +121,7 @@ function grantReward(id: string, reward: number, reason: string) {
 			scope: "money",
 			emoji: "💵",
 			color: palette.green,
-			message: `You got <font color="#fff">$${reward}</font> for ${reason}!`,
+			message: `You got <font color="#fff">$${amount}</font> for ${reason}!`,
 		});
 	});
 }

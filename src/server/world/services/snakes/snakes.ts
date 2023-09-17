@@ -1,7 +1,8 @@
 import { Players } from "@rbxts/services";
 import { store } from "server/store";
+import { SNAKE_TICK_PHASE } from "server/world/constants";
 import { getSafePointInWorld, killSnake, playerIsSpawned } from "server/world/utils";
-import { SNAKE_TICK_PHASE, WORLD_TICK } from "shared/constants";
+import { WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
 import { defaultPlayerSave, RANDOM_SKIN, selectPlayerSave } from "shared/store/saves";
 import { createScheduler } from "shared/utils/scheduler";

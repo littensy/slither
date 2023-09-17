@@ -1,8 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { createCandy, getSnake, onCandyTick, removeCandyIfAtLimit } from "server/world";
-import { CANDY_LIMITS } from "shared/constants";
+import { CANDY_LIMITS, createCandy, getSnake, onCandyTick, removeCandyIfAtLimit } from "server/world";
 import { CandyType, selectCandies, selectCandyById, selectCandyCount } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 

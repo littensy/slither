@@ -1,4 +1,4 @@
-import { store } from "server/store";
+import { grantMoney } from "server/rewards";
 import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 
@@ -13,9 +13,10 @@ export async function initMoneyService() {
 }
 
 function giveMoney(player: Player, amount: number) {
-	store.givePlayerBalance(player.Name, amount);
+	amount = grantMoney(player, amount);
 
 	remotes.client.alert.fire(player, {
+		scope: "money",
 		emoji: "💸",
 		message: `Your purchase of <font color="#fff">$${amount}</font> succeeded! Thank you  ❤️`,
 		color: palette.green,

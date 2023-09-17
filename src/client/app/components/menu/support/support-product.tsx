@@ -90,6 +90,7 @@ export function SupportProduct({
 			position={lerpBinding(transition, position.add(new UDim2(0, 0, 0, rem(6))), position)}
 		>
 			<ReactiveButton
+				key="button"
 				onClick={promptPurchase}
 				onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
 				backgroundTransparency={1}
@@ -99,9 +100,9 @@ export function SupportProduct({
 					key="glow"
 					shadowColor={palette.white}
 					shadowTransparency={composeBindings(lerpBinding(hover, 0.2, 0), lerpBinding(glow, 1, 0), blend)}
-					shadowSize={rem(8)}
+					shadowSize={rem(12)}
 				>
-					<uigradient Color={gradient} Rotation={95} />
+					<uigradient key="gradient" Color={gradient} Rotation={95} />
 				</Shadow>
 
 				<Shadow
@@ -192,8 +193,8 @@ export function SupportProduct({
 					<Text
 						key="price"
 						font={fonts.inter.medium}
-						text={`\u{E002} ${price}  →`}
-						textSize={rem(1.25)}
+						text={`\u{E002}${price}`}
+						textSize={rem(1.5)}
 						textColor={palette.base}
 						position={new UDim2(0.5, 0, 0.5, 0)}
 					/>
