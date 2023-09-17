@@ -29,7 +29,7 @@ export function SupportFooter() {
 				"experiences ✨",
 			].join(" ")}
 			textColor={palette.overlay0}
-			textSize={rem(1.5)}
+			textSize={rem(1.25)}
 			textXAlignment="Center"
 			textYAlignment="Bottom"
 			position={new UDim2(0.5, 0, 1, -rem(3))}
