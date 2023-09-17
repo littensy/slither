@@ -100,7 +100,7 @@ export function SupportProduct({
 					key="glow"
 					shadowColor={palette.white}
 					shadowTransparency={composeBindings(lerpBinding(hover, 0.2, 0), lerpBinding(glow, 1, 0), blend)}
-					shadowSize={rem(8)}
+					shadowSize={rem(12)}
 				>
 					<uigradient key="gradient" Color={gradient} Rotation={95} />
 				</Shadow>
