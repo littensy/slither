@@ -10,7 +10,12 @@ export function SupportPremium() {
 	const rem = useRem();
 	const promptPremiumPurchase = async () => {
 		if (Players.LocalPlayer.MembershipType === Enum.MembershipType.Premium) {
-			sendAlert({});
+			sendAlert({
+				emoji: "💎",
+				message: "You already have <font color='#fff'>Premium</font>!",
+				color: palette.sapphire,
+				colorSecondary: palette.blue,
+			});
 		} else {
 			MarketplaceService.PromptPremiumPurchase(Players.LocalPlayer);
 		}
