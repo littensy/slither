@@ -3,6 +3,7 @@ import { RemProvider } from "client/app/providers/rem-provider";
 
 import { SupportFooter } from "./support-footer";
 import { SupportProducts } from "./support-products";
+import { SupportPremium } from "./support-premium";
 
 export function Support() {
 	return (
@@ -12,6 +13,7 @@ export function Support() {
 			</RemProvider>
 
 			<SupportFooter key="footer" />
+			<SupportPremium key="premium" />
 		</>
 	);
 }
