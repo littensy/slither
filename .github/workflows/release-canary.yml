@@ -19,7 +19,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: canary
 
     steps:
       - uses: actions/checkout@v3

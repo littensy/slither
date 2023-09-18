@@ -23,7 +23,7 @@ environments:
 
               🐍  Defeat other players by cutting them off with your tail!
 
-              🏆  Eat and fight to increase your score, and rise to the top!
+              🏆  Compete against up to 24 players for first place!
 
               🤝  This game is a work-in-progress! Feedback is appreciated.
             maxPlayerCount: 50
@@ -51,14 +51,15 @@ target:
         configuration:
           name: 🐍 Slither
           description: |
-            Slither is a casual multiplayer game where you control a snake and grow by eating glowing orbs. If your head bumps into another snake's tail, you're out!
+            A casual game with soothing pastel color palettes 🎨.
+            Eat candy orbs to raise your score. If you bump into someone else, you're out!
 
             🐍  Defeat other players by cutting them off with your tail!
 
-            🏆  Eat and fight to increase your score, and rise to the top!
+            🏆  Compete against up to 24 players for first place!
 
-            🤝  This game is a work-in-progress! Feedback is appreciated.
-          maxPlayerCount: 24
+            💎  With Premium, all money earned comes with a 20% bonus!
+          maxPlayerCount: 25
     products:
       money-100:
         price: 10
