@@ -121,10 +121,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/object-utils/-/object-utils-1.0.4.tgz#c53d80f89e75c401365446be63fa1396bc2cffe7"
   integrity sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==
 
-"@rbxts/pretty-react-hooks@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.2.0.tgz#2e636bf624dd6b166490e7255e328bcfd8a0eabb"
-  integrity sha512-WZn2+K5lr5eD4BFrmVWyD2/ARBfgNbtIESbdSmjPBhgjcgxKaXlUmNBFA1EBeP0mz8o8Shb9g5TFJWTKNbRfvw==
+"@rbxts/pretty-react-hooks@0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.2.1.tgz#2ab8325855f78a1b95f9bb2098617e88e2fbed9d"
+  integrity sha512-lCBWb1nV2SaeZHOQACco6t9yPxmAt+8Rr4zMgDJQIk+tHDPJ6QVqyCGHodNC4+lQki3lEGxvMHq+RLLcr7YpEQ==
   dependencies:
     "@rbxts/react-roblox" "^0.1.1"
     "@rbxts/services" "^1.5.1"
