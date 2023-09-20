@@ -1,5 +1,4 @@
 import { MarketplaceService, Players } from "@rbxts/services";
-import { getProductId, ProductTag } from "shared/assets";
 
 type ProductHandler = (player: Player) => void;
 
@@ -25,6 +24,6 @@ export async function initProcessReceiptService() {
 	};
 }
 
-export async function createProduct(tag: ProductTag, handler: ProductHandler) {
-	productHandlers.set(await getProductId(tag), handler);
+export function createProduct(id: number, handler: ProductHandler) {
+	productHandlers.set(id, handler);
 }

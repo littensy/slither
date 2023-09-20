@@ -3,17 +3,13 @@ import { Group } from "client/app/common/group";
 import { Text } from "client/app/common/text";
 import { useRem } from "client/app/hooks";
 import { fonts } from "client/app/utils/fonts";
-import { $git } from "rbxts-transform-debug";
+import { $git, $package } from "rbxts-transform-debug";
 import { palette } from "shared/data/palette";
 
 interface HomeVersionProps {
 	readonly anchorPoint: Vector2;
 	readonly position: UDim2;
 }
-
-const GIT = $git();
-const VERSION = GIT.LatestTag !== "" ? GIT.LatestTag : GIT.Commit;
-const BRANCH = `@${GIT.Branch !== "" ? GIT.Branch : "main"}`;
 
 export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 	const rem = useRem();
@@ -26,10 +22,9 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 				HorizontalAlignment="Center"
 				Padding={new UDim(0, rem(0.8))}
 			/>
-
 			<Text
 				font={fonts.inter.medium}
-				text={VERSION}
+				text={$package.version}
 				textAutoResize="X"
 				textColor={palette.text}
 				textTransparency={0.5}
@@ -39,9 +34,8 @@ export function HomeVersion({ anchorPoint, position }: HomeVersionProps) {
 			<Divider />
 
 			<Text
-				richText
 				font={fonts.inter.medium}
-				text={BRANCH}
+				text={DateTime.fromIsoDate($git().ISODate)?.FormatLocalTime("LLL", "en-us") ?? "unknown"}
 				textAutoResize="X"
 				textColor={palette.text}
 				textTransparency={0.5}

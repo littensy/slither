@@ -1,15 +1,16 @@
 import { grantMoney } from "server/rewards";
+import { DevProduct } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 
 import { createProduct } from "./process-receipt";
 
 export async function initMoneyService() {
-	createProduct("money_100", (player) => giveMoney(player, 100));
-	createProduct("money_250", (player) => giveMoney(player, 250));
-	createProduct("money_500", (player) => giveMoney(player, 500));
-	createProduct("money_1000", (player) => giveMoney(player, 1000));
-	createProduct("money_5000", (player) => giveMoney(player, 5000));
+	createProduct(DevProduct.MONEY_100, (player) => giveMoney(player, 100));
+	createProduct(DevProduct.MONEY_250, (player) => giveMoney(player, 250));
+	createProduct(DevProduct.MONEY_500, (player) => giveMoney(player, 500));
+	createProduct(DevProduct.MONEY_1000, (player) => giveMoney(player, 1000));
+	createProduct(DevProduct.MONEY_5000, (player) => giveMoney(player, 5000));
 }
 
 function giveMoney(player: Player, amount: number) {

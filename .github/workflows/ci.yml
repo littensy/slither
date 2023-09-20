@@ -27,7 +27,7 @@ jobs:
           yarn prettier --check src
 
       - name: Compile
-        run: yarn build --verbose
+        run: yarn build:dev --verbose
 
       - name: Build project
         run: rojo build --output place.rbxlx

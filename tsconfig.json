@@ -26,6 +26,10 @@
 		"plugins": [
 			{
 				"transform": "rbxts-transform-debug"
+			},
+			{
+				"transform": "rbxts-transform-env",
+				"defaultEnvironment": "canary"
 			}
 		]
 	}

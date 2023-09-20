@@ -1,8 +1,8 @@
-import { useAsync, useViewport } from "@rbxts/pretty-react-hooks";
+import { useViewport } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useOrientation, usePremium, useRem } from "client/app/hooks";
-import { getProducts } from "shared/assets";
+import { DevProduct } from "shared/assets";
 import { PREMIUM_BENEFIT } from "shared/constants";
 import { palette } from "shared/data/palette";
 
@@ -18,8 +18,6 @@ export function SupportProducts() {
 	const orientation = useOrientation();
 	const premium = usePremium();
 
-	const [products] = useAsync(getProducts);
-
 	const getProductTitle = (money: number) => {
 		if (premium) {
 			money = math.floor(money * PREMIUM_BENEFIT);
@@ -30,10 +28,6 @@ export function SupportProducts() {
 	};
 
 	let index = 0;
-
-	if (!products) {
-		return undefined!;
-	}
 
 	return (
 		<scrollingframe
@@ -61,7 +55,7 @@ export function SupportProducts() {
 				<SupportProduct
 					key="top-left"
 					index={index++}
-					productId={products.money_100}
+					productId={DevProduct.MONEY_100}
 					productTitle={getProductTitle(100)}
 					productSubtitle="🍑  PEACH"
 					productDiscount={premium ? "20% BONUS!" : undefined}
@@ -73,7 +67,7 @@ export function SupportProducts() {
 				<SupportProduct
 					key="bottom-left"
 					index={index++}
-					productId={products.money_250}
+					productId={DevProduct.MONEY_250}
 					productTitle={getProductTitle(250)}
 					productSubtitle="🍒  MAROON"
 					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
@@ -85,7 +79,7 @@ export function SupportProducts() {
 				<SupportProduct
 					key="top-right"
 					index={index++}
-					productId={products.money_500}
+					productId={DevProduct.MONEY_500}
 					productTitle={getProductTitle(500)}
 					productSubtitle="🍀  GREEN"
 					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
@@ -97,7 +91,7 @@ export function SupportProducts() {
 				<SupportProduct
 					key="bottom-right"
 					index={index++}
-					productId={products.money_1000}
+					productId={DevProduct.MONEY_1000}
 					productTitle={getProductTitle(1000)}
 					productSubtitle="🦋  SAPPHIRE"
 					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
@@ -111,7 +105,7 @@ export function SupportProducts() {
 			<SupportProduct
 				key="right-product"
 				index={index++}
-				productId={products.money_5000}
+				productId={DevProduct.MONEY_5000}
 				productTitle={getProductTitle(5000)}
 				productSubtitle="💜  MAUVE"
 				productDiscount={premium ? "20% BONUS!" : "25% OFF"}
