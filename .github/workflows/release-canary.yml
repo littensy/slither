@@ -22,16 +22,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-tags: true
-          fetch-depth: 0
       - uses: bahmutov/npm-install@v1
       - uses: ok-nick/setup-aftman@v0.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Compile
-        run: yarn build --verbose
+        run: yarn build:dev --verbose
 
       - name: Build project
         run: rojo build --output place.rbxlx
@@ -57,7 +54,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: place
-          path: ./
 
       - name: Deploy game
         run: mantle deploy --allow-purchases --environment canary

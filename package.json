@@ -7,15 +7,17 @@
 		"watch": "rbxtsc -w",
 		"tarmac": "tarmac sync --target roblox",
 		"serve": "rojo serve",
-		"build": "rm -rf out && yarn compile && rojo build --output place.rbxlx",
-		"deploy:dev": "yarn build && mantle deploy --environment canary",
-		"deploy:prod": "yarn build && mantle deploy --environment production"
+		"build:dev": "rm -rf out && yarn compile && rojo build --output place.rbxlx",
+		"build:prod": "rm -rf out && cross-env NODE_ENV=production yarn compile && rojo build --output place.rbxlx",
+		"deploy:dev": "yarn build:dev && mantle deploy --environment canary",
+		"deploy:prod": "yarn build:prod && mantle deploy --environment production"
 	},
 	"devDependencies": {
 		"@rbxts/compiler-types": "^2.1.1-types.0",
 		"@rbxts/types": "^1.0.714",
 		"@typescript-eslint/eslint-plugin": "^5.61.0",
 		"@typescript-eslint/parser": "^5.61.0",
+		"cross-env": "^7.0.3",
 		"eslint": "^8.49.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "5.0.0-alpha.2",
@@ -24,6 +26,7 @@
 		"eslint-plugin-unused-imports": "^3.0.0",
 		"prettier": "^3.0.0",
 		"rbxts-transform-debug": "^2.1.0-beta.0",
+		"rbxts-transform-env": "^2.1.0-beta.3",
 		"roblox-ts": "^2.1.1",
 		"typescript": "~5.0"
 	},
