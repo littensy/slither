@@ -47,7 +47,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: place
-          path: place.rbxlx
 
       - name: Deploy game
         run: mantle deploy --allow-purchases --environment production
