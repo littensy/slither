@@ -35,7 +35,7 @@ const LIST_PADDING = 1;
 export function Alert({ alert, index }: AlertProps) {
 	const rem = useRem();
 	const menuOpen = useSelector(selectIsMenuOpen);
-	const visibleIndex = useSelectorCreator(selectAlertIndex, index);
+	const visibleIndex = useSelectorCreator(selectAlertIndex, alert.id);
 
 	const [transition, transitionMotion] = useMotion(0);
 	const [hover, hoverMotion] = useMotion(0);
