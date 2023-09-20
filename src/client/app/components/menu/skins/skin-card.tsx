@@ -60,7 +60,7 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 			onClick={() => {
 				if (!hidden) {
 					onClick();
-					playSound(sounds.sfx.navigate);
+					playSound(sounds.navigate);
 				}
 			}}
 			animateSizeStrength={2}

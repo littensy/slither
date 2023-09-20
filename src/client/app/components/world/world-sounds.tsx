@@ -5,7 +5,7 @@ import { selectSnakeFromWorldSubject } from "client/store/world";
 import { playSound, sounds } from "shared/assets";
 import { selectHasLocalSnake, selectSnakeIsBoosting } from "shared/store/snakes";
 
-const ERROR_SOUNDS = [sounds.sfx.error_1, sounds.sfx.error_2, sounds.sfx.error_3];
+const ERROR_SOUNDS = [sounds.error_1, sounds.error_2, sounds.error_3];
 
 const random = new Random();
 
@@ -28,7 +28,7 @@ export function WorldSounds() {
 	// Spawn sound
 	useEffect(() => {
 		if (hasLocalSnake) {
-			playSound(sounds.sfx.start_game);
+			playSound(sounds.start_game);
 		}
 	}, [hasLocalSnake]);
 
@@ -36,7 +36,7 @@ export function WorldSounds() {
 	useEffect(() => {
 		if ((snake?.score ?? 0) > (previousScore ?? 0)) {
 			const speed = random.NextNumber(0.87, 1);
-			playSound(sounds.sfx.whoosh, { volume: 0.5 * volume, speed });
+			playSound(sounds.whoosh, { volume: 0.5 * volume, speed });
 		}
 	}, [snake?.score]);
 
@@ -44,7 +44,7 @@ export function WorldSounds() {
 	useDebounceEffect(
 		() => {
 			if (snake) {
-				playSound(boosting ? sounds.sfx.boost_start : sounds.sfx.boost_stop, { volume });
+				playSound(boosting ? sounds.boost_start : sounds.boost_stop, { volume });
 			}
 		},
 		[boosting],

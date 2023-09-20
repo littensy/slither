@@ -85,14 +85,14 @@ export function Alert({ alert, index }: AlertProps) {
 	}, [visibleIndex]);
 
 	useMountEffect(() => {
-		playSound(alert.sound ?? sounds.sfx.alert_neutral);
+		playSound(alert.sound ?? sounds.alert_neutral);
 	});
 
 	return (
 		<ReactiveButton
 			onClick={() => {
 				dismissAlert(alert.id);
-				playSound(sounds.sfx.alert_dismiss);
+				playSound(sounds.alert_dismiss);
 			}}
 			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0, springs.responsive)}
 			soundVariant="none"

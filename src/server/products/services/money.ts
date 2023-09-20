@@ -21,6 +21,6 @@ function giveMoney(player: Player, amount: number) {
 		emoji: "💸",
 		message: `Your purchase of <font color="#fff">$${amount}</font> succeeded! Thank you  ❤️`,
 		color: palette.green,
-		sound: sounds.sfx.alert_money,
+		sound: sounds.alert_money,
 	});
 }

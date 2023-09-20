@@ -83,7 +83,7 @@ export function ActButton() {
 				emoji: "🚨",
 				color: palette.red,
 				message: `Sorry, you cannot afford the <font color="#fff">${current}</font> skin yet.`,
-				sound: sounds.sfx.alert_bad,
+				sound: sounds.alert_bad,
 			});
 		}
 	};

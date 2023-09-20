@@ -59,6 +59,6 @@ async function fallbackPlayerSave(player: Player) {
 		color: palette.red,
 		message: "Roblox may be having issues with your save data. Sorry for the inconvenience!",
 		duration: 10,
-		sound: sounds.sfx.alert_bad,
+		sound: sounds.alert_bad,
 	});
 }

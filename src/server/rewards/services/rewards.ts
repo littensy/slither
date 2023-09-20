@@ -123,7 +123,7 @@ function grantMoneyReward(id: string, amount: number, reason: string) {
 			emoji: "💵",
 			color: palette.green,
 			message: `You got <font color="#fff">$${amount}</font> for ${reason}!`,
-			sound: sounds.sfx.alert_money,
+			sound: sounds.alert_money,
 		});
 	});
 }
