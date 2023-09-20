@@ -28,7 +28,7 @@
 		"rbxts-transform-debug": "^2.1.0-beta.0",
 		"rbxts-transform-env": "^2.1.0-beta.3",
 		"roblox-ts": "^2.1.1",
-		"typescript": "~5.0"
+		"typescript": "~5.2"
 	},
 	"dependencies": {
 		"@rbxts/bitbuffer2": "^1.0.0-ts.0",
