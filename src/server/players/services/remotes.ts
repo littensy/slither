@@ -1,4 +1,5 @@
 import { store } from "server/store";
+import { sounds } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { findSnakeSkin } from "shared/data/skins";
 import { remotes } from "shared/remotes";
@@ -17,12 +18,14 @@ export async function initRemoteService() {
 				emoji: "💵",
 				color: palette.green,
 				message: `You bought the <font color="#fff">${skin.id}</font> skin for <font color="#fff">$${skin.price}</font>. Thank you!`,
+				sound: sounds.sfx.alert_money,
 			});
 		} else {
 			remotes.client.alert.fire(player, {
 				emoji: "🚨",
 				color: palette.red,
 				message: `Sorry, you cannot afford the <font color="#fff">${skinId}</font> skin yet.`,
+				sound: sounds.sfx.alert_bad,
 			});
 		}
 	});
@@ -49,6 +52,7 @@ export async function initRemoteService() {
 				emoji: "🚨",
 				color: palette.red,
 				message: `Sorry, you do not own the <font color="#fff">${skinId}</font> skin.`,
+				sound: sounds.sfx.alert_bad,
 			});
 		}
 	});

@@ -11,6 +11,7 @@ import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { selectMenuCurrentSkin } from "client/store/menu";
+import { sounds } from "shared/assets";
 import { LOCAL_USER } from "shared/constants";
 import { palette } from "shared/data/palette";
 import { findSnakeSkin } from "shared/data/skins";
@@ -82,6 +83,7 @@ export function ActButton() {
 				emoji: "🚨",
 				color: palette.red,
 				message: `Sorry, you cannot afford the <font color="#fff">${current}</font> skin yet.`,
+				sound: sounds.sfx.alert_bad,
 			});
 		}
 	};

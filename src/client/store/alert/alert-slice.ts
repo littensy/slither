@@ -14,6 +14,7 @@ export interface Alert {
 	readonly colorMessage?: Color3;
 	readonly duration: number;
 	readonly visible: boolean;
+	readonly sound?: string;
 }
 
 export type AlertScope = "ranking" | "money";

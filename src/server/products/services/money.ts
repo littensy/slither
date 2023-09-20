@@ -1,5 +1,5 @@
 import { grantMoney } from "server/rewards";
-import { DevProduct } from "shared/assets";
+import { DevProduct, sounds } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 
@@ -21,5 +21,6 @@ function giveMoney(player: Player, amount: number) {
 		emoji: "💸",
 		message: `Your purchase of <font color="#fff">$${amount}</font> succeeded! Thank you  ❤️`,
 		color: palette.green,
+		sound: sounds.sfx.alert_money,
 	});
 }

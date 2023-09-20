@@ -60,6 +60,9 @@ target:
 
             💎  With Premium, all money earned comes with a 20% bonus!
           maxPlayerCount: 25
+    assets:
+      - assets/sounds/music/*
+      - assets/sounds/sfx/*
     products:
       money-100:
         price: 10
