@@ -18,6 +18,7 @@ export interface TextProps<T extends Instance = TextLabel> extends FrameProps<T>
 	textHeight?: number | Roact.Binding<number>;
 	textAutoResize?: "X" | "Y" | "XY";
 	richText?: boolean | Roact.Binding<boolean>;
+	maxVisibleGraphemes?: number | Roact.Binding<number>;
 }
 
 export function Text(props: TextProps) {
@@ -38,6 +39,7 @@ export function Text(props: TextProps) {
 			TextScaled={props.textScaled}
 			LineHeight={props.textHeight}
 			RichText={props.richText}
+			MaxVisibleGraphemes={props.maxVisibleGraphemes}
 			Size={props.size}
 			AutomaticSize={props.textAutoResize}
 			Position={props.position}

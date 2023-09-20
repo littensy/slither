@@ -48,7 +48,7 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 	}, [enabled]);
 
 	return (
-		<ReactiveButton onClick={onClick} backgroundTransparency={1} size={size} layoutOrder={order}>
+		<ReactiveButton onClick={onClick} soundVariant="alt" backgroundTransparency={1} size={size} layoutOrder={order}>
 			<CanvasOrFrame
 				key="fade-out"
 				groupTransparency={transparency}

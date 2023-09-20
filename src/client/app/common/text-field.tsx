@@ -10,6 +10,7 @@ interface TextFieldProps extends TextProps<TextBox> {
 	placeholderColor?: Color3 | Roact.Binding<Color3>;
 	clearTextOnFocus?: boolean | Roact.Binding<boolean>;
 	multiLine?: boolean | Roact.Binding<boolean>;
+	textEditable?: boolean | Roact.Binding<boolean>;
 }
 
 export function TextField(props: TextFieldProps) {
@@ -27,6 +28,7 @@ export function TextField(props: TextFieldProps) {
 			PlaceholderColor3={props.placeholderColor}
 			ClearTextOnFocus={props.clearTextOnFocus}
 			MultiLine={props.multiLine}
+			TextEditable={props.textEditable}
 			Font={Enum.Font.Unknown}
 			FontFace={props.font || fonts.inter.regular}
 			TextColor3={props.textColor}
@@ -37,6 +39,7 @@ export function TextField(props: TextFieldProps) {
 			TextYAlignment={props.textYAlignment}
 			TextTruncate={props.textTruncate}
 			TextScaled={props.textScaled}
+			AutomaticSize={props.textAutoResize}
 			Size={props.size}
 			Position={props.position}
 			AnchorPoint={props.anchorPoint}
@@ -50,8 +53,8 @@ export function TextField(props: TextFieldProps) {
 			Event={props.event || {}}
 			Change={props.change || {}}
 		>
-			<Group ref={setChildRef} />
-			{props.cornerRadius && <uicorner CornerRadius={props.cornerRadius} />}
+			<Group key="ref" ref={setChildRef} />
+			{props.cornerRadius && <uicorner key="corner" CornerRadius={props.cornerRadius} />}
 			{props.children}
 		</textbox>
 	);

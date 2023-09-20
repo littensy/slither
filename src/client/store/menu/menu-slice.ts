@@ -6,6 +6,7 @@ import { getMenuDirection } from "./menu-utils";
 export interface MenuState {
 	readonly page: MenuPage;
 	readonly open: boolean;
+	readonly music: boolean;
 	readonly transition: {
 		readonly direction: "left" | "right";
 		readonly counter: number;
@@ -20,6 +21,7 @@ export type MenuPage = "support" | "home" | "skins";
 const initialState: MenuState = {
 	page: "home",
 	open: true,
+	music: true,
 	transition: {
 		direction: "left",
 		counter: 0,
@@ -50,5 +52,10 @@ export const menuSlice = createProducer(initialState, {
 			...state.skins,
 			current: skin,
 		},
+	}),
+
+	setMenuMusic: (state, music: boolean) => ({
+		...state,
+		music,
 	}),
 });
