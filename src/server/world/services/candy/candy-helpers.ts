@@ -150,7 +150,7 @@ export function dropCandyOnDeath(id: string): void {
 
 	// the total worth of the loot should scale logarithmically with the
 	// snake's score, but not exceed the score itself
-	const sum = math.min(2048 * math.log10(snake.score / 512 + 1), snake.score);
+	const sum = math.min(6000 * math.log10(snake.score / 1000 + 1), snake.score);
 	const total = candyPositions.size();
 
 	const candies = candyPositions.mapFiltered((position, index) => {
