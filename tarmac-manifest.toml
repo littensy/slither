@@ -24,13 +24,13 @@ id = 14835608619
 packable = false
 
 [inputs."assets/images/skins/snake_jelly_blue.png"]
-hash = "a7574e2c3123feab41e801b01be57f30df5b4a12dad3a364833d678201503353"
-id = 14836361432
+hash = "ff83b6f70ffe3287698ddcf650c8ed3870dfe56beb87ed64076df35123ed8196"
+id = 14836431074
 packable = false
 
 [inputs."assets/images/skins/snake_jelly_red.png"]
-hash = "98fcf4d54664065efd50d6a2429d2a04dc3da5d609e2db0548bbbf91e836430b"
-id = 14836361471
+hash = "ca8d21c51f5315f3b23bffb6bab6649510118590ce5d6ea62d93922f6874df4e"
+id = 14836431136
 packable = false
 
 [inputs."assets/images/skins/snake_main.png"]
