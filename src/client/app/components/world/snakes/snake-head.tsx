@@ -53,7 +53,7 @@ export function SnakeHead({
 		// on the actual offset because there is a slight desync
 		const position = isSubjectDelayed
 			? offsetSmooth.map(({ X, Y }) => new UDim2(0, rem(-X), 0, rem(-Y)))
-			: line.map(({ fromX, fromY }) => new UDim2(0, rem(fromX), 0, rem(fromY)));
+			: line.map(({ toX, toY }) => new UDim2(0, rem(toX), 0, rem(toY)));
 
 		return { size, position };
 	}, [rem, isSubjectDelayed]);

@@ -92,10 +92,10 @@ function createSnakeBindings(snake: SnakeEntity, scale: number): SnakeBindings {
 
 			lineMotion.to({
 				diameter: immediate(getSize(snake) * scale),
-				fromX: createGoal(previousTracer.X * scale, isSubject),
-				fromY: createGoal(previousTracer.Y * scale, isSubject),
-				toX: createGoal(tracer.X * scale, isSubject),
-				toY: createGoal(tracer.Y * scale, isSubject),
+				fromX: createGoal(tracer.X * scale, isSubject),
+				fromY: createGoal(tracer.Y * scale, isSubject),
+				toX: createGoal(previousTracer.X * scale, isSubject),
+				toY: createGoal(previousTracer.Y * scale, isSubject),
 			});
 
 			effectMotion.to({
