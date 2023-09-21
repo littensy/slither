@@ -86,7 +86,7 @@ export function SkinThumbnail({ tints, textures, textureSize, active, transparen
 				<Image
 					key={`tracer-${index}`}
 					image={textures[(index + 1) % textures.size()]}
-					imageColor={tints[index % tints.size()]}
+					imageColor={tints[(index + 1) % tints.size()]}
 					scaleType="Slice"
 					sliceCenter={new Rect(textureSize.div(2), textureSize.div(2))}
 					sliceScale={4}
