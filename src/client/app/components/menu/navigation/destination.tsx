@@ -34,12 +34,11 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 
 	return (
 		<ReactiveButton
+			onClick={() => store.setMenuPage(page)}
+			soundVariant="alt"
 			backgroundTransparency={1}
 			size={new UDim2(0, rem(7), 0, rem(5))}
 			layoutOrder={order}
-			onClick={() => {
-				store.setMenuPage(page);
-			}}
 		>
 			<Shadow
 				key="glow"

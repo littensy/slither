@@ -6,6 +6,7 @@ import { Backdrop } from "./backdrop";
 import { Candy } from "./candy";
 import { Snakes } from "./snakes";
 import { WorldBorder } from "./world-border";
+import { WorldSounds } from "./world-sounds";
 import { WorldSubject } from "./world-subject";
 
 export function World() {
@@ -17,6 +18,7 @@ export function World() {
 				<Snakes />
 				<WorldSubject />
 				<WorldBorder />
+				<WorldSounds />
 			</Group>
 		</RemProvider>
 	);

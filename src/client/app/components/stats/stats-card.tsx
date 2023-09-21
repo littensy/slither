@@ -11,6 +11,7 @@ import { springs } from "client/app/utils/springs";
 import { palette } from "shared/data/palette";
 
 interface StatsCardProps {
+	readonly onClick?: () => void;
 	readonly emoji: string;
 	readonly label: string;
 	readonly value: string;
@@ -26,7 +27,7 @@ const CARD_HEIGHT = 4;
 const CARD_EMOJI_WIDTH = 2;
 const CARD_CANVAS_MARGIN = 3;
 
-export function StatsCard({ emoji, label, value, primary, secondary, enabled, order }: StatsCardProps) {
+export function StatsCard({ onClick, emoji, label, value, primary, secondary, enabled, order }: StatsCardProps) {
 	const primaryDark = primary.Lerp(palette.crust, 0.75);
 	const secondaryDark = secondary.Lerp(palette.crust, 0.75);
 
@@ -47,7 +48,7 @@ export function StatsCard({ emoji, label, value, primary, secondary, enabled, or
 	}, [enabled]);
 
 	return (
-		<ReactiveButton backgroundTransparency={1} size={size} layoutOrder={order}>
+		<ReactiveButton onClick={onClick} soundVariant="alt" backgroundTransparency={1} size={size} layoutOrder={order}>
 			<CanvasOrFrame
 				key="fade-out"
 				groupTransparency={transparency}

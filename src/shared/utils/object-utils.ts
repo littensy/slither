@@ -64,3 +64,20 @@ export function assign<K extends string, V>(object: { [key in K]: V }, patch: { 
 
 	return result;
 }
+
+/**
+ * Returns a shuffled copy of the given array.
+ */
+export function shuffle<T extends defined>(array: T[]): T[] {
+	const result = table.clone(array);
+	const random = new Random();
+
+	for (const index of $range(result.size() - 1, 1, -1)) {
+		const randomIndex = random.NextInteger(0, index);
+		const temp = result[index];
+		result[index] = result[randomIndex];
+		result[randomIndex] = temp;
+	}
+
+	return result;
+}

@@ -10,6 +10,7 @@ import {
 	selectMilestoneScore,
 } from "server/store/milestones";
 import { getSnake } from "server/world";
+import { sounds } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 import { describeSnakeFromScore, selectSnakeRanking } from "shared/store/snakes";
@@ -122,6 +123,7 @@ function grantMoneyReward(id: string, amount: number, reason: string) {
 			emoji: "💵",
 			color: palette.green,
 			message: `You got <font color="#fff">$${amount}</font> for ${reason}!`,
+			sound: sounds.alert_money,
 		});
 	});
 }

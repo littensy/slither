@@ -1,5 +1,6 @@
 import { store } from "server/store";
 import { createBot, getSnake, killSnake } from "server/world";
+import { defaultPlayerSave } from "shared/store/saves";
 import { selectSnakes } from "shared/store/snakes";
 
 import { createCommand } from "./create-command";
@@ -37,4 +38,8 @@ createCommand("/purge", (player, argument) => {
 
 createCommand("/money", (player, argument) => {
 	store.givePlayerBalance(player.Name, tonumber(argument) ?? 0);
+});
+
+createCommand("/force-reset", (player) => {
+	store.setPlayerSave(player.Name, defaultPlayerSave);
 });

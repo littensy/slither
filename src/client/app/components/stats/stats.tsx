@@ -1,7 +1,7 @@
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact from "@rbxts/roact";
 import { Group } from "client/app/common/group";
-import { useDefined, useRem } from "client/app/hooks";
+import { useDefined, useRem, useStore } from "client/app/hooks";
 import { LOCAL_USER } from "shared/constants";
 import { selectPlayerBalance } from "shared/store/saves";
 import { selectLocalSnakeScore, selectRankForDisplay } from "shared/store/snakes";
@@ -10,6 +10,7 @@ import { StatsCard } from "./stats-card";
 
 export function Stats() {
 	const rem = useRem();
+	const store = useStore();
 
 	const currentScore = useSelector(selectLocalSnakeScore);
 	const currentRank = useSelector(selectRankForDisplay);
@@ -57,6 +58,12 @@ export function Stats() {
 
 			<StatsCard
 				key="balance"
+				onClick={() => {
+					if (currentScore === undefined) {
+						// Only show the support page if the user is not playing
+						store.setMenuPage("support");
+					}
+				}}
 				emoji="💵"
 				label="MONEY"
 				value={`$${balance}`}

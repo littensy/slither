@@ -4,7 +4,7 @@ import { Image } from "client/app/common/image";
 import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem } from "client/app/hooks";
-import { images } from "shared/assets";
+import { images, playSound, sounds } from "shared/assets";
 
 import { SkinIndicator } from "./skin-indicator";
 import { SkinThumbnail } from "./skin-thumbnail";
@@ -57,9 +57,15 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 
 	return (
 		<ReactiveButton
-			onClick={hidden ? undefined : onClick}
+			onClick={() => {
+				if (!hidden) {
+					onClick();
+					playSound(sounds.navigate);
+				}
+			}}
 			animateSizeStrength={2}
 			animatePositionStrength={1.5}
+			soundVariant="none"
 			backgroundTransparency={1}
 			anchorPoint={new Vector2(0.5, 1)}
 			size={size}

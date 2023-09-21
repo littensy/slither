@@ -28,3 +28,7 @@ export const selectSkinOverride = (state: RootState) => {
 		? state.menu.skins.current
 		: undefined;
 };
+
+export const selectMusicEnabled = (state: RootState) => {
+	return state.menu.music;
+};

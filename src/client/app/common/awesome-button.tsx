@@ -20,6 +20,7 @@ interface AwesomeButtonProps extends Roact.PropsWithChildren {
 	readonly overlayGradient?: ColorSequence | Roact.Binding<ColorSequence>;
 	readonly overlayTransparency?: number | Roact.Binding<number>;
 	readonly overlayRotation?: number | Roact.Binding<number>;
+	readonly layoutOrder?: number | Roact.Binding<number>;
 }
 
 export function AwesomeButton({
@@ -31,6 +32,7 @@ export function AwesomeButton({
 	overlayGradient,
 	overlayTransparency = 0,
 	overlayRotation,
+	layoutOrder,
 	children,
 }: AwesomeButtonProps) {
 	const rem = useRem();
@@ -47,6 +49,7 @@ export function AwesomeButton({
 			anchorPoint={anchorPoint}
 			size={size}
 			position={position}
+			layoutOrder={layoutOrder}
 		>
 			<Shadow
 				key="drop-shadow"
@@ -64,8 +67,6 @@ export function AwesomeButton({
 				size={new UDim2(1, 0, 1, 0)}
 			/>
 
-			{children}
-
 			<Outline key="outline" cornerRadius={new UDim(0, rem(1))} innerTransparency={0} />
 
 			<Image
@@ -77,6 +78,8 @@ export function AwesomeButton({
 			>
 				<uigradient key="gradient" Color={overlayGradient} Rotation={overlayRotation} />
 			</Image>
+
+			{children}
 		</ReactiveButton>
 	);
 }

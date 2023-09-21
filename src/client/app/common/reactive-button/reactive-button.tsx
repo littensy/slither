@@ -2,6 +2,7 @@ import { blend, lerpBinding, useUpdateEffect } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { useMotion, useRem } from "client/app/hooks";
 import { composeBindings } from "client/app/utils/compose-bindings";
+import { ButtonSoundVariant, playButtonDown, playButtonUp } from "shared/assets";
 
 import { Button } from "../button";
 import { Frame } from "../frame";
@@ -29,6 +30,7 @@ interface ReactiveButtonProps extends Roact.PropsWithChildren {
 	animatePositionDirection?: Vector2;
 	animateSize?: boolean;
 	animateSizeStrength?: number;
+	soundVariant?: ButtonSoundVariant;
 	zIndex?: number | Roact.Binding<number>;
 	event?: Roact.JsxInstanceEvents<TextButton>;
 	change?: Roact.JsxInstanceChangeEvents<TextButton>;
@@ -56,6 +58,7 @@ export function ReactiveButton({
 	animatePositionDirection = new Vector2(0, 1),
 	animateSize = true,
 	animateSizeStrength = 1,
+	soundVariant = "default",
 	event = {},
 	change = {},
 	children,
@@ -89,11 +92,13 @@ export function ReactiveButton({
 				if (!enabled) return;
 				buttonEvents.onMouseDown();
 				onMouseDown?.();
+				playButtonDown(soundVariant);
 			}}
 			onMouseUp={() => {
 				if (!enabled) return;
 				buttonEvents.onMouseUp();
 				onMouseUp?.();
+				playButtonUp(soundVariant);
 			}}
 			onMouseEnter={() => {
 				buttonEvents.onMouseEnter();

@@ -9,6 +9,8 @@ interface GridPoint<T> {
  * Cast this object to a Vector3 to use it as a key.
  */
 function vectorize({ X, Y }: Vector2) {
+	if (X !== X) X = 0;
+	if (Y !== Y) Y = 0;
 	return new Vector3(X, Y, 0);
 }
 

@@ -1,4 +1,4 @@
-import { lerpBinding } from "@rbxts/pretty-react-hooks";
+import { lerpBinding, useMountEffect } from "@rbxts/pretty-react-hooks";
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { dismissAlert } from "client/alert";
@@ -15,7 +15,7 @@ import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
 import { Alert, selectAlertIndex } from "client/store/alert";
 import { selectIsMenuOpen } from "client/store/menu";
-import { images } from "shared/assets";
+import { images, playSound, sounds } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { mapStrict } from "shared/utils/math-utils";
 
@@ -84,10 +84,18 @@ export function Alert({ alert, index }: AlertProps) {
 		}
 	}, [visibleIndex]);
 
+	useMountEffect(() => {
+		playSound(alert.sound ?? sounds.alert_neutral);
+	});
+
 	return (
 		<ReactiveButton
-			onClick={() => dismissAlert(alert.id)}
+			onClick={() => {
+				dismissAlert(alert.id);
+				playSound(sounds.alert_dismiss);
+			}}
 			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0, springs.responsive)}
+			soundVariant="none"
 			backgroundTransparency={1}
 			anchorPoint={new Vector2(0.5, 0)}
 			size={size}
