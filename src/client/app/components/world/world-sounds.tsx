@@ -21,7 +21,7 @@ export function WorldSounds() {
 	useEffect(() => {
 		if (snake?.dead) {
 			const index = random.NextInteger(0, ERROR_SOUNDS.size() - 1);
-			playSound(ERROR_SOUNDS[index], { volume });
+			playSound(ERROR_SOUNDS[index], { volume: 2 * volume });
 		}
 	}, [snake?.dead]);
 
@@ -36,7 +36,7 @@ export function WorldSounds() {
 	useEffect(() => {
 		if ((snake?.score ?? 0) > (previousScore ?? 0)) {
 			const speed = random.NextNumber(0.87, 1);
-			playSound(sounds.whoosh, { volume: 0.5 * volume, speed });
+			playSound(sounds.whoosh, { volume: 0.6 * volume, speed });
 		}
 	}, [snake?.score]);
 
