@@ -21,7 +21,7 @@ const SCORE_REWARDS: { readonly [K in ScoreMilestone]: number } = {
 	1_000: 20,
 	5_000: 50,
 	10_000: 100,
-	25_000: 200,
+	25_000: 250,
 	50_000: 500,
 	100_000: 1_000,
 	250_000: 2_500,
@@ -30,8 +30,8 @@ const SCORE_REWARDS: { readonly [K in ScoreMilestone]: number } = {
 };
 
 const RANK_REWARDS: { readonly [ranking: number]: number | undefined } = {
-	1: 200,
-	2: 100,
+	1: 100,
+	2: 75,
 	3: 50,
 };
 
@@ -74,7 +74,8 @@ function observeRewards(id: string) {
 		const enemy = getSnake(enemyId);
 
 		if (enemy) {
-			const bounty = describeSnakeFromScore(enemy.score).length;
+			const length = describeSnakeFromScore(enemy.score).length;
+			const bounty = math.floor(length / 2);
 			grantMoneyReward(id, bounty, `defeating <font color="#fff">${enemy.name}</font>`);
 		}
 
@@ -94,7 +95,7 @@ function observeRewards(id: string) {
 				if (reward !== undefined) {
 					grantMoneyReward(id, reward, `staying in the <font color="#fff">top ${rank}</font>`);
 				}
-			}, 60);
+			}, 180);
 		},
 	);
 
