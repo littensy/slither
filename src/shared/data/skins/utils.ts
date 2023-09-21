@@ -6,7 +6,7 @@ function lerpHue(from: number, to: number, alpha: number) {
 	return (lerpRadians(from * TAU, to * TAU, alpha) / TAU) % 1;
 }
 
-function lerpHSV(from: Color3, to: Color3, alpha: number) {
+export function lerpColor(from: Color3, to: Color3, alpha: number) {
 	const [fromH, fromS, fromV] = Color3.toHSV(from);
 	const [toH, toS, toV] = Color3.toHSV(to);
 
@@ -28,13 +28,13 @@ export function blendColorSequence(colors: Color3[], length: number, looped = tr
 		const from = colors[indexInArray];
 		const to = colors[(indexInArray + 1) % colorCount];
 
-		pattern[index] = lerpHSV(from, to, indexScaled % 1);
+		pattern[index] = lerpColor(from, to, indexScaled % 1);
 	}
 
 	return pattern;
 }
 
-export function duplicateSequence<T extends defined>(sequence: T[], repeatCount: number): T[] {
+export function duplicate<T extends defined>(sequence: T[], repeatCount: number): T[] {
 	const pattern: T[] = [];
 
 	for (const _ of $range(0, repeatCount - 1)) {

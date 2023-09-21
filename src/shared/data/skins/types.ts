@@ -5,6 +5,7 @@ export interface SnakeSkin {
 	readonly price: number;
 	readonly size: Vector2;
 	readonly tint: readonly Color3[];
+	readonly boostTint?: readonly Color3[];
 	readonly texture: readonly string[];
 	readonly primary?: Color3;
 	readonly secondary?: Color3;

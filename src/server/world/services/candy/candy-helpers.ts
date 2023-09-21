@@ -160,7 +160,7 @@ export function dropCandyOnDeath(id: string): void {
 			position,
 			type: CandyType.Loot,
 			size: math.ceil(sum / total),
-			color: skin.tint,
+			color: skin.boostTint || skin.tint,
 		});
 	});
 

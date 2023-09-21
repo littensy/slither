@@ -16,8 +16,8 @@ interface SkinThumbnailProps {
 }
 
 const TRACER_SIZE = 7;
-const TRACER_POINTS = 6;
-const TRACER_SQUISH = 0.3;
+const TRACER_POINTS = 5;
+const TRACER_SQUISH = 0.4;
 
 const TRACERS = fillArray(TRACER_POINTS, (index) => {
 	const from = new Vector2(

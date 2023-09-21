@@ -20,7 +20,7 @@ function SnakeTracerComponent({ line, effects, skinId, index }: SnakeTracerProps
 	const tracerSkin = getSnakeSkinForTracer(skinId, index);
 
 	const rem = useRem();
-	const style = useTracerStyle(line, effects, index, tracerSkin.tint);
+	const style = useTracerStyle(line, effects, index, tracerSkin.tint, tracerSkin.boostTint);
 
 	const glowStyle = useMemo(() => {
 		const binding = style.boostTimer.map(() => {
@@ -31,7 +31,7 @@ function SnakeTracerComponent({ line, effects, skinId, index }: SnakeTracerProps
 			return blend(1 - boost, dead, 0.3);
 		});
 
-		const color = style.color.map((color) => {
+		const color = (style.boostColor || style.color).map((color) => {
 			return color.Lerp(new Color3(), 0.1);
 		});
 

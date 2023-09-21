@@ -11,7 +11,13 @@ function redden(color: Color3) {
 	return color.Lerp(Color3.fromRGB(255, 0, 0), 0.3);
 }
 
-export function useTracerStyle(line: SnakeLineBinding, effects: SnakeEffectBinding, index: number, tint: Color3) {
+export function useTracerStyle(
+	line: SnakeLineBinding,
+	effects: SnakeEffectBinding,
+	index: number,
+	tint: Color3,
+	boostTint?: Color3,
+) {
 	const rem = useRem();
 	const boostTimer = useTimer();
 	const boostActive = useBindingState(effects.map(({ boost }) => boost > 0.01));
@@ -45,13 +51,22 @@ export function useTracerStyle(line: SnakeLineBinding, effects: SnakeEffectBindi
 		const color = boostTimer.value.map(() => {
 			const { boost, dead } = effects.getValue();
 
-			// do not retrieve time from 'timer' because it is not consistent
-			// between different components
 			const time = os.clock();
 			const highlight = math.sin(15 * time - 0.8 * index);
 
 			return tint.Lerp(brighten(tint, highlight), boost).Lerp(redden(tint), dead);
 		});
+
+		const boostColor =
+			boostTint &&
+			boostTimer.value.map(() => {
+				const { boost } = effects.getValue();
+
+				const time = os.clock();
+				const highlight = math.sin(15 * time - 0.8 * index);
+
+				return boostTint.Lerp(brighten(boostTint, highlight), boost);
+			});
 
 		const transparency = effects.map(({ dead }) => {
 			return dead;
@@ -62,6 +77,7 @@ export function useTracerStyle(line: SnakeLineBinding, effects: SnakeEffectBindi
 			position,
 			rotation,
 			color,
+			boostColor,
 			transparency,
 			boostTimer: boostTimer.value,
 			boostActive,
