@@ -2,9 +2,13 @@
 return {
 	images = {
 		skins = {
-			snake_eye_left = "rbxassetid://14034366397",
-			snake_eye_right = "rbxassetid://14034362504",
-			snake_main = "rbxassetid://14035801225",
+			snake_canada = "rbxassetid://14835690010",
+			snake_eye_left = "rbxassetid://14835197016",
+			snake_eye_right = "rbxassetid://14835197048",
+			snake_jelly = "rbxassetid://14835608619",
+			snake_main = "rbxassetid://14835436639",
+			snake_outlined = "rbxassetid://14835738362",
+			snake_stars = "rbxassetid://14835481672",
 		},
 		ui = {
 			alert_dismiss = "rbxassetid://14402269904",

@@ -1,16 +1,36 @@
+[inputs."assets/images/skins/snake_canada.png"]
+hash = "ced675b78d32116f978d42c5d434dce33ba8d6ccc374d24e75f36fd676c4822a"
+id = 14835690010
+packable = false
+
 [inputs."assets/images/skins/snake_eye_left.png"]
-hash = "3572781920b0c779fb4fcbf5c8d895c828f7f5b10fa90ed1c384d2248bd68f10"
-id = 14034366397
+hash = "0a28ff35791484c782ea7351df7efbf0885fc4419c46a464f115781ed8d6a643"
+id = 14835197016
 packable = false
 
 [inputs."assets/images/skins/snake_eye_right.png"]
-hash = "e30dd8bae04d2f44b57451114ca1a3456a35b5bb506ff5d54c7e2595a92a335e"
-id = 14034362504
+hash = "41700be12f2287484ea0515770de5d56137e39d9fa644e055497580072ccedb0"
+id = 14835197048
+packable = false
+
+[inputs."assets/images/skins/snake_jelly.png"]
+hash = "1ebf971d90be603dbb6e2222d2c2abe7f195ae3a9db13083ba3d97763b733d83"
+id = 14835608619
 packable = false
 
 [inputs."assets/images/skins/snake_main.png"]
-hash = "1e598a6a305b566bf81f2aae5382b203681277c9525c86a33c84a29a593448c7"
-id = 14035801225
+hash = "01cd3135ba40f6cc44e04c17d7f7f49cb63dd3ccf8b142dc55ea39e70b3d1882"
+id = 14835436639
+packable = false
+
+[inputs."assets/images/skins/snake_outlined.png"]
+hash = "f2a6874149b47e61c515ddae100f6c345068ec4548ccc0e6578f9bd17e42e6ec"
+id = 14835738362
+packable = false
+
+[inputs."assets/images/skins/snake_stars.png"]
+hash = "bd2f638b65cce6497abf8c577f8c62e01298b6ab95862be6d3a12a2beb2f2ae6"
+id = 14835481672
 packable = false
 
 [inputs."assets/images/ui/alert_dismiss.png"]
