@@ -10,7 +10,7 @@ state:
 environments:
   - label: canary
     targetNamePrefix: environmentLabel
-    targetAccess: friends
+    targetAccess: public
     targetOverrides:
       icon: assets/marketing/game_icon_canary.png
       thumbnails: [assets/marketing/game_thumbnail_canary.png]
@@ -19,11 +19,12 @@ environments:
           configuration:
             name: 🛠️ Slither Testing
             description: |
+              A casual game with soothing pastel color palettes 🎨.
               This is a development build of Slither. It may be unstable, so let me know if you find any bugs!
 
-              🐍  Defeat other players by cutting them off with your tail!
+              🐍  Eliminate other players by cutting them off with your tail!
 
-              🏆  Compete against up to 24 players for first place!
+              🏆  Compete against other players for first place!
 
               🤝  This game is a work-in-progress! Feedback is appreciated.
             maxPlayerCount: 50
@@ -54,11 +55,11 @@ target:
             A casual game with soothing pastel color palettes 🎨.
             Eat candy orbs to raise your score. If you bump into someone else, you're out!
 
-            🐍  Defeat other players by cutting them off with your tail!
+            🐍  Eliminate other players by cutting them off with your tail!
 
-            🏆  Compete against up to 24 players for first place!
+            🏆  Compete against other players for first place!
 
-            💎  With Premium, all money earned comes with a 20% bonus!
+            💎  With Premium, all in-game money earned comes with a 20% bonus!
           maxPlayerCount: 25
     assets:
       - assets/sounds/*
