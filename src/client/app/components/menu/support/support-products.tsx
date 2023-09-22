@@ -21,10 +21,13 @@ export function SupportProducts() {
 	const getProductTitle = (money: number) => {
 		if (premium) {
 			money = math.floor(money * PREMIUM_BENEFIT);
-			return `$${formatInteger(money)}\u{E001}`;
 		}
 
 		return `$${formatInteger(money)}`;
+	};
+
+	const getProductDiscount = (money: number, discount?: string) => {
+		return premium ? `<s>$${formatInteger(money)}</s> \u{E001} BONUS!` : discount;
 	};
 
 	let index = 0;
@@ -58,7 +61,7 @@ export function SupportProducts() {
 					productId={DevProduct.MONEY_100}
 					productTitle={getProductTitle(100)}
 					productSubtitle="🍑  PEACH"
-					productDiscount={premium ? "20% BONUS!" : undefined}
+					productDiscount={getProductDiscount(100)}
 					primaryColor={palette.yellow}
 					secondaryColor={palette.peach}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -70,7 +73,7 @@ export function SupportProducts() {
 					productId={DevProduct.MONEY_250}
 					productTitle={getProductTitle(250)}
 					productSubtitle="🍒  MAROON"
-					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
+					productDiscount={getProductDiscount(250)}
 					primaryColor={palette.maroon}
 					secondaryColor={palette.red}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -81,8 +84,8 @@ export function SupportProducts() {
 					index={index++}
 					productId={DevProduct.MONEY_500}
 					productTitle={getProductTitle(500)}
-					productSubtitle="🍀  GREEN"
-					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
+					productSubtitle="🍐  GREEN"
+					productDiscount={getProductDiscount(500)}
 					primaryColor={palette.teal}
 					secondaryColor={palette.green}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -93,8 +96,8 @@ export function SupportProducts() {
 					index={index++}
 					productId={DevProduct.MONEY_1000}
 					productTitle={getProductTitle(1000)}
-					productSubtitle="🦋  SAPPHIRE"
-					productDiscount={premium ? "20% BONUS!" : "20% OFF"}
+					productSubtitle="💎  SAPPHIRE"
+					productDiscount={getProductDiscount(1000)}
 					primaryColor={palette.sapphire}
 					secondaryColor={palette.blue}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -108,7 +111,7 @@ export function SupportProducts() {
 				productId={DevProduct.MONEY_5000}
 				productTitle={getProductTitle(5000)}
 				productSubtitle="💜  MAUVE"
-				productDiscount={premium ? "20% BONUS!" : "25% OFF"}
+				productDiscount={getProductDiscount(5000)}
 				primaryColor={palette.mauve}
 				secondaryColor={palette.blue}
 				size={new UDim2(0.4, -padding / 2, 1, 0)}
