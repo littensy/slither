@@ -3,6 +3,7 @@ import Roact, { memo, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem, useSeed } from "client/app/hooks";
+import { brighten } from "client/app/utils/color-utils";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
@@ -63,7 +64,7 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 	return (
 		<Image
 			image={images.ui.circle}
-			imageColor={color.Lerp(Color3.fromRGB(255, 255, 255), 0.7)}
+			imageColor={brighten(color, 0.7, 0.5)}
 			imageTransparency={transparency}
 			size={new UDim2(0, diameter, 0, diameter)}
 			position={position}

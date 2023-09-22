@@ -61,7 +61,7 @@ export function ActButton() {
 
 	const { size, gradient } = useMemo(() => {
 		const size = textWidth.map((width) => {
-			return new UDim2(0, width + rem(4), 0, rem(4.5));
+			return new UDim2(0, width + rem(3), 0, rem(4.5));
 		});
 
 		const gradient = composeBindings(primary, secondary, (primary, secondary) => {

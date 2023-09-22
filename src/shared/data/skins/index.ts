@@ -25,12 +25,16 @@ export function findSnakeSkin(id: string): SnakeSkin | undefined {
  * Returns the texture and tint of a snake tracer at this index.
  * Used to apply repeating patterns to the snake.
  */
-export function getSnakeSkinForTracer(id: string, index: number): { readonly texture: string; readonly tint: Color3 } {
-	const { texture, tint } = getSnakeSkin(id);
+export function getSnakeSkinForTracer(
+	id: string,
+	index: number,
+): { readonly texture: string; readonly tint: Color3; readonly boostTint?: Color3 } {
+	const { texture, tint, boostTint } = getSnakeSkin(id);
 
 	return {
 		texture: texture[index % texture.size()],
 		tint: tint[index % tint.size()],
+		boostTint: boostTint && boostTint[index % boostTint.size()],
 	};
 }
 

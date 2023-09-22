@@ -2,7 +2,6 @@ import Roact, { useEffect } from "@rbxts/roact";
 import { CanvasGroup } from "client/app/common/canvas-group";
 import { Image } from "client/app/common/image";
 import { useMotion, useRem } from "client/app/hooks";
-import { darken } from "client/app/utils/color-utils";
 import { images } from "shared/assets";
 import { fillArray } from "shared/utils/object-utils";
 
@@ -17,8 +16,8 @@ interface SkinThumbnailProps {
 }
 
 const TRACER_SIZE = 7;
-const TRACER_POINTS = 6;
-const TRACER_SQUISH = 0.3;
+const TRACER_POINTS = 5;
+const TRACER_SQUISH = 0.4;
 
 const TRACERS = fillArray(TRACER_POINTS, (index) => {
 	const from = new Vector2(
@@ -87,6 +86,7 @@ export function SkinThumbnail({ tints, textures, textureSize, active, transparen
 				<Image
 					key={`tracer-${index}`}
 					image={textures[(index + 1) % textures.size()]}
+					imageColor={tints[(index + 1) % tints.size()]}
 					scaleType="Slice"
 					sliceCenter={new Rect(textureSize.div(2), textureSize.div(2))}
 					sliceScale={4}
@@ -95,19 +95,7 @@ export function SkinThumbnail({ tints, textures, textureSize, active, transparen
 					position={new UDim2(position.X, 0, position.Y, 0)}
 					rotation={rotation}
 					zIndex={-index - 1}
-				>
-					<uigradient
-						key="gradient"
-						Color={
-							new ColorSequence(
-								tints[index % tints.size()],
-								darken(tints[(index + 1) % tints.size()], (index + 1) / 50, 1),
-							)
-						}
-						Offset={new Vector2(0, 0.25)}
-						Rotation={90}
-					/>
-				</Image>
+				/>
 			))}
 		</CanvasGroup>
 	);
