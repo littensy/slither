@@ -11,8 +11,9 @@ export function HomeFooter() {
 		<Text
 			richText
 			font={fonts.inter.medium}
-			text='Made with ❤️ by <font color="#ffffff">littensy</font>'
-			textColor={palette.overlay0}
+			text={`Made with <font transparency="0">❤️</font> by <font transparency="0" color="#${palette.offwhite.ToHex()}">littensy</font>`}
+			textColor={palette.text}
+			textTransparency={0.5}
 			textSize={rem(1.25)}
 			textXAlignment="Center"
 			textYAlignment="Bottom"

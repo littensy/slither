@@ -23,7 +23,7 @@ export function Home() {
 				size={new UDim2(0, rem(4), 0, rem(4))}
 				position={new UDim2(1, rem(-3), 1, rem(-3))}
 			/>
-			<HomeVersion anchorPoint={new Vector2(0.5, 0)} position={new UDim2(0.5, 0, 0.5, rem(6.5))} />
+			<HomeVersion position={new UDim2(0.5, 0, 0.5, rem(6.5))} />
 			<HomeFooter />
 		</>
 	);

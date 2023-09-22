@@ -172,6 +172,7 @@ export function SupportProduct({
 					{productDiscount !== undefined && (
 						<Text
 							key="discount"
+							richText
 							font={fonts.rubik.medium}
 							text={productDiscount}
 							textSize={rem(1.25)}
