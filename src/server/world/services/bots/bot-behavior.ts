@@ -5,6 +5,7 @@ import { getCandy, getRandomPointInWorld, getSnake } from "server/world/utils";
 import { CandyType } from "shared/store/candy";
 import { describeSnakeFromScore, SnakeEntity } from "shared/store/snakes";
 import { map } from "shared/utils/math-utils";
+import { fillArray } from "shared/utils/object-utils";
 
 import { candyGrid } from "../candy";
 import { snakeGrid } from "../snakes";
@@ -36,8 +37,13 @@ export class BotBehavior {
 
 	private idle(snake: SnakeEntity) {
 		// prefer points that are further away
-		const goal = maxVector(getRandomPointInWorld(), getRandomPointInWorld());
 		const head = snake.head;
+		const goal = fillArray(10, () => getRandomPointInWorld()).reduce((acc, point) => {
+			const minDistance = head.sub(acc).Magnitude;
+			const currentDistance = head.sub(point).Magnitude;
+
+			return currentDistance < minDistance ? point : acc;
+		}, getRandomPointInWorld());
 		const angle = math.atan2(goal.Y - head.Y, goal.X - head.X);
 
 		store.turnSnake(this.id, angle);
@@ -122,7 +128,7 @@ export class BotBehavior {
 	}
 
 	private getBehavior() {
-		const noise = math.noise(this.seed, time());
+		const noise = math.noise(this.seed, time() / 10);
 		const index = math.round(map(noise, -0.5, 0.5, 0, BEHAVIORS.size() - 1));
 
 		return BEHAVIORS[index] ?? BehaviorMode.Idle;
