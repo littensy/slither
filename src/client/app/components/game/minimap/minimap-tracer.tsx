@@ -17,6 +17,7 @@ export function MinimapTracer({ from, to }: MinimapTracerProps) {
 	return (
 		<Frame
 			backgroundColor={palette.lavender}
+			cornerRadius={new UDim(1, 0)}
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={new UDim2(length, rem(0.2), 0, rem(0.2))}
 			position={new UDim2(center.X, 0, center.Y, 0)}
