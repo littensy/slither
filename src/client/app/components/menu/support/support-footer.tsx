@@ -5,7 +5,7 @@ import { fonts } from "client/app/utils/fonts";
 import { palette } from "shared/data/palette";
 
 const colorize = (text: string, color: Color3) => {
-	return `<font color="#${color.ToHex()}">${text}</font>`;
+	return `<font transparency="0" color="#${color.ToHex()}">${text}</font>`;
 };
 
 export function SupportFooter() {
@@ -26,9 +26,10 @@ export function SupportFooter() {
 					colorize("a", palette.blue),
 					colorize("l", palette.mauve),
 				].join(""),
-				"experiences ✨",
+				'experiences <font transparency="0">✨</font>',
 			].join(" ")}
-			textColor={palette.overlay0}
+			textColor={palette.text}
+			textTransparency={0.5}
 			textSize={rem(1.25)}
 			textXAlignment="Center"
 			textYAlignment="Bottom"
