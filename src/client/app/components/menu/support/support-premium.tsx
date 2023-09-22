@@ -12,7 +12,8 @@ export function SupportPremium() {
 		if (Players.LocalPlayer.MembershipType === Enum.MembershipType.Premium) {
 			sendAlert({
 				emoji: "💎",
-				message: "You already have <font color='#fff'>Premium</font>!",
+				message:
+					"You get <font color='#fff'>20% more money</font> because of <font color='#fff'>Premium benefits</font>!",
 				color: palette.sapphire,
 				colorSecondary: palette.blue,
 			});

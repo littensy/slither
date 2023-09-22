@@ -73,7 +73,7 @@ export function SupportProducts() {
 					productId={DevProduct.MONEY_250}
 					productTitle={getProductTitle(250)}
 					productSubtitle="🍒  MAROON"
-					productDiscount={getProductDiscount(250)}
+					productDiscount={getProductDiscount(250, "20% OFF")}
 					primaryColor={palette.maroon}
 					secondaryColor={palette.red}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -85,7 +85,7 @@ export function SupportProducts() {
 					productId={DevProduct.MONEY_500}
 					productTitle={getProductTitle(500)}
 					productSubtitle="🍐  GREEN"
-					productDiscount={getProductDiscount(500)}
+					productDiscount={getProductDiscount(500, "20% OFF")}
 					primaryColor={palette.teal}
 					secondaryColor={palette.green}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -97,7 +97,7 @@ export function SupportProducts() {
 					productId={DevProduct.MONEY_1000}
 					productTitle={getProductTitle(1000)}
 					productSubtitle="💎  SAPPHIRE"
-					productDiscount={getProductDiscount(1000)}
+					productDiscount={getProductDiscount(1000, "20% OFF")}
 					primaryColor={palette.sapphire}
 					secondaryColor={palette.blue}
 					size={new UDim2(0.5, -padding / 2, 0.5, -padding / 2)}
@@ -111,7 +111,7 @@ export function SupportProducts() {
 				productId={DevProduct.MONEY_5000}
 				productTitle={getProductTitle(5000)}
 				productSubtitle="💜  MAUVE"
-				productDiscount={getProductDiscount(5000)}
+				productDiscount={getProductDiscount(5000, "25% OFF")}
 				primaryColor={palette.mauve}
 				secondaryColor={palette.blue}
 				size={new UDim2(0.4, -padding / 2, 1, 0)}
