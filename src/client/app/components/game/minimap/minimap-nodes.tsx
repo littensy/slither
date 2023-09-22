@@ -4,7 +4,6 @@ import Roact, { Element, useState } from "@rbxts/roact";
 import { CanvasGroup } from "client/app/common/canvas-group";
 import { useDefined, useStore } from "client/app/hooks";
 import { selectSnakeFromWorldSubject } from "client/store/world";
-import { LOCAL_USER } from "shared/constants";
 import { selectSnakesById } from "shared/store/snakes";
 
 import { MinimapCursor } from "./minimap-cursor";
@@ -24,12 +23,8 @@ export function MinimapNodes() {
 			const snakes = store.getState(selectSnakesById);
 
 			for (const [, snake] of pairs(snakes)) {
-				if (snake.id === LOCAL_USER) {
-					continue;
-				}
-
 				const size = snake.tracers.size();
-				const step = math.floor(map(size, 0, 100, 5, 20));
+				const step = math.floor(map(size, 0, 100, 2, 10));
 				let previous = snake.head;
 
 				for (const index of $range(0, size - 1, step)) {
