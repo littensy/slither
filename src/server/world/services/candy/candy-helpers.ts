@@ -110,9 +110,9 @@ export function dropCandyWhileBoosting(id: string) {
 		};
 
 		return setInterval(() => {
-			store.incrementSnakeScore(id, random.NextInteger(-5, -3));
+			store.incrementSnakeScore(id, random.NextInteger(-3, -1));
 			dropCandy();
-		}, 0.2);
+		}, 0.25);
 	});
 }
 
