@@ -1,7 +1,7 @@
 import { createProducer } from "@rbxts/reflex";
 import { SNAKE_BOOST_SPEED, SNAKE_SPEED, WORLD_TICK } from "shared/constants";
 import { map, turnRadians } from "shared/utils/math-utils";
-import { mapObject, mapProperty } from "shared/utils/object-utils";
+import { mapProperties, mapProperty } from "shared/utils/object-utils";
 
 import { describeSnakeFromScore, snakeIsBoosting } from "./snake-utils";
 
@@ -52,7 +52,7 @@ export const snakesSlice = createProducer(initialState, {
 	}),
 
 	snakeTick: (state, deltaTime: number = WORLD_TICK) => {
-		return mapObject(state, (snake) => {
+		return mapProperties(state, (snake) => {
 			if (snake.dead) {
 				return snake;
 			}

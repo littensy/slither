@@ -1,5 +1,5 @@
 import { createProducer } from "@rbxts/reflex";
-import { assign, mapProperty } from "shared/utils/object-utils";
+import { assign, mapProperties, mapProperty } from "shared/utils/object-utils";
 
 export interface CandyState {
 	readonly [id: string]: CandyEntity | undefined;
@@ -46,5 +46,39 @@ export const candySlice = createProducer(initialState, {
 			...candy,
 			eatenAt,
 		}));
+	},
+
+	bulkRemoveStaleCandy: (state, candyType: CandyType, amount: number) => {
+		const staleIds = new Set<string>();
+		const candyList: CandyEntity[] = [];
+		let candyListSize = 0;
+
+		// reconstruct a list of candy, lower id = older
+		for (const [id, candy] of pairs(state)) {
+			if (candy.type !== candyType) {
+				continue;
+			}
+
+			const insertAt = candyList.findIndex((otherCandy) => {
+				return tonumber(otherCandy.id)! > tonumber(id)!;
+			});
+
+			if (insertAt !== -1) {
+				candyList.insert(insertAt, candy);
+			} else {
+				candyList.push(candy);
+			}
+
+			candyListSize += 1;
+		}
+
+		// pick the amount of candy to remove, oldest first
+		for (const index of $range(0, math.min(amount, candyListSize) - 1)) {
+			staleIds.add(candyList[index].id);
+		}
+
+		return mapProperties(state, (candy) => {
+			return !staleIds.has(candy.id) ? candy : undefined;
+		});
 	},
 });

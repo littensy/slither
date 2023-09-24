@@ -3,7 +3,7 @@ import { createSelector, shallowEqual } from "@rbxts/reflex";
 import { Players } from "@rbxts/services";
 import { LOCAL_USER } from "shared/constants";
 import { SharedState } from "shared/store";
-import { mapObject } from "shared/utils/object-utils";
+import { mapProperties } from "shared/utils/object-utils";
 
 import { SnakeEntity } from "./snake-slice";
 import { snakeIsBoosting } from "./snake-utils";
@@ -27,15 +27,15 @@ export const selectSnakeCount = createSelector(selectSnakesById, (snakesById) =>
 });
 
 export const selectDeadSnakesById = createSelector(selectSnakesById, (snakesById) => {
-	return mapObject(snakesById, (snake) => (snake.dead ? snake : undefined));
+	return mapProperties(snakesById, (snake) => (snake.dead ? snake : undefined));
 });
 
 export const selectAliveSnakesById = createSelector(selectSnakesById, (snakesById) => {
-	return mapObject(snakesById, (snake) => (!snake.dead ? snake : undefined));
+	return mapProperties(snakesById, (snake) => (!snake.dead ? snake : undefined));
 });
 
 export const selectPlayerSnakesById = createSelector(selectSnakesById, (snakesById) => {
-	return mapObject(snakesById, (snake) => (Players.FindFirstChild(snake.id) ? snake : undefined));
+	return mapProperties(snakesById, (snake) => (Players.FindFirstChild(snake.id) ? snake : undefined));
 });
 
 export const selectPlayerCountIsAbove = (count: number) => {

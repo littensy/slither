@@ -1,12 +1,16 @@
 /// <reference types="@rbxts/testez/globals" />
 
+import { Players } from "@rbxts/services";
 import { store } from "server/store";
 import { SCORE_MILESTONES, selectMilestone } from "server/store/milestones";
 
-import { getPlayer } from "../helpers/get-player";
-
 export = () => {
-	const player = getPlayer();
+	const player = Players.FindFirstChildWhichIsA("Player");
+
+	if (!player) {
+		SKIP();
+		return;
+	}
 
 	it("should create a milestone", () => {
 		store.addSnake(player.Name, {});

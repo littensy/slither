@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import Roact, { memo } from "@rbxts/roact";
 import { Frame } from "client/app/common/frame";
 import { palette } from "shared/data/palette";
 
@@ -9,7 +9,7 @@ interface MinimapTracerProps {
 	readonly to: Vector2;
 }
 
-export function MinimapTracer({ from, to }: MinimapTracerProps) {
+export const MinimapTracer = memo<MinimapTracerProps>(({ from, to }) => {
 	const rem = useMinimapRem();
 	const center = from.add(to).div(2);
 	const length = from.sub(to).Magnitude;
@@ -24,4 +24,4 @@ export function MinimapTracer({ from, to }: MinimapTracerProps) {
 			rotation={math.deg(math.atan2(to.Y - from.Y, to.X - from.X))}
 		/>
 	);
-}
+});

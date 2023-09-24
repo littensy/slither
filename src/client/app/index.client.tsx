@@ -12,6 +12,7 @@ const target = Players.LocalPlayer.WaitForChild("PlayerGui");
 
 if (IS_CANARY) {
 	profileAllComponents();
+	debug.setmemorycategory("App");
 }
 
 root.render(

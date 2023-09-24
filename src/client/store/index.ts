@@ -1,9 +1,9 @@
 import { combineProducers, InferState } from "@rbxts/reflex";
-import { IS_EDIT } from "shared/constants";
 import { slices } from "shared/store";
 
 import { alertSlice } from "./alert";
 import { menuSlice } from "./menu";
+import { profilerMiddleware } from "./middleware/profiler";
 import { receiverMiddleware } from "./middleware/receiver";
 import { worldSlice } from "./world";
 
@@ -19,9 +19,7 @@ export function createStore() {
 		world: worldSlice,
 	});
 
-	if (!IS_EDIT) {
-		store.applyMiddleware(receiverMiddleware());
-	}
+	store.applyMiddleware(profilerMiddleware, receiverMiddleware());
 
 	return store;
 }

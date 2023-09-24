@@ -1,9 +1,14 @@
 import { store } from "server/store";
-import { selectSnakeCount } from "shared/store/snakes";
+import { getSafePointInWorld } from "server/world/utils";
+import { getRandomBaseSnakeSkin } from "shared/data/skins";
+import { selectSnakeCount, selectSnakeIsDead } from "shared/store/snakes";
 
-import { createBots } from "./create-bot";
+import { BotBehavior } from "./bot-behavior";
+import { generateBotName } from "./generate-name";
 
-const MIN_SNAKES = 10;
+const MIN_SNAKES = 24;
+
+let nextBotId = 0;
 
 export async function initBotService() {
 	store.subscribe(
@@ -13,4 +18,28 @@ export async function initBotService() {
 	);
 
 	createBots(MIN_SNAKES);
+}
+
+export function createBots(amount: number) {
+	for (const _ of $range(0, amount)) {
+		createBot();
+	}
+}
+
+export function createBot() {
+	const id = `bot-${nextBotId++}`;
+	const name = generateBotName();
+	const behavior = new BotBehavior(id);
+
+	store.addSnake(id, {
+		name,
+		head: getSafePointInWorld(),
+		skin: getRandomBaseSnakeSkin().id,
+	});
+
+	store.once(selectSnakeIsDead(id), () => {
+		behavior.destroy();
+	});
+
+	return id;
 }
