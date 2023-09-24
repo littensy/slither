@@ -1,11 +1,15 @@
-import { createBroadcaster } from "@rbxts/reflex";
+import { createBroadcaster, ProducerMiddleware } from "@rbxts/reflex";
 import { Players } from "@rbxts/services";
-import { WORLD_TICK } from "shared/constants";
+import { IS_EDIT, WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
 import { serializeState, SharedStateSerialized } from "shared/serdes";
 import { SharedState, slices } from "shared/store";
 
-export function broadcasterMiddleware() {
+export function broadcasterMiddleware(): ProducerMiddleware {
+	if (IS_EDIT) {
+		return () => (dispatch) => dispatch;
+	}
+
 	const hydrated = new Set<number>();
 
 	const broadcaster = createBroadcaster({

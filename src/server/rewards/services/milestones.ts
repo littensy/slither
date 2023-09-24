@@ -1,5 +1,5 @@
 import { store } from "server/store";
-import { IS_CANARY } from "shared/constants";
+import { IS_CANARY, IS_EDIT } from "shared/constants";
 import {
 	identifySnake,
 	selectPlayerCountIsAbove,
@@ -37,5 +37,5 @@ function observePlayer(id: string) {
 }
 
 function shouldRewardMilestone() {
-	return IS_CANARY || store.getState(selectPlayerCountIsAbove(5));
+	return IS_CANARY || IS_EDIT || store.getState(selectPlayerCountIsAbove(5));
 }

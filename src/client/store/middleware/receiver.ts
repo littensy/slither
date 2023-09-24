@@ -1,8 +1,13 @@
-import { createBroadcastReceiver } from "@rbxts/reflex";
+import { createBroadcastReceiver, ProducerMiddleware } from "@rbxts/reflex";
+import { IS_EDIT } from "shared/constants";
 import { remotes } from "shared/remotes";
 import { deserializeState } from "shared/serdes";
 
-export function receiverMiddleware() {
+export function receiverMiddleware(): ProducerMiddleware {
+	if (IS_EDIT) {
+		return () => (dispatch) => dispatch;
+	}
+
 	const receiver = createBroadcastReceiver({
 		start: () => {
 			remotes.store.start.fire();

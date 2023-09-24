@@ -4,7 +4,7 @@ import { CANDY_LIMITS } from "server/world/constants";
 import { getCandy, getRandomPointNearWorldOrigin, getSnake } from "server/world/utils";
 import { getRandomAccent } from "shared/data/palette";
 import { getSnakeSkinForTracer } from "shared/data/skins";
-import { CandyEntity, CandyType, selectCandyById, selectCandyCount, selectStaleCandyOfType } from "shared/store/candy";
+import { CandyEntity, CandyType, selectCandyById, selectCandyCount } from "shared/store/candy";
 import { describeSnakeFromScore, selectSnakeIsBoosting } from "shared/store/snakes";
 import { Grid } from "shared/utils/grid";
 import { fillArray } from "shared/utils/object-utils";
@@ -65,16 +65,8 @@ export function removeCandyIfAtLimit(candyType: CandyType) {
 	const max = CANDY_LIMITS[candyType];
 	const count = store.getState(selectCandyCount(candyType));
 
-	if (count <= max) {
-		return;
-	}
-
-	for (const _ of $range(max, count - 1)) {
-		const candy = store.getState(selectStaleCandyOfType(candyType));
-
-		if (candy) {
-			removeCandy(candy.id);
-		}
+	if (count > max) {
+		store.bulkRemoveStaleCandy(candyType, count - max);
 	}
 }
 
