@@ -1,9 +1,9 @@
 import { combineProducers, InferState } from "@rbxts/reflex";
 import { slices } from "shared/store";
+import { profilerMiddleware } from "shared/store/middleware/profiler";
 
 import { alertSlice } from "./alert";
 import { menuSlice } from "./menu";
-import { profilerMiddleware } from "./middleware/profiler";
 import { receiverMiddleware } from "./middleware/receiver";
 import { worldSlice } from "./world";
 
