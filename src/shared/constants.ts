@@ -8,8 +8,8 @@ export const PREMIUM_BENEFIT = 1.2;
 export const WORLD_BOUNDS = 196;
 export const WORLD_TICK = 1 / 20;
 
-export const SNAKE_SPEED = 5;
-export const SNAKE_BOOST_SPEED = 10;
+export const SNAKE_SPEED = 6;
+export const SNAKE_BOOST_SPEED = 12;
 
 export const REMOTE_TICK = 1 / 20; // Roblox limits
 

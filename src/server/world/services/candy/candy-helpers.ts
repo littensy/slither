@@ -21,8 +21,8 @@ export function createCandy(patch?: Partial<CandyEntity>): CandyEntity {
 	const candy: CandyEntity = {
 		id: `${nextCandyId++}`,
 		type: CandyType.Default,
-		size: math.min(random.NextInteger(1, 6), random.NextInteger(1, 6)),
-		position: getRandomPointNearWorldOrigin(0.95),
+		size: math.min(random.NextInteger(1, 4), random.NextInteger(1, 5)),
+		position: getRandomPointNearWorldOrigin(0.98),
 		color: getRandomAccent(),
 		...patch,
 	};
@@ -96,15 +96,13 @@ export function dropCandyWhileBoosting(id: string) {
 				type: CandyType.Dropping,
 			});
 
-			removeCandyIfAtLimit(CandyType.Dropping);
-
 			store.addCandy(candy);
 		};
 
 		return setInterval(() => {
-			store.incrementSnakeScore(id, random.NextInteger(-3, -1));
+			store.incrementSnakeScore(id, random.NextInteger(-4, -1));
 			dropCandy();
-		}, 0.25);
+		}, 0.2);
 	});
 }
 
@@ -142,7 +140,7 @@ export function dropCandyOnDeath(id: string): void {
 
 	// the total worth of the loot should scale logarithmically with the
 	// snake's score, but not exceed the score itself
-	const sum = math.min(6000 * math.log10(snake.score / 1000 + 1), snake.score);
+	const sum = math.min(8000 * math.log10(snake.score / 3000 + 1), snake.score);
 	const total = candyPositions.size();
 
 	const candies = candyPositions.mapFiltered((position, index) => {
@@ -155,8 +153,6 @@ export function dropCandyOnDeath(id: string): void {
 			color: skin.boostTint || skin.tint,
 		});
 	});
-
-	removeCandyIfAtLimit(CandyType.Loot);
 
 	store.populateCandy(candies);
 }
