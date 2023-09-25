@@ -14,7 +14,7 @@ export function broadcasterMiddleware(): ProducerMiddleware {
 
 	const broadcaster = createBroadcaster({
 		producers: slices,
-		dispatchRate: WORLD_TICK,
+		dispatchRate: WORLD_TICK / 2,
 		hydrateRate: 30,
 		dispatch: (player, actions) => {
 			remotes.store.dispatch.fire(player, actions);

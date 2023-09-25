@@ -20,6 +20,7 @@ import { createScheduler } from "shared/utils/scheduler";
 import { useMockRemotes } from "../utils/use-mock-remotes";
 
 const START_SIZE = 0;
+const SIZE_INCREMENT = 3;
 const DEBUG_SIZES = [0, 500, 1000, 5000, 10000, 20000, 40000, 80000];
 
 function Debugger() {
@@ -96,7 +97,7 @@ export = hoarcekat(() => {
 	}, []);
 
 	useInterval(() => {
-		store.incrementSnakeScore(LOCAL_USER, 0);
+		store.incrementSnakeScore(LOCAL_USER, SIZE_INCREMENT);
 	}, 0.5);
 
 	return (

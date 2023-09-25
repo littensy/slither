@@ -31,10 +31,11 @@ export function useSnakesOnScreen(scale: number, offset: Vector2) {
 	const snakes = useSelector(selectSnakesById);
 	const previousSnakes = usePrevious(snakes) || {};
 
+	const [onScreen, setOnScreen] = useState<SnakeOnScreen[]>([]);
+
 	const grid = useMemo(() => {
 		return new Grid<TracerCell>(16);
 	}, []);
-	const [onScreen, setOnScreen] = useState<SnakeOnScreen[]>([]);
 
 	useEffect(() => {
 		// replace old tracer positions with new ones
@@ -49,6 +50,13 @@ export function useSnakesOnScreen(scale: number, offset: Vector2) {
 				}
 			});
 
+			// insert/replace snake head
+			if (previousSnake) {
+				grid.replace(previousSnake.head, snake.head, headCell);
+			} else {
+				grid.insert(snake.head, headCell);
+			}
+
 			// insert/replace new tracers
 			snake.tracers.forEach((tracer, index) => {
 				const tracerCell: TracerCell = { id: snake.id, type: "tracer", index };
@@ -60,13 +68,6 @@ export function useSnakesOnScreen(scale: number, offset: Vector2) {
 					grid.insert(tracer, tracerCell);
 				}
 			});
-
-			// insert/replace snake head
-			if (previousSnake) {
-				grid.replace(previousSnake.head, snake.head, headCell);
-			} else {
-				grid.insert(snake.head, headCell);
-			}
 		}
 
 		// remove snakes that are no longer on the grid

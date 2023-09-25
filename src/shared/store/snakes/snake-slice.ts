@@ -102,7 +102,7 @@ export const snakesSlice = createProducer(initialState, {
 
 			if (currentLength < desiredLength) {
 				for (const index of $range(currentLength, desiredLength - 1)) {
-					tracers.push(tail.add(new Vector2(TINY * index, 0)));
+					tracers.push(tail.add(new Vector2(TINY * (index + 1), 0)));
 				}
 			}
 

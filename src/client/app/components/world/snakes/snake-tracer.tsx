@@ -1,6 +1,5 @@
 import { blend, lerp } from "@rbxts/pretty-react-hooks";
 import Roact, { memo, useMemo } from "@rbxts/roact";
-import { Image } from "client/app/common/image";
 import { useRem } from "client/app/hooks";
 import { images } from "shared/assets";
 import { getSnakeSkin, getSnakeSkinForTracer } from "shared/data/skins";
@@ -50,33 +49,34 @@ function SnakeTracerComponent({ line, effects, skinId, index }: SnakeTracerProps
 	}, [style, rem, skin]);
 
 	return (
-		<Image
-			image={tracerSkin.texture}
-			imageColor={style.color}
-			imageTransparency={style.transparency}
-			scaleType="Slice"
-			sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
-			sliceScale={4}
-			anchorPoint={new Vector2(0.5, 0.5)}
-			size={style.size}
-			position={style.position}
-			rotation={style.rotation}
-			zIndex={-index - 1}
+		<imagelabel
+			Image={tracerSkin.texture}
+			ImageColor3={style.color}
+			ImageTransparency={style.transparency}
+			ScaleType="Slice"
+			SliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
+			SliceScale={4}
+			BackgroundTransparency={1}
+			AnchorPoint={new Vector2(0.5, 0.5)}
+			Size={style.size}
+			Position={style.position}
+			Rotation={style.rotation}
+			ZIndex={-index - 1}
 		>
 			{style.boostActive && (
-				<Image
+				<imagelabel
 					key="glow"
-					image={images.ui.blur}
-					imageColor={glowStyle.color}
-					imageTransparency={glowStyle.transparency}
-					scaleType="Slice"
-					sliceCenter={new Rect(256, 256, 256, 256)}
-					anchorPoint={new Vector2(0.5, 0.5)}
-					size={glowStyle.size}
-					position={new UDim2(0.5, 0, 0.5, 0)}
+					Image={images.ui.blur}
+					ImageColor3={glowStyle.color}
+					ImageTransparency={glowStyle.transparency}
+					ScaleType="Slice"
+					SliceCenter={new Rect(256, 256, 256, 256)}
+					AnchorPoint={new Vector2(0.5, 0.5)}
+					Size={glowStyle.size}
+					Position={new UDim2(0.5, 0, 0.5, 0)}
 				/>
 			)}
-		</Image>
+		</imagelabel>
 	);
 }
 
