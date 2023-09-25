@@ -37,7 +37,7 @@
 		"@rbxts/object-utils": "^1.0.4",
 		"@rbxts/pretty-react-hooks": "0.2.1",
 		"@rbxts/react-reflex": "0.2.0",
-		"@rbxts/react-roblox": "^0.1.0",
+		"@rbxts/react-roblox": "^0.2.0",
 		"@rbxts/reflex": "^4.2.0",
 		"@rbxts/remo": "^1.1.0",
 		"@rbxts/ripple": "^0.7.0",

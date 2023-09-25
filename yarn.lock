@@ -159,10 +159,21 @@
   resolved "https://registry.yarnpkg.com/@rbxts/react-reflex/-/react-reflex-0.2.0.tgz#f1e27b062f0ad09800eb27f29a561d7401292824"
   integrity sha512-pPrRpIwl8Qzz7GryoP9KrZCQyJCy6ohjlboFIMhe+DcRtqoO2nV7bboifozE7sq3vK0T7UP7fPjIFmaJzZeJIA==
 
-"@rbxts/react-roblox@^0.1.0", "@rbxts/react-roblox@^0.1.1", "@rbxts/react-roblox@^0.1.2":
+"@rbxts/react-roblox@^0.1.1", "@rbxts/react-roblox@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@rbxts/react-roblox/-/react-roblox-0.1.2.tgz#6dec0c09a6910346c3d04f11b557e80bb51b2af1"
   integrity sha512-74R0iemEWSgrE8f98JMfdQFSE+VpJTqo91aaZoBbskqHdeWX+kvVxjkiE5nMOkjIfptVHlZvD7P18hOTe2lwog==
+  dependencies:
+    "@rbxts/luau-polyfill-internal" "1.2.3-ts.0"
+    "@rbxts/react-internal" "^0.2.2"
+    "@rbxts/react-reconciler-internal" "^0.2.1"
+    "@rbxts/scheduler-internal" "^0.2.1"
+    "@rbxts/shared-internal" "^0.2.1"
+
+"@rbxts/react-roblox@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@rbxts/react-roblox/-/react-roblox-0.2.0.tgz#a4471617a024225678b96136c17fde761fadba88"
+  integrity sha512-HTdJ7HSVfkyH+ow78paMS4aVz4C87mXEDDeDeQxhw17xQOANFl3cnoSKJ8ldmNgjoSMEgh5KacdoxjRGoF8wZg==
   dependencies:
     "@rbxts/luau-polyfill-internal" "1.2.3-ts.0"
     "@rbxts/react-internal" "^0.2.2"
