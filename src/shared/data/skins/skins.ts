@@ -1,4 +1,5 @@
 import { images } from "shared/assets";
+import { darken } from "shared/utils/color-utils";
 
 import { accentList, accents, palette } from "../palette";
 import { SnakeSkin } from "../skins";
@@ -138,6 +139,20 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
+		id: "stare",
+		price: 750,
+		tint: blendColorSequence([palette.white, darken(palette.white, 0.25)], 10),
+		boostTint: [palette.yellow],
+		texture: [images.skins.snake_stare_body],
+		headTexture: images.skins.snake_stare_head,
+		eyeTextureLeft: images.skins.snake_no_eye,
+		eyeTextureRight: images.skins.snake_no_eye,
+		primary: darken(palette.peach, 0.5, 0.5),
+		secondary: darken(palette.peach, 0.7, 0.5),
+	},
+
+	{
+		...defaultSnakeSkin,
 		id: "rainbow",
 		price: 1000,
 		tint: blendColorSequence(
@@ -193,8 +208,19 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
+		id: "black-ice",
+		price: 2750,
+		tint: [palette.white],
+		boostTint: [palette.crust],
+		texture: [images.skins.snake_black_ice],
+		primary: palette.mantle,
+		secondary: palette.crust,
+	},
+
+	{
+		...defaultSnakeSkin,
 		id: "neon",
-		price: 2500,
+		price: 3500,
 		tint: blendColorSequence([Color3.fromRGB(186, 51, 84), Color3.fromRGB(94, 41, 153)], 16),
 		texture: [images.skins.snake_outlined],
 	},
@@ -202,18 +228,35 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "nightwish",
-		price: 2750,
+		price: 3750,
 		tint: blendColorSequence([Color3.fromRGB(61, 199, 207), Color3.fromRGB(166, 61, 186), palette.base], 16),
 		texture: [images.skins.snake_outlined],
 	},
 
 	{
 		...defaultSnakeSkin,
-		id: "black-ice",
-		price: 3250,
+		id: "epic",
+		price: 7331,
 		tint: [palette.white],
-		boostTint: [palette.crust],
-		texture: [images.skins.snake_black_ice],
+		boostTint: [Color3.fromRGB(224, 179, 89)],
+		texture: [images.skins.snake_awesome_body],
+		headTexture: images.skins.snake_awesome_head,
+		eyeTextureLeft: images.skins.snake_no_eye,
+		eyeTextureRight: images.skins.snake_no_eye,
+		primary: palette.surface2,
+		secondary: palette.surface0,
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "epic-vampire",
+		price: 13337,
+		tint: [palette.white],
+		boostTint: [Color3.fromRGB(186, 51, 69)],
+		texture: [images.skins.snake_vamp_body],
+		headTexture: images.skins.snake_vamp_head,
+		eyeTextureLeft: images.skins.snake_no_eye,
+		eyeTextureRight: images.skins.snake_no_eye,
 		primary: palette.mantle,
 		secondary: palette.crust,
 	},

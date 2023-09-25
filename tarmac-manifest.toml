@@ -1,11 +1,21 @@
+[inputs."assets/images/skins/snake_awesome_body.png"]
+hash = "8d7bd157761c33b955ea7890c8688a373312e44f54c169f37da1726fadee7844"
+id = 14884183308
+packable = false
+
+[inputs."assets/images/skins/snake_awesome_head.png"]
+hash = "2e93b0da41edad20d3eaf103892f75488adea7e1b080b3844f9db236605ff686"
+id = 14884183395
+packable = false
+
 [inputs."assets/images/skins/snake_black_ice.png"]
 hash = "b966800fd1331404a732c31f79e12c5bf94b79d0e8d3f7ff2923f433e06dc7a3"
 id = 14836390041
 packable = false
 
 [inputs."assets/images/skins/snake_canada.png"]
-hash = "1f4e99811aefeb36de563b852626d1c0e4a22067ffffeb194d17404deeed0ef3"
-id = 14836252674
+hash = "e328654b7fa2b819790a28dd72298700f5b81e47bc4de83d1445523cd3614626"
+id = 14884212831
 packable = false
 
 [inputs."assets/images/skins/snake_eye_left.png"]
@@ -34,18 +44,43 @@ id = 14836431136
 packable = false
 
 [inputs."assets/images/skins/snake_main.png"]
-hash = "01cd3135ba40f6cc44e04c17d7f7f49cb63dd3ccf8b142dc55ea39e70b3d1882"
-id = 14835436639
+hash = "eab72850c3c072a09399d9a4dcc7710d10a5cb0a3f245a32940052ef1a622ed4"
+id = 14884217464
+packable = false
+
+[inputs."assets/images/skins/snake_no_eye.png"]
+hash = "f19a7a9044ddb730bd2ca5bd6dd80320cc8b4615bc49db8f216eace741acb324"
+id = 14883700305
 packable = false
 
 [inputs."assets/images/skins/snake_outlined.png"]
-hash = "c58f062dc711340f71b394640a32ae1e68262d38269c6ae0da93404fde1577a5"
-id = 14836208386
+hash = "6266d866585cf0967179f308dfe7c8ed57699b176dc3567dfa40f1a78078da4b"
+id = 14884183614
+packable = false
+
+[inputs."assets/images/skins/snake_stare_body.png"]
+hash = "caacaf5c35e3d05a81590692c96432bb8fcc3ab964a2e7fac18a4d46ec07d4f8"
+id = 14884183698
+packable = false
+
+[inputs."assets/images/skins/snake_stare_head.png"]
+hash = "fd8390d50902ad8133d41b5afb0a05a6ab274a3638ae656549c779d2e5dd644c"
+id = 14884183771
 packable = false
 
 [inputs."assets/images/skins/snake_stars.png"]
-hash = "d85339e3cbf136e4a7fffd45ca9eea303ff739e738d2198298e7252e831beacf"
-id = 14836247469
+hash = "93bb25b18efacbee6605468897277db4f5198528f9305a7991c2b54f1717a3ec"
+id = 14884212936
+packable = false
+
+[inputs."assets/images/skins/snake_vamp_body.png"]
+hash = "4ce5cca037d85758a97521ccfedd2f596413d7d33e588dd23a34b1ee808f1bc4"
+id = 14884117497
+packable = false
+
+[inputs."assets/images/skins/snake_vamp_head.png"]
+hash = "ab290c60aa28352ac984c34956f5d04b7cc0500c9c58d9f6e1036473ecaa31de"
+id = 14884117564
 packable = false
 
 [inputs."assets/images/ui/alert_dismiss.png"]

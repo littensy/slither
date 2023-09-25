@@ -3,11 +3,11 @@ import Roact, { memo, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem, useSeed } from "client/app/hooks";
-import { brighten } from "client/app/utils/color-utils";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { CandyType } from "shared/store/candy";
+import { brighten } from "shared/utils/color-utils";
 import { mapStrict } from "shared/utils/math-utils";
 
 interface CandyItemProps {

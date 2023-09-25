@@ -2,15 +2,13 @@ import Roact, { useEffect } from "@rbxts/roact";
 import { CanvasGroup } from "client/app/common/canvas-group";
 import { Image } from "client/app/common/image";
 import { useMotion, useRem } from "client/app/hooks";
-import { images } from "shared/assets";
+import { SnakeSkin } from "shared/data/skins";
 import { fillArray } from "shared/utils/object-utils";
 
 import { SNAKE_ANGLE_OFFSET } from "../../world/snakes";
 
 interface SkinThumbnailProps {
-	readonly tints: readonly Color3[];
-	readonly textures: readonly string[];
-	readonly textureSize: Vector2;
+	readonly skin: SnakeSkin;
 	readonly active: boolean;
 	readonly transparency: Roact.Binding<number>;
 }
@@ -37,7 +35,7 @@ const TRACERS = fillArray(TRACER_POINTS, (index) => {
 	return { size, position, rotation };
 });
 
-export function SkinThumbnail({ tints, textures, textureSize, active, transparency }: SkinThumbnailProps) {
+export function SkinThumbnail({ skin, active, transparency }: SkinThumbnailProps) {
 	const rem = useRem();
 	const [offset, offsetMotion] = useMotion(new UDim());
 
@@ -56,10 +54,10 @@ export function SkinThumbnail({ tints, textures, textureSize, active, transparen
 
 			<Image
 				key="head"
-				image={textures[0]}
-				imageColor={tints[0]}
+				image={skin.headTexture ?? skin.texture[0]}
+				imageColor={skin.tint[0]}
 				scaleType="Slice"
-				sliceCenter={new Rect(textureSize.div(2), textureSize.div(2))}
+				sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 				sliceScale={4}
 				anchorPoint={new Vector2(0.5, 0.5)}
 				size={new UDim2(0, rem(TRACER_SIZE), 0, rem(TRACER_SIZE))}
@@ -68,14 +66,14 @@ export function SkinThumbnail({ tints, textures, textureSize, active, transparen
 			>
 				<Image
 					key="eye-right"
-					image={images.skins.snake_eye_right}
+					image={skin.eyeTextureRight}
 					size={new UDim2(0.45, 0, 0.45, 0)}
 					position={new UDim2(0.5, 0, 0.1, 0)}
 				/>
 
 				<Image
 					key="eye-left"
-					image={images.skins.snake_eye_left}
+					image={skin.eyeTextureLeft}
 					anchorPoint={new Vector2(1, 0)}
 					size={new UDim2(0.45, 0, 0.45, 0)}
 					position={new UDim2(0.5, 0, 0.1, 0)}
@@ -85,10 +83,10 @@ export function SkinThumbnail({ tints, textures, textureSize, active, transparen
 			{TRACERS.map(({ size, position, rotation }, index) => (
 				<Image
 					key={`tracer-${index}`}
-					image={textures[(index + 1) % textures.size()]}
-					imageColor={tints[(index + 1) % tints.size()]}
+					image={skin.texture[(index + 1) % skin.texture.size()]}
+					imageColor={skin.tint[(index + 1) % skin.tint.size()]}
 					scaleType="Slice"
-					sliceCenter={new Rect(textureSize.div(2), textureSize.div(2))}
+					sliceCenter={new Rect(skin.size.div(2), skin.size.div(2))}
 					sliceScale={4}
 					anchorPoint={new Vector2(0.5, 0.5)}
 					size={new UDim2(size.X, rem(TRACER_SIZE), size.Y, rem(TRACER_SIZE))}

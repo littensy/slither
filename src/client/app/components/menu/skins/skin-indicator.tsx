@@ -2,12 +2,12 @@ import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { useMotion, useRem } from "client/app/hooks";
-import { brighten } from "client/app/utils/color-utils";
 import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { LOCAL_USER } from "shared/constants";
 import { palette } from "shared/data/palette";
 import { selectPlayerEquippedSkin, selectPlayerOwnsSkin } from "shared/store/saves";
+import { brighten } from "shared/utils/color-utils";
 
 interface SkinIndicatorProps {
 	readonly id: string;

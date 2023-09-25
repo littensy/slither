@@ -10,10 +10,10 @@ import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useProductPrice, useRem } from "client/app/hooks";
-import { brighten } from "client/app/utils/color-utils";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
 import { palette } from "shared/data/palette";
+import { brighten } from "shared/utils/color-utils";
 
 interface SupportProductProps extends Roact.PropsWithChildren {
 	readonly index: number;
