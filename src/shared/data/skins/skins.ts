@@ -194,7 +194,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "neon",
-		price: 1750,
+		price: 2500,
 		tint: blendColorSequence([Color3.fromRGB(186, 51, 84), Color3.fromRGB(94, 41, 153)], 16),
 		texture: [images.skins.snake_outlined],
 	},
@@ -202,7 +202,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "nightwish",
-		price: 2000,
+		price: 2750,
 		tint: blendColorSequence([Color3.fromRGB(61, 199, 207), Color3.fromRGB(166, 61, 186), palette.base], 16),
 		texture: [images.skins.snake_outlined],
 	},
@@ -210,7 +210,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "black-ice",
-		price: 2500,
+		price: 3250,
 		tint: [palette.white],
 		boostTint: [palette.crust],
 		texture: [images.skins.snake_black_ice],
