@@ -71,6 +71,7 @@ function SnakeTracerComponent({ line, effects, skinId, index }: SnakeTracerProps
 					ImageTransparency={glowStyle.transparency}
 					ScaleType="Slice"
 					SliceCenter={new Rect(256, 256, 256, 256)}
+					BackgroundTransparency={1}
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Size={glowStyle.size}
 					Position={new UDim2(0.5, 0, 0.5, 0)}
