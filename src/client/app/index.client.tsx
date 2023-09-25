@@ -1,5 +1,5 @@
-import { createRoot } from "@rbxts/react-roblox";
-import Roact, { Portal, StrictMode } from "@rbxts/roact";
+import { createPortal, createRoot } from "@rbxts/react-roblox";
+import Roact, { StrictMode } from "@rbxts/roact";
 import { Players } from "@rbxts/services";
 import { IS_CANARY } from "shared/constants";
 
@@ -16,11 +16,12 @@ if (IS_CANARY) {
 }
 
 root.render(
-	<StrictMode>
-		<RootProvider>
-			<Portal target={target}>
+	createPortal(
+		<StrictMode>
+			<RootProvider>
 				<App />
-			</Portal>
-		</RootProvider>
-	</StrictMode>,
+			</RootProvider>
+		</StrictMode>,
+		target,
+	),
 );
