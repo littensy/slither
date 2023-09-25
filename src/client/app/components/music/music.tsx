@@ -12,6 +12,13 @@ const MUSIC = [
 	"rbxassetid://9039769202", // Santa Ervilio
 	"rbxassetid://9039768724", // Friends
 	"rbxassetid://9047050075", // Lo Fi Dreams Hip Hop
+	"rbxassetid://9039771403", // Opportunity
+	"rbxassetid://9039770227", // It s For Me
+	"rbxassetid://9047105000", // I'll Show Ya
+	"rbxassetid://9046863579", // City Lights
+	"rbxassetid://9047105308", // Dusk To Dawn
+	"rbxassetid://9047105702", // Light Dreamer
+	"rbxassetid://9047105533", // No Smoking
 ];
 
 export function Music() {

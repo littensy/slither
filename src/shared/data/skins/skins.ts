@@ -249,7 +249,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
-		id: "epic-vampire",
+		id: "devious",
 		price: 13337,
 		tint: [palette.white],
 		boostTint: [Color3.fromRGB(186, 51, 69)],
