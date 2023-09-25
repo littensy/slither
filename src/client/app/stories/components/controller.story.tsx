@@ -20,7 +20,7 @@ import { createScheduler } from "shared/utils/scheduler";
 import { useMockRemotes } from "../utils/use-mock-remotes";
 
 const START_SIZE = 0;
-const SIZE_INCREMENT = 3;
+const SIZE_INCREMENT = 100;
 const DEBUG_SIZES = [0, 500, 1000, 5000, 10000, 20000, 40000, 80000];
 
 function Debugger() {
