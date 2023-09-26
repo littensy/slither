@@ -44,8 +44,9 @@ export class BotBehavior {
 			return;
 		}
 
+		const range = math.random() > 0.2 ? 20 : 180;
 		// Max turn of 20 degrees away from current angle
-		store.turnSnake(this.id, snake.angle + math.rad(math.random(-40, 40)));
+		store.turnSnake(this.id, snake.angle + math.rad(math.random(-range, range)));
 	}
 
 	private scavenge(snake: SnakeEntity) {
