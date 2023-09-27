@@ -16,7 +16,7 @@
 
 [![Place Visits](https://img.shields.io/badge/plays-5k-a6da95?style=for-the-badge&logo=roblox&logoColor=d9e0ee&labelColor=302d41)](https://www.roblox.com/games/14162747150)
 [![Discord](https://img.shields.io/discord/1062844485282836522?style=for-the-badge&logo=discord&logoColor=d9e0ee&label=chat&labelColor=302d41&color=b7bdf8)](https://discord.gg/tyjBaP44sK)
-[![Join Group](https://img.shields.io/badge/join-group-f5bde6?style=for-the-badge&logo=roblox&logoColor=d9e0ee&labelColor=302d41)](https://www.roblox.com/groups/4918739)
+[![Join Group](https://img.shields.io/badge/group-litten's_games-f5bde6?style=for-the-badge&logo=roblox&logoColor=d9e0ee&labelColor=302d41)](https://www.roblox.com/groups/4918739)
 
 </div>
 
