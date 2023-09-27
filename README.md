@@ -1,16 +1,12 @@
 <div align="center">
     <a href="https://www.roblox.com/games/14162747150/Slither">
-        <img
-            src="assets/marketing/github_logo.png"
-            alt="Slither Icon"
-            width="256"
-        />
+        <img src="assets/marketing/github_logo.png" alt="Slither Icon" width="256" />
     </a>
 </div>
 
 <div align="center">
 
-# Slither
+# Slither 🐍
 
 A casual game with a soothing Catppuccin color palette 🎨
 
@@ -25,8 +21,8 @@ A casual game with a soothing Catppuccin color palette 🎨
 ## Attributions
 
 -   🎨 [Catppuccin](https://catppuccin.com): Pastel color palette
--   🐍 [slither.io](https://slither.io): Inspiration and concept
 -   🎧 [kenney.nl](https://kenney.nl): Interface sound effects
+-   🐍 [slither.io](https://slither.io): Inspiration and concept
 
 ## Special Thanks
 
