@@ -14,10 +14,10 @@
 
 A casual game with a soothing Catppuccin color palette 🎨
 
-[Game](https://www.roblox.com/games/14162747150)・[Group](https://www.roblox.com/groups/4918739/littens-Games#!/about)・[Discord](https://discord.gg/tyjBaP44sK)
+[Game](https://www.roblox.com/games/14162747150)・[Group](https://www.roblox.com/groups/4918739)・[Discord](https://discord.gg/tyjBaP44sK)
 
 [![Play Game](https://img.shields.io/badge/play-00B06F?style=for-the-badge&logo=roblox)](https://www.roblox.com/games/14162747150)
-[![Play Game (Dev)](https://img.shields.io/badge/canary-gold?style=for-the-badge&logo=robloxstudio&logoColor=black)](https://www.roblox.com/games/14162747150)
+[![Play Game (Dev)](https://img.shields.io/badge/canary-gold?style=for-the-badge&logo=robloxstudio&logoColor=black)](https://www.roblox.com/games/14162328419)
 [![Litten's Games Group](https://img.shields.io/badge/litten's_games-red?style=for-the-badge&logo=roblox)](https://www.roblox.com/groups/4918739)
 
 </div>
