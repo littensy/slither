@@ -14,7 +14,7 @@ A casual game with a soothing Catppuccin color palette 🎨
 
 [![Play Game](https://img.shields.io/badge/play-00B06F?style=for-the-badge&logo=roblox)](https://www.roblox.com/games/14162747150)
 [![Play Game (Dev)](https://img.shields.io/badge/canary-gold?style=for-the-badge&logo=robloxstudio&logoColor=black)](https://www.roblox.com/games/14162328419)
-[![Litten's Games Group](https://img.shields.io/badge/litten's_games-red?style=for-the-badge&logo=roblox)](https://www.roblox.com/groups/4918739)
+[![Litten's Games Group](https://img.shields.io/badge/litten's_games-C70039?style=for-the-badge&logo=roblox)](https://www.roblox.com/groups/4918739)
 
 </div>
 
@@ -26,7 +26,7 @@ A casual game with a soothing Catppuccin color palette 🎨
 
 ## Special Thanks
 
--   [@Inversion](https://github.com/neoinversion) for his help and contribution throughout development
+-   [@Inversion](https://github.com/neoinversion) for his help and contributions
 -   [@pashleyy](https://github.com/passhley) for the concept
 
 ## License
