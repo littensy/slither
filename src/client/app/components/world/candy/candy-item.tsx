@@ -3,11 +3,11 @@ import Roact, { memo, useEffect, useMemo } from "@rbxts/roact";
 import { Image } from "client/app/common/image";
 import { Shadow } from "client/app/common/shadow";
 import { useMotion, useRem, useSeed } from "client/app/hooks";
-import { brighten } from "client/app/utils/color-utils";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { springs } from "client/app/utils/springs";
 import { images } from "shared/assets";
 import { CandyType } from "shared/store/candy";
+import { brighten } from "shared/utils/color-utils";
 import { mapStrict } from "shared/utils/math-utils";
 
 interface CandyItemProps {
@@ -19,7 +19,7 @@ interface CandyItemProps {
 	readonly eatenAt?: Vector2;
 }
 
-function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }: CandyItemProps) {
+export const CandyItem = memo<CandyItemProps>(({ variant, size, point, color, eatenAt, worldScale }) => {
 	const rem = useRem();
 	const timer = useTimer();
 	const seed = useSeed();
@@ -38,7 +38,7 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 		});
 
 		const glow = timer.value.map((t) => {
-			const diameter = map(math.noise(seed - 3 * t), -0.5, 0.5, 0, 4);
+			const diameter = map(math.noise(seed - 3 * t), -0.5, 0.5, 1, 4.5);
 			return new UDim2(0, rem(diameter), 0, rem(diameter));
 		});
 
@@ -51,7 +51,7 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 	}, [rem, worldScale]);
 
 	const diameter = useMemo(() => {
-		return variant === CandyType.Loot ? rem(2 + 1.5 * math.random()) : mapStrict(size, 1, 20, rem(0.75), rem(3.5));
+		return variant === CandyType.Loot ? rem(2 + 1.5 * math.random()) : mapStrict(size, 1, 5, rem(0.75), rem(2));
 	}, [variant, rem]);
 
 	useEffect(() => {
@@ -64,19 +64,17 @@ function CandyItemComponent({ variant, size, point, color, eatenAt, worldScale }
 	return (
 		<Image
 			image={images.ui.circle}
-			imageColor={brighten(color, 0.7, 0.5)}
+			imageColor={brighten(color, 0.7, 0.7)}
 			imageTransparency={transparency}
 			size={new UDim2(0, diameter, 0, diameter)}
 			position={position}
 		>
 			<Shadow
-				shadowColor={color}
+				shadowColor={brighten(color, 0.7)}
 				shadowSize={glow}
-				shadowTransparency={transparency.map((t) => blend(0.5, t))}
+				shadowTransparency={transparency.map((t) => blend(0.6, t))}
 				shadowPosition={0}
 			/>
 		</Image>
 	);
-}
-
-export const CandyItem = memo(CandyItemComponent);
+});

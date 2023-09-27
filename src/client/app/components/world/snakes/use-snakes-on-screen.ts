@@ -1,4 +1,4 @@
-import { useCamera, usePrevious, useUnmountEffect } from "@rbxts/pretty-react-hooks";
+import { useCamera, useUnmountEffect } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import { useEffect, useMemo, useState } from "@rbxts/roact";
 import { useRem } from "client/app/hooks";
@@ -27,59 +27,23 @@ interface TracerCell {
 export function useSnakesOnScreen(scale: number, offset: Vector2) {
 	const rem = useRem();
 	const camera = useCamera();
-
 	const snakes = useSelector(selectSnakesById);
-	const previousSnakes = usePrevious(snakes) || {};
 
-	const grid = useMemo(() => {
-		return new Grid<TracerCell>(16);
-	}, []);
 	const [onScreen, setOnScreen] = useState<SnakeOnScreen[]>([]);
 
+	const grid = useMemo(() => {
+		return new Grid<TracerCell>(10);
+	}, []);
+
 	useEffect(() => {
-		// replace old tracer positions with new ones
+		grid.clear();
+
 		for (const [, snake] of pairs(snakes)) {
-			const previousSnake = previousSnakes[snake.id];
-			const headCell: TracerCell = { id: snake.id, type: "head", index: -1 };
+			grid.insert(snake.head, { id: snake.id, type: "head", index: -1 });
 
-			// delete old tracers
-			previousSnake?.tracers.forEach((tracer, index) => {
-				if (!snake.tracers[index]) {
-					grid.remove(tracer);
-				}
-			});
-
-			// insert/replace new tracers
 			snake.tracers.forEach((tracer, index) => {
-				const tracerCell: TracerCell = { id: snake.id, type: "tracer", index };
-				const previousTracer = previousSnake?.tracers[index];
-
-				if (previousTracer) {
-					grid.replace(previousTracer, tracer, tracerCell);
-				} else {
-					grid.insert(tracer, tracerCell);
-				}
+				grid.insert(tracer, { id: snake.id, type: "tracer", index });
 			});
-
-			// insert/replace snake head
-			if (previousSnake) {
-				grid.replace(previousSnake.head, snake.head, headCell);
-			} else {
-				grid.insert(snake.head, headCell);
-			}
-		}
-
-		// remove snakes that are no longer on the grid
-		for (const [, snake] of pairs(previousSnakes)) {
-			if (snakes[snake.id]) {
-				continue;
-			}
-
-			grid.remove(snake.head);
-
-			for (const tracer of snake.tracers) {
-				grid.remove(tracer);
-			}
 		}
 	}, [snakes]);
 

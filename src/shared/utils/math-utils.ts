@@ -29,7 +29,7 @@ export function addRadians(a: number, b: number) {
 }
 
 export function lerpRadians(a: number, b: number, t: number) {
-	return a + subtractRadians(b, a) * t;
+	return addRadians(a, subtractRadians(b, a) * t);
 }
 
 export function turnRadians(current: number, target: number, angle: number) {

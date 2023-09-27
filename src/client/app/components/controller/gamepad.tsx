@@ -7,8 +7,8 @@ interface GamepadProps {
 	readonly setBoost: (boost: boolean) => void;
 }
 
-const BOOST_KEYS = new Set<Enum.KeyCode>([Enum.KeyCode.ButtonR2, Enum.KeyCode.ButtonL2, Enum.KeyCode.ButtonA]);
-const THUMBSTICK_KEYS = new Set<Enum.KeyCode>([Enum.KeyCode.Thumbstick1, Enum.KeyCode.Thumbstick2]);
+const BOOST_KEYS = new ReadonlySet<Enum.KeyCode>([Enum.KeyCode.ButtonR2, Enum.KeyCode.ButtonL2, Enum.KeyCode.ButtonA]);
+const THUMBSTICK_KEYS = new ReadonlySet<Enum.KeyCode>([Enum.KeyCode.Thumbstick1, Enum.KeyCode.Thumbstick2]);
 const THUMBSTICK_DEADZONE = 0.3;
 
 export function Gamepad({ updateAngle, setBoost }: GamepadProps) {

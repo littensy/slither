@@ -99,14 +99,7 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 				/>
 			</Image>
 
-			<SkinThumbnail
-				key="thumbnail"
-				active={active}
-				tints={palette.skin.tint}
-				textures={palette.skin.texture}
-				textureSize={palette.skin.size}
-				transparency={transparency}
-			/>
+			<SkinThumbnail key="thumbnail" active={active} skin={palette.skin} transparency={transparency} />
 
 			<SkinIndicator key="indicator" id={id} primary={palette.primary} transparency={transparency} />
 		</ReactiveButton>

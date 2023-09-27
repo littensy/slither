@@ -1,4 +1,5 @@
 import { images } from "shared/assets";
+import { darken } from "shared/utils/color-utils";
 
 import { accentList, accents, palette } from "../palette";
 import { SnakeSkin } from "../skins";
@@ -19,15 +20,8 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "silver",
-		price: 50,
+		price: 100,
 		tint: [palette.text],
-	},
-
-	{
-		...defaultSnakeSkin,
-		id: "peppermint",
-		price: 75,
-		tint: [palette.red, palette.red, palette.offwhite, palette.offwhite],
 	},
 
 	{
@@ -87,50 +81,57 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
+		id: "peppermint",
+		price: 200,
+		tint: [palette.red, palette.red, palette.offwhite, palette.offwhite],
+	},
+
+	{
+		...defaultSnakeSkin,
 		id: "candycorn",
-		price: 125,
+		price: 250,
 		tint: [palette.yellow, palette.yellow, palette.peach, palette.peach, palette.offwhite],
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "zebra",
-		price: 150,
+		price: 300,
 		tint: [palette.overlay0, palette.text],
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "honeybee",
-		price: 175,
+		price: 450,
 		tint: [palette.mantle, palette.mantle, palette.yellow],
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "space-cat",
-		price: 175,
+		price: 450,
 		tint: [palette.surface0, palette.offwhite, palette.mauve],
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "berries-and-cherries",
-		price: 200,
+		price: 750,
 		tint: blendColorSequence([palette.red, palette.mauve, palette.blue, palette.mauve], 16),
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "sunset",
-		price: 200,
+		price: 750,
 		tint: blendColorSequence([palette.mauve, palette.red, palette.peach, palette.red], 16),
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "siamese",
-		price: 250,
+		price: 750,
 		tint: blendColorSequence([Color3.fromRGB(99, 74, 61), palette.yellow], 16),
 		primary: Color3.fromRGB(125, 94, 76),
 		secondary: Color3.fromRGB(92, 69, 56),
@@ -138,8 +139,22 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
+		id: "stare",
+		price: 750,
+		tint: blendColorSequence([palette.white, darken(palette.white, 0.25)], 10),
+		boostTint: [palette.yellow],
+		texture: [images.skins.snake_stare_body],
+		headTexture: images.skins.snake_stare_head,
+		eyeTextureLeft: images.skins.snake_no_eye,
+		eyeTextureRight: images.skins.snake_no_eye,
+		primary: darken(palette.peach, 0.5, 0.5),
+		secondary: darken(palette.peach, 0.7, 0.5),
+	},
+
+	{
+		...defaultSnakeSkin,
 		id: "rainbow",
-		price: 500,
+		price: 1000,
 		tint: blendColorSequence(
 			[
 				palette.red,
@@ -161,7 +176,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "watermelon",
-		price: 750,
+		price: 1500,
 		tint: blendColorSequence([palette.white, Color3.fromRGB(97, 143, 122)], 12),
 		boostTint: [Color3.fromRGB(97, 224, 148)],
 		texture: [images.skins.snake_jelly],
@@ -172,7 +187,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "red-cherry",
-		price: 750,
+		price: 1500,
 		tint: blendColorSequence([palette.white, Color3.fromRGB(140, 97, 110)], 12),
 		boostTint: [Color3.fromRGB(232, 107, 130)],
 		texture: [images.skins.snake_jelly_red],
@@ -183,7 +198,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "blue-raspberry",
-		price: 750,
+		price: 1500,
 		tint: blendColorSequence([palette.white, Color3.fromRGB(97, 97, 140)], 12),
 		boostTint: [Color3.fromRGB(97, 117, 219)],
 		texture: [images.skins.snake_jelly_blue],
@@ -193,8 +208,19 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
+		id: "black-ice",
+		price: 2750,
+		tint: [palette.white],
+		boostTint: [palette.crust],
+		texture: [images.skins.snake_black_ice],
+		primary: palette.mantle,
+		secondary: palette.crust,
+	},
+
+	{
+		...defaultSnakeSkin,
 		id: "neon",
-		price: 850,
+		price: 3500,
 		tint: blendColorSequence([Color3.fromRGB(186, 51, 84), Color3.fromRGB(94, 41, 153)], 16),
 		texture: [images.skins.snake_outlined],
 	},
@@ -202,18 +228,35 @@ export const snakeSkins: readonly SnakeSkin[] = [
 	{
 		...defaultSnakeSkin,
 		id: "nightwish",
-		price: 1000,
+		price: 3750,
 		tint: blendColorSequence([Color3.fromRGB(61, 199, 207), Color3.fromRGB(166, 61, 186), palette.base], 16),
 		texture: [images.skins.snake_outlined],
 	},
 
 	{
 		...defaultSnakeSkin,
-		id: "black-ice",
-		price: 1250,
+		id: "epic",
+		price: 7331,
 		tint: [palette.white],
-		boostTint: [palette.crust],
-		texture: [images.skins.snake_black_ice],
+		boostTint: [Color3.fromRGB(224, 179, 89)],
+		texture: [images.skins.snake_awesome_body],
+		headTexture: images.skins.snake_awesome_head,
+		eyeTextureLeft: images.skins.snake_no_eye,
+		eyeTextureRight: images.skins.snake_no_eye,
+		primary: palette.surface2,
+		secondary: palette.surface0,
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "devious",
+		price: 13337,
+		tint: [palette.white],
+		boostTint: [Color3.fromRGB(186, 51, 69)],
+		texture: [images.skins.snake_vamp_body],
+		headTexture: images.skins.snake_vamp_head,
+		eyeTextureLeft: images.skins.snake_no_eye,
+		eyeTextureRight: images.skins.snake_no_eye,
 		primary: palette.mantle,
 		secondary: palette.crust,
 	},

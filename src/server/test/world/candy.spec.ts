@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { store } from "server/store";
-import { CANDY_LIMITS, createCandy, getSnake, onCandyTick, removeCandyIfAtLimit } from "server/world";
+import { CANDY_LIMITS, createCandy, getSnake, onCandyTick } from "server/world";
 import { CandyType, selectCandies, selectCandyById, selectCandyCount } from "shared/store/candy";
 import { fillArray } from "shared/utils/object-utils";
 
@@ -101,8 +101,7 @@ export = () => {
 		});
 		store.populateCandy(candies);
 		expect(countCandy(CandyType.Dropping)).to.equal(CANDY_LIMITS[CandyType.Dropping] + 1);
-		removeCandyIfAtLimit(CandyType.Dropping);
-		removeCandyIfAtLimit(CandyType.Dropping);
+		store.flush();
 		expect(countCandy(CandyType.Dropping)).to.equal(CANDY_LIMITS[CandyType.Dropping]);
 	});
 };

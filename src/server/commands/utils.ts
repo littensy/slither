@@ -9,18 +9,18 @@ interface EnhancedTextChatService extends TextChatService {
 	TextChatCommands: Folder;
 }
 
-const textChatServiceTree = {
+const textChatServiceSchema = {
 	$className: "TextChatService",
 	TextChannels: {
 		$className: "Folder",
-		RBXGeneral: { $className: "TextChannel" },
-		RBXSystem: { $className: "TextChannel" },
+		RBXGeneral: "TextChannel",
+		RBXSystem: "TextChannel",
 	},
-	TextChatCommands: { $className: "Folder" },
+	TextChatCommands: "Folder",
 } as const;
 
 async function promiseTextChatService(): Promise<EnhancedTextChatService> {
-	return promiseTree(TextChatService, textChatServiceTree);
+	return promiseTree(TextChatService, textChatServiceSchema);
 }
 
 export async function getTextChannels() {

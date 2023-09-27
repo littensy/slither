@@ -11,6 +11,8 @@ export async function initCharacterService() {
 	Players.PlayerAdded.Connect((player) => {
 		const characterAdded = player.CharacterAdded.Connect((character) => {
 			promiseCharacter(character).then(onSpawn);
+
+			player.ClearCharacterAppearance();
 		});
 
 		promisePlayerDisconnected(player).then(() => {

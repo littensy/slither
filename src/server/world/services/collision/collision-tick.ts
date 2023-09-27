@@ -50,7 +50,7 @@ function isCollidingWithSnake(snake: SnakeEntity) {
 	const enemyRadius = describeSnakeFromScore(enemy.score).radius;
 	const distance = nearest.position.sub(snake.head).Magnitude;
 
-	if (distance <= 0.9 * (radius + enemyRadius)) {
+	if (distance <= 0.8 * (radius + enemyRadius)) {
 		return enemy;
 	}
 }

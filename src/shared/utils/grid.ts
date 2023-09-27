@@ -115,6 +115,16 @@ export class Grid<T = void> {
 		return points;
 	}
 
+	public size() {
+		let size = 0;
+
+		for (const [, cell] of this.cells) {
+			size += cell.size();
+		}
+
+		return size;
+	}
+
 	public clear() {
 		this.cells.clear();
 	}

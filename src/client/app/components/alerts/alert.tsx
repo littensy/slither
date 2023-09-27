@@ -9,7 +9,6 @@ import { ReactiveButton } from "client/app/common/reactive-button";
 import { Shadow } from "client/app/common/shadow";
 import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
-import { brightenIfDark, darken } from "client/app/utils/color-utils";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
 import { springs } from "client/app/utils/springs";
@@ -17,6 +16,7 @@ import { Alert, selectAlertIndex } from "client/store/alert";
 import { selectIsMenuOpen } from "client/store/menu";
 import { images, playSound, sounds } from "shared/assets";
 import { palette } from "shared/data/palette";
+import { brightenIfDark, darken } from "shared/utils/color-utils";
 import { mapStrict } from "shared/utils/math-utils";
 
 import { AlertTimer } from "./alert-timer";

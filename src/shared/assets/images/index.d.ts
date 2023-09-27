@@ -2,6 +2,7 @@ export const images: {
 	readonly skins: {
 		readonly snake_eye_left: string;
 		readonly snake_eye_right: string;
+		readonly snake_no_eye: string;
 		readonly snake_main: string;
 		readonly snake_stars: string;
 		readonly snake_jelly: string;
@@ -10,6 +11,12 @@ export const images: {
 		readonly snake_canada: string;
 		readonly snake_outlined: string;
 		readonly snake_black_ice: string;
+		readonly snake_awesome_body: string;
+		readonly snake_awesome_head: string;
+		readonly snake_stare_body: string;
+		readonly snake_stare_head: string;
+		readonly snake_vamp_body: string;
+		readonly snake_vamp_head: string;
 	};
 	readonly ui: {
 		readonly alert_dismiss: string;

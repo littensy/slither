@@ -155,11 +155,12 @@ function createSnakeBindings(snake: SnakeEntity, scale: number): SnakeBindings {
 }
 
 export function useSnakeBindings(snakeOnScreen: SnakeOnScreen, scale: number, isSubject: boolean): SnakeBindings {
+	const boosting = useSelectorCreator(selectSnakeIsBoosting, snakeOnScreen.snake.id);
+	const skipNext = useRef(false);
+
 	const bindings = useMemo(() => {
 		return createSnakeBindings(snakeOnScreen.snake, scale);
 	}, []);
-	const skipNext = useRef(false);
-	const boosting = useSelectorCreator(selectSnakeIsBoosting, snakeOnScreen.snake.id);
 
 	useEffect(() => {
 		// if this is not the subject, skip every other frame

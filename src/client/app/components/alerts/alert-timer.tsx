@@ -4,8 +4,8 @@ import { RunService } from "@rbxts/services";
 import { CanvasGroup } from "client/app/common/canvas-group";
 import { Frame } from "client/app/common/frame";
 import { useRem } from "client/app/hooks";
-import { darken } from "client/app/utils/color-utils";
 import { palette } from "shared/data/palette";
+import { darken } from "shared/utils/color-utils";
 
 interface AlertTimerProps {
 	readonly duration: number;

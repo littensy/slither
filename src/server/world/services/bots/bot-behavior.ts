@@ -1,11 +1,11 @@
 import Object from "@rbxts/object-utils";
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { getCandy, getRandomPointInWorld, getSnake } from "server/world/utils";
+import { getCandy, getSnake } from "server/world/utils";
+import { WORLD_BOUNDS } from "shared/constants";
 import { CandyType } from "shared/store/candy";
 import { describeSnakeFromScore, SnakeEntity } from "shared/store/snakes";
 import { map } from "shared/utils/math-utils";
-import { fillArray } from "shared/utils/object-utils";
 
 import { candyGrid } from "../candy";
 import { snakeGrid } from "../snakes";
@@ -26,6 +26,7 @@ export class BotBehavior {
 		this.id = id;
 		this.seed = math.random() * 255;
 
+		// Updates once per
 		this.cleanup = setInterval(() => {
 			this.update();
 		}, 1);
@@ -36,17 +37,16 @@ export class BotBehavior {
 	}
 
 	private idle(snake: SnakeEntity) {
-		// prefer points that are further away
 		const head = snake.head;
-		const goal = fillArray(10, () => getRandomPointInWorld()).reduce((acc, point) => {
-			const minDistance = head.sub(acc).Magnitude;
-			const currentDistance = head.sub(point).Magnitude;
+		if (WORLD_BOUNDS - head.Magnitude <= 20) {
+			const angle = math.atan2(head.Y, head.X) + math.rad(180);
+			store.turnSnake(this.id, angle);
+			return;
+		}
 
-			return currentDistance < minDistance ? point : acc;
-		}, getRandomPointInWorld());
-		const angle = math.atan2(goal.Y - head.Y, goal.X - head.X);
-
-		store.turnSnake(this.id, angle);
+		const range = math.random() > 0.2 ? 20 : 180;
+		// Max turn of 20 degrees away from current angle
+		store.turnSnake(this.id, snake.angle + math.rad(math.random(-range, range)));
 	}
 
 	private scavenge(snake: SnakeEntity) {
@@ -66,6 +66,7 @@ export class BotBehavior {
 
 		const candy = target && getCandy(target.metadata.id);
 		if (!candy) {
+			this.idle(snake);
 			return;
 		}
 
@@ -74,8 +75,8 @@ export class BotBehavior {
 	}
 
 	private flee(snake: SnakeEntity, direction: Vector2) {
-		// Go 180 degrees in opposite direction
-		const angle = math.atan2(direction.Y, direction.X) + math.rad(180);
+		// Go 180 (plus or minus some variance) degrees in opposite direction
+		const angle = math.atan2(direction.Y, direction.X) + math.rad(180 + math.random(-10, 10));
 		store.turnSnake(snake.id, angle);
 	}
 

@@ -4,7 +4,6 @@ import { Group } from "client/app/common/group";
 import { Image } from "client/app/common/image";
 import { useContinuousAngle, useMotion, useRem } from "client/app/hooks";
 import { springs } from "client/app/utils/springs";
-import { images } from "shared/assets";
 import { getSnakeSkin, getSnakeSkinForTracer } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 
@@ -38,7 +37,7 @@ export function SnakeHead({
 	const rem = useRem();
 	const currentAngle = useContinuousAngle(angle);
 	const angleDifference = useContinuousAngle(subtractRadians(desiredAngle, currentAngle));
-	const style = useTracerStyle(line, effects, 0, tracerSkin.tint);
+	const style = useTracerStyle(line, effects, 0, skin.headColor || tracerSkin.tint);
 
 	const [isSubjectDelayed, setIsSubjectDelayed] = useState(false);
 	const [rotation, rotationMotion] = useMotion(math.deg(currentAngle + SNAKE_ANGLE_OFFSET));
@@ -78,7 +77,7 @@ export function SnakeHead({
 		<Group anchorPoint={new Vector2(0.5, 0.5)} size={size} position={position}>
 			<Image
 				key="head"
-				image={tracerSkin.texture}
+				image={skin.headTexture ?? tracerSkin.texture}
 				imageColor={style.color}
 				imageTransparency={style.transparency}
 				scaleType="Slice"
@@ -89,7 +88,7 @@ export function SnakeHead({
 			>
 				<Image
 					key="eye-right"
-					image={images.skins.snake_eye_right}
+					image={skin.eyeTextureRight}
 					imageTransparency={style.transparency}
 					size={new UDim2(0.45, 0, 0.45, 0)}
 					position={new UDim2(0.5, 0, 0.1, 0)}
@@ -98,7 +97,7 @@ export function SnakeHead({
 
 				<Image
 					key="eye-left"
-					image={images.skins.snake_eye_left}
+					image={skin.eyeTextureLeft}
 					imageTransparency={style.transparency}
 					anchorPoint={new Vector2(1, 0)}
 					size={new UDim2(0.45, 0, 0.45, 0)}

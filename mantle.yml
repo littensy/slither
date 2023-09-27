@@ -17,16 +17,13 @@ environments:
       places:
         start:
           configuration:
-            name: 🛠️ Slither Testing
+            name: Slither DEV 🚧
             description: |
-              A casual game with soothing pastel color palettes 🎨.
-              This is a development build of Slither. It may be unstable, so let me know if you find any bugs!
+              This is a development build of Slither. Your feedback is appreciated ❤️
 
-              🐍  Eliminate other players by cutting them off with your tail!
-
-              🏆  Compete against other players for first place!
-
-              🤝  This game is a work-in-progress! Feedback is appreciated.
+              🚧  Proceed with caution: You may encounter bugs, data resets, and instability.
+              🔥  Take a look at upcoming features before they're shipped to production.
+              🤝  Send your feedback to the group wall or the linked socials!
             maxPlayerCount: 50
   - label: production
     branches: [main]
@@ -37,8 +34,12 @@ target:
     icon: assets/marketing/game_icon.png
     thumbnails: [assets/marketing/game_thumbnail.png]
     socialLinks:
-      - title: Community
+      - title: "📌・@littensy"
         url: https://discord.gg/tyjBaP44sK
+      - title: 💬・Chat
+        url: https://discord.gg/tyjBaP44sK
+      - title: 🤝・Community
+        url: https://www.roblox.com/groups/4918739/littens-Games#!/about
     configuration:
       playableDevices: [computer, console, phone, tablet]
       privateServers:
@@ -50,16 +51,22 @@ target:
       start:
         file: place.rbxlx
         configuration:
-          name: 🐍 Slither
+          name: Slither 🐍
           description: |
-            A casual game with soothing pastel color palettes 🎨.
-            Eat candy orbs to raise your score. If you bump into someone else, you're out!
+            A casual game with a soothing pastel color palette 🎨
 
-            🐍  Eliminate other players by cutting them off with your tail!
+            Eat candy 🍬 and grow to become the largest in the game!
+            Eliminate ❌ your opponents with your tail, but don't bump into them!
 
-            🏆  Compete against other players for first place!
+            🏆  Compete against other players for the highest score!
+            🎨  Unlock new skins to customize your character!
+            💎  Have Premium? Enjoy a 20% bonus towards money you earn 💸
 
-            💎  With Premium, all in-game money earned comes with a 20% bonus!
+            Please like ❤️ and favorite ⭐️ if you enjoyed Slither!
+            Follow 🔔 to be notified of new updates!
+
+            🎮  Use the MOUSE or THUMBSTICK to control your body 💫
+            🎮  Hold JUMP or TOUCH to boost 🚀
           maxPlayerCount: 25
     assets:
       - assets/sounds/*

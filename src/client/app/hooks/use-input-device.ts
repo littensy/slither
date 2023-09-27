@@ -5,7 +5,7 @@ import { UserInputService } from "@rbxts/services";
 export type InputDevice = "keyboard" | "gamepad" | "touch";
 
 const getInputType = (inputType = UserInputService.GetLastInputType()): InputDevice | undefined => {
-	if (inputType === Enum.UserInputType.Keyboard) {
+	if (inputType === Enum.UserInputType.Keyboard || inputType === Enum.UserInputType.MouseMovement) {
 		return "keyboard";
 	} else if (inputType === Enum.UserInputType.Gamepad1) {
 		return "gamepad";

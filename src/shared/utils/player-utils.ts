@@ -1,16 +1,12 @@
 import { Players } from "@rbxts/services";
 import { promiseTree } from "@rbxts/validate-tree";
 
-const characterTree = {
+const characterSchema = {
 	$className: "Model",
-	HumanoidRootPart: {
-		$className: "BasePart",
-	},
+	HumanoidRootPart: "BasePart",
 	Humanoid: {
 		$className: "Humanoid",
-		Animator: {
-			$className: "Animator",
-		},
+		Animator: "Animator",
 	},
 } as const;
 
@@ -22,7 +18,7 @@ export interface Character extends Model {
 }
 
 export async function promiseCharacter(character: Model): Promise<Character> {
-	return promiseTree(character, characterTree).timeout(30, "Character timed out");
+	return promiseTree(character, characterSchema).timeout(30, "Character timed out");
 }
 
 export async function promisePlayerDisconnected(player: Player): Promise<void> {

@@ -2,16 +2,23 @@
 return {
 	images = {
 		skins = {
+			snake_awesome_body = "rbxassetid://14884183308",
+			snake_awesome_head = "rbxassetid://14884183395",
 			snake_black_ice = "rbxassetid://14836390041",
-			snake_canada = "rbxassetid://14836252674",
+			snake_canada = "rbxassetid://14884212831",
 			snake_eye_left = "rbxassetid://14835197016",
 			snake_eye_right = "rbxassetid://14835197048",
 			snake_jelly = "rbxassetid://14835608619",
 			snake_jelly_blue = "rbxassetid://14836431074",
 			snake_jelly_red = "rbxassetid://14836431136",
-			snake_main = "rbxassetid://14835436639",
-			snake_outlined = "rbxassetid://14836208386",
-			snake_stars = "rbxassetid://14836247469",
+			snake_main = "rbxassetid://14884217464",
+			snake_no_eye = "rbxassetid://14883700305",
+			snake_outlined = "rbxassetid://14884183614",
+			snake_stare_body = "rbxassetid://14884183698",
+			snake_stare_head = "rbxassetid://14884183771",
+			snake_stars = "rbxassetid://14884212936",
+			snake_vamp_body = "rbxassetid://14884117497",
+			snake_vamp_head = "rbxassetid://14884117564",
 		},
 		ui = {
 			alert_dismiss = "rbxassetid://14402269904",
