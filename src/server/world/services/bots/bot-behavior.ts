@@ -66,6 +66,7 @@ export class BotBehavior {
 
 		const candy = target && getCandy(target.metadata.id);
 		if (!candy) {
+			this.idle(snake);
 			return;
 		}
 
