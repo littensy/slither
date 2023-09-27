@@ -1,34 +1,50 @@
-<div align="center">
-    <a href="https://www.roblox.com/games/14162747150/Slither">
-        <img src="assets/marketing/github_logo.png" alt="Slither Icon" width="256" />
-    </a>
-</div>
+<h3 align="center">
+    <img src="assets/marketing/github_logo.png" alt="Slither Icon" width="192" />
+    <br />
+    Slither
+</h3>
+
+<p align="center">
+    A casual game with a soothing Catppuccin color palette 🎨
+</p>
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" alt="Catppuccin Palette" width="400" />
+</p>
 
 <div align="center">
 
-# Slither 🐍
-
-A casual game with a soothing Catppuccin color palette 🎨
-
-[Game](https://www.roblox.com/games/14162747150)・[Group](https://www.roblox.com/groups/4918739)・[Discord](https://discord.gg/tyjBaP44sK)
-
-[![Play Game](https://img.shields.io/badge/play-00B06F?style=for-the-badge&logo=roblox)](https://www.roblox.com/games/14162747150)
-[![Play Game (Dev)](https://img.shields.io/badge/canary-gold?style=for-the-badge&logo=robloxstudio&logoColor=black)](https://www.roblox.com/games/14162328419)
-[![Litten's Games Group](https://img.shields.io/badge/litten's_games-C70039?style=for-the-badge&logo=roblox)](https://www.roblox.com/groups/4918739)
+[![Place Visits](https://img.shields.io/badge/plays-5k-a6da95?style=for-the-badge&logo=roblox&logoColor=d9e0ee&labelColor=302d41)](https://www.roblox.com/games/14162747150)
+[![Discord](https://img.shields.io/discord/1062844485282836522?style=for-the-badge&logo=discord&logoColor=d9e0ee&label=chat&labelColor=302d41&color=b7bdf8)](https://discord.gg/tyjBaP44sK)
+[![Join Group](https://img.shields.io/badge/group-join-f5bde6?style=for-the-badge&logo=roblox&logoColor=d9e0ee&labelColor=302d41)](https://www.roblox.com/groups/4918739)
 
 </div>
 
-## Attributions
+&nbsp;
 
--   🎨 [Catppuccin](https://catppuccin.com): Pastel color palette
--   🎧 [kenney.nl](https://kenney.nl): Interface sound effects
--   🐍 [slither.io](https://slither.io): Inspiration and concept
+## ❤️ Gratitude
 
-## Special Thanks
+This project is based on and heavily inspired by:
 
--   [@Inversion](https://github.com/neoinversion) for his help and contributions
+-   🎨 [Catppuccin](https://catppuccin.com): A community-driven pastel color palette
+-   🎧 [kenney.nl](https://kenney.nl): Thousands of free game assets
+-   🐍 [slither.io](https://slither.io): The inspiration and game concepts
+
+## 🧑‍💻 Contributors
+
+Special thanks to these contributors for making this possible:
+
+-   [@Inversion](https://github.com/neoinversion) for making awesome pull requests
 -   [@pashleyy](https://github.com/passhley) for the concept
 
-## License
+---
 
-This game is licensed under the [MIT License](LICENSE.md).
+<p align="center">
+Slither is released under the <a href="LICENSE.md">MIT License</a>.
+</p>
+
+<div align="center">
+
+[![MIT License](https://img.shields.io/badge/license-mit-f4dbd6?style=for-the-badge&labelColor=302d41)](LICENSE.md)
+
+</div>
