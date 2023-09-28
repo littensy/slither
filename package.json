@@ -1,6 +1,6 @@
 {
 	"name": "slither",
-	"version": "0.6.1",
+	"version": "1.0.0",
 	"license": "MIT",
 	"scripts": {
 		"lint": "yarn eslint src && yarn prettier --check src",
