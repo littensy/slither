@@ -2,12 +2,7 @@
 
 import { HttpService } from "@rbxts/services";
 import { getRandomAccent } from "shared/data/palette";
-import {
-	deserializeCandy,
-	deserializeCandyEntity,
-	serializeCandy,
-	serializeCandyEntity,
-} from "shared/serdes/handlers/serdes-candy";
+import { deserializeCandy, serializeCandy } from "shared/serdes/handlers/serdes-candy";
 import { CandyEntity, CandyState } from "shared/store/candy";
 
 export = () => {
@@ -32,10 +27,17 @@ export = () => {
 	}
 
 	it("should serialize an entity", () => {
-		const candy: CandyEntity = generateCandy();
-		const serialized = serializeCandyEntity(candy);
-		const deserialized = deserializeCandyEntity(serialized, candy.id);
-		assertCandyEqual(candy, deserialized);
+		const state: CandyState = {
+			"1": generateCandy("1"),
+		};
+
+		const serialized = serializeCandy(state);
+		const deserialized = deserializeCandy(serialized);
+
+		for (const [id, candy] of pairs(state)) {
+			expect(deserialized[id]).to.be.ok();
+			assertCandyEqual(candy, deserialized[id]!);
+		}
 	});
 
 	it("should serialize a record of entities", () => {
@@ -44,6 +46,7 @@ export = () => {
 			"2": generateCandy("2"),
 			"3": generateCandy("3"),
 		};
+
 		const serialized = serializeCandy(state);
 		const deserialized = deserializeCandy(serialized);
 
@@ -54,9 +57,15 @@ export = () => {
 	});
 
 	it("should compress the data", () => {
-		const candy = generateCandy();
-		const serialized = serializeCandyEntity(candy);
-		const json = HttpService.JSONEncode(candy);
+		const state: CandyState = {
+			"1": generateCandy("1"),
+			"2": generateCandy("2"),
+			"3": generateCandy("3"),
+		};
+
+		const serialized = serializeCandy(state);
+		const json = HttpService.JSONEncode(state);
+
 		expect(serialized.size() < json.size()).to.equal(true);
 	});
 };
