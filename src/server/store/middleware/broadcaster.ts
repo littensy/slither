@@ -14,8 +14,8 @@ export function broadcasterMiddleware(): ProducerMiddleware {
 
 	const broadcaster = createBroadcaster({
 		producers: slices,
-		dispatchRate: WORLD_TICK / 2,
-		hydrateRate: 30,
+		dispatchRate: WORLD_TICK,
+		hydrateRate: 60,
 		dispatch: (player, actions) => {
 			remotes.store.dispatch.fire(player, actions);
 		},
@@ -23,9 +23,10 @@ export function broadcasterMiddleware(): ProducerMiddleware {
 			remotes.store.hydrate.fire(player, state as unknown as SharedStateSerialized);
 		},
 		beforeHydrate: (player, state) => {
-			const serialized = serializeState(state) as unknown as SharedState;
+			const isInitialHydrate = !hydrated.has(player.UserId);
+			const serialized = serializeState(state, isInitialHydrate) as unknown as SharedState;
 
-			if (!hydrated.has(player.UserId)) {
+			if (isInitialHydrate) {
 				hydrated.add(player.UserId);
 				return serialized;
 			}
@@ -38,7 +39,7 @@ export function broadcasterMiddleware(): ProducerMiddleware {
 		},
 	});
 
-	remotes.store.start.connect(async (player) => {
+	remotes.store.start.connect((player) => {
 		broadcaster.start(player);
 	});
 

@@ -80,3 +80,13 @@ export function shuffle<T extends defined>(array: T[]): T[] {
 
 	return result;
 }
+
+export function countProperties(object: object): number {
+	let size = 0;
+
+	for (const _ of pairs(object)) {
+		size += 1;
+	}
+
+	return size;
+}

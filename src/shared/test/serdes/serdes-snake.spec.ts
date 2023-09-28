@@ -3,12 +3,7 @@
 import { shallowEqual } from "@rbxts/reflex";
 import { HttpService } from "@rbxts/services";
 import { getRandomBaseSnakeSkin } from "shared/data/skins";
-import {
-	deserializeSnakeEntity,
-	deserializeSnakes,
-	serializeSnakeEntity,
-	serializeSnakes,
-} from "shared/serdes/handlers/serdes-snake";
+import { deserializeSnakes, serializeSnakes } from "shared/serdes/handlers/serdes-snake";
 import { SnakeEntity, SnakesState } from "shared/store/snakes";
 import { fillArray } from "shared/utils/object-utils";
 
@@ -41,10 +36,17 @@ export = () => {
 	}
 
 	it("should serialize an entity", () => {
-		const snake: SnakeEntity = generateSnake();
-		const serialized = serializeSnakeEntity(snake);
-		const deserialized = deserializeSnakeEntity(serialized, snake.id);
-		assertSnakeEqual(snake, deserialized);
+		const state: SnakesState = {
+			"1": generateSnake("1"),
+		};
+
+		const serialized = serializeSnakes(state);
+		const deserialized = deserializeSnakes(serialized);
+
+		for (const [id, snake] of pairs(state)) {
+			expect(deserialized[id]).to.be.ok();
+			assertSnakeEqual(snake, deserialized[id]!);
+		}
 	});
 
 	it("should serialize a record of entities", () => {
@@ -53,6 +55,7 @@ export = () => {
 			"2": generateSnake("2"),
 			"3": generateSnake("3"),
 		};
+
 		const serialized = serializeSnakes(state);
 		const deserialized = deserializeSnakes(serialized);
 
@@ -63,9 +66,15 @@ export = () => {
 	});
 
 	it("should compress the data", () => {
-		const snake = generateSnake();
-		const serialized = serializeSnakeEntity(snake);
-		const json = HttpService.JSONEncode(snake);
+		const state: SnakesState = {
+			"1": generateSnake("1"),
+			"2": generateSnake("2"),
+			"3": generateSnake("3"),
+		};
+
+		const serialized = serializeSnakes(state);
+		const json = HttpService.JSONEncode(state);
+
 		expect(serialized.size() < json.size()).to.equal(true);
 	});
 };

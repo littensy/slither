@@ -21,7 +21,7 @@ import { useMockRemotes } from "../utils/use-mock-remotes";
 
 const START_SIZE = 0;
 const SIZE_INCREMENT = 100;
-const DEBUG_SIZES = [0, 500, 1000, 5000, 10000, 20000, 40000, 80000];
+const DEBUG_SIZES = [0, 500, 1000, 2500, 5000, 10000, 20000, 40000, 80000, 160000];
 
 function Debugger() {
 	const rem = useRem();
@@ -43,6 +43,7 @@ function Debugger() {
 				textYAlignment="Bottom"
 				position={new UDim2(0, rem(2), 1, rem(-2))}
 			/>
+
 			<Text
 				text={`Tracers: ${math.floor(description.length)}`}
 				textColor={palette.text}
@@ -50,9 +51,16 @@ function Debugger() {
 				textYAlignment="Bottom"
 				position={new UDim2(0, rem(2), 1, rem(-4))}
 			/>
+
 			<Group size={new UDim2(1, 0, 0.5, 0)}>
-				<uilistlayout FillDirection="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" />
-				{DEBUG_SIZES.map((score) => {
+				<uilistlayout
+					FillDirection="Horizontal"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					SortOrder="LayoutOrder"
+				/>
+
+				{DEBUG_SIZES.map((score, index) => {
 					const description = describeSnakeFromScore(score);
 					const diameter = rem(world.scale * description.radius * 2);
 
@@ -61,9 +69,13 @@ function Debugger() {
 							size={new UDim2(0, diameter, 0, diameter)}
 							backgroundColor={palette.red}
 							cornerRadius={new UDim(1, 0)}
+							layoutOrder={index}
 						>
 							<Text
-								text={`${score}\n${math.floor(description.length)}`}
+								text={`${score}\nl${math.floor(description.length)}\nd${string.format(
+									"%.2f",
+									description.radius,
+								)}`}
 								textColor={palette.crust}
 								textScaled
 								size={new UDim2(1, 0, 1, 0)}
