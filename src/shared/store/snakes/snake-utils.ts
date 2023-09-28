@@ -13,7 +13,7 @@ export function snakeIsBoosting(snake: SnakeEntity) {
 }
 
 export function describeSnakeFromScore(score: number): SnakeDescription {
-	const radius = math.max(math.log10(score / 500 + 1), 0.5);
+	const radius = math.max(0.7 * math.log10(score / 300 + 2), 0.5);
 
 	return {
 		radius,
