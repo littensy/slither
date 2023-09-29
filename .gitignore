@@ -7,3 +7,4 @@
 *.rbxlx
 .DS_Store
 .env
+mantle-output.json

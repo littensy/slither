@@ -1,5 +1,6 @@
 import { store } from "server/store";
-import { PREMIUM_BENEFIT } from "shared/constants";
+import { IS_CANARY, IS_EDIT, PREMIUM_BENEFIT } from "shared/constants";
+import { selectPlayerCountIsAbove } from "shared/store/snakes";
 
 export function grantMoney(player: Player, amount: number) {
 	if (player.MembershipType === Enum.MembershipType.Premium) {
@@ -7,7 +8,18 @@ export function grantMoney(player: Player, amount: number) {
 	} else {
 		amount = math.round(amount);
 	}
+
 	store.givePlayerBalance(player.Name, amount);
 
 	return amount;
+}
+
+export function shouldGrantReward() {
+	// TODO: use strict behavior once player count is stable
+	// return IS_CANARY || IS_EDIT || store.getState(selectPlayerCountIsAbove(5));
+	return true;
+}
+
+export function shouldGrantBadge() {
+	return IS_CANARY || IS_EDIT || store.getState(selectPlayerCountIsAbove(10));
 }

@@ -28,3 +28,11 @@ export async function promisePlayerDisconnected(player: Player): Promise<void> {
 
 	await Promise.fromEvent(Players.PlayerRemoving, (playerWhoLeft) => playerWhoLeft === player);
 }
+
+export function getPlayerByName(name: string) {
+	const player = Players.FindFirstChild(name);
+
+	if (player?.IsA("Player")) {
+		return player;
+	}
+}

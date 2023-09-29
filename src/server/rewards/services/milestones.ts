@@ -1,12 +1,7 @@
 import { store } from "server/store";
-import { IS_CANARY, IS_EDIT } from "shared/constants";
-import {
-	identifySnake,
-	selectPlayerCountIsAbove,
-	selectPlayerSnakesById,
-	selectSnakeRanking,
-	selectSnakeScore,
-} from "shared/store/snakes";
+import { identifySnake, selectPlayerSnakesById, selectSnakeRanking, selectSnakeScore } from "shared/store/snakes";
+
+import { shouldGrantReward } from "../utils";
 
 export async function initMilestoneService() {
 	store.observe(selectPlayerSnakesById, identifySnake, (snake) => {
@@ -16,13 +11,13 @@ export async function initMilestoneService() {
 
 function observePlayer(id: string) {
 	const unsubscribeRanking = store.subscribe(selectSnakeRanking(id), (ranking) => {
-		if (ranking !== undefined && shouldRewardMilestone()) {
+		if (ranking !== undefined && shouldGrantReward()) {
 			store.setMilestoneRank(id, ranking);
 		}
 	});
 
 	const unsubscribeScore = store.subscribe(selectSnakeScore(id), (score) => {
-		if (score !== undefined && shouldRewardMilestone()) {
+		if (score !== undefined && shouldGrantReward()) {
 			store.setMilestoneScore(id, score);
 		}
 	});
@@ -34,8 +29,4 @@ function observePlayer(id: string) {
 		unsubscribeScore();
 		store.removeMilestone(id);
 	};
-}
-
-function shouldRewardMilestone() {
-	return IS_CANARY || IS_EDIT || store.getState(selectPlayerCountIsAbove(5));
 }
