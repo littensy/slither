@@ -9,6 +9,10 @@ permissions:
   contents: write
   packages: write
 
+concurrency:
+  group: production_environment
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
