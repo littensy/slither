@@ -40,7 +40,7 @@ export const milestoneSlice = createProducer(initialState, {
 	clearMilestoneKillScore: (state, playerId: string) => {
 		return mapProperty(state, playerId, (milestone) => ({
 			...milestone,
-			killedScore: undefined,
+			lastKilled: undefined,
 		}));
 	},
 
