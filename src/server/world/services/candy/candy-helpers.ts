@@ -99,10 +99,12 @@ export function dropCandyWhileBoosting(id: string) {
 			store.addCandy(candy);
 		};
 
+		store.incrementSnakeScore(id, 4);
+
 		return setInterval(() => {
 			store.incrementSnakeScore(id, random.NextInteger(-4, -1));
 			dropCandy();
-		}, 0.2);
+		}, 0.15);
 	});
 }
 
