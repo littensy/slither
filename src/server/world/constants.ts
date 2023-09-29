@@ -9,7 +9,7 @@ export const CANDY_TICK_PHASE = 0.33 * WORLD_TICK;
 export const COLLISION_TICK_PHASE = 0.66 * WORLD_TICK;
 
 export const CANDY_LIMITS: { readonly [K in CandyType]: number } = {
-	[CandyType.Default]: 4096,
+	[CandyType.Default]: 3072,
 	[CandyType.Dropping]: 256,
 	[CandyType.Loot]: 384,
 };
