@@ -31,8 +31,8 @@ export function Home() {
 					HorizontalAlignment="Right"
 					FillDirection="Horizontal"
 				/>
-				<MuteButton />
 				<SpectateButton />
+				<MuteButton />
 			</Group>
 		</>
 	);
