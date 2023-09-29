@@ -16,6 +16,14 @@ export const selectWorldSubject = (state: RootState) => {
 	return state.world.subject;
 };
 
+export const selectWorldSpectating = (state: RootState) => {
+	return state.world.spectating;
+};
+
+export const selectSnakeSpectated = (state: RootState) => {
+	return state.snakes[state.world.spectating];
+};
+
 export const selectSnakeFromWorldSubject = (state: RootState) => {
 	return state.snakes[state.world.subject];
 };

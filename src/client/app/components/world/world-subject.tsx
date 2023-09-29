@@ -2,24 +2,27 @@ import { useInterval } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { useStore } from "client/app/hooks";
-import { selectLocalSnake, selectTopSnake } from "shared/store/snakes";
+import { selectSnakeSpectated } from "client/store/world";
+import { cycleNextSnake, selectLocalSnake } from "shared/store/snakes";
 
 export function WorldSubject() {
 	const store = useStore();
-	const localSnake = useSelector(selectLocalSnake);
-	const topSnake = useSelector(selectTopSnake);
+	const snakeClient = useSelector(selectLocalSnake);
+	const snakeSpectated = useSelector(selectSnakeSpectated);
 
 	useEffect(() => {
-		if (localSnake) {
-			store.setWorldSubject(localSnake.id);
+		if (snakeClient) {
+			store.setWorldSubject(snakeClient.id);
+		} else if (snakeSpectated) {
+			store.setWorldSubject(snakeSpectated.id);
 		}
-	}, [localSnake?.id, topSnake?.id]);
+	}, [snakeClient?.id, snakeSpectated?.id]);
 
 	useInterval(() => {
-		if (!localSnake && topSnake) {
-			store.setWorldSubject(topSnake.id);
+		if (!snakeSpectated) {
+			store.setWorldSpectating(store.getState(cycleNextSnake("")));
 		}
-	}, 2);
+	}, 1);
 
 	return <></>;
 }

@@ -7,13 +7,7 @@ import { fonts } from "client/app/utils/fonts";
 import { selectMusicEnabled } from "client/store/menu";
 import { palette } from "shared/data/palette";
 
-interface MuteButtonProps {
-	readonly anchorPoint: Vector2;
-	readonly size: UDim2;
-	readonly position: UDim2;
-}
-
-export function MuteButton({ anchorPoint, size, position }: MuteButtonProps) {
+export function MuteButton() {
 	const rem = useRem();
 	const store = useStore();
 	const musicEnabled = useSelector(selectMusicEnabled);
@@ -21,11 +15,8 @@ export function MuteButton({ anchorPoint, size, position }: MuteButtonProps) {
 	return (
 		<AwesomeButton
 			onClick={() => store.setMenuMusic(!musicEnabled)}
-			overlayGradient={new ColorSequence(musicEnabled ? palette.blue : palette.maroon)}
-			overlayTransparency={0.5}
-			anchorPoint={anchorPoint}
-			size={size}
-			position={position}
+			overlayGradient={new ColorSequence(musicEnabled ? palette.lavender : palette.maroon)}
+			size={new UDim2(0, rem(4), 0, rem(4))}
 		>
 			<Text
 				key="caption"
