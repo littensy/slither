@@ -15,7 +15,7 @@ export function MuteButton() {
 	return (
 		<AwesomeButton
 			onClick={() => store.setMenuMusic(!musicEnabled)}
-			overlayGradient={new ColorSequence(musicEnabled ? palette.lavender : palette.maroon)}
+			overlayGradient={new ColorSequence(musicEnabled ? palette.text : palette.maroon)}
 			size={new UDim2(0, rem(4), 0, rem(4))}
 		>
 			<Text

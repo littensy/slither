@@ -29,8 +29,9 @@ export const CandyItem = memo<CandyItemProps>(({ variant, size, point, color, ea
 
 	const { position, glow, transparency } = useMemo(() => {
 		const position = timer.value.map((t) => {
-			const x = 4 * math.noise(t, seed);
-			const y = 4 * math.noise(-seed, t);
+			const noiseMultiplier = 1 - transition.getValue();
+			const x = 4 * noiseMultiplier * math.noise(t, seed);
+			const y = 4 * noiseMultiplier * math.noise(-seed, t);
 			const point = pointSmooth.getValue();
 			const scale = worldScale.getValue();
 

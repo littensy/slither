@@ -24,7 +24,7 @@ export function SpectateButton() {
 	return (
 		<AwesomeButton
 			onClick={onClick.run}
-			overlayGradient={new ColorSequence(palette.green, palette.teal)}
+			overlayGradient={new ColorSequence(palette.text)}
 			size={new UDim2(0, rem(4), 0, rem(4))}
 		>
 			<Text key="caption" font={fonts.inter.medium} text="🎥" textSize={rem(2)} size={new UDim2(1, 0, 1, 0)} />

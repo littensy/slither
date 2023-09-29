@@ -38,7 +38,7 @@ export function Indicator({ colors, order }: IndicatorProps) {
 
 	useEffect(() => {
 		const x = map(currentIndex, 0, 2, -8, 8);
-		positionMotion.spring(x);
+		positionMotion.spring(x, { tension: 240, friction: 25, mass: 1.5 });
 	}, [page, rem]);
 
 	useEffect(() => {

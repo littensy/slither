@@ -1,15 +1,15 @@
 import { useThrottleCallback } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact from "@rbxts/roact";
+import Roact, { useEffect } from "@rbxts/roact";
 import { useInputDevice, useStore } from "client/app/hooks";
 import { REMOTE_TICK, WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
 import { selectLocalSnake } from "shared/store/snakes";
 
-import { Gamepad } from "./gamepad";
-import { Mouse } from "./mouse";
-import { Touch } from "./touch";
-import { useToggleTouchControls } from "./use-toggle-touch-controls";
+import { Gamepad } from "./controllers/gamepad";
+import { Mouse } from "./controllers/mouse";
+import { Touch } from "./controllers/touch";
+import { useToggleTouchControls } from "./utils/use-toggle-touch-controls";
 
 export function Controller() {
 	const store = useStore();
@@ -32,6 +32,12 @@ export function Controller() {
 		},
 		{ wait: WORLD_TICK, leading: true, trailing: true },
 	);
+
+	useEffect(() => {
+		if (snake) {
+			store.setWorldInputAngle(0);
+		}
+	}, [!snake]);
 
 	if (!snake) {
 		return <></>;

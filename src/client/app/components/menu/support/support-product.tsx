@@ -156,7 +156,7 @@ export function SupportProduct({
 						text={productTitle}
 						textSize={rem(4.5)}
 						textColor={palette.base}
-						position={new UDim2(0.5, 0, 0.5, 0)}
+						size={new UDim2(1, 0, 1, 0)}
 					/>
 
 					<Text
@@ -166,7 +166,7 @@ export function SupportProduct({
 						textSize={rem(1.25)}
 						textColor={palette.base}
 						textYAlignment="Bottom"
-						position={new UDim2(0.5, 0, 1, 0)}
+						size={new UDim2(1, 0, 1, 0)}
 					/>
 
 					{productDiscount !== undefined && (
@@ -178,7 +178,7 @@ export function SupportProduct({
 							textSize={rem(1.25)}
 							textColor={palette.base}
 							textYAlignment="Top"
-							position={new UDim2(0.5, 0, 0, 0)}
+							size={new UDim2(1, 0, 1, 0)}
 						/>
 					)}
 				</Group>

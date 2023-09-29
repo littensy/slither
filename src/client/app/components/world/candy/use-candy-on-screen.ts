@@ -5,7 +5,7 @@ import { useRem } from "client/app/hooks";
 import { CandyEntity, selectCandiesById } from "shared/store/candy";
 import { Grid } from "shared/utils/grid";
 
-const MARGIN = 4;
+const MARGIN = 8;
 
 export function useCandyOnScreen(offset: Vector2, scale: number) {
 	const rem = useRem();

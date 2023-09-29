@@ -133,24 +133,14 @@ hash = "64020170b0236890947e4ea28e15592699351f7d9d9a3825b05b030fb8a3d3f0"
 id = 14120569384
 packable = false
 
-[inputs."assets/images/ui/nav_flower.png"]
-hash = "408047cea3e847801d1f6a4e6d3d696ea30dceb90e26c9b9f5589c35c1f1cf5d"
-id = 14183568377
-packable = false
-
-[inputs."assets/images/ui/nav_flower_alt.png"]
-hash = "667ef91dca6628ba363be23aa44825d461a8cf18f00cc7e907f8d3317d8eb248"
-id = 14183568458
-packable = false
-
 [inputs."assets/images/ui/nav_heart.png"]
 hash = "7d3d964b46383cd6a6134c3a95fb9c473d23140e7a3c74317f736cda98e64069"
 id = 14183565399
 packable = false
 
 [inputs."assets/images/ui/nav_heart_alt.png"]
-hash = "ebc51faabac2e627f7c7a0dd05b0700c426389fb44fc91c2d074fcab62642efe"
-id = 14183565469
+hash = "c5ef63cad11ff4eb160fe0024f46fd479d1cd04996c49364f172c47964b3b24e"
+id = 14916522329
 packable = false
 
 [inputs."assets/images/ui/nav_home.png"]
@@ -161,6 +151,16 @@ packable = false
 [inputs."assets/images/ui/nav_home_alt.png"]
 hash = "ca351de75ba52f1bc7798f46e6ca173ef3a4d6c95d1d6b3413faff6a930e3a40"
 id = 14183565737
+packable = false
+
+[inputs."assets/images/ui/nav_skins.png"]
+hash = "ff92c83ed23a25fdd0dff665d9b13e76d2d7406f8dfc54499dfbedeb9a797317"
+id = 14916522483
+packable = false
+
+[inputs."assets/images/ui/nav_skins_alt.png"]
+hash = "ea9e2ea0b3acb8bba7bcc0c23888114514f8c1538926491b759e3ed01adc7ada"
+id = 14916522599
 packable = false
 
 [inputs."assets/images/ui/skin_card_gradient.png"]
