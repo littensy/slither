@@ -10,6 +10,8 @@ import { Indicator } from "./indicator";
 export function Navigation() {
 	const rem = useRem();
 
+	let index = 0;
+
 	return (
 		<Group size={new UDim2(1, 0, 0, rem(7.5))}>
 			<Indicator
@@ -35,7 +37,7 @@ export function Navigation() {
 					color={palette.red}
 					icon={images.ui.nav_heart}
 					iconAlt={images.ui.nav_heart_alt}
-					order={0}
+					order={index++}
 				/>
 
 				<Destination
@@ -45,7 +47,7 @@ export function Navigation() {
 					color={palette.mauve}
 					icon={images.ui.nav_home}
 					iconAlt={images.ui.nav_home_alt}
-					order={1}
+					order={index++}
 				/>
 
 				<Destination
@@ -53,9 +55,9 @@ export function Navigation() {
 					page="skins"
 					label="Skins"
 					color={palette.blue}
-					icon={images.ui.nav_flower}
-					iconAlt={images.ui.nav_flower_alt}
-					order={2}
+					icon={images.ui.nav_skins}
+					iconAlt={images.ui.nav_skins_alt}
+					order={index++}
 				/>
 			</Group>
 		</Group>

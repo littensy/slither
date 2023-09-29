@@ -2,6 +2,7 @@ import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Frame } from "client/app/common/frame";
+import { Group } from "client/app/common/group";
 import { Image } from "client/app/common/image";
 import { Outline } from "client/app/common/outline";
 import { ReactiveButton } from "client/app/common/reactive-button";
@@ -29,7 +30,7 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 	const [transition, transitionMotion] = useMotion(0);
 
 	useEffect(() => {
-		transitionMotion.spring(isPage ? 1 : 0, springs.stiff);
+		transitionMotion.spring(isPage ? 1 : 0, springs.responsive);
 	}, [isPage]);
 
 	return (
@@ -59,7 +60,9 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 
 			<Outline
 				key="outline"
-				outlineTransparency={lerpBinding(transition, 1, 0)}
+				outlineTransparency={lerpBinding(transition, 1, 0.5)}
+				innerThickness={rem(4, "pixel")}
+				outerThickness={rem(2, "pixel")}
 				innerColor={color}
 				cornerRadius={new UDim(0, rem(1))}
 			/>
@@ -74,15 +77,21 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 				position={lerpBinding(transition, new UDim2(0.5, 0, 0.5, 0), new UDim2(0.5, 0, 0.5, rem(-0.75)))}
 			/>
 
-			<Text
-				key="label"
-				font={fonts.rubik.medium}
-				text={label.upper()}
-				textColor={lerpBinding(transition, palette.text, color)}
-				textSize={rem(1.25)}
-				textTransparency={lerpBinding(transition, 1, 0.2)}
-				position={lerpBinding(transition, new UDim2(0.5, 0, 0.5, rem(0.75)), new UDim2(0.5, 0, 0.5, rem(1)))}
-			/>
+			<Group key="label-container" clipsDescendants>
+				<Text
+					key="label"
+					font={fonts.inter.bold}
+					text={label}
+					textColor={lerpBinding(transition, palette.text, color)}
+					textSize={rem(1.2)}
+					textTransparency={lerpBinding(transition, 1, 0.2)}
+					position={lerpBinding(
+						transition,
+						new UDim2(0.5, 0, 0.5, rem(4)),
+						new UDim2(0.5, 0, 0.5, rem(1.25)),
+					)}
+				/>
+			</Group>
 		</ReactiveButton>
 	);
 }
