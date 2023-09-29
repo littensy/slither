@@ -1,4 +1,3 @@
-import { Players } from "@rbxts/services";
 import { setInterval } from "@rbxts/set-timeout";
 import { store } from "server/store";
 import {
@@ -14,8 +13,9 @@ import { sounds } from "shared/assets";
 import { palette } from "shared/data/palette";
 import { remotes } from "shared/remotes";
 import { describeSnakeFromScore, selectSnakeRanking } from "shared/store/snakes";
+import { getPlayerByName } from "shared/utils/player-utils";
 
-import { grantMoney } from "../utils";
+import { grantMoney, shouldGrantReward } from "../utils";
 
 const SCORE_REWARDS: { readonly [K in ScoreMilestone]: number } = {
 	1_000: 20,
@@ -42,18 +42,18 @@ const RANK_REWARDS_PASSIVE: { readonly [ranking: number]: number | undefined } =
 };
 
 export async function initRewardService() {
-	store.observe(selectMilestones, identifyMilestone, (milestone, id) => {
-		return observeRewards(id);
+	store.observe(selectMilestones, identifyMilestone, (_, id) => {
+		return observeMilestone(id);
 	});
 }
 
-function observeRewards(id: string) {
+function observeMilestone(id: string) {
 	// When the player hits a new top ranking they haven't hit
 	// during their current life, grant them a reward
 	const unsubscribeRanking = store.subscribe(selectMilestoneRanking(id), (ranking = 0) => {
 		const reward = RANK_REWARDS[ranking];
 
-		if (reward !== undefined) {
+		if (reward !== undefined && shouldGrantReward()) {
 			grantMoneyReward(id, reward, `making <font color="#fff">top ${ranking}</font>`);
 		}
 	});
@@ -63,7 +63,7 @@ function observeRewards(id: string) {
 	const unsubscribeScore = store.subscribe(selectMilestoneScore(id), (score) => {
 		const reward = score && SCORE_REWARDS[score];
 
-		if (reward !== undefined) {
+		if (reward !== undefined && shouldGrantReward()) {
 			grantMoneyReward(id, reward, `hitting a score of <font color="#fff">${score}</font>`);
 		}
 	});
@@ -73,7 +73,7 @@ function observeRewards(id: string) {
 	const unsubscribeKill = store.observeWhile(selectMilestoneLastKilled(id), (enemyId) => {
 		const enemy = getSnake(enemyId);
 
-		if (enemy) {
+		if (enemy && shouldGrantReward()) {
 			const length = describeSnakeFromScore(enemy.score).length;
 			const bounty = math.floor(length / 2);
 			grantMoneyReward(id, bounty, `defeating <font color="#fff">${enemy.name}</font>`);
@@ -92,7 +92,7 @@ function observeRewards(id: string) {
 				const rank = store.getState(selectSnakeRanking(id)) ?? 0;
 				const reward = RANK_REWARDS_PASSIVE[rank];
 
-				if (reward !== undefined) {
+				if (reward !== undefined && shouldGrantReward()) {
 					grantMoneyReward(id, reward, `staying in the <font color="#fff">top ${rank}</font>`);
 				}
 			}, 180);
@@ -108,9 +108,9 @@ function observeRewards(id: string) {
 }
 
 function grantMoneyReward(id: string, amount: number, reason: string) {
-	const player = Players.FindFirstChild(id);
+	const player = getPlayerByName(id);
 
-	if (!player?.IsA("Player")) {
+	if (!player) {
 		return;
 	}
 

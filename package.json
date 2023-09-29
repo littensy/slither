@@ -11,7 +11,9 @@
 		"build:dev": "rm -rf out && yarn compile && rojo build --output place.rbxlx",
 		"build:prod": "rm -rf out && cross-env NODE_ENV=production yarn compile && rojo build --output place.rbxlx",
 		"deploy:dev": "yarn build:dev && mantle deploy --environment canary",
-		"deploy:prod": "yarn build:prod && mantle deploy --environment production"
+		"deploy:prod": "yarn build:prod && mantle deploy --environment production",
+		"output:dev": "mantle outputs --environment canary > mantle-output.json",
+		"output:prod": "mantle outputs --environment production > mantle-output.json"
 	},
 	"devDependencies": {
 		"@rbxts/compiler-types": "^2.1.1-types.0",

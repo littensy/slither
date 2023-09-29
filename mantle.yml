@@ -70,6 +70,37 @@ target:
           maxPlayerCount: 25
     assets:
       - assets/sounds/*
+    badges:
+      1-score-25000:
+        name: ✨ 25,000 Score
+        description: Nothing can stop you now! Hit a score of 25,000.
+        icon: assets/badges/score_25000.png
+        enabled: true
+      2-score-50000:
+        name: 🔥 50,000 Score
+        description: You're on track to becoming the loooooongest. Hit a score of 50,000.
+        icon: assets/badges/score_50000.png
+        enabled: true
+      3-score-100000:
+        name: 🚀 100,000 Score
+        description: You're breaking records! Hit a score of 100,000.
+        icon: assets/badges/score_100000.png
+        enabled: true
+      4-3rd-place:
+        name: 🥉 3rd Place
+        description: You reached 3rd place in a big server!
+        icon: assets/badges/third_place.png
+        enabled: true
+      5-2nd-place:
+        name: 🥈 2nd Place
+        description: You reached 2nd place in a big server!
+        icon: assets/badges/second_place.png
+        enabled: true
+      6-1st-place:
+        name: 🏆 1st Place
+        description: You're in the lead... for now! Get 1st place in a big server.
+        icon: assets/badges/first_place.png
+        enabled: true
     products:
       money-100:
         price: 10
