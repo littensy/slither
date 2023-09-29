@@ -1,6 +1,6 @@
 import Roact, { useEffect } from "@rbxts/roact";
 
-import { useTouchMove } from "./use-touch-move";
+import { useTouchMove } from "../utils/use-touch-move";
 
 interface TouchProps {
 	readonly updateAngle: (angle: number) => void;
