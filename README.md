@@ -28,7 +28,7 @@ This project is based on and heavily inspired by:
 
 -   🎨 [Catppuccin](https://catppuccin.com): A community-driven pastel color palette
 -   🎧 [kenney.nl](https://kenney.nl): Thousands of free game assets
--   🐍 [Microsoft Fluent Emoji](https://github.com/microsoft/fluentui-emoji): A collection of emoji, used in badges
+-   😜 [Microsoft Fluent Emoji](https://github.com/microsoft/fluentui-emoji): A collection of emoji, used in badges
 
 ## 🧑‍💻 Contributors
 
