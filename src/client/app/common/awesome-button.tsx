@@ -62,10 +62,16 @@ export function AwesomeButton({
 			<Frame
 				key="background"
 				backgroundColor={palette.white}
-				backgroundTransparency={lerpBinding(hover, 0.1, 0)}
 				cornerRadius={new UDim(0, rem(1))}
 				size={new UDim2(1, 0, 1, 0)}
-			/>
+			>
+				<uigradient
+					key="background-gradient"
+					Offset={lerpBinding(hover, new Vector2(), new Vector2(0, 1))}
+					Rotation={90}
+					Transparency={new NumberSequence(0, 0.1)}
+				/>
+			</Frame>
 
 			<Outline key="outline" cornerRadius={new UDim(0, rem(1))} innerTransparency={0} />
 
