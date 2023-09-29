@@ -3,11 +3,13 @@ import { createProducer } from "@rbxts/reflex";
 export interface WorldState {
 	readonly subject: string;
 	readonly spectating: string;
+	readonly inputAngle: number;
 }
 
 const initialState: WorldState = {
 	subject: "",
 	spectating: "",
+	inputAngle: 0,
 };
 
 export const worldSlice = createProducer(initialState, {
@@ -19,5 +21,10 @@ export const worldSlice = createProducer(initialState, {
 	setWorldSpectating: (state, spectating: string) => ({
 		...state,
 		spectating,
+	}),
+
+	setWorldInputAngle: (state, inputAngle: number) => ({
+		...state,
+		inputAngle,
 	}),
 });
