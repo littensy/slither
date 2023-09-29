@@ -82,7 +82,7 @@ export function dropCandyWhileBoosting(id: string) {
 			}
 
 			const description = describeSnakeFromScore(snake.score);
-			const tail = snake.tracers[snake.tracers.size() - 1];
+			const tail = snake.tracers[snake.tracers.size() - 1] || snake.head;
 
 			if (tail.sub(previousTail).Magnitude < description.radius * 2) {
 				return;
