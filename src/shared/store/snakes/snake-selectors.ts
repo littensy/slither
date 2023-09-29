@@ -12,6 +12,17 @@ export const identifySnake = (snake: SnakeEntity) => {
 	return snake.id;
 };
 
+export const cycleNextSnake = (currentId: string) => (state: SharedState) => {
+	const snakes = selectSnakesSorted((a, b) => a.score > b.score)(state);
+	const index = snakes.findIndex((snake) => snake.id === currentId);
+
+	if (index !== -1) {
+		return snakes[(index + 1) % snakes.size()]?.id;
+	} else {
+		return snakes[0]?.id;
+	}
+};
+
 export const selectSnakesById = (state: SharedState) => {
 	return state.snakes;
 };
