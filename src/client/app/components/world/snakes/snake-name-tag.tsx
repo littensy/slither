@@ -145,7 +145,7 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 				text={name}
 				textSize={rem(1.5)}
 				textColor={minBrightness(tint, 0.5)}
-				position={new UDim2(0.5, 0, 0.5, 0)}
+				size={new UDim2(1, 0, 1, 0)}
 				change={{
 					TextBounds: (rbx) => {
 						nameSizeMotion.spring(rbx.TextBounds, springs.responsive);
