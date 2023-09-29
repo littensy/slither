@@ -28,6 +28,7 @@ return {
 			circle = "rbxassetid://14120516288",
 			heart = "rbxassetid://14789182848",
 			heart_glow = "rbxassetid://14789182940",
+			leader_pointer = "rbxassetid://14917242400",
 			map_crosshair = "rbxassetid://14127467312",
 			map_cursor = "rbxassetid://14127465927",
 			menu_title = "rbxassetid://14120569384",

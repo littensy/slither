@@ -118,6 +118,11 @@ hash = "8498cfac2c85d6b8dea5b650ca12e479f57bd1c298f322a132a232185cde866c"
 id = 14789182940
 packable = false
 
+[inputs."assets/images/ui/leader_pointer.png"]
+hash = "bf9bbfcac07db2ce7b20db172c335e7d8ec3c1790907bf37e7a9f36d76d2d98c"
+id = 14917242400
+packable = false
+
 [inputs."assets/images/ui/map_crosshair.png"]
 hash = "cf91f362ff6af65cf1aaa1c1f05681001fdc2d7af9a71c1f9162100e6a400a76"
 id = 14127467312

@@ -5,6 +5,7 @@ import { CanvasOrFrame } from "client/app/common/canvas-or-frame";
 import { useMotion } from "client/app/hooks";
 import { selectWorldSubject } from "client/store/world";
 
+import { Compass } from "./compass";
 import { Minimap } from "./minimap";
 
 export function Game() {
@@ -21,7 +22,8 @@ export function Game() {
 			backgroundTransparency={1}
 			size={new UDim2(1, 0, 1, 0)}
 		>
-			<Minimap />
+			<Minimap key="minimap" />
+			<Compass key="compass" />
 		</CanvasOrFrame>
 	);
 }

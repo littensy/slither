@@ -40,5 +40,6 @@ export const images: {
 		readonly skin_indicator_locked: string;
 		readonly vignette: string;
 		readonly tile_stripes: string;
+		readonly leader_pointer: string;
 	};
 };
