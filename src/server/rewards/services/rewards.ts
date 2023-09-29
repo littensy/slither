@@ -75,8 +75,8 @@ function observeMilestone(id: string) {
 
 		if (enemy && shouldGrantReward()) {
 			const length = describeSnakeFromScore(enemy.score).length;
-			const bounty = math.floor(length / 2);
-			grantMoneyReward(id, bounty, `defeating <font color="#fff">${enemy.name}</font>`);
+			const bounty = math.ceil(length / 3);
+			grantMoneyReward(id, bounty, `eliminating <font color="#fff">${enemy.name}</font>`);
 		}
 
 		store.clearMilestoneKillScore(id);

@@ -77,32 +77,32 @@ export function dropCandyWhileBoosting(id: string) {
 		const dropCandy = () => {
 			const snake = getSnake(id);
 
-			if (!snake) {
-				return;
+			if (snake) {
+				const description = describeSnakeFromScore(snake.score);
+				const tail: Vector2 | undefined = snake.tracers[snake.tracers.size() - 1];
+
+				if (tail && tail.sub(previousTail).Magnitude > description.radius * 2) {
+					previousTail = tail;
+					store.addCandy(createCandy({ position: tail, type: CandyType.Dropping }));
+				}
 			}
-
-			const description = describeSnakeFromScore(snake.score);
-			const tail = snake.tracers[snake.tracers.size() - 1] || snake.head;
-
-			if (tail.sub(previousTail).Magnitude < description.radius * 2) {
-				return;
-			}
-
-			previousTail = tail;
-
-			const candy = createCandy({
-				size: random.NextInteger(1, 5),
-				position: tail,
-				type: CandyType.Dropping,
-			});
-
-			store.addCandy(candy);
 		};
 
+		const decrementScore = () => {
+			const snake = getSnake(id);
+
+			if (snake) {
+				const maxDecrease = math.clamp(math.round(3 + 0.001 * snake.score), 2, 10);
+				store.incrementSnakeScore(id, random.NextInteger(-maxDecrease, -1));
+			}
+		};
+
+		decrementScore();
+
 		return setInterval(() => {
-			store.incrementSnakeScore(id, random.NextInteger(-4, -1));
+			decrementScore();
 			dropCandy();
-		}, 0.2);
+		}, 0.15);
 	});
 }
 
