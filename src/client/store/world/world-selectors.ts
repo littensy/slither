@@ -24,6 +24,12 @@ export const selectSnakeSpectated = (state: RootState) => {
 	return state.snakes[state.world.spectating];
 };
 
+export const selectWorldInputAngle = (isClient = true) => {
+	return (state: RootState) => {
+		return isClient ? state.world.inputAngle : 0;
+	};
+};
+
 export const selectSnakeFromWorldSubject = (state: RootState) => {
 	return state.snakes[state.world.subject];
 };

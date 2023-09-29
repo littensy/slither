@@ -1,6 +1,7 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { memo, useMemo } from "@rbxts/roact";
 import { selectSkinOverride } from "client/store/menu";
+import { LOCAL_USER } from "shared/constants";
 import { describeSnakeFromScore } from "shared/store/snakes";
 
 import { SnakeHead } from "./snake-head";
@@ -60,6 +61,7 @@ function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }:
 					skinId={skin}
 					offsetSmooth={offsetSmooth}
 					isSubject={snake.id === subject}
+					isClient={snake.id === LOCAL_USER}
 				>
 					<SnakeNameTag
 						key="name-tag"

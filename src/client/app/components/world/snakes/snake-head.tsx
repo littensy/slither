@@ -1,9 +1,11 @@
+import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo, useState } from "@rbxts/roact";
 import { setTimeout } from "@rbxts/set-timeout";
 import { Group } from "client/app/common/group";
 import { Image } from "client/app/common/image";
 import { useContinuousAngle, useMotion, useRem } from "client/app/hooks";
 import { springs } from "client/app/utils/springs";
+import { selectWorldInputAngle } from "client/store/world";
 import { getSnakeSkin, getSnakeSkinForTracer } from "shared/data/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 
@@ -19,6 +21,7 @@ interface SnakeHeadProps extends Roact.PropsWithChildren {
 	readonly skinId: string;
 	readonly offsetSmooth: Roact.Binding<Vector2>;
 	readonly isSubject: boolean;
+	readonly isClient: boolean;
 }
 
 export function SnakeHead({
@@ -29,8 +32,15 @@ export function SnakeHead({
 	skinId,
 	offsetSmooth,
 	isSubject,
+	isClient,
 	children,
 }: SnakeHeadProps) {
+	const inputAngle = useSelectorCreator(selectWorldInputAngle, isClient);
+
+	if (isClient) {
+		desiredAngle = inputAngle;
+	}
+
 	const skin = getSnakeSkin(skinId);
 	const tracerSkin = getSnakeSkinForTracer(skinId, 0);
 
