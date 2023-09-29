@@ -1,6 +1,6 @@
 import { useThrottleCallback } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact from "@rbxts/roact";
+import Roact, { useEffect } from "@rbxts/roact";
 import { useInputDevice, useStore } from "client/app/hooks";
 import { REMOTE_TICK, WORLD_TICK } from "shared/constants";
 import { remotes } from "shared/remotes";
@@ -32,6 +32,12 @@ export function Controller() {
 		},
 		{ wait: WORLD_TICK, leading: true, trailing: true },
 	);
+
+	useEffect(() => {
+		if (snake) {
+			store.setWorldInputAngle(0);
+		}
+	}, [!snake]);
 
 	if (!snake) {
 		return <></>;
