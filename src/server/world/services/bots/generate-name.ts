@@ -344,9 +344,14 @@ const nouns = [
 	"Zebra",
 ];
 
-export function generateBotName() {
-	const adjective = adjectives[math.random(0, adjectives.size() - 1)];
-	const noun = nouns[math.random(0, nouns.size() - 1)];
+const emojis = ["🤖", "🖥️", "💻", "🖨️"];
 
-	return `${adjective} ${noun}`;
+export function generateBotName() {
+	const random = new Random();
+
+	const adjective = adjectives[random.NextInteger(0, adjectives.size() - 1)];
+	const noun = nouns[random.NextInteger(0, nouns.size() - 1)];
+	const emoji = emojis[random.NextInteger(0, emojis.size() - 1)];
+
+	return `${emoji} ${adjective} ${noun}`;
 }
