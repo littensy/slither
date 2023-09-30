@@ -11,7 +11,7 @@ export function VoiceCamera() {
 	const snake = useSelector(selectSnakeFromWorldSubject);
 
 	const getCameraCFrame = (position: Vector2) => {
-		const origin = toRealSpace(position).Position.add(new Vector3(0, 12, 0));
+		const origin = toRealSpace(position).Position;
 		return CFrame.lookAt(origin, origin.add(new Vector3(0, -1, 0)), new Vector3(0, 0, -1));
 	};
 
