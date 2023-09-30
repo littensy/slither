@@ -22,7 +22,7 @@ return {
 		},
 		ui = {
 			alert_dismiss = "rbxassetid://14402269904",
-			backdrop = "rbxassetid://14136965139",
+			backdrop = "rbxassetid://14921324346",
 			blur = "rbxassetid://14120516187",
 			button_glow_top = "rbxassetid://14367671668",
 			circle = "rbxassetid://14120516288",

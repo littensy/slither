@@ -6,6 +6,12 @@ export async function initCharacterService() {
 		character.HumanoidRootPart.SetNetworkOwner(undefined);
 		character.HumanoidRootPart.Anchored = true;
 		character.Humanoid.SetStateEnabled(Enum.HumanoidStateType.Dead, false);
+
+		for (const part of character.GetDescendants()) {
+			if (part.IsA("BasePart") || part.IsA("Decal")) {
+				part.Transparency = 1;
+			}
+		}
 	}
 
 	Players.PlayerAdded.Connect((player) => {

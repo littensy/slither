@@ -1,4 +1,4 @@
-import { Players } from "@rbxts/services";
+import { Players, RunService } from "@rbxts/services";
 
 import { getTextChatCommands } from "./utils";
 
@@ -14,7 +14,7 @@ export async function createCommand(alias: string, handler: (player: Player, arg
 	command.Triggered.Connect((origin, unfilteredText) => {
 		const player = Players.GetPlayerByUserId(origin.UserId);
 
-		if (player && ADMINS.has(origin.UserId)) {
+		if (player && (ADMINS.has(origin.UserId) || RunService.IsStudio())) {
 			const argument = unfilteredText.sub(2 + alias.size());
 			handler(player, argument);
 		}

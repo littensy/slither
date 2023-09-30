@@ -47,6 +47,8 @@ target:
       enableStudioAccessToApis: true
       avatarType: playerChoice
       avatarAnimationType: playerChoice
+    spatialVoice:
+      enabled: true
     places:
       start:
         file: place.rbxlx
