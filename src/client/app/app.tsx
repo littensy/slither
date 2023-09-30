@@ -9,6 +9,7 @@ import { Menu } from "./components/menu";
 import { Music } from "./components/music";
 import { Preloader } from "./components/preloader";
 import { Stats } from "./components/stats";
+import { Voice } from "./components/voice";
 import { World } from "./components/world";
 
 export function App() {
@@ -16,6 +17,7 @@ export function App() {
 		<ErrorHandler>
 			<Music />
 			<Preloader />
+			<Voice />
 
 			<Root>
 				<Controller />
