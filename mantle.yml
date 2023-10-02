@@ -24,6 +24,9 @@ environments:
               🚧  Proceed with caution: You may encounter bugs, data resets, and instability.
               🔥  Take a look at upcoming features before they're shipped to production.
               🤝  Send your feedback to the group wall or the linked socials!
+
+              🏷️  Slither is released under the MIT License
+              🫶  Source code is available on GitHub: littensy/slither
             maxPlayerCount: 50
   - label: production
     branches: [main]
@@ -67,6 +70,9 @@ target:
 
             Please like ❤️ and favorite ⭐️ if you enjoyed Slither!
             Follow 🔔 to be notified of new updates!
+
+            🏷️  Slither is released under the MIT License
+            🫶  Source code is available on GitHub: littensy/slither
           maxPlayerCount: 25
     assets:
       - assets/sounds/*
