@@ -20,6 +20,7 @@ export interface SnakeEntity {
 	readonly tracers: readonly Vector2[];
 	readonly skin: string;
 	readonly dead: boolean;
+	readonly eliminations: number;
 }
 
 // Used to prevent tracers from overlapping
@@ -36,6 +37,7 @@ const defaultEntity: SnakeEntity = {
 	tracers: [],
 	skin: "",
 	dead: false,
+	eliminations: 0,
 };
 
 const initialState: SnakesState = {};
@@ -142,6 +144,13 @@ export const snakesSlice = createProducer(initialState, {
 		return mapProperty(state, id, (snake) => ({
 			...snake,
 			score: math.max(snake.score + amount, 0),
+		}));
+	},
+
+	incrementSnakeEliminations: (state, id: string) => {
+		return mapProperty(state, id, (snake) => ({
+			...snake,
+			eliminations: snake.eliminations + 1,
 		}));
 	},
 });
