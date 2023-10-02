@@ -24,6 +24,7 @@ export function onCollisionTick() {
 		if (enemy) {
 			killSnake(snake.id);
 			store.playerKilledSnake(enemy.id, snake.id);
+			store.incrementSnakeEliminations(enemy.id);
 		}
 	}
 }

@@ -76,7 +76,7 @@ function observeMilestone(id: string) {
 		if (enemy && shouldGrantReward()) {
 			const length = describeSnakeFromScore(enemy.score).length;
 			const bounty = math.ceil(length / 3);
-			grantMoneyReward(id, bounty, `eliminating <font color="#fff">${enemy.name}</font>`);
+			grantMoneyReward(id, bounty, `eliminating <font color="#fff">${enemy.name}</font>`, true);
 		}
 
 		store.clearMilestoneKillScore(id);
@@ -107,7 +107,7 @@ function observeMilestone(id: string) {
 	};
 }
 
-function grantMoneyReward(id: string, amount: number, reason: string) {
+function grantMoneyReward(id: string, amount: number, reason: string, immediate = false) {
 	const player = getPlayerByName(id);
 
 	if (!player) {
@@ -118,7 +118,7 @@ function grantMoneyReward(id: string, amount: number, reason: string) {
 
 	// Delay the alert so that it doesn't appear at the same time as
 	// other alerts
-	Promise.delay(0.5).then(() => {
+	Promise.delay(immediate ? 0 : 0.5).then(() => {
 		remotes.client.alert.fire(player, {
 			scope: "money",
 			emoji: "💵",

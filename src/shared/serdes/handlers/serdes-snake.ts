@@ -20,6 +20,7 @@ export function serializeSnakes(state: SnakesState): string {
 		writeArray(buffer, snake.tracers, writeVector2);
 		buffer.WriteString(snake.skin);
 		buffer.WriteBool(snake.dead);
+		buffer.WriteUInt(16, snake.eliminations);
 	}
 
 	return buffer.ToString();
@@ -44,6 +45,7 @@ export function deserializeSnakes(data: string): SnakesState {
 			tracers: readArray(buffer, readVector2),
 			skin: buffer.ReadString(),
 			dead: buffer.ReadBool(),
+			eliminations: buffer.ReadUInt(16),
 		};
 	}
 

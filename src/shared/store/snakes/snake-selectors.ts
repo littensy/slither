@@ -69,8 +69,12 @@ export const selectLocalSnake = (state: SharedState) => {
 	return state.snakes[LOCAL_USER];
 };
 
-export const selectLocalSnakeScore = (state: SharedState) => {
+export const selectLocalScore = (state: SharedState) => {
 	return state.snakes[LOCAL_USER]?.score;
+};
+
+export const selectLocalEliminations = (state: SharedState) => {
+	return state.snakes[LOCAL_USER]?.eliminations;
 };
 
 export const selectHasLocalSnake = (state: SharedState) => {

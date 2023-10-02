@@ -2,13 +2,13 @@ import { useViewport } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { Group } from "client/app/common/group";
 import { useOrientation, usePremium, useRem } from "client/app/hooks";
+import { formatInteger } from "client/app/utils/format-integer";
 import { DevProduct } from "shared/assets";
 import { PREMIUM_BENEFIT } from "shared/constants";
 import { palette } from "shared/data/palette";
 
 import { SupportHeart } from "./support-heart";
 import { SupportProduct } from "./support-product";
-import { formatInteger } from "./utils";
 
 export function SupportProducts() {
 	const rem = useRem();

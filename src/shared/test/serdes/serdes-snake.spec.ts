@@ -20,6 +20,7 @@ export = () => {
 			tracers: fillArray(10, () => new Vector2(math.random(), math.random())),
 			skin: getRandomBaseSnakeSkin().id,
 			dead: math.random() > 0.5,
+			eliminations: math.random(1, 100),
 		};
 	}
 
