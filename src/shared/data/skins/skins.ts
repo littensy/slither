@@ -6,7 +6,7 @@ import { SnakeSkin } from "../skins";
 import { defaultSnakeSkin } from "./types";
 import { blendColorSequence, duplicate } from "./utils";
 
-export const baseSnakeSkins: readonly SnakeSkin[] = accentList.map((id) => {
+const catppuccinSnakeSkins: readonly SnakeSkin[] = accentList.map((id) => {
 	return {
 		...defaultSnakeSkin,
 		id,
@@ -15,7 +15,7 @@ export const baseSnakeSkins: readonly SnakeSkin[] = accentList.map((id) => {
 });
 
 export const snakeSkins: readonly SnakeSkin[] = [
-	...baseSnakeSkins,
+	...catppuccinSnakeSkins,
 
 	{
 		...defaultSnakeSkin,
@@ -55,6 +55,22 @@ export const snakeSkins: readonly SnakeSkin[] = [
 		...defaultSnakeSkin,
 		id: "france",
 		price: 100,
+		tint: [
+			palette.blue,
+			palette.blue,
+			palette.offwhite,
+			palette.offwhite,
+			palette.red,
+			palette.red,
+			palette.offwhite,
+			palette.offwhite,
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "mexico",
+		price: 100,
 		tint: [palette.blue, palette.blue, palette.offwhite, palette.offwhite, palette.red, palette.red],
 	},
 
@@ -81,29 +97,296 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
+		id: "brazil",
+		price: 100,
+		tint: [palette.green, palette.green, palette.yellow, palette.yellow, palette.blue, palette.blue],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "australia",
+		price: 100,
+		tint: [
+			palette.blue,
+			palette.blue,
+			palette.blue,
+			palette.white,
+			palette.white,
+			palette.offwhite,
+			palette.red,
+			palette.red,
+			palette.offwhite,
+		],
+		texture: [
+			images.skins.snake_main,
+			images.skins.snake_main,
+			images.skins.snake_main,
+			images.skins.snake_stars,
+			images.skins.snake_stars,
+			images.skins.snake_main,
+			images.skins.snake_main,
+			images.skins.snake_main,
+			images.skins.snake_main,
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "finland",
+		price: 100,
+		tint: [palette.offwhite, palette.offwhite, palette.offwhite, palette.blue],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "norway",
+		price: 100,
+		tint: [palette.red, palette.red, palette.offwhite, palette.blue, palette.blue],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "denmark",
+		price: 100,
+		tint: [palette.red, palette.red, palette.offwhite],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "sweden",
+		price: 100,
+		tint: [palette.blue, palette.blue, palette.yellow],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "poland",
+		price: 100,
+		tint: [palette.offwhite, palette.offwhite, palette.red, palette.red],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "czech",
+		price: 100,
+		tint: [
+			palette.offwhite,
+			palette.offwhite,
+			palette.offwhite,
+			palette.blue,
+			palette.blue,
+			palette.red,
+			palette.red,
+			palette.red,
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "hungary",
+		price: 100,
+		tint: [palette.red, palette.red, palette.offwhite, palette.offwhite, palette.green, palette.green],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "south-africa",
+		price: 100,
+		tint: [
+			palette.red,
+			palette.red,
+			palette.offwhite,
+			palette.green,
+			palette.green,
+			palette.yellow,
+			palette.crust,
+			palette.crust,
+			palette.yellow,
+			palette.green,
+			palette.green,
+			palette.offwhite,
+			palette.blue,
+			palette.blue,
+			palette.offwhite,
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#ed5352"),
+			Color3.fromHex("#ef8c3d"),
+			Color3.fromHex("#f8c654"),
+			Color3.fromHex("#7cb788"),
+			Color3.fromHex("#4b98cb"),
+			Color3.fromHex("#bc59be"),
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "bi-pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#ea4689"),
+			Color3.fromHex("#ea4689"),
+			Color3.fromHex("#ea4689"),
+			Color3.fromHex("#b08dfb"),
+			Color3.fromHex("#3059bb"),
+			Color3.fromHex("#3059bb"),
+			Color3.fromHex("#3059bb"),
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "pan-pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#ea4689"),
+			Color3.fromHex("#ea4689"),
+			Color3.fromHex("#f4c757"),
+			Color3.fromHex("#f4c757"),
+			Color3.fromHex("#60b4ea"),
+			Color3.fromHex("#60b4ea"),
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "lesbian-pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#e86366"),
+			Color3.fromHex("#e58f3f"),
+			Color3.fromHex("#e8ba64"),
+			Color3.fromHex("#fcfffe"),
+			Color3.fromHex("#d2a8cd"),
+			Color3.fromHex("#b95bbd"),
+			Color3.fromHex("#862b6b"),
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "ace-pride",
+		price: 100,
+		tint: [palette.base, Color3.fromHex("#bcb6ba"), Color3.fromHex("#fcfffe"), Color3.fromHex("#b95bbd")],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "aro-pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#78b88b"),
+			Color3.fromHex("#a3dbb2"),
+			Color3.fromHex("#fcfffe"),
+			Color3.fromHex("#bcb6ba"),
+			palette.base,
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "agender-pride",
+		price: 100,
+		tint: [
+			palette.base,
+			Color3.fromHex("#bcb6ba"),
+			Color3.fromHex("#fcfffe"),
+			Color3.fromHex("#78b88b"),
+			Color3.fromHex("#fcfffe"),
+			Color3.fromHex("#bcb6ba"),
+			palette.base,
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "genderfluid-pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#e88599"),
+			Color3.fromHex("#fcfffe"),
+			Color3.fromHex("#b95bbd"),
+			palette.base,
+			Color3.fromHex("#2c5bbb"),
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "genderqueer-pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#b85cb9"),
+			Color3.fromHex("#b85cb9"),
+			Color3.fromHex("#fcfffe"),
+			Color3.fromHex("#fcfffe"),
+			Color3.fromHex("#79b78a"),
+			Color3.fromHex("#79b78a"),
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "trans-pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#94c8e5"),
+			Color3.fromHex("#f5cfc8"),
+			Color3.fromHex("#fcfffe"),
+			Color3.fromHex("#f5cfc8"),
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "nonbinary-pride",
+		price: 100,
+		tint: [Color3.fromHex("#f4c757"), Color3.fromHex("#fcfffe"), Color3.fromHex("#b95bbd"), palette.base],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "intersex-pride",
+		price: 100,
+		tint: [
+			Color3.fromHex("#f6c754"),
+			Color3.fromHex("#f6c754"),
+			Color3.fromHex("#f6c754"),
+			Color3.fromHex("#b95bbd"),
+		],
+	},
+
+	{
+		...defaultSnakeSkin,
 		id: "peppermint",
-		price: 200,
+		price: 150,
 		tint: [palette.red, palette.red, palette.offwhite, palette.offwhite],
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "candycorn",
-		price: 250,
+		price: 150,
 		tint: [palette.yellow, palette.yellow, palette.peach, palette.peach, palette.offwhite],
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "zebra",
-		price: 300,
+		price: 250,
 		tint: [palette.overlay0, palette.text],
 	},
 
 	{
 		...defaultSnakeSkin,
 		id: "honeybee",
-		price: 450,
+		price: 350,
 		tint: [palette.mantle, palette.mantle, palette.yellow],
 	},
 
@@ -167,7 +450,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 				palette.blue,
 				palette.mauve,
 			],
-			18,
+			30,
 		),
 		primary: Color3.fromRGB(186, 51, 84),
 		secondary: Color3.fromRGB(217, 97, 125),
@@ -261,3 +544,7 @@ export const snakeSkins: readonly SnakeSkin[] = [
 		secondary: palette.crust,
 	},
 ];
+
+export const baseSnakeSkins = snakeSkins.filter((skin) => {
+	return skin.price === 0;
+});
