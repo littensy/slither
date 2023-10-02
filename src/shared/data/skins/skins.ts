@@ -69,13 +69,6 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
-		id: "mexico",
-		price: 100,
-		tint: [palette.blue, palette.blue, palette.offwhite, palette.offwhite, palette.red, palette.red],
-	},
-
-	{
-		...defaultSnakeSkin,
 		id: "germany",
 		price: 100,
 		tint: [palette.surface1, palette.surface1, palette.red, palette.red, palette.yellow, palette.yellow],
@@ -90,9 +83,9 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
-		id: "estonia",
+		id: "mexico",
 		price: 100,
-		tint: [palette.blue, palette.blue, palette.surface1, palette.surface1, palette.offwhite, palette.offwhite],
+		tint: [palette.blue, palette.blue, palette.offwhite, palette.offwhite, palette.red, palette.red],
 	},
 
 	{
@@ -128,6 +121,13 @@ export const snakeSkins: readonly SnakeSkin[] = [
 			images.skins.snake_main,
 			images.skins.snake_main,
 		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "estonia",
+		price: 100,
+		tint: [palette.blue, palette.blue, palette.surface1, palette.surface1, palette.offwhite, palette.offwhite],
 	},
 
 	{
@@ -179,6 +179,13 @@ export const snakeSkins: readonly SnakeSkin[] = [
 			palette.red,
 			palette.red,
 		],
+	},
+
+	{
+		...defaultSnakeSkin,
+		id: "ukraine",
+		price: 100,
+		tint: [palette.blue, palette.blue, palette.blue, palette.yellow, palette.yellow, palette.yellow],
 	},
 
 	{
