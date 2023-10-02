@@ -41,7 +41,7 @@ export function Mouse({ updateAngle, setBoost }: MouseProps) {
 	return (
 		<InputCapture
 			onInputChanged={(frame, input) => {
-				if (input.UserInputType !== Enum.UserInputType.MouseMovement) {
+				if (input.UserInputType !== Enum.UserInputType.MouseMovement || !keysDown.isEmpty()) {
 					return;
 				}
 
@@ -50,19 +50,15 @@ export function Mouse({ updateAngle, setBoost }: MouseProps) {
 				const angle = math.atan2(direction.Y, direction.X);
 
 				updateAngle(angle);
-
-				if (!keysDown.isEmpty()) {
-					setKeysDown([]);
-				}
 			}}
-			onInputBegan={(frame, input) => {
+			onInputBegan={(_, input) => {
 				if (KEY_CODES.has(input.KeyCode) || KEY_CODES.has(input.UserInputType)) {
 					setBoost(true);
 				} else if (MOVE_DIRECTIONS.has(input.KeyCode) && !keysDown.includes(input.KeyCode)) {
 					setKeysDown((keysDown) => [input.KeyCode, ...keysDown]);
 				}
 			}}
-			onInputEnded={(frame, input) => {
+			onInputEnded={(_, input) => {
 				if (KEY_CODES.has(input.KeyCode) || KEY_CODES.has(input.UserInputType)) {
 					setBoost(false);
 				} else if (MOVE_DIRECTIONS.has(input.KeyCode)) {
