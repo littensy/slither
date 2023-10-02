@@ -57,18 +57,16 @@ target:
           description: |
             A casual game with a soothing pastel color palette 🎨
 
-            Eat candy 🍬 and grow to become the largest in the game!
-            Eliminate ❌ your opponents with your tail, but don't bump into them!
-
-            🏆  Compete against other players for the highest score!
+            🐍  Eat candy and compete to become the largest in the game!
+            ☠️  Eliminate your opponents with your tail!
             🎨  Unlock new skins to customize your character!
             💎  Have Premium? Enjoy a 20% bonus towards money you earn 💸
 
+            🎮  Use the MOUSE or THUMBSTICK to turn 💫
+            🎮  Hold JUMP or TAP to boost 🚀
+
             Please like ❤️ and favorite ⭐️ if you enjoyed Slither!
             Follow 🔔 to be notified of new updates!
-
-            🎮  Use the MOUSE or THUMBSTICK to control your body 💫
-            🎮  Hold JUMP or TOUCH to boost 🚀
           maxPlayerCount: 25
     assets:
       - assets/sounds/*
