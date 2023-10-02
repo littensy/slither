@@ -1,14 +1,10 @@
 import { createProducer } from "@rbxts/reflex";
 import { mapProperty } from "shared/utils/object-utils";
 
+import { PlayerSave } from "./save-types";
+
 export interface SaveState {
 	readonly [id: string]: PlayerSave | undefined;
-}
-
-export interface PlayerSave {
-	readonly balance: number;
-	readonly skins: readonly string[];
-	readonly skin: string;
 }
 
 const initialState: SaveState = {};

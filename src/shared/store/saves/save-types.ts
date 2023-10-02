@@ -1,12 +1,16 @@
 import { t } from "@rbxts/t";
 import { baseSnakeSkins } from "shared/data/skins";
 
-import { PlayerSave } from "./save-slice";
+export interface PlayerSave {
+	readonly balance: number;
+	readonly skins: readonly string[];
+	readonly skin: string;
+}
 
 export const RANDOM_SKIN = "__random__";
 
 export const defaultPlayerSave: PlayerSave = {
-	balance: 0,
+	balance: 100,
 	skins: [RANDOM_SKIN, ...baseSnakeSkins.map((skin) => skin.id)],
 	skin: RANDOM_SKIN,
 };

@@ -44,8 +44,8 @@ export function Alert({ alert, index }: AlertProps) {
 
 	const style = useMemo(() => {
 		const highlight = composeBindings(hover, transition, (a, b) => a * b);
-		const background = darken(alert.color.Lerp(palette.base, 0.25), 0.5);
-		const backgroundSecondary = darken(alert.colorSecondary?.Lerp(palette.base, 0.25) || palette.white, 0.5);
+		const background = darken(alert.color.Lerp(palette.base, 0.25), 0.8);
+		const backgroundSecondary = darken(alert.colorSecondary?.Lerp(palette.base, 0.25) || palette.white, 0.8);
 		const message = brightenIfDark(alert.colorMessage || alert.color);
 
 		return { highlight, background, backgroundSecondary, message };
