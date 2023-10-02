@@ -8,7 +8,8 @@ import { useMotion, useRem } from "client/app/hooks";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { selectSnakeFromWorldSubject } from "client/store/world";
 import { images } from "shared/assets";
-import { selectTopSnake } from "shared/store/snakes";
+
+import { useLeader } from "./utils";
 
 const ANGLE_FIX = math.rad(-90);
 const MIN_RANGE = 20;
@@ -16,8 +17,8 @@ const MIN_RANGE = 20;
 export function Compass() {
 	const rem = useRem();
 	const viewport = useViewport();
+	const leader = useLeader();
 	const subject = useSelector(selectSnakeFromWorldSubject);
-	const leader = useSelector(selectTopSnake);
 
 	const [displacement, displacementMotion] = useMotion(new Vector2());
 	const [visible, visibleMotion] = useMotion(0);
