@@ -44,7 +44,7 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 	}, [rem]);
 
 	useEffect(() => {
-		transparencyMotion.spring(enabled ? 0 : 0.5, springs.slow);
+		transparencyMotion.spring(enabled ? 0 : 0.75, springs.slow);
 	}, [enabled]);
 
 	return (
@@ -119,7 +119,7 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 
 				<Text
 					key="value"
-					font={fonts.rubik.regular}
+					font={fonts.inter.regular}
 					text={value}
 					textColor={palette.white}
 					textTransparency={0.05}

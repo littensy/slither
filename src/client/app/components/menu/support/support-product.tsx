@@ -152,7 +152,7 @@ export function SupportProduct({
 				>
 					<Text
 						key="title"
-						font={fonts.rubik.semibold}
+						font={fonts.inter.bold}
 						text={productTitle}
 						textSize={rem(4.5)}
 						textColor={palette.base}
@@ -161,7 +161,7 @@ export function SupportProduct({
 
 					<Text
 						key="subtitle"
-						font={fonts.rubik.medium}
+						font={fonts.inter.bold}
 						text={productSubtitle}
 						textSize={rem(1.25)}
 						textColor={palette.base}
@@ -173,7 +173,7 @@ export function SupportProduct({
 						<Text
 							key="discount"
 							richText
-							font={fonts.rubik.medium}
+							font={fonts.inter.bold}
 							text={productDiscount}
 							textSize={rem(1.25)}
 							textColor={palette.base}
