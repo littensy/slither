@@ -8,6 +8,7 @@ import { Text } from "client/app/common/text";
 import { useMotion, useRem } from "client/app/hooks";
 import { composeBindings } from "client/app/utils/compose-bindings";
 import { fonts } from "client/app/utils/fonts";
+import { formatInteger } from "client/app/utils/format-integer";
 import { springs } from "client/app/utils/springs";
 import { selectMenuCurrentSkin } from "client/store/menu";
 import { sounds } from "shared/assets";
@@ -16,15 +17,25 @@ import { palette } from "shared/data/palette";
 import { findSnakeSkin } from "shared/data/skins";
 import { remotes } from "shared/remotes";
 import { RANDOM_SKIN, selectCurrentPlayerSkin, selectPlayerBalance, selectPlayerSkins } from "shared/store/saves";
-import { brighten } from "shared/utils/color-utils";
+import { darken } from "shared/utils/color-utils";
 
 interface Status {
 	readonly variant: "buy" | "not-enough-money" | "wear" | "wearing" | "none";
 	readonly price?: number;
 }
 
-const darkGreen = brighten(palette.green, -3);
-const darkRed = brighten(palette.red, -3);
+const darkGreen = darken(palette.green, 0.5, 0.5);
+const darkRed = darken(palette.red, 0.25, 0.5);
+const darkBlue = darken(palette.blue, 0.25, 0.5);
+const darkPeach = darken(palette.peach, 0.25, 0.5);
+
+function stylize(text: unknown, color: Color3) {
+	if (text === `"${RANDOM_SKIN}"`) {
+		text = '"random"';
+	}
+
+	return `<font color="#${color.ToHex()}">${text}</font>`;
+}
 
 function getStatus(equipped: string, current: string, inventory: readonly string[] = [], balance = 0): Status {
 	const equippedSkin = findSnakeSkin(equipped);
@@ -47,11 +58,11 @@ function getStatus(equipped: string, current: string, inventory: readonly string
 
 export function ActButton() {
 	const rem = useRem();
-	const equipped = useSelectorCreator(selectCurrentPlayerSkin, LOCAL_USER) ?? RANDOM_SKIN;
-	const current = useSelector(selectMenuCurrentSkin);
+	const equippedSkin = useSelectorCreator(selectCurrentPlayerSkin, LOCAL_USER) ?? RANDOM_SKIN;
+	const currentSkin = useSelector(selectMenuCurrentSkin);
 	const inventory = useSelectorCreator(selectPlayerSkins, LOCAL_USER);
 	const balance = useSelectorCreator(selectPlayerBalance, LOCAL_USER);
-	const status = getStatus(equipped, current, inventory, balance);
+	const status = getStatus(equippedSkin, currentSkin, inventory, balance);
 
 	const [primary, primaryMotion] = useMotion(new Color3());
 	const [secondary, secondaryMotion] = useMotion(new Color3());
@@ -75,14 +86,14 @@ export function ActButton() {
 		gradientSpinMotion.spring(gradientSpin.getValue() + 180, springs.molasses);
 
 		if (status.variant === "buy") {
-			remotes.save.buySkin.fire(current);
+			remotes.save.buySkin.fire(currentSkin);
 		} else if (status.variant === "wear") {
-			remotes.save.setSkin.fire(current);
+			remotes.save.setSkin.fire(currentSkin);
 		} else if (status.variant === "not-enough-money") {
 			sendAlert({
 				emoji: "🚨",
 				color: palette.red,
-				message: `Sorry, you cannot afford the <font color="#fff">${current}</font> skin yet.`,
+				message: `Sorry, you cannot afford the ${stylize(currentSkin, palette.white)} skin yet.`,
 				sound: sounds.alert_bad,
 			});
 		}
@@ -112,13 +123,16 @@ export function ActButton() {
 
 	const text =
 		status.variant === "buy"
-			? `💵  Buy for <font color="#${darkGreen.ToHex()}">$${status.price}</font>`
+			? `💵  Buy ${stylize(`"${currentSkin}"`, darkGreen)} for ${stylize(
+					"$" + formatInteger(status.price),
+					darkGreen,
+			  )}`
 			: status.variant === "wear"
-			? "🎨  Wear"
+			? `🎨  Wear ${stylize(`"${currentSkin}"`, darkBlue)}`
 			: status.variant === "wearing"
-			? "🎨  Wearing"
+			? `🎨  Wearing ${stylize(`"${currentSkin}"`, darkPeach)}`
 			: status.variant === "not-enough-money"
-			? `🔒  Costs <font color="#${darkRed.ToHex()}">$${status.price}</font>`
+			? `🔒  ${stylize(`"${currentSkin}"`, darkRed)} costs ${stylize("$" + formatInteger(status.price), darkRed)}`
 			: "🔒  Locked";
 
 	return (

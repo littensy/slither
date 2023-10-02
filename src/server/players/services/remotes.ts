@@ -44,7 +44,7 @@ export async function initRemoteService() {
 				colorMessage: skin?.primary || skin?.tint[0] || palette.mauve,
 				message:
 					skinId === RANDOM_SKIN
-						? "You are now wearing a random skin!"
+						? 'You are now wearing a <font color="#fff">random</font> skin!'
 						: `You are now wearing the <font color="#fff">${skinId}</font> skin!`,
 			});
 		} else {

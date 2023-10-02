@@ -1,5 +1,6 @@
 import { hoarcekat, useMountEffect } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
+import { Alerts } from "client/app/components/alerts";
 import { Menu } from "client/app/components/menu";
 import { World } from "client/app/components/world";
 import { RootProvider } from "client/app/providers/root-provider";
@@ -14,16 +15,14 @@ export = hoarcekat(() => {
 
 	useMountEffect(() => {
 		store.setMenuPage("skins");
-		store.setPlayerSave(LOCAL_USER, {
-			...defaultPlayerSave,
-			balance: 45,
-		});
+		store.setPlayerSave(LOCAL_USER, defaultPlayerSave);
 	});
 
 	return (
 		<RootProvider>
 			<World />
 			<Menu />
+			<Alerts />
 		</RootProvider>
 	);
 });
