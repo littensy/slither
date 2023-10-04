@@ -1,5 +1,6 @@
+import { useInterval } from "@rbxts/pretty-react-hooks";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
+import Roact, { useRef } from "@rbxts/roact";
 import { selectSnakeById } from "shared/store/snakes";
 import { Character } from "shared/utils/player-utils";
 
@@ -12,18 +13,16 @@ interface VoiceCharacterProps {
 
 export function VoiceCharacter({ player, model }: VoiceCharacterProps) {
 	const snake = useSelectorCreator(selectSnakeById, player.Name);
+	const hidden = useRef<Model>();
 
-	useEffect(() => {
+	useInterval(() => {
 		if (snake) {
 			model.PivotTo(toRealSpace(snake.head));
-		}
-	}, [snake]);
-
-	useEffect(() => {
-		if (!snake) {
+		} else if (hidden.current !== model) {
 			model.PivotTo(new CFrame(100, 200, 100));
+			hidden.current = model;
 		}
-	}, [!snake]);
+	}, 0.2);
 
 	return <></>;
 }
