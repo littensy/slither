@@ -1,5 +1,5 @@
 import { store } from "server/store";
-import { IS_CANARY, IS_EDIT, PREMIUM_BENEFIT } from "shared/constants";
+import { IS_CANARY, IS_EDIT, PREMIUM_BENEFIT } from "shared/constants/core";
 import { selectPlayerCountIsAbove } from "shared/store/snakes";
 
 export function grantMoney(player: Player, amount: number) {

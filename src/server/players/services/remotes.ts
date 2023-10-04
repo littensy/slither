@@ -1,7 +1,7 @@
 import { store } from "server/store";
 import { sounds } from "shared/assets";
-import { palette } from "shared/data/palette";
-import { findSnakeSkin } from "shared/data/skins";
+import { palette } from "shared/constants/palette";
+import { findSnakeSkin } from "shared/constants/skins";
 import { remotes } from "shared/remotes";
 import { RANDOM_SKIN, selectPlayerBalance, selectPlayerSkins } from "shared/store/saves";
 

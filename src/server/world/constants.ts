@@ -1,4 +1,4 @@
-import { WORLD_TICK } from "shared/constants";
+import { WORLD_TICK } from "shared/constants/core";
 import { CandyType } from "shared/store/candy";
 
 // The world updates every world tick, which is less than the server's

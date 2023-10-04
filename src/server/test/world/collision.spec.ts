@@ -2,7 +2,7 @@
 
 import { store } from "server/store";
 import { getSnake, onCollisionTick, onSnakeTick } from "server/world";
-import { WORLD_BOUNDS } from "shared/constants";
+import { WORLD_BOUNDS } from "shared/constants/core";
 
 export = () => {
 	it("should kill snake on collision", () => {

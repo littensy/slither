@@ -1,5 +1,5 @@
 import { createProducer } from "@rbxts/reflex";
-import { SNAKE_BOOST_SPEED, SNAKE_SPEED, WORLD_TICK } from "shared/constants";
+import { SNAKE_BOOST_SPEED, SNAKE_SPEED, WORLD_TICK } from "shared/constants/core";
 import { map, turnRadians } from "shared/utils/math-utils";
 import { mapProperties, mapProperty } from "shared/utils/object-utils";
 

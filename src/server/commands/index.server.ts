@@ -1,5 +1,6 @@
+import { createBot } from "server/bots";
 import { store } from "server/store";
-import { createBot, getSnake, killSnake } from "server/world";
+import { getSnake, killSnake } from "server/world";
 import { defaultPlayerSave } from "shared/store/saves";
 import { selectSnakes } from "shared/store/snakes";
 

@@ -1,6 +1,6 @@
 import Object from "@rbxts/object-utils";
 import { createSelector, shallowEqual } from "@rbxts/reflex";
-import { LOCAL_USER } from "shared/constants";
+import { USER_NAME } from "shared/constants/core";
 import { SharedState } from "shared/store";
 import { mapProperties } from "shared/utils/object-utils";
 import { getPlayerByName } from "shared/utils/player-utils";
@@ -66,19 +66,19 @@ export const selectPlayerCountIsAbove = (count: number) => {
 };
 
 export const selectLocalSnake = (state: SharedState) => {
-	return state.snakes[LOCAL_USER];
+	return state.snakes[USER_NAME];
 };
 
 export const selectLocalScore = (state: SharedState) => {
-	return state.snakes[LOCAL_USER]?.score;
+	return state.snakes[USER_NAME]?.score;
 };
 
 export const selectLocalEliminations = (state: SharedState) => {
-	return state.snakes[LOCAL_USER]?.eliminations;
+	return state.snakes[USER_NAME]?.eliminations;
 };
 
 export const selectHasLocalSnake = (state: SharedState) => {
-	return LOCAL_USER in state.snakes;
+	return USER_NAME in state.snakes;
 };
 
 export const selectSnakes = createSelector(selectSnakesById, (snakesById) => {
@@ -157,7 +157,7 @@ export const selectSnakeRanking = (id: string) => {
 	});
 };
 
-export const selectLocalSnakeRanking = selectSnakeRanking(LOCAL_USER);
+export const selectLocalSnakeRanking = selectSnakeRanking(USER_NAME);
 
 export const selectRankForDisplay = (state: SharedState) => {
 	const ranking = selectLocalSnakeRanking(state);

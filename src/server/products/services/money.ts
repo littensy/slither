@@ -1,6 +1,6 @@
 import { grantMoney } from "server/rewards";
 import { DevProduct, sounds } from "shared/assets";
-import { palette } from "shared/data/palette";
+import { palette } from "shared/constants/palette";
 import { remotes } from "shared/remotes";
 
 import { createProduct } from "./process-receipt";

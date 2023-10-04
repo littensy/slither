@@ -1,5 +1,5 @@
 import { COLLISION_TICK_PHASE } from "server/world/constants";
-import { WORLD_TICK } from "shared/constants";
+import { WORLD_TICK } from "shared/constants/core";
 import { createScheduler } from "shared/utils/scheduler";
 
 import { onCollisionTick } from "./collision-tick";

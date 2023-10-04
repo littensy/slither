@@ -10,7 +10,7 @@ import {
 } from "server/store/milestones";
 import { getSnake } from "server/world";
 import { sounds } from "shared/assets";
-import { palette } from "shared/data/palette";
+import { palette } from "shared/constants/palette";
 import { remotes } from "shared/remotes";
 import { describeSnakeFromScore, selectSnakeRanking } from "shared/store/snakes";
 import { getPlayerByName } from "shared/utils/player-utils";

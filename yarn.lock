@@ -121,12 +121,11 @@
   resolved "https://registry.yarnpkg.com/@rbxts/object-utils/-/object-utils-1.0.4.tgz#c53d80f89e75c401365446be63fa1396bc2cffe7"
   integrity sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==
 
-"@rbxts/pretty-react-hooks@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.2.1.tgz#2ab8325855f78a1b95f9bb2098617e88e2fbed9d"
-  integrity sha512-lCBWb1nV2SaeZHOQACco6t9yPxmAt+8Rr4zMgDJQIk+tHDPJ6QVqyCGHodNC4+lQki3lEGxvMHq+RLLcr7YpEQ==
+"@rbxts/pretty-react-hooks@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.3.2.tgz#9cc3f0823ccaf911771ce5a006e3acbc9ed62559"
+  integrity sha512-/3O/LC8y+WdXDOnMQPbk61IrqRRU1+Uqk74X+1CJpnZXq3NOl7AuCI8q0jfL0ZZXroMGIfScg2SCT3YJ5uzz6A==
   dependencies:
-    "@rbxts/react-roblox" "^0.1.1"
     "@rbxts/services" "^1.5.1"
     "@rbxts/set-timeout" "^1.1.2"
 
@@ -159,7 +158,7 @@
   resolved "https://registry.yarnpkg.com/@rbxts/react-reflex/-/react-reflex-0.2.0.tgz#f1e27b062f0ad09800eb27f29a561d7401292824"
   integrity sha512-pPrRpIwl8Qzz7GryoP9KrZCQyJCy6ohjlboFIMhe+DcRtqoO2nV7bboifozE7sq3vK0T7UP7fPjIFmaJzZeJIA==
 
-"@rbxts/react-roblox@^0.1.1", "@rbxts/react-roblox@^0.1.2":
+"@rbxts/react-roblox@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@rbxts/react-roblox/-/react-roblox-0.1.2.tgz#6dec0c09a6910346c3d04f11b557e80bb51b2af1"
   integrity sha512-74R0iemEWSgrE8f98JMfdQFSE+VpJTqo91aaZoBbskqHdeWX+kvVxjkiE5nMOkjIfptVHlZvD7P18hOTe2lwog==

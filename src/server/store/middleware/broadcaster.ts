@@ -1,6 +1,6 @@
 import { createBroadcaster, ProducerMiddleware } from "@rbxts/reflex";
 import { Players } from "@rbxts/services";
-import { IS_EDIT, WORLD_TICK } from "shared/constants";
+import { IS_EDIT, WORLD_TICK } from "shared/constants/core";
 import { remotes } from "shared/remotes";
 import { serializeState, SharedStateSerialized } from "shared/serdes";
 import { SharedState, slices } from "shared/store";
