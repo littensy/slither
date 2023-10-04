@@ -1,7 +1,7 @@
-import { IS_CANARY } from "shared/constants/core";
+import { RunService } from "@rbxts/services";
 
 declare const _G: { __DEV__: boolean };
 
-if (IS_CANARY) {
+if (RunService.IsStudio()) {
 	_G.__DEV__ = true;
 }
