@@ -1,5 +1,5 @@
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { memo, useMemo } from "@rbxts/roact";
+import Roact, { memo, useEffect, useMemo } from "@rbxts/roact";
 import { selectSkinOverride } from "client/store/menu";
 import { USER_NAME } from "shared/constants/core";
 import { describeSnakeFromScore } from "shared/store/snakes";
@@ -7,18 +7,18 @@ import { describeSnakeFromScore } from "shared/store/snakes";
 import { SnakeHead } from "./snake-head";
 import { SnakeNameTag } from "./snake-name-tag";
 import { SnakeTracer } from "./snake-tracer";
-import { useSnakeBindings } from "./use-snake-bindings";
+import { SnakeBindings, useSnakeBindings } from "./use-snake-bindings";
 import { SnakeOnScreen } from "./use-snakes-on-screen";
 
 interface SnakeProps {
 	readonly snakeOnScreen: SnakeOnScreen;
 	readonly scale: number;
 	readonly offset: Vector2;
-	readonly offsetSmooth: Roact.Binding<Vector2>;
 	readonly subject?: string;
+	readonly setSnakeBindings: (bindings: SnakeBindings) => void;
 }
 
-function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }: SnakeProps) {
+export const Snake = memo<SnakeProps>(({ snakeOnScreen, scale, offset, subject, setSnakeBindings }) => {
 	const snake = snakeOnScreen.snake;
 	const snakeBindings = useSnakeBindings(snakeOnScreen, scale, snake.id === subject);
 	const snakeSkinOverride = useSelector(selectSkinOverride);
@@ -49,6 +49,12 @@ function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }:
 		});
 	}, [snakeOnScreen]);
 
+	useEffect(() => {
+		if (snake.id === subject) {
+			setSnakeBindings(snakeBindings);
+		}
+	}, [snakeBindings, subject]);
+
 	return (
 		<>
 			{snakeOnScreen.head && (
@@ -59,8 +65,6 @@ function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }:
 					line={snakeBindings.head.line}
 					effects={snakeBindings.head.effects}
 					skinId={skin}
-					offsetSmooth={offsetSmooth}
-					isSubject={snake.id === subject}
 					isClient={snake.id === USER_NAME}
 				>
 					<SnakeNameTag
@@ -79,6 +83,4 @@ function SnakeComponent({ snakeOnScreen, scale, offset, offsetSmooth, subject }:
 			{children}
 		</>
 	);
-}
-
-export const Snake = memo(SnakeComponent);
+});

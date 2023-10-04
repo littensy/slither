@@ -1,31 +1,54 @@
+import { composeBindings, toBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
+import Roact, { useCallback, useMemo, useRef, useState } from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
 import { useMotion, useRem } from "client/hooks";
 import { selectWorldCamera } from "client/store/world";
 import { springs } from "client/utils/springs";
 
 import { Snake } from "./snake";
+import { SnakeBindings } from "./use-snake-bindings";
 import { useSnakesOnScreen } from "./use-snakes-on-screen";
 
 export function Snakes() {
 	const rem = useRem();
 	const world = useSelector(selectWorldCamera);
 	const snakesOnScreen = useSnakesOnScreen(world.scale, world.offset);
-	const [offset, offsetMotion] = useMotion(world.offset.mul(world.scale));
+	const previousOffset = useRef(new UDim2(0.5, 0, 0.5, 0));
 
-	const position = useMemo(() => {
-		return offset.map(({ X, Y }) => {
-			return new UDim2(0.5, rem(X), 0.5, rem(Y));
+	const [transition, transitionMotion] = useMotion(1);
+	const [snakeBindings, setSnakeBindings] = useState<SnakeBindings>();
+
+	const offset = useMemo((): Roact.Binding<UDim2> => {
+		if (!snakeBindings) {
+			return toBinding(new UDim2(0.5, 0, 0.5, 0));
+		}
+
+		return composeBindings(snakeBindings.head.line, transition, ({ toX, toY }, alpha) => {
+			const offset = new UDim2(0.5, rem(-toX), 0.5, rem(-toY));
+			return alpha !== 1 ? previousOffset.current.Lerp(offset, alpha) : offset;
 		});
-	}, [rem]);
+	}, [rem, snakeBindings]);
 
-	useEffect(() => {
-		offsetMotion.spring(world.offset.mul(world.scale), springs.world);
-	}, [world.offset, world.scale]);
+	const onSubjectChanged = useCallback(
+		(bindings: SnakeBindings) => {
+			// Manually transition from the current subject to the next
+			if (snakeBindings && snakeBindings !== bindings) {
+				previousOffset.current = offset.getValue();
+				transitionMotion.set(0);
+				transitionMotion.spring(1, {
+					...springs.world,
+					restingVelocity: 1e-8,
+				});
+			}
+
+			setSnakeBindings(bindings);
+		},
+		[offset],
+	);
 
 	return (
-		<Group position={position} zIndex={2}>
+		<Group position={offset} zIndex={2}>
 			{snakesOnScreen.map((snakeOnScreen) => {
 				return (
 					<Snake
@@ -33,8 +56,8 @@ export function Snakes() {
 						snakeOnScreen={snakeOnScreen}
 						scale={world.scale}
 						offset={world.offset}
-						offsetSmooth={offset}
 						subject={world.subject}
+						setSnakeBindings={onSubjectChanged}
 					/>
 				);
 			})}
