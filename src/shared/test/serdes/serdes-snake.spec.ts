@@ -2,7 +2,7 @@
 
 import { shallowEqual } from "@rbxts/reflex";
 import { HttpService } from "@rbxts/services";
-import { getRandomBaseSnakeSkin } from "shared/data/skins";
+import { getRandomBaseSnakeSkin } from "shared/constants/skins";
 import { deserializeSnakes, serializeSnakes } from "shared/serdes/handlers/serdes-snake";
 import { SnakeEntity, SnakesState } from "shared/store/snakes";
 import { fillArray } from "shared/utils/object-utils";

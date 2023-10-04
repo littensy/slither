@@ -1,5 +1,5 @@
 import { t } from "@rbxts/t";
-import { baseSnakeSkins } from "shared/data/skins";
+import { baseSnakeSkins } from "shared/constants/skins";
 
 export interface PlayerSave {
 	readonly balance: number;

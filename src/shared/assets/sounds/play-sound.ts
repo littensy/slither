@@ -1,5 +1,5 @@
 import { SoundService } from "@rbxts/services";
-import { IS_EDIT } from "shared/constants";
+import { IS_EDIT } from "shared/constants/core";
 
 export interface SoundOptions {
 	volume?: number;

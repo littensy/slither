@@ -1,6 +1,6 @@
 import { setTimeout } from "@rbxts/set-timeout";
 import { store } from "server/store";
-import { WORLD_BOUNDS } from "shared/constants";
+import { WORLD_BOUNDS } from "shared/constants/core";
 import { selectCandyById } from "shared/store/candy";
 import { selectSnakeById } from "shared/store/snakes";
 

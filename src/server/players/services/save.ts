@@ -2,7 +2,7 @@ import { createCollection } from "@rbxts/lapis";
 import { Players } from "@rbxts/services";
 import { store } from "server/store";
 import { sounds } from "shared/assets";
-import { palette } from "shared/data/palette";
+import { palette } from "shared/constants/palette";
 import { remotes } from "shared/remotes";
 import { defaultPlayerSave, playerSaveSchema, selectPlayerSave } from "shared/store/saves";
 import { promisePlayerDisconnected } from "shared/utils/player-utils";

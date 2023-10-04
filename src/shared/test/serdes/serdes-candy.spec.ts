@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { HttpService } from "@rbxts/services";
-import { getRandomAccent } from "shared/data/palette";
+import { getRandomAccent } from "shared/constants/palette";
 import { deserializeCandy, serializeCandy } from "shared/serdes/handlers/serdes-candy";
 import { CandyEntity, CandyState } from "shared/store/candy";
 

@@ -1,0 +1,16 @@
+import { StarterGui } from "@rbxts/services";
+import { remotes } from "shared/remotes";
+
+const resetBindable = new Instance("BindableEvent");
+
+resetBindable.Event.Connect(() => {
+	remotes.snake.kill.fire();
+});
+
+Promise.retryWithDelay(
+	async () => {
+		StarterGui.SetCore("ResetButtonCallback", resetBindable);
+	},
+	10,
+	5,
+);

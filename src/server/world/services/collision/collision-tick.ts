@@ -1,6 +1,6 @@
 import { store } from "server/store";
 import { getSnake, killSnake } from "server/world/utils";
-import { WORLD_BOUNDS } from "shared/constants";
+import { WORLD_BOUNDS } from "shared/constants/core";
 import { describeSnakeFromScore, selectSnakesSorted, SnakeEntity } from "shared/store/snakes";
 
 import { snakeGrid } from "../snakes";

@@ -3,7 +3,7 @@ import { Client, createRemotes, namespace, remote, Server, throttleMiddleware } 
 import { t } from "@rbxts/t";
 import type { Alert } from "client/store/alert";
 
-import { WORLD_TICK } from "./constants";
+import { WORLD_TICK } from "./constants/core";
 import { SharedStateSerialized } from "./serdes";
 
 export const remotes = createRemotes({

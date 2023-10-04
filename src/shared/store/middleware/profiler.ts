@@ -1,5 +1,5 @@
 import { ProducerMiddleware } from "@rbxts/reflex";
-import { IS_PROD } from "shared/constants";
+import { IS_PROD } from "shared/constants/core";
 
 export const profilerMiddleware: ProducerMiddleware = () => {
 	return (dispatch, name) => {

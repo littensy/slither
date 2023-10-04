@@ -1,4 +1,4 @@
-import { IS_PROD } from "shared/constants";
+import { IS_PROD } from "shared/constants/core";
 
 export enum Badge {
 	SCORE_25000 = IS_PROD ? 2152586187 : 2152587210,

@@ -1,10 +1,10 @@
+import { initBotFactory } from "server/bots";
 import { store } from "server/store";
 import {
 	CANDY_LIMITS,
 	candyGrid,
 	createCandy,
 	getSafePointInWorld,
-	initBotService,
 	initCandyService,
 	initCollisionService,
 	initSnakeService,
@@ -13,7 +13,7 @@ import {
 	onSnakeTick,
 	snakeGrid,
 } from "server/world";
-import { WORLD_BOUNDS } from "shared/constants";
+import { WORLD_BOUNDS } from "shared/constants/core";
 import { CandyType } from "shared/store/candy";
 import { benchmark } from "shared/utils/benchmark";
 import { fillArray } from "shared/utils/object-utils";
@@ -55,7 +55,7 @@ async function setup() {
 	initCandyService();
 	initSnakeService();
 	initCollisionService();
-	initBotService();
+	initBotFactory();
 	disconnectAllSchedulers();
 }
 
