@@ -1,6 +1,6 @@
 import Roact, { useEffect } from "@rbxts/roact";
 import { TeleportService } from "@rbxts/services";
-import { AwesomeButton } from "client/components/ui/awesome-button";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { Frame } from "client/components/ui/frame";
 import { Group } from "client/components/ui/group";
 import { Layer } from "client/components/ui/layer";
@@ -114,7 +114,7 @@ export function ErrorPage({ message }: ErrorPageProps) {
 
 				<Group key={`spacer-${index}`} size={new UDim2(0, 0, 0, rem(2))} layoutOrder={index++} />
 
-				<AwesomeButton
+				<PrimaryButton
 					key="reconnect"
 					onClick={async () => TeleportService.TeleportToPlaceInstance(game.PlaceId, game.JobId)}
 					overlayGradient={new ColorSequence(palette.blue, palette.mauve)}
@@ -129,7 +129,7 @@ export function ErrorPage({ message }: ErrorPageProps) {
 						textSize={rem(1.5)}
 						size={new UDim2(1, 0, 1, 0)}
 					/>
-				</AwesomeButton>
+				</PrimaryButton>
 			</Frame>
 		</Layer>
 	);

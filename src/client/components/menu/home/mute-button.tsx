@@ -1,6 +1,6 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact from "@rbxts/roact";
-import { AwesomeButton } from "client/components/ui/awesome-button";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { Text } from "client/components/ui/text";
 import { useRem, useStore } from "client/hooks";
 import { selectMusicEnabled } from "client/store/menu";
@@ -13,7 +13,7 @@ export function MuteButton() {
 	const musicEnabled = useSelector(selectMusicEnabled);
 
 	return (
-		<AwesomeButton
+		<PrimaryButton
 			onClick={() => store.setMenuMusic(!musicEnabled)}
 			overlayGradient={new ColorSequence(musicEnabled ? palette.text : palette.maroon)}
 			size={new UDim2(0, rem(4), 0, rem(4))}
@@ -25,6 +25,6 @@ export function MuteButton() {
 				textSize={rem(2)}
 				size={new UDim2(1, 0, 1, 0)}
 			/>
-		</AwesomeButton>
+		</PrimaryButton>
 	);
 }

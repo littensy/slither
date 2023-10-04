@@ -2,7 +2,7 @@ import { blend, lerpBinding, useTimeout } from "@rbxts/pretty-react-hooks";
 import { composeBindings } from "@rbxts/pretty-react-hooks";
 import Roact, { useMemo } from "@rbxts/roact";
 import { MarketplaceService, Players } from "@rbxts/services";
-import { AwesomeButton } from "client/components/ui/awesome-button";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
 import { Frame } from "client/components/ui/frame";
 import { Group } from "client/components/ui/group";
@@ -183,7 +183,7 @@ export function SupportProduct({
 					)}
 				</Group>
 
-				<AwesomeButton
+				<PrimaryButton
 					key="purchase-button"
 					onClick={promptPurchase}
 					overlayGradient={gradient}
@@ -199,7 +199,7 @@ export function SupportProduct({
 						textColor={palette.base}
 						position={new UDim2(0.5, 0, 0.5, 0)}
 					/>
-				</AwesomeButton>
+				</PrimaryButton>
 
 				{children}
 			</ReactiveButton>

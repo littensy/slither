@@ -1,6 +1,6 @@
 import { lerpBinding, useTimer } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { AwesomeButton } from "client/components/ui/awesome-button";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { Outline } from "client/components/ui/outline";
 import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
@@ -31,7 +31,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	};
 
 	return (
-		<AwesomeButton
+		<PrimaryButton
 			onClick={onClick}
 			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
 			overlayGradient={new ColorSequence(palette.mauve, palette.blue)}
@@ -60,6 +60,6 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 			/>
 
 			<Outline key="outline" cornerRadius={new UDim(0, rem(1))} innerTransparency={0} />
-		</AwesomeButton>
+		</PrimaryButton>
 	);
 }
