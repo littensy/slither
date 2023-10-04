@@ -1,6 +1,6 @@
 import { useViewport } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { Group } from "client/common/group";
+import { Group } from "client/components/ui/group";
 import { useOrientation, usePremium, useRem } from "client/hooks";
 import { formatInteger } from "client/utils/format-integer";
 import { DevProduct } from "shared/assets";

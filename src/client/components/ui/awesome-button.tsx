@@ -4,7 +4,7 @@ import Roact from "@rbxts/roact";
 import { images } from "shared/assets";
 import { palette } from "shared/constants/palette";
 
-import { useMotion, useRem } from "../hooks";
+import { useMotion, useRem } from "../../hooks";
 import { Frame } from "./frame";
 import { Image } from "./image";
 import { Outline } from "./outline";

@@ -1,9 +1,9 @@
-import "client/dev";
+import "client/app/react-config";
 
 import { hoarcekat } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { InputCapture } from "client/common/input-capture";
 import { Menu } from "client/components/menu";
+import { InputCapture } from "client/components/ui/input-capture";
 import { World } from "client/components/world";
 import { RootProvider } from "client/providers/root-provider";
 import { store } from "client/store";

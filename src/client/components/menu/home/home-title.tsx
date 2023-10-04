@@ -1,6 +1,6 @@
 import { useTimer } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { Image } from "client/common/image";
+import { Image } from "client/components/ui/image";
 import { useRem } from "client/hooks";
 import { images } from "shared/assets";
 

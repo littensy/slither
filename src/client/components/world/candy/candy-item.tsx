@@ -1,8 +1,8 @@
 import { blend, lerp, map, useTimer } from "@rbxts/pretty-react-hooks";
 import { composeBindings } from "@rbxts/pretty-react-hooks";
 import Roact, { memo, useEffect, useMemo } from "@rbxts/roact";
-import { Image } from "client/common/image";
-import { Shadow } from "client/common/shadow";
+import { Image } from "client/components/ui/image";
+import { Shadow } from "client/components/ui/shadow";
 import { useMotion, useRem, useSeed } from "client/hooks";
 import { springs } from "client/utils/springs";
 import { images } from "shared/assets";

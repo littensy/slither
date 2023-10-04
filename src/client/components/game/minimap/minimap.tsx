@@ -1,8 +1,8 @@
 import Roact from "@rbxts/roact";
-import { Frame } from "client/common/frame";
-import { Group } from "client/common/group";
-import { Image } from "client/common/image";
-import { Shadow } from "client/common/shadow";
+import { Frame } from "client/components/ui/frame";
+import { Group } from "client/components/ui/group";
+import { Image } from "client/components/ui/image";
+import { Shadow } from "client/components/ui/shadow";
 import { useInputDevice } from "client/hooks";
 import { RemProvider } from "client/providers/rem-provider";
 import { images } from "shared/assets";

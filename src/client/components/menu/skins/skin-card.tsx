@@ -1,8 +1,8 @@
 import { blend } from "@rbxts/pretty-react-hooks";
 import Roact, { useEffect } from "@rbxts/roact";
-import { Image } from "client/common/image";
-import { ReactiveButton } from "client/common/reactive-button";
-import { Shadow } from "client/common/shadow";
+import { Image } from "client/components/ui/image";
+import { ReactiveButton } from "client/components/ui/reactive-button";
+import { Shadow } from "client/components/ui/shadow";
 import { useMotion, useRem } from "client/hooks";
 import { images, playSound, sounds } from "shared/assets";
 

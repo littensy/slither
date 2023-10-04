@@ -1,6 +1,6 @@
 import Roact, { useEffect } from "@rbxts/roact";
-import { CanvasGroup } from "client/common/canvas-group";
-import { Image } from "client/common/image";
+import { CanvasGroup } from "client/components/ui/canvas-group";
+import { Image } from "client/components/ui/image";
 import { useMotion, useRem } from "client/hooks";
 import { SnakeSkin } from "shared/constants/skins";
 import { fillArray } from "shared/utils/object-utils";

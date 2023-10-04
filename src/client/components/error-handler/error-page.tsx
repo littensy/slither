@@ -1,11 +1,11 @@
 import Roact, { useEffect } from "@rbxts/roact";
 import { TeleportService } from "@rbxts/services";
-import { AwesomeButton } from "client/common/awesome-button";
-import { Frame } from "client/common/frame";
-import { Group } from "client/common/group";
-import { Layer } from "client/common/layer";
-import { Text } from "client/common/text";
-import { TextField } from "client/common/text-field";
+import { AwesomeButton } from "client/components/ui/awesome-button";
+import { Frame } from "client/components/ui/frame";
+import { Group } from "client/components/ui/group";
+import { Layer } from "client/components/ui/layer";
+import { Text } from "client/components/ui/text";
+import { TextField } from "client/components/ui/text-field";
 import { useRem } from "client/hooks";
 import { fonts } from "client/utils/fonts";
 import { playSound, sounds } from "shared/assets";

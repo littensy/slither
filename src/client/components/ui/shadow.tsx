@@ -2,7 +2,7 @@ import { composeBindings } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
 import { images } from "shared/assets";
 
-import { useRem } from "../hooks";
+import { useRem } from "../../hooks";
 import { Image } from "./image";
 
 interface ShadowProps extends Roact.PropsWithChildren {

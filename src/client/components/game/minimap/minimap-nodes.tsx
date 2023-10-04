@@ -1,7 +1,7 @@
 import { map, useInterval } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { Element, useState } from "@rbxts/roact";
-import { CanvasGroup } from "client/common/canvas-group";
+import { CanvasGroup } from "client/components/ui/canvas-group";
 import { useDefined, useStore } from "client/hooks";
 import { selectSnakeFromWorldSubject } from "client/store/world";
 import { selectSnakesById, selectTopSnake } from "shared/store/snakes";

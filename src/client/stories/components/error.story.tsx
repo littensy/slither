@@ -1,4 +1,4 @@
-import "client/dev";
+import "client/app/react-config";
 
 import { hoarcekat } from "@rbxts/pretty-react-hooks";
 import Roact, { useEffect } from "@rbxts/roact";

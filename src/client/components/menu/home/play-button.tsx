@@ -1,9 +1,9 @@
 import { lerpBinding, useTimer } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { AwesomeButton } from "client/common/awesome-button";
-import { Outline } from "client/common/outline";
-import { Shadow } from "client/common/shadow";
-import { Text } from "client/common/text";
+import { AwesomeButton } from "client/components/ui/awesome-button";
+import { Outline } from "client/components/ui/outline";
+import { Shadow } from "client/components/ui/shadow";
+import { Text } from "client/components/ui/text";
 import { useMotion, useRem } from "client/hooks";
 import { fonts } from "client/utils/fonts";
 import { palette } from "shared/constants/palette";

@@ -1,10 +1,10 @@
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
-import { CanvasOrFrame } from "client/common/canvas-or-frame";
-import { Frame } from "client/common/frame";
-import { Group } from "client/common/group";
-import { ReactiveButton } from "client/common/reactive-button";
-import { Shadow } from "client/common/shadow";
-import { Text } from "client/common/text";
+import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
+import { Frame } from "client/components/ui/frame";
+import { Group } from "client/components/ui/group";
+import { ReactiveButton } from "client/components/ui/reactive-button";
+import { Shadow } from "client/components/ui/shadow";
+import { Text } from "client/components/ui/text";
 import { useMotion, useRem } from "client/hooks";
 import { fonts } from "client/utils/fonts";
 import { springs } from "client/utils/springs";

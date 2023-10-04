@@ -1,11 +1,11 @@
-import "client/dev";
+import "client/app/react-config";
 
 import { hoarcekat } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { sendAlert } from "client/alert";
-import { InputCapture } from "client/common/input-capture";
+import { sendAlert } from "client/alerts";
 import { Alerts } from "client/components/alerts";
 import { Menu } from "client/components/menu";
+import { InputCapture } from "client/components/ui/input-capture";
 import { Backdrop } from "client/components/world/backdrop";
 import { RootProvider } from "client/providers/root-provider";
 import { palette } from "shared/constants/palette";

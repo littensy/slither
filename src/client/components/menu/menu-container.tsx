@@ -1,8 +1,8 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
-import { CanvasOrFrame } from "client/common/canvas-or-frame";
-import { DelayRender } from "client/common/delay-render";
+import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
+import { DelayRender } from "client/components/ui/delay-render";
 import { useMotion, useRem } from "client/hooks";
 import { MenuPage, selectCurrentPage, selectIsMenuOpen, selectMenuTransition } from "client/store/menu";
 import { springs } from "client/utils/springs";

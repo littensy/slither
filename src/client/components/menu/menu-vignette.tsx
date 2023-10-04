@@ -1,7 +1,7 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
-import { Image } from "client/common/image";
+import { Image } from "client/components/ui/image";
 import { useMotion } from "client/hooks";
 import { selectIsMenuOpen } from "client/store/menu";
 import { springs } from "client/utils/springs";

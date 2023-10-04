@@ -1,5 +1,5 @@
 import Roact from "@rbxts/roact";
-import { ErrorBoundary } from "client/common/error-boundary";
+import { ErrorBoundary } from "client/components/ui/error-boundary";
 
 import { ErrorPage } from "./error-page";
 

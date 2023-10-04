@@ -1,6 +1,5 @@
 import Roact from "@rbxts/roact";
 
-import { Layer } from "../common/layer";
 import { Alerts } from "../components/alerts";
 import { Controller } from "../components/controller";
 import { ErrorHandler } from "../components/error-handler";
@@ -9,6 +8,7 @@ import { Menu } from "../components/menu";
 import { Music } from "../components/music";
 import { Preloader } from "../components/preloader";
 import { Stats } from "../components/stats";
+import { Layer } from "../components/ui/layer";
 import { Voice } from "../components/voice";
 import { World } from "../components/world";
 

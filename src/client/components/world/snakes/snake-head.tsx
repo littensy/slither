@@ -1,8 +1,8 @@
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo, useState } from "@rbxts/roact";
 import { setTimeout } from "@rbxts/set-timeout";
-import { Group } from "client/common/group";
-import { Image } from "client/common/image";
+import { Group } from "client/components/ui/group";
+import { Image } from "client/components/ui/image";
 import { useContinuousAngle, useMotion, useRem } from "client/hooks";
 import { selectWorldInputAngle } from "client/store/world";
 import { springs } from "client/utils/springs";

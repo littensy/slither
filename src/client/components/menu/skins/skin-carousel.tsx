@@ -1,6 +1,6 @@
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
-import { Group } from "client/common/group";
+import { Group } from "client/components/ui/group";
 import { useRem, useStore } from "client/hooks";
 import { selectMenuCurrentSkin } from "client/store/menu";
 import { USER_NAME } from "shared/constants/core";

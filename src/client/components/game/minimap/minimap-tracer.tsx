@@ -1,5 +1,5 @@
 import Roact, { memo } from "@rbxts/roact";
-import { Image } from "client/common/image";
+import { Image } from "client/components/ui/image";
 import { images } from "shared/assets";
 import { palette } from "shared/constants/palette";
 

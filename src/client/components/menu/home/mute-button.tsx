@@ -1,7 +1,7 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact from "@rbxts/roact";
-import { AwesomeButton } from "client/common/awesome-button";
-import { Text } from "client/common/text";
+import { AwesomeButton } from "client/components/ui/awesome-button";
+import { Text } from "client/components/ui/text";
 import { useRem, useStore } from "client/hooks";
 import { selectMusicEnabled } from "client/store/menu";
 import { fonts } from "client/utils/fonts";

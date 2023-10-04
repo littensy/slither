@@ -1,5 +1,5 @@
 import Roact from "@rbxts/roact";
-import { Text } from "client/common/text";
+import { Text } from "client/components/ui/text";
 import { useRem } from "client/hooks";
 import { fonts } from "client/utils/fonts";
 import { $git, $package } from "rbxts-transform-debug";

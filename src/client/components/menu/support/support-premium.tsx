@@ -1,8 +1,8 @@
 import Roact from "@rbxts/roact";
 import { MarketplaceService, Players } from "@rbxts/services";
-import { sendAlert } from "client/alert";
-import { AwesomeButton } from "client/common/awesome-button";
-import { Text } from "client/common/text";
+import { sendAlert } from "client/alerts";
+import { AwesomeButton } from "client/components/ui/awesome-button";
+import { Text } from "client/components/ui/text";
 import { useRem } from "client/hooks";
 import { palette } from "shared/constants/palette";
 

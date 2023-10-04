@@ -1,5 +1,5 @@
 import Roact from "@rbxts/roact";
-import { Group } from "client/common/group";
+import { Group } from "client/components/ui/group";
 import { useRem } from "client/hooks";
 import { images } from "shared/assets";
 import { palette } from "shared/constants/palette";

@@ -1,5 +1,5 @@
 import Roact, { useEffect } from "@rbxts/roact";
-import { Image } from "client/common/image";
+import { Image } from "client/components/ui/image";
 import { useContinuousAngle, useMotion } from "client/hooks";
 import { images } from "shared/assets";
 import { palette } from "shared/constants/palette";

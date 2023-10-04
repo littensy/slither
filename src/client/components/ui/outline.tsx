@@ -2,7 +2,7 @@ import { blend, composeBindings } from "@rbxts/pretty-react-hooks";
 import Roact, { useMemo } from "@rbxts/roact";
 import { palette } from "shared/constants/palette";
 
-import { useRem } from "../hooks";
+import { useRem } from "../../hooks";
 import { Group } from "./group";
 
 interface OutlineProps extends Roact.PropsWithChildren {

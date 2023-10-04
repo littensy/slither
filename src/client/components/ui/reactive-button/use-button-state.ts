@@ -3,7 +3,7 @@ import { useMemo, useState } from "@rbxts/roact";
 import { UserInputService } from "@rbxts/services";
 import { setTimeout } from "@rbxts/set-timeout";
 
-import { useInputDevice } from "../../hooks/use-input-device";
+import { useInputDevice } from "../../../hooks/use-input-device";
 
 export interface ButtonEvents {
 	onMouseDown: () => void;

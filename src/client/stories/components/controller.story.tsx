@@ -1,13 +1,13 @@
-import "client/dev";
+import "client/app/react-config";
 
 import { hoarcekat, useInterval } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Players } from "@rbxts/services";
-import { Frame } from "client/common/frame";
-import { Group } from "client/common/group";
-import { Text } from "client/common/text";
 import { Controller } from "client/components/controller";
+import { Frame } from "client/components/ui/frame";
+import { Group } from "client/components/ui/group";
+import { Text } from "client/components/ui/text";
 import { World } from "client/components/world/world";
 import { useRem } from "client/hooks";
 import { RootProvider } from "client/providers/root-provider";

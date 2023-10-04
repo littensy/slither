@@ -1,8 +1,8 @@
 import { lerpBinding, useEventListener } from "@rbxts/pretty-react-hooks";
 import Roact, { useBinding } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
-import { CanvasGroup } from "client/common/canvas-group";
-import { Frame } from "client/common/frame";
+import { CanvasGroup } from "client/components/ui/canvas-group";
+import { Frame } from "client/components/ui/frame";
 import { useRem } from "client/hooks";
 import { palette } from "shared/constants/palette";
 import { darken } from "shared/utils/color-utils";

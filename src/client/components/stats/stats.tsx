@@ -1,6 +1,6 @@
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact from "@rbxts/roact";
-import { Group } from "client/common/group";
+import { Group } from "client/components/ui/group";
 import { useDefined, useRem, useStore } from "client/hooks";
 import { formatInteger } from "client/utils/format-integer";
 import { USER_NAME } from "shared/constants/core";

@@ -1,6 +1,6 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
-import { Group } from "client/common/group";
+import { Group } from "client/components/ui/group";
 import { useMotion, useRem } from "client/hooks";
 import { selectWorldCamera } from "client/store/world";
 import { springs } from "client/utils/springs";

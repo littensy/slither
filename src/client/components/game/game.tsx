@@ -1,7 +1,7 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
-import { CanvasOrFrame } from "client/common/canvas-or-frame";
+import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
 import { useMotion } from "client/hooks";
 import { selectWorldSubject } from "client/store/world";
 

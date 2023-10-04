@@ -1,9 +1,9 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
-import { CanvasGroup } from "client/common/canvas-group";
-import { Frame } from "client/common/frame";
-import { Group } from "client/common/group";
-import { Image } from "client/common/image";
+import { CanvasGroup } from "client/components/ui/canvas-group";
+import { Frame } from "client/components/ui/frame";
+import { Group } from "client/components/ui/group";
+import { Image } from "client/components/ui/image";
 import { useMotion, useRem } from "client/hooks";
 import { selectWorldCamera } from "client/store/world";
 import { springs } from "client/utils/springs";
