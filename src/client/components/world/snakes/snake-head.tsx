@@ -1,6 +1,5 @@
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo, useState } from "@rbxts/roact";
-import { setTimeout } from "@rbxts/set-timeout";
+import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
 import { Image } from "client/components/ui/image";
 import { useContinuousAngle, useMotion, useRem } from "client/hooks";
@@ -19,22 +18,10 @@ interface SnakeHeadProps extends Roact.PropsWithChildren {
 	readonly line: SnakeLineBinding;
 	readonly effects: SnakeEffectBinding;
 	readonly skinId: string;
-	readonly offsetSmooth: Roact.Binding<Vector2>;
-	readonly isSubject: boolean;
 	readonly isClient: boolean;
 }
 
-export function SnakeHead({
-	angle,
-	desiredAngle,
-	line,
-	effects,
-	skinId,
-	offsetSmooth,
-	isSubject,
-	isClient,
-	children,
-}: SnakeHeadProps) {
+export function SnakeHead({ angle, desiredAngle, line, effects, skinId, isClient, children }: SnakeHeadProps) {
 	const inputAngle = useSelectorCreator(selectWorldInputAngle, isClient);
 
 	if (isClient) {
@@ -49,7 +36,6 @@ export function SnakeHead({
 	const angleDifference = useContinuousAngle(subtractRadians(desiredAngle, currentAngle));
 	const style = useTracerStyle(line, effects, 0, skin.headColor || tracerSkin.tint);
 
-	const [isSubjectDelayed, setIsSubjectDelayed] = useState(false);
 	const [rotation, rotationMotion] = useMotion(math.deg(currentAngle + SNAKE_ANGLE_OFFSET));
 	const [look, lookMotion] = useMotion(0);
 
@@ -58,30 +44,17 @@ export function SnakeHead({
 			return new UDim2(0, rem(diameter), 0, rem(diameter));
 		});
 
-		// if this is the subject, we calculate the position based
-		// on the actual offset because there is a slight desync
-		const position = isSubjectDelayed
-			? offsetSmooth.map(({ X, Y }) => new UDim2(0, rem(-X), 0, rem(-Y)))
-			: line.map(({ toX, toY }) => new UDim2(0, rem(toX), 0, rem(toY)));
+		const position = line.map(({ toX, toY }) => {
+			return new UDim2(0, rem(toX), 0, rem(toY));
+		});
 
 		return { size, position };
-	}, [rem, isSubjectDelayed]);
+	}, [rem]);
 
 	useEffect(() => {
 		rotationMotion.spring(math.deg(currentAngle + SNAKE_ANGLE_OFFSET), springs.world);
 		lookMotion.spring(math.deg(angleDifference));
 	}, [currentAngle, angleDifference]);
-
-	useEffect(() => {
-		// wait a while if setting a new subject to avoid centering
-		// the head before the camera is done moving
-		return setTimeout(
-			() => {
-				setIsSubjectDelayed(isSubject);
-			},
-			isSubject ? 1 : 0,
-		);
-	}, [isSubject]);
 
 	return (
 		<Group anchorPoint={new Vector2(0.5, 0.5)} size={size} position={position}>

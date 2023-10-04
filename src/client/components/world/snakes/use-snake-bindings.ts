@@ -11,7 +11,7 @@ export type SnakeLineBinding = Roact.Binding<LineMotionValues>;
 
 export type SnakeEffectBinding = Roact.Binding<EffectMotionValues>;
 
-interface SnakeBindings {
+export interface SnakeBindings {
 	readonly bindings: Map<number, TracerBindingController>;
 	readonly head: TracerBindingController;
 	readonly update: (snakeOnScreen: SnakeOnScreen, scale: number, boosting: boolean, isSubject: boolean) => void;
