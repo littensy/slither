@@ -11,11 +11,7 @@ export function DelayRender({ shouldRender, mountDelay = 0, unmountDelay = 0, ch
 	const [render, setRender] = useState(false);
 
 	useEffect(() => {
-		if (shouldRender) {
-			return setTimeout(() => setRender(true), mountDelay);
-		} else {
-			return setTimeout(() => setRender(false), unmountDelay);
-		}
+		return setTimeout(() => setRender(shouldRender), shouldRender ? mountDelay : unmountDelay);
 	}, [shouldRender]);
 
 	return <>{render && children}</>;
