@@ -1,7 +1,7 @@
 import { useUpdateEffect } from "@rbxts/pretty-react-hooks";
 import Roact, { useMemo } from "@rbxts/roact";
+import { springs } from "client/constants/springs";
 import { useMotion } from "client/hooks";
-import { springs } from "client/utils/springs";
 
 export interface ButtonAnimation {
 	/**

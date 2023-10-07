@@ -4,9 +4,9 @@ import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
 import { Frame } from "client/components/ui/frame";
 import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
+import { fonts } from "client/constants/fonts";
+import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
-import { fonts } from "client/utils/fonts";
-import { springs } from "client/utils/springs";
 import { palette } from "shared/constants/palette";
 import { getSnakeSkinForTracer } from "shared/constants/skins";
 

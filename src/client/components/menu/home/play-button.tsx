@@ -1,11 +1,11 @@
 import { lerpBinding, useTimer } from "@rbxts/pretty-react-hooks";
 import Roact from "@rbxts/roact";
-import { PrimaryButton } from "client/components/ui/primary-button";
 import { Outline } from "client/components/ui/outline";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
+import { fonts } from "client/constants/fonts";
 import { useMotion, useRem } from "client/hooks";
-import { fonts } from "client/utils/fonts";
 import { palette } from "shared/constants/palette";
 import { remotes } from "shared/remotes";
 

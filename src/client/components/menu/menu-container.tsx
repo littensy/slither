@@ -3,9 +3,9 @@ import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
 import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
 import { DelayRender } from "client/components/ui/delay-render";
+import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
 import { MenuPage, selectCurrentPage, selectIsMenuOpen, selectMenuTransition } from "client/store/menu";
-import { springs } from "client/utils/springs";
 
 interface MenuContainerProps extends Roact.PropsWithChildren {
 	readonly page?: MenuPage;

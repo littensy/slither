@@ -3,9 +3,9 @@ import { useSelector } from "@rbxts/react-reflex";
 import Roact from "@rbxts/roact";
 import { PrimaryButton } from "client/components/ui/primary-button";
 import { Text } from "client/components/ui/text";
+import { fonts } from "client/constants/fonts";
 import { useRem, useStore } from "client/hooks";
 import { selectWorldSpectating } from "client/store/world";
-import { fonts } from "client/utils/fonts";
 import { palette } from "shared/constants/palette";
 import { cycleNextSnake } from "shared/store/snakes";
 

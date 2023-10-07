@@ -8,10 +8,10 @@ import { Outline } from "client/components/ui/outline";
 import { ReactiveButton } from "client/components/ui/reactive-button";
 import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
+import { fonts } from "client/constants/fonts";
+import { springs } from "client/constants/springs";
 import { useMotion, useRem, useStore } from "client/hooks";
 import { MenuPage, selectIsPage } from "client/store/menu";
-import { fonts } from "client/utils/fonts";
-import { springs } from "client/utils/springs";
 import { palette } from "shared/constants/palette";
 
 interface DestinationProps {
