@@ -94,17 +94,17 @@ target:
         enabled: true
       4-3rd-place:
         name: 🥉 3rd Place
-        description: You reached 3rd place in a big server!
+        description: You're among the greatest! Become the third largest in the server.
         icon: assets/badges/third_place.png
         enabled: true
       5-2nd-place:
         name: 🥈 2nd Place
-        description: You reached 2nd place in a big server!
+        description: Blaze through the competition! Become the second largest in the server.
         icon: assets/badges/second_place.png
         enabled: true
       6-1st-place:
-        name: 🏆 1st Place
-        description: You're in the lead... for now! Get 1st place in a big server.
+        name: 🥇 1st Place
+        description: You're on top of the world! Become the largest in the server.
         icon: assets/badges/first_place.png
         enabled: true
     products:
