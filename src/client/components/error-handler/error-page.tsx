@@ -1,13 +1,13 @@
 import Roact, { useEffect } from "@rbxts/roact";
 import { TeleportService } from "@rbxts/services";
-import { AwesomeButton } from "client/components/ui/awesome-button";
 import { Frame } from "client/components/ui/frame";
 import { Group } from "client/components/ui/group";
 import { Layer } from "client/components/ui/layer";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { Text } from "client/components/ui/text";
 import { TextField } from "client/components/ui/text-field";
+import { fonts } from "client/constants/fonts";
 import { useRem } from "client/hooks";
-import { fonts } from "client/utils/fonts";
 import { playSound, sounds } from "shared/assets";
 import { palette } from "shared/constants/palette";
 
@@ -114,7 +114,7 @@ export function ErrorPage({ message }: ErrorPageProps) {
 
 				<Group key={`spacer-${index}`} size={new UDim2(0, 0, 0, rem(2))} layoutOrder={index++} />
 
-				<AwesomeButton
+				<PrimaryButton
 					key="reconnect"
 					onClick={async () => TeleportService.TeleportToPlaceInstance(game.PlaceId, game.JobId)}
 					overlayGradient={new ColorSequence(palette.blue, palette.mauve)}
@@ -129,7 +129,7 @@ export function ErrorPage({ message }: ErrorPageProps) {
 						textSize={rem(1.5)}
 						size={new UDim2(1, 0, 1, 0)}
 					/>
-				</AwesomeButton>
+				</PrimaryButton>
 			</Frame>
 		</Layer>
 	);

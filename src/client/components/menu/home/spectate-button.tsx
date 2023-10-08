@@ -1,11 +1,11 @@
 import { useThrottleCallback } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact from "@rbxts/roact";
-import { AwesomeButton } from "client/components/ui/awesome-button";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { Text } from "client/components/ui/text";
+import { fonts } from "client/constants/fonts";
 import { useRem, useStore } from "client/hooks";
 import { selectWorldSpectating } from "client/store/world";
-import { fonts } from "client/utils/fonts";
 import { palette } from "shared/constants/palette";
 import { cycleNextSnake } from "shared/store/snakes";
 
@@ -22,12 +22,12 @@ export function SpectateButton() {
 	);
 
 	return (
-		<AwesomeButton
+		<PrimaryButton
 			onClick={onClick.run}
 			overlayGradient={new ColorSequence(palette.text)}
 			size={new UDim2(0, rem(4), 0, rem(4))}
 		>
 			<Text key="caption" font={fonts.inter.medium} text="🎥" textSize={rem(2)} size={new UDim2(1, 0, 1, 0)} />
-		</AwesomeButton>
+		</PrimaryButton>
 	);
 }

@@ -4,9 +4,9 @@ import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { Image } from "client/components/ui/image";
+import { springs } from "client/constants/springs";
 import { useMotion, useSeed } from "client/hooks";
 import { selectWorldCamera } from "client/store/world";
-import { springs } from "client/utils/springs";
 import { images } from "shared/assets";
 import { accents } from "shared/constants/palette";
 

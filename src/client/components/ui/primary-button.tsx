@@ -11,7 +11,7 @@ import { Outline } from "./outline";
 import { ReactiveButton } from "./reactive-button";
 import { Shadow } from "./shadow";
 
-interface AwesomeButtonProps extends Roact.PropsWithChildren {
+interface PrimaryButtonProps extends Roact.PropsWithChildren {
 	readonly onClick?: () => void;
 	readonly onHover?: (hovered: boolean) => void;
 	readonly size?: UDim2 | Roact.Binding<UDim2>;
@@ -23,7 +23,7 @@ interface AwesomeButtonProps extends Roact.PropsWithChildren {
 	readonly layoutOrder?: number | Roact.Binding<number>;
 }
 
-export function AwesomeButton({
+export function PrimaryButton({
 	onClick,
 	onHover,
 	size,
@@ -34,7 +34,7 @@ export function AwesomeButton({
 	overlayRotation,
 	layoutOrder,
 	children,
-}: AwesomeButtonProps) {
+}: PrimaryButtonProps) {
 	const rem = useRem();
 	const [hover, hoverMotion] = useMotion(0);
 

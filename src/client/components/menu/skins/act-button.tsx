@@ -3,14 +3,14 @@ import { composeBindings } from "@rbxts/pretty-react-hooks";
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { sendAlert } from "client/alerts";
-import { AwesomeButton } from "client/components/ui/awesome-button";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
+import { fonts } from "client/constants/fonts";
+import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
 import { selectMenuCurrentSkin } from "client/store/menu";
-import { fonts } from "client/utils/fonts";
 import { formatInteger } from "client/utils/format-integer";
-import { springs } from "client/utils/springs";
 import { sounds } from "shared/assets";
 import { USER_NAME } from "shared/constants/core";
 import { palette } from "shared/constants/palette";
@@ -136,7 +136,7 @@ export function ActButton() {
 			: "🔒  Locked";
 
 	return (
-		<AwesomeButton
+		<PrimaryButton
 			onClick={onClick}
 			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
 			overlayGradient={gradient}
@@ -171,6 +171,6 @@ export function ActButton() {
 				size={new UDim2(1, 0, 1, 0)}
 				clipsDescendants
 			/>
-		</AwesomeButton>
+		</PrimaryButton>
 	);
 }

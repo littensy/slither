@@ -1,8 +1,8 @@
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/components/ui/image";
+import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
-import { springs } from "client/utils/springs";
 import { images } from "shared/assets";
 import { USER_NAME } from "shared/constants/core";
 import { palette } from "shared/constants/palette";

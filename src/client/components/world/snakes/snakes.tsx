@@ -2,9 +2,9 @@ import { composeBindings, toBinding } from "@rbxts/pretty-react-hooks";
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useCallback, useMemo, useRef, useState } from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
+import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
 import { selectWorldCamera } from "client/store/world";
-import { springs } from "client/utils/springs";
 
 import { Snake } from "./snake";
 import { SnakeBindings } from "./use-snake-bindings";

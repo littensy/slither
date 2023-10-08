@@ -2,9 +2,9 @@ import { useSelectorCreator } from "@rbxts/react-reflex";
 import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
 import { Image } from "client/components/ui/image";
+import { springs } from "client/constants/springs";
 import { useContinuousAngle, useMotion, useRem } from "client/hooks";
 import { selectWorldInputAngle } from "client/store/world";
-import { springs } from "client/utils/springs";
 import { getSnakeSkin, getSnakeSkinForTracer } from "shared/constants/skins";
 import { subtractRadians } from "shared/utils/math-utils";
 

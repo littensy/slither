@@ -1,7 +1,7 @@
 import Roact from "@rbxts/roact";
 import { MarketplaceService, Players } from "@rbxts/services";
 import { sendAlert } from "client/alerts";
-import { AwesomeButton } from "client/components/ui/awesome-button";
+import { PrimaryButton } from "client/components/ui/primary-button";
 import { Text } from "client/components/ui/text";
 import { useRem } from "client/hooks";
 import { palette } from "shared/constants/palette";
@@ -23,7 +23,7 @@ export function SupportPremium() {
 	};
 
 	return (
-		<AwesomeButton
+		<PrimaryButton
 			onClick={promptPremiumPurchase}
 			anchorPoint={new Vector2(1, 1)}
 			position={new UDim2(1, rem(-3), 1, rem(-3))}
@@ -37,6 +37,6 @@ export function SupportPremium() {
 				textColor={palette.black}
 				text="\u{E001} "
 			/>
-		</AwesomeButton>
+		</PrimaryButton>
 	);
 }

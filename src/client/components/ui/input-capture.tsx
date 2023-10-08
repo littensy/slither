@@ -25,15 +25,21 @@ export function InputCapture({
 	const [frame, frameRef] = useState<Frame>();
 
 	useEventListener(UserInputService.InputBegan, (input, gameProcessed) => {
-		if (frame && !gameProcessed && !IS_EDIT) onInputBegan?.(frame, input);
+		if (frame && !IS_EDIT && !gameProcessed) {
+			onInputBegan?.(frame, input);
+		}
 	});
 
 	useEventListener(UserInputService.InputEnded, (input) => {
-		if (frame && !IS_EDIT) onInputEnded?.(frame, input);
+		if (frame && !IS_EDIT) {
+			onInputEnded?.(frame, input);
+		}
 	});
 
 	useEventListener(UserInputService.InputChanged, (input) => {
-		if (frame && !IS_EDIT) onInputChanged?.(frame, input);
+		if (frame && !IS_EDIT) {
+			onInputChanged?.(frame, input);
+		}
 	});
 
 	return (
