@@ -1,6 +1,6 @@
 import { useSelector } from "@rbxts/react-reflex";
 import Roact, { useEffect } from "@rbxts/roact";
-import { useRem, useStore } from "client/hooks";
+import { useStore } from "client/hooks";
 import { selectHasLocalSnake } from "shared/store/snakes";
 
 import { Home } from "./home";
@@ -12,7 +12,6 @@ import { Support } from "./support";
 
 export function Menu() {
 	const store = useStore();
-	const rem = useRem();
 	const spawned = useSelector(selectHasLocalSnake);
 
 	useEffect(() => {
