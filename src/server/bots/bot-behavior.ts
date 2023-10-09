@@ -134,7 +134,3 @@ export class BotBehavior {
 		return BEHAVIORS[index] ?? BehaviorMode.Idle;
 	}
 }
-
-function maxVector(a: Vector2, b: Vector2) {
-	return a.Magnitude > b.Magnitude ? a : b;
-}

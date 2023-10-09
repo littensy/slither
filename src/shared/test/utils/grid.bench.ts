@@ -35,7 +35,7 @@ export = benchmark({
 	},
 
 	functions: {
-		grid: (profiler, { set, grid, queries, vectors, replacements }) => {
+		grid: (profiler, { grid, queries, vectors, replacements }) => {
 			profiler.Begin("populate");
 			for (const vector of vectors) {
 				grid.insert(vector);
@@ -65,14 +65,12 @@ export = benchmark({
 			profiler.Begin("nearest");
 			for (const query of queries) {
 				const queryVector = new Vector3(query, query, 0);
-				let nearest: Vector3 | undefined;
 				let nearestDistance = query;
 
 				for (const vector of set) {
 					const distance = vector.sub(queryVector).Magnitude;
 
 					if (distance < nearestDistance) {
-						nearest = vector;
 						nearestDistance = distance;
 					}
 				}
