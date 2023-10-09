@@ -15,7 +15,7 @@ import { shouldGrantBadge } from "../utils";
 const RANKING_BADGES: { [K in number]?: Badge } = {
 	1: Badge.FIRST_PLACE,
 	2: Badge.SECOND_PLACE,
-	3: Badge.FIRST_PLACE,
+	3: Badge.THIRD_PLACE,
 };
 
 const SCORE_BADGES: { [K in ScoreMilestone]?: Badge } = {
