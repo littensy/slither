@@ -5,7 +5,7 @@ import { sounds } from "shared/assets";
 import { palette } from "shared/constants/palette";
 import { remotes } from "shared/remotes";
 import { defaultPlayerSave, playerSaveSchema, selectPlayerSave } from "shared/store/saves";
-import { promisePlayerDisconnected } from "shared/utils/player-utils";
+import { onPlayerAdded, promisePlayerDisconnected } from "shared/utils/player-utils";
 
 const collection = createCollection("players", {
 	defaultData: defaultPlayerSave,
@@ -13,11 +13,7 @@ const collection = createCollection("players", {
 });
 
 export async function initSaveService() {
-	Players.PlayerAdded.Connect(loadPlayerSave);
-
-	for (const player of Players.GetPlayers()) {
-		loadPlayerSave(player);
-	}
+	onPlayerAdded(loadPlayerSave);
 }
 
 async function loadPlayerSave(player: Player) {
