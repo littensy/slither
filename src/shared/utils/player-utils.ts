@@ -36,3 +36,13 @@ export function getPlayerByName(name: string) {
 		return player;
 	}
 }
+
+export function onPlayerAdded(callback: (player: Player) => void) {
+	const connection = Players.PlayerAdded.Connect(callback);
+
+	for (const player of Players.GetPlayers()) {
+		callback(player);
+	}
+
+	return () => connection.Disconnect();
+}

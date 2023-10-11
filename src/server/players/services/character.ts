@@ -1,5 +1,4 @@
-import { Players } from "@rbxts/services";
-import { Character, promiseCharacter, promisePlayerDisconnected } from "shared/utils/player-utils";
+import { Character, onPlayerAdded, promiseCharacter, promisePlayerDisconnected } from "shared/utils/player-utils";
 
 export async function initCharacterService() {
 	function onSpawn(character: Character) {
@@ -14,7 +13,7 @@ export async function initCharacterService() {
 		}
 	}
 
-	Players.PlayerAdded.Connect((player) => {
+	onPlayerAdded((player) => {
 		const characterAdded = player.CharacterAdded.Connect((character) => {
 			promiseCharacter(character).then(onSpawn);
 
