@@ -190,10 +190,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/remo/-/remo-1.2.3.tgz#8336a450b82ec68af9675e15d3579498351be1c9"
   integrity sha512-7uN903B3w9pi/RkYV7vnZEtNIuYfW2TvvXxbJB5j05B0Xa1i9pGFjJgCkClShMxFGNPH11L8QisJE+eFoQJwiA==
 
-"@rbxts/ripple@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@rbxts/ripple/-/ripple-0.7.0.tgz#b6a5ecb1e9fbf904c442ba4237e226e553bfff34"
-  integrity sha512-o84Y6pXp0/sP1TqmRxnolF+q1AyDcjgNN0fnGEKCYBefatVlJa2WBoOCdYfmcLdrb1lnGR9I84wQJnt30tE2Jg==
+"@rbxts/ripple@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@rbxts/ripple/-/ripple-0.7.1.tgz#1b8f0d73f7d74f26ded0694d54c6d383be9a0f78"
+  integrity sha512-m8oJtsfDl1pJArSxz41AdrLGvC6e4zM/biUHdrsqpfPaouhkxSoAvExYwWV9oduDBRb03U5gyEnRpXUOERqiFA==
 
 "@rbxts/roact-compat-internal@^0.3.1":
   version "0.3.1"
