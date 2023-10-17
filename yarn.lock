@@ -250,10 +250,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/testez/-/testez-0.4.2-ts.0.tgz#4475183d317182ac7099bffee6492ffcb7bcaf0b"
   integrity sha512-8Q+OG9ddTD2P3aARCuRKpPqUBvuifgSnHvQMZ6jBMqUzxhIysnb0l4c3vnnaQnvdyZ1OW9tKxcdEHMGTb67uOw==
 
-"@rbxts/types@^1.0.720":
-  version "1.0.720"
-  resolved "https://registry.yarnpkg.com/@rbxts/types/-/types-1.0.720.tgz#a7247b4c74bd252210629d87e73baad4dee0e651"
-  integrity sha512-qhINYzZA1dsz534UdmQx1UKXVtBfBf26Lyh3mrX/5Lm6Iqjt0jDTtFn691BjA3xQlCU8oPec0gnRFxuIql0quA==
+"@rbxts/types@^1.0.723":
+  version "1.0.723"
+  resolved "https://registry.yarnpkg.com/@rbxts/types/-/types-1.0.723.tgz#ca5d27e5bac6242fe8600a65d87ded9460dfb9c6"
+  integrity sha512-VVLpEtGuQtOF2QrZ/clX4LnTjjytxRFQuHrQrPrCbS8ZFc0cMBGwtbwMVohXs4hytYBaR73hrGIjH+KFrhd3Eg==
 
 "@rbxts/validate-tree@^2.0.2":
   version "2.0.2"
