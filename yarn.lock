@@ -121,10 +121,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/object-utils/-/object-utils-1.0.4.tgz#c53d80f89e75c401365446be63fa1396bc2cffe7"
   integrity sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==
 
-"@rbxts/pretty-react-hooks@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.3.2.tgz#9cc3f0823ccaf911771ce5a006e3acbc9ed62559"
-  integrity sha512-/3O/LC8y+WdXDOnMQPbk61IrqRRU1+Uqk74X+1CJpnZXq3NOl7AuCI8q0jfL0ZZXroMGIfScg2SCT3YJ5uzz6A==
+"@rbxts/pretty-react-hooks@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@rbxts/pretty-react-hooks/-/pretty-react-hooks-0.3.3.tgz#ae1940f4bcdbbe79909445bcc27b58b20f0d6768"
+  integrity sha512-vcphO7E7pPl/3qmaVquKwnDvAhaPy62wwP0MIUskddpMH3++wk3bZvZq/nXGxlwV+fqQyvhl59yTHBNzik1A8g==
   dependencies:
     "@rbxts/services" "^1.5.1"
     "@rbxts/set-timeout" "^1.1.2"
