@@ -42,7 +42,7 @@
 		"@rbxts/react-reflex": "^0.2.0",
 		"@rbxts/react-roblox": "^0.2.0",
 		"@rbxts/reflex": "^4.2.2",
-		"@rbxts/remo": "^1.2.3",
+		"@rbxts/remo": "^1.2.4",
 		"@rbxts/ripple": "^0.7.1",
 		"@rbxts/roact": "npm:@rbxts/react-ts@latest",
 		"@rbxts/services": "^1.5.1",
