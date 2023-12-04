@@ -185,10 +185,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/reflex/-/reflex-4.2.2.tgz#49b01ca1011230d23451bbb4e2ced068ef82d1bc"
   integrity sha512-TLIwtCyGSHAheEEf9XlfqB9sZHLl02cs+fgNAE351OzQWI2RtCYeBNjAKQ3L0tZstHUQOw7FyiNvZzNQU0rDSw==
 
-"@rbxts/remo@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@rbxts/remo/-/remo-1.2.3.tgz#8336a450b82ec68af9675e15d3579498351be1c9"
-  integrity sha512-7uN903B3w9pi/RkYV7vnZEtNIuYfW2TvvXxbJB5j05B0Xa1i9pGFjJgCkClShMxFGNPH11L8QisJE+eFoQJwiA==
+"@rbxts/remo@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@rbxts/remo/-/remo-1.3.0.tgz#33aedccee536d03714fba2ad4f1e6cd6a560cbd7"
+  integrity sha512-vgb9CS36+5YQU4koT12I5LknJ6EjcAtzDduGleP0Qcu5XVTaG3WQIvsbrDC0xCafRIrqTNPkkHRXE04JFCI1MQ==
 
 "@rbxts/ripple@^0.7.1":
   version "0.7.1"
