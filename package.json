@@ -27,7 +27,7 @@
 		"eslint-plugin-roblox-ts": "^0.0.36",
 		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"eslint-plugin-unused-imports": "^3.0.0",
-		"prettier": "^3.0.3",
+		"prettier": "^3.1.1",
 		"rbxts-transform-debug": "^2.2.0",
 		"rbxts-transform-env": "^2.2.0",
 		"roblox-ts": "^2.2.0",
