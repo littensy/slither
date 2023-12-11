@@ -180,10 +180,10 @@
     "@rbxts/scheduler-internal" "^0.2.1"
     "@rbxts/shared-internal" "^0.2.1"
 
-"@rbxts/reflex@^4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@rbxts/reflex/-/reflex-4.2.2.tgz#49b01ca1011230d23451bbb4e2ced068ef82d1bc"
-  integrity sha512-TLIwtCyGSHAheEEf9XlfqB9sZHLl02cs+fgNAE351OzQWI2RtCYeBNjAKQ3L0tZstHUQOw7FyiNvZzNQU0rDSw==
+"@rbxts/reflex@^4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@rbxts/reflex/-/reflex-4.3.1.tgz#4c0bcca8024cd647b5caa0cfd1085188b0f5ac3b"
+  integrity sha512-S5MbEpHKeRh9NWhwGJ789WbUsmlAlpQziWaNK4+kz1EpaaQ7uHQMZAuN1DYl4+QkqmOSuPlj04COwmArBGWH1Q==
 
 "@rbxts/remo@^1.3.0":
   version "1.3.0"
