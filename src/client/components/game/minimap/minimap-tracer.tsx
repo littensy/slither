@@ -20,10 +20,10 @@ export const MinimapTracer = memo<MinimapTracerProps>(({ from, to, isPlayer, isF
 	const color = isLeader
 		? palette.yellow
 		: isFriend
-		? palette.sapphire
-		: isPlayer
-		? palette.lavender
-		: palette.surface2;
+			? palette.sapphire
+			: isPlayer
+				? palette.lavender
+				: palette.surface2;
 
 	return (
 		<Image
