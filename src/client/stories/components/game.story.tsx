@@ -31,7 +31,7 @@ export = hoarcekat(() => {
 						: new Vector2(
 								math.random(-WORLD_BOUNDS, WORLD_BOUNDS),
 								math.random(-WORLD_BOUNDS, WORLD_BOUNDS),
-						  ),
+							),
 				skin: getRandomBaseSnakeSkin().id,
 				score: math.random(0, 5000),
 			});

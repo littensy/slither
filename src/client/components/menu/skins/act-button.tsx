@@ -105,14 +105,17 @@ export function ActButton() {
 				primaryMotion.spring(palette.red);
 				secondaryMotion.spring(palette.peach);
 				break;
+
 			case "wear":
 				primaryMotion.spring(palette.blue);
 				secondaryMotion.spring(palette.mauve);
 				break;
+
 			case "buy":
 				primaryMotion.spring(palette.teal);
 				secondaryMotion.spring(palette.green);
 				break;
+
 			case "not-enough-money":
 			case "none":
 				primaryMotion.spring(palette.red);
@@ -121,19 +124,30 @@ export function ActButton() {
 		}
 	}, [status.variant]);
 
-	const text =
-		status.variant === "buy"
-			? `💵  Buy ${stylize(`"${currentSkin}"`, darkGreen)} for ${stylize(
+	const text = useMemo(() => {
+		switch (status.variant) {
+			case "buy":
+				return `💵  Buy ${stylize(`"${currentSkin}"`, darkGreen)} for ${stylize(
 					"$" + formatInteger(status.price),
 					darkGreen,
-			  )}`
-			: status.variant === "wear"
-			? `🎨  Wear ${stylize(`"${currentSkin}"`, darkBlue)}`
-			: status.variant === "wearing"
-			? `🎨  Wearing ${stylize(`"${currentSkin}"`, darkPeach)}`
-			: status.variant === "not-enough-money"
-			? `🔒  ${stylize(`"${currentSkin}"`, darkRed)} costs ${stylize("$" + formatInteger(status.price), darkRed)}`
-			: "🔒  Locked";
+				)}`;
+
+			case "wear":
+				return `🎨  Wear ${stylize(`"${currentSkin}"`, darkBlue)}`;
+
+			case "wearing":
+				return `🎨  Wearing ${stylize(`"${currentSkin}"`, darkPeach)}`;
+
+			case "not-enough-money":
+				return `🔒  ${stylize(`"${currentSkin}"`, darkRed)} costs ${stylize(
+					"$" + formatInteger(status.price),
+					darkRed,
+				)}`;
+
+			default:
+				return "🔒  Locked";
+		}
+	}, [status, currentSkin]);
 
 	return (
 		<PrimaryButton
