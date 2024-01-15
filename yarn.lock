@@ -99,10 +99,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/flipper/-/flipper-2.0.1.tgz#25bd840441055da419c234a9d045309e40ac3ad2"
   integrity sha512-kxb5AZizP05XSmo3waS/QkcfNMD5b6HX4gGwyHOyBow260R5MIT4L/ZUPLvleXXyb9b67X4NVmHoac1tPXOLNA==
 
-"@rbxts/lapis@^0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@rbxts/lapis/-/lapis-0.2.7.tgz#c773acfaf3368fc2e6057331770bc7aeee9bbc03"
-  integrity sha512-3h/Ptfx1PFxhiCOBgPL9nHFcrI3tWxLV2B3rmssNAaO5VhuAiYOfbkzY3bXD8e801NCw2i8NqhCiD6HaLbFSGg==
+"@rbxts/lapis@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@rbxts/lapis/-/lapis-0.2.9.tgz#8d223b67ab77a52e6ca4d6985b0f90ea0fbcd6cd"
+  integrity sha512-sRGUrVMhUWq47c8g6EpFDLWqqEoxcEr1TdIffN3orJOLqBAYbd9DyIFntPfi4dV30NQtYwaT5YfqUvCij2t2Ew==
 
 "@rbxts/luau-polyfill-internal@1.2.3-ts.0":
   version "1.2.3-ts.0"
