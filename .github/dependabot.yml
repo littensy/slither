@@ -4,3 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      deps:
+        dependency-type: "production"
+      deps-dev:
+        dependency-type: "development"
