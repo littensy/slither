@@ -17,7 +17,7 @@
 	},
 	"devDependencies": {
 		"@rbxts/compiler-types": "^2.2.0-types.0",
-		"@rbxts/types": "^1.0.739",
+		"@rbxts/types": "^1.0.744",
 		"@typescript-eslint/eslint-plugin": "^6.19.0",
 		"@typescript-eslint/parser": "^6.19.0",
 		"cross-env": "^7.0.3",
@@ -27,7 +27,7 @@
 		"eslint-plugin-roblox-ts": "^0.0.36",
 		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"eslint-plugin-unused-imports": "^3.0.0",
-		"prettier": "^3.2.2",
+		"prettier": "^3.2.4",
 		"rbxts-transform-debug": "^2.2.0",
 		"rbxts-transform-env": "^2.2.0",
 		"roblox-ts": "^2.2.0",
