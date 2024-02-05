@@ -183,10 +183,10 @@
   resolved "https://registry.yarnpkg.com/@rbxts/remo/-/remo-1.3.1.tgz#502a8899b7e197d3626262cf7ee407b96e9ac8ae"
   integrity sha512-cGYEoYOLC5W0SdHGlHx73HmEs2CRPm4I5FRw8wRjQdm0D9BLepCXa9Vw2u7vXt5p54Nqd99Ctmf/ZL6Z0bwKkQ==
 
-"@rbxts/ripple@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@rbxts/ripple/-/ripple-0.8.0.tgz#05f4e626394457bcb6a0ac91b62584209c113f1e"
-  integrity sha512-P9zTLYK1eoc5T+1AIHD6olK3ZV4B3/m4xrN99ToBSTTZRM3lc8Ap+QAQpArmmmefk1URWcdhC6/yBYZNjghY6g==
+"@rbxts/ripple@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@rbxts/ripple/-/ripple-0.8.1.tgz#c3eb9efeea4666525a75ebf9f7a1d12241860109"
+  integrity sha512-3zQznIQcuXKb6Q0jZpKvhYRdWjQ+sMOBQt3KlQ7as4URiiQyXQCBGx7oWupVwJHuWi4CnpfQVkB2VFDWAmH20Q==
 
 "@rbxts/roact-compat-internal@^0.3.1":
   version "0.3.1"
@@ -233,10 +233,10 @@
   dependencies:
     "@rbxts/luau-polyfill-internal" "1.2.3-ts.0"
 
-"@rbxts/t@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@rbxts/t/-/t-3.1.0.tgz#a8f2d99d5ce1b0cc7f2a61e0a93ad4d872764089"
-  integrity sha512-ba/wfKYtAL6JWVhZNbhMnBZtzgGaTxttvfzxxpEcHDy0Qeaq0DF2Odo/zJ32Ajw961EMYkAMTnPXLLrLB/r+mw==
+"@rbxts/t@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@rbxts/t/-/t-3.1.1.tgz#713e48693a9a2f15908b9f80e42af04d9c385e74"
+  integrity sha512-r+IvHHGLt9ZM8+cJAs5Q7ZyGaSlsbkXTaeat85FxRmjjozykHLbQ24rY/5utJbp63a5uCy3Wyl1fGv/Gk/GnIw==
 
 "@rbxts/testez@^0.4.2-ts.0":
   version "0.4.2-ts.0"
