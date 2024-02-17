@@ -1,7 +1,7 @@
 import "./react-config";
 
+import React, { StrictMode } from "@rbxts/react";
 import { createPortal, createRoot } from "@rbxts/react-roblox";
-import Roact, { StrictMode } from "@rbxts/roact";
 import { Players } from "@rbxts/services";
 import { RootProvider } from "client/providers/root-provider";
 
@@ -13,8 +13,8 @@ const target = Players.LocalPlayer.WaitForChild("PlayerGui");
 root.render(
 	createPortal(
 		<StrictMode>
-			<RootProvider key="root-provider">
-				<App key="app" />
+			<RootProvider>
+				<App />
 			</RootProvider>
 		</StrictMode>,
 		target,

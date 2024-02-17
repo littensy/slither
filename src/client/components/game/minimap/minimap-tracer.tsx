@@ -1,4 +1,4 @@
-import Roact, { memo } from "@rbxts/roact";
+import React, { memo } from "@rbxts/react";
 import { Image } from "client/components/ui/image";
 import { images } from "shared/assets";
 import { palette } from "shared/constants/palette";
@@ -13,7 +13,7 @@ interface MinimapTracerProps {
 	readonly isLeader: boolean;
 }
 
-export const MinimapTracer = memo<MinimapTracerProps>(({ from, to, isPlayer, isFriend, isLeader }) => {
+function MinimapTracerComponent({ from, to, isPlayer, isFriend, isLeader }: MinimapTracerProps) {
 	const rem = useMinimapRem();
 	const center = from.add(to).div(2);
 	const length = from.sub(to).Magnitude;
@@ -37,4 +37,6 @@ export const MinimapTracer = memo<MinimapTracerProps>(({ from, to, isPlayer, isF
 			rotation={math.deg(math.atan2(to.Y - from.Y, to.X - from.X))}
 		/>
 	);
-});
+}
+
+export const MinimapTracer = memo(MinimapTracerComponent);

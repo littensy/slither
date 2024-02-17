@@ -1,4 +1,4 @@
-import { useEffect } from "@rbxts/roact";
+import { useEffect } from "@rbxts/react";
 import { store } from "client/store";
 import { USER_NAME } from "shared/constants/core";
 import { getSnakeSkin } from "shared/constants/skins";

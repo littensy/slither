@@ -1,5 +1,5 @@
 import { useInterval } from "@rbxts/pretty-react-hooks";
-import { useState } from "@rbxts/roact";
+import { useState } from "@rbxts/react";
 import { getSnakeSkin, SnakeSkin } from "shared/constants/skins";
 import { darken } from "shared/utils/color-utils";
 

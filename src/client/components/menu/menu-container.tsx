@@ -1,13 +1,14 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
+import React, { useEffect, useMemo, useRef } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
-import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
 import { DelayRender } from "client/components/ui/delay-render";
 import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
 import { MenuPage, selectCurrentPage, selectIsMenuOpen, selectMenuTransition } from "client/store/menu";
 
-interface MenuContainerProps extends Roact.PropsWithChildren {
+import { Transition } from "../ui/transition";
+
+interface MenuContainerProps extends React.PropsWithChildren {
 	readonly page?: MenuPage;
 }
 
@@ -50,16 +51,14 @@ export function MenuContainer({ page, children }: MenuContainerProps) {
 
 	return (
 		<DelayRender shouldRender={visible} unmountDelay={1}>
-			<CanvasOrFrame
-				key="container"
+			<Transition
 				groupTransparency={lerpBinding(transition, 1, 0)}
-				backgroundTransparency={1}
 				size={new UDim2(1, 0, 1, 0)}
 				position={lerpBinding(transition, transitionFrom.current, new UDim2())}
 				clipsDescendants
 			>
 				{children}
-			</CanvasOrFrame>
+			</Transition>
 		</DelayRender>
 	);
 }

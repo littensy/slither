@@ -1,5 +1,5 @@
+import React from "@rbxts/react";
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
-import Roact from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
 import { useDefined, useRem, useStore } from "client/hooks";
 import { formatInteger } from "client/utils/format-integer";
@@ -26,10 +26,9 @@ export function Stats() {
 
 	return (
 		<Group>
-			<uipadding key="margin" PaddingBottom={new UDim(0, rem(3))} PaddingLeft={new UDim(0, rem(3))} />
+			<uipadding PaddingBottom={new UDim(0, rem(3))} PaddingLeft={new UDim(0, rem(3))} />
 
 			<uilistlayout
-				key="layout"
 				FillDirection="Vertical"
 				HorizontalAlignment="Left"
 				VerticalAlignment="Bottom"
@@ -38,7 +37,6 @@ export function Stats() {
 			/>
 
 			<StatsCard
-				key="eliminated"
 				emoji="☠️"
 				label="KOs"
 				value={`${formatInteger(eliminations)}`}
@@ -49,7 +47,6 @@ export function Stats() {
 			/>
 
 			<StatsCard
-				key="rank"
 				emoji="🏆"
 				label="Rank"
 				value={rank}
@@ -60,7 +57,6 @@ export function Stats() {
 			/>
 
 			<StatsCard
-				key="score"
 				emoji="💯"
 				label="Score"
 				value={`${formatInteger(score)}`}
@@ -71,7 +67,6 @@ export function Stats() {
 			/>
 
 			<StatsCard
-				key="balance"
 				onClick={() => {
 					if (currentScore === undefined) {
 						// Only show the support page if the user is not playing

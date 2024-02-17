@@ -1,6 +1,6 @@
 import { useDebounceEffect, usePrevious } from "@rbxts/pretty-react-hooks";
+import React, { useEffect } from "@rbxts/react";
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
 import { selectSnakeFromWorldSubject } from "client/store/world";
 import { playSound, sounds } from "shared/assets";
 import { selectHasLocalSnake, selectSnakeIsBoosting } from "shared/store/snakes";

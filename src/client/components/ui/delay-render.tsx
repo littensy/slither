@@ -1,7 +1,7 @@
-import Roact, { useEffect, useState } from "@rbxts/roact";
+import React, { useEffect, useState } from "@rbxts/react";
 import { setTimeout } from "@rbxts/set-timeout";
 
-interface DelayRenderProps extends Roact.PropsWithChildren {
+interface DelayRenderProps extends React.PropsWithChildren {
 	shouldRender: boolean;
 	mountDelay?: number;
 	unmountDelay?: number;

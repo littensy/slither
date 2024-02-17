@@ -1,7 +1,7 @@
 import { lerpBinding, useViewport } from "@rbxts/pretty-react-hooks";
 import { composeBindings } from "@rbxts/pretty-react-hooks";
+import React, { useEffect, useMemo } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
 import { Image } from "client/components/ui/image";
 import { Text } from "client/components/ui/text";
@@ -58,30 +58,22 @@ export function Compass() {
 	return (
 		<Group>
 			<uipadding
-				key="padding"
 				PaddingTop={new UDim(0, rem(6))}
 				PaddingBottom={new UDim(0, rem(6))}
 				PaddingLeft={new UDim(0, rem(6))}
 				PaddingRight={new UDim(0, rem(6))}
 			/>
 
-			<Group
-				key="compass-container"
-				anchorPoint={new Vector2(0.5, 0.5)}
-				size={new UDim2(0, rem(6), 0, rem(6))}
-				position={style.position}
-			>
+			<Group anchorPoint={new Vector2(0.5, 0.5)} size={new UDim2(0, rem(6), 0, rem(6))} position={style.position}>
 				<Text
-					key="icon"
 					text="👑"
 					textSize={rem(3)}
 					textTransparency={lerpBinding(visible, 1, 0)}
 					size={new UDim2(1, 0, 1, 0)}
 				/>
 
-				<Group key="compass-needle" rotation={style.rotation}>
+				<Group rotation={style.rotation}>
 					<Image
-						key="compass-arrow"
 						image={images.ui.leader_pointer}
 						imageTransparency={lerpBinding(visible, 1, 0)}
 						anchorPoint={new Vector2(0.5, 0.5)}

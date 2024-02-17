@@ -1,4 +1,4 @@
-import Roact, { useEffect } from "@rbxts/roact";
+import React, { useEffect } from "@rbxts/react";
 import { Image } from "client/components/ui/image";
 import { useContinuousAngle, useMotion } from "client/hooks";
 import { images } from "shared/assets";

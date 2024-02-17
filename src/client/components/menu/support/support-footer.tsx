@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { Text } from "client/components/ui/text";
 import { fonts } from "client/constants/fonts";
 import { useRem } from "client/hooks";

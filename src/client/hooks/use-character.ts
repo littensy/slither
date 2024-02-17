@@ -1,5 +1,5 @@
 import { useAsync, useEventListener } from "@rbxts/pretty-react-hooks";
-import { useState } from "@rbxts/roact";
+import { useState } from "@rbxts/react";
 import { Character, promiseCharacter } from "shared/utils/player-utils";
 
 export function useCharacter(player: Player): Character | undefined {

@@ -1,4 +1,4 @@
-import { useEffect } from "@rbxts/roact";
+import { useEffect } from "@rbxts/react";
 import { UserInputService } from "@rbxts/services";
 
 export function useToggleTouchControls(visible: boolean) {

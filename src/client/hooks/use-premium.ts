@@ -1,5 +1,5 @@
 import { useEventListener } from "@rbxts/pretty-react-hooks";
-import { useState } from "@rbxts/roact";
+import { useState } from "@rbxts/react";
 import { Players } from "@rbxts/services";
 
 export function usePremium() {

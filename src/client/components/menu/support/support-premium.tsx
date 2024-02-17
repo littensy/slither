@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { MarketplaceService, Players } from "@rbxts/services";
 import { sendAlert } from "client/alerts";
 import { PrimaryButton } from "client/components/ui/primary-button";
@@ -31,11 +31,10 @@ export function SupportPremium() {
 			overlayGradient={new ColorSequence(palette.red, palette.blue)}
 		>
 			<Text
-				key="premium-icon"
 				position={new UDim2(0.5, 0, 0.5, 0)}
 				textSize={rem(2)}
 				textColor={palette.black}
-				text="\u{E001} "
+				text={`${RobloxEmoji.Premium} `}
 			/>
 		</PrimaryButton>
 	);

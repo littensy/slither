@@ -1,19 +1,19 @@
 import { blend, composeBindings } from "@rbxts/pretty-react-hooks";
-import Roact, { useMemo } from "@rbxts/roact";
+import React, { useMemo } from "@rbxts/react";
 import { palette } from "shared/constants/palette";
 
 import { useRem } from "../../hooks";
 import { Group } from "./group";
 
-interface OutlineProps extends Roact.PropsWithChildren {
-	readonly outlineTransparency?: number | Roact.Binding<number>;
-	readonly innerColor?: Color3 | Roact.Binding<Color3>;
-	readonly outerColor?: Color3 | Roact.Binding<Color3>;
-	readonly innerTransparency?: number | Roact.Binding<number>;
-	readonly outerTransparency?: number | Roact.Binding<number>;
-	readonly innerThickness?: number | Roact.Binding<number>;
-	readonly outerThickness?: number | Roact.Binding<number>;
-	readonly cornerRadius?: UDim | Roact.Binding<UDim>;
+interface OutlineProps extends React.PropsWithChildren {
+	readonly outlineTransparency?: number | React.Binding<number>;
+	readonly innerColor?: Color3 | React.Binding<Color3>;
+	readonly outerColor?: Color3 | React.Binding<Color3>;
+	readonly innerTransparency?: number | React.Binding<number>;
+	readonly outerTransparency?: number | React.Binding<number>;
+	readonly innerThickness?: number | React.Binding<number>;
+	readonly outerThickness?: number | React.Binding<number>;
+	readonly cornerRadius?: UDim | React.Binding<UDim>;
 }
 
 function ceilEven(n: number) {
@@ -67,26 +67,16 @@ export function Outline({
 
 	return (
 		<>
-			<Group key="inner-border" size={innerStyle.size} position={innerStyle.position}>
-				<uicorner key="corner" CornerRadius={innerStyle.radius} />
-				<uistroke
-					key="stroke"
-					Color={innerColor}
-					Transparency={innerStyle.transparency}
-					Thickness={innerThickness}
-				>
+			<Group size={innerStyle.size} position={innerStyle.position}>
+				<uicorner CornerRadius={innerStyle.radius} />
+				<uistroke Color={innerColor} Transparency={innerStyle.transparency} Thickness={innerThickness}>
 					{children}
 				</uistroke>
 			</Group>
 
-			<Group key="outer-border">
-				<uicorner key="corner" CornerRadius={cornerRadius} />
-				<uistroke
-					key="stroke"
-					Color={outerColor}
-					Transparency={outerStyle.transparency}
-					Thickness={outerThickness}
-				>
+			<Group>
+				<uicorner CornerRadius={cornerRadius} />
+				<uistroke Color={outerColor} Transparency={outerStyle.transparency} Thickness={outerThickness}>
 					{children}
 				</uistroke>
 			</Group>

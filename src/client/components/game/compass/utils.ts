@@ -1,5 +1,5 @@
+import { useEffect, useState } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import { useEffect, useState } from "@rbxts/roact";
 import { setTimeout } from "@rbxts/set-timeout";
 import { selectTopSnake } from "shared/store/snakes";
 

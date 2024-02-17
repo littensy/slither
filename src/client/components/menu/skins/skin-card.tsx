@@ -1,5 +1,5 @@
 import { blend } from "@rbxts/pretty-react-hooks";
-import Roact, { useEffect } from "@rbxts/roact";
+import React, { useEffect } from "@rbxts/react";
 import { Image } from "client/components/ui/image";
 import { ReactiveButton } from "client/components/ui/reactive-button";
 import { Shadow } from "client/components/ui/shadow";
@@ -73,7 +73,6 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 			zIndex={-math.abs(index)}
 		>
 			<Shadow
-				key="drop-shadow"
 				shadowColor={palette.secondary}
 				shadowBlur={0.6}
 				shadowSize={rem(7)}
@@ -82,7 +81,6 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 			/>
 
 			<Image
-				key="background"
 				backgroundColor={palette.primary}
 				backgroundTransparency={transparency}
 				image={images.ui.skin_card_gradient}
@@ -92,16 +90,15 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 				size={new UDim2(1, 0, 1, 0)}
 			>
 				<uistroke
-					key="stroke"
 					Color={palette.primary}
 					Thickness={rem(0.5)}
 					Transparency={transparency.map((t) => blend(t, 0.8))}
 				/>
 			</Image>
 
-			<SkinThumbnail key="thumbnail" active={active} skin={palette.skin} transparency={transparency} />
+			<SkinThumbnail active={active} skin={palette.skin} transparency={transparency} />
 
-			<SkinIndicator key="indicator" id={id} primary={palette.primary} transparency={transparency} />
+			<SkinIndicator id={id} primary={palette.primary} transparency={transparency} />
 		</ReactiveButton>
 	);
 }

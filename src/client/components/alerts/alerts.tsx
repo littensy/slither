@@ -1,5 +1,5 @@
+import React from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact from "@rbxts/roact";
 import { selectAlerts } from "client/store/alert";
 
 import { Alert } from "./alert";

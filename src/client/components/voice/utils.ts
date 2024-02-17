@@ -1,5 +1,5 @@
 import { useEventListener } from "@rbxts/pretty-react-hooks";
-import { useEffect, useState } from "@rbxts/roact";
+import { useEffect, useState } from "@rbxts/react";
 import { Players } from "@rbxts/services";
 import { Character, promiseCharacter } from "shared/utils/player-utils";
 

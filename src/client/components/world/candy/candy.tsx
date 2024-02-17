@@ -1,5 +1,5 @@
+import React, { useBinding, useEffect, useMemo } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
 import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";

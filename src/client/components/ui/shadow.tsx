@@ -1,16 +1,16 @@
 import { composeBindings } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { images } from "shared/assets";
 
 import { useRem } from "../../hooks";
 import { Image } from "./image";
 
-interface ShadowProps extends Roact.PropsWithChildren {
+interface ShadowProps extends React.PropsWithChildren {
 	shadowBlur?: number;
-	shadowPosition?: number | Roact.Binding<number>;
-	shadowSize?: number | UDim2 | Roact.Binding<number | UDim2>;
-	shadowColor?: Color3 | Roact.Binding<Color3>;
-	shadowTransparency?: number | Roact.Binding<number>;
+	shadowPosition?: number | React.Binding<number>;
+	shadowSize?: number | UDim2 | React.Binding<number | UDim2>;
+	shadowColor?: Color3 | React.Binding<Color3>;
+	shadowTransparency?: number | React.Binding<number>;
 	zIndex?: number;
 }
 

@@ -1,5 +1,4 @@
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
-import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
+import React, { useEffect, useMemo } from "@rbxts/react";
 import { Frame } from "client/components/ui/frame";
 import { Group } from "client/components/ui/group";
 import { ReactiveButton } from "client/components/ui/reactive-button";
@@ -9,6 +8,8 @@ import { fonts } from "client/constants/fonts";
 import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
 import { palette } from "shared/constants/palette";
+
+import { Transition } from "../ui/transition";
 
 interface StatsCardProps {
 	readonly onClick?: () => void;
@@ -49,15 +50,12 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 
 	return (
 		<ReactiveButton onClick={onClick} soundVariant="alt" backgroundTransparency={1} size={size} layoutOrder={order}>
-			<CanvasOrFrame
-				key="fade-out"
+			<Transition
 				groupTransparency={transparency}
-				backgroundTransparency={1}
 				size={new UDim2(1, rem(2 * CARD_CANVAS_MARGIN), 1, rem(2 * CARD_CANVAS_MARGIN))}
 				position={new UDim2(0, rem(-CARD_CANVAS_MARGIN), 0, rem(-CARD_CANVAS_MARGIN))}
 			>
 				<uipadding
-					key="canvas-margin"
 					PaddingTop={new UDim(0, rem(CARD_CANVAS_MARGIN))}
 					PaddingBottom={new UDim(0, rem(CARD_CANVAS_MARGIN))}
 					PaddingLeft={new UDim(0, rem(CARD_CANVAS_MARGIN))}
@@ -65,7 +63,6 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 				/>
 
 				<Shadow
-					key="drop-shadow"
 					shadowColor={primary.Lerp(secondary, 0.5)}
 					shadowBlur={0.3}
 					shadowPosition={rem(0.5)}
@@ -74,18 +71,16 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 				/>
 
 				<Frame
-					key="background"
 					backgroundTransparency={0.3}
 					backgroundColor={palette.white}
 					cornerRadius={new UDim(0, rem(0.5))}
 					size={new UDim2(1, 0, 1, 0)}
 				>
-					<uigradient key="gradient" Color={new ColorSequence(primaryDark, secondaryDark)} />
+					<uigradient Color={new ColorSequence(primaryDark, secondaryDark)} />
 				</Frame>
 
-				<Group key="indicator-container" clipsDescendants size={new UDim2(0, rem(0.35), 1, 0)}>
+				<Group clipsDescendants size={new UDim2(0, rem(0.35), 1, 0)}>
 					<Frame
-						key="indicator"
 						backgroundColor={primary}
 						cornerRadius={new UDim(0, rem(0.5))}
 						size={new UDim2(0, rem(1), 1, 0)}
@@ -93,7 +88,6 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 				</Group>
 
 				<Text
-					key="emoji"
 					text={emoji}
 					textSize={rem(2)}
 					size={new UDim2(0, rem(CARD_EMOJI_WIDTH), 1, 0)}
@@ -101,7 +95,6 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 				/>
 
 				<Text
-					key="label"
 					font={fonts.inter.bold}
 					text={label}
 					textColor={primary}
@@ -118,7 +111,6 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 				/>
 
 				<Text
-					key="value"
 					font={fonts.inter.regular}
 					text={value}
 					textColor={palette.white}
@@ -133,7 +125,7 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 						},
 					}}
 				/>
-			</CanvasOrFrame>
+			</Transition>
 		</ReactiveButton>
 	);
 }

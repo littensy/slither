@@ -1,6 +1,6 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
+import React, { useEffect } from "@rbxts/react";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
 import { Frame } from "client/components/ui/frame";
 import { Group } from "client/components/ui/group";
 import { Image } from "client/components/ui/image";
@@ -42,7 +42,6 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 			layoutOrder={order}
 		>
 			<Shadow
-				key="glow"
 				shadowBlur={0.3}
 				shadowPosition={rem(0.5)}
 				shadowSize={rem(4)}
@@ -51,7 +50,6 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 			/>
 
 			<Frame
-				key="background"
 				backgroundColor={color}
 				backgroundTransparency={lerpBinding(transition, 1, 0.8)}
 				cornerRadius={new UDim(0, rem(1))}
@@ -59,7 +57,6 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 			/>
 
 			<Outline
-				key="outline"
 				outlineTransparency={lerpBinding(transition, 1, 0.5)}
 				innerThickness={rem(4, "pixel")}
 				outerThickness={rem(2, "pixel")}
@@ -68,7 +65,6 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 			/>
 
 			<Image
-				key="icon"
 				image={isPage ? icon : iconAlt}
 				imageColor={lerpBinding(transition, palette.text, color)}
 				imageTransparency={lerpBinding(transition, 0.7, 0)}
@@ -77,9 +73,8 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 				position={lerpBinding(transition, new UDim2(0.5, 0, 0.5, 0), new UDim2(0.5, 0, 0.5, rem(-0.75)))}
 			/>
 
-			<Group key="label-container" clipsDescendants>
+			<Group clipsDescendants>
 				<Text
-					key="label"
 					font={fonts.inter.bold}
 					text={label}
 					textColor={lerpBinding(transition, palette.text, color)}

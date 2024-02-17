@@ -1,5 +1,5 @@
 import { useViewport } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { Group } from "client/components/ui/group";
 import { useOrientation, usePremium, useRem } from "client/hooks";
 import { formatInteger } from "client/utils/format-integer";
@@ -27,7 +27,7 @@ export function SupportProducts() {
 	};
 
 	const getProductDiscount = (money: number, discount?: string) => {
-		return premium ? `<s>$${formatInteger(money)}</s> \u{E001} BONUS!` : discount;
+		return premium ? `<s>$${formatInteger(money)}</s> ${RobloxEmoji.Premium} BONUS!` : discount;
 	};
 
 	let index = 0;
@@ -42,11 +42,10 @@ export function SupportProducts() {
 			Size={new UDim2(0, rem(70), 0, rem(36))}
 			Position={new UDim2(0.5, 0, 0.5, 16)}
 		>
-			<uisizeconstraint key="size-constraint" MaxSize={viewport.map((v) => new Vector2(v.X, math.huge))} />
+			<uisizeconstraint MaxSize={viewport.map((v) => new Vector2(v.X, math.huge))} />
 
 			{orientation === "portrait" && (
 				<uipadding
-					key="phone-padding"
 					PaddingLeft={new UDim(0, padding)}
 					PaddingRight={new UDim(0, padding)}
 					PaddingTop={new UDim(0, -2 * padding)}
@@ -54,9 +53,8 @@ export function SupportProducts() {
 				/>
 			)}
 
-			<Group key="left-group" size={new UDim2(0.6, -padding / 2, 1, 0)}>
+			<Group size={new UDim2(0.6, -padding / 2, 1, 0)}>
 				<SupportProduct
-					key="top-left"
 					index={index++}
 					productId={DevProduct.MONEY_100}
 					productTitle={getProductTitle(100)}
@@ -68,7 +66,6 @@ export function SupportProducts() {
 					position={new UDim2(0, 0, 0, 0)}
 				/>
 				<SupportProduct
-					key="bottom-left"
 					index={index++}
 					productId={DevProduct.MONEY_250}
 					productTitle={getProductTitle(250)}
@@ -80,7 +77,6 @@ export function SupportProducts() {
 					position={new UDim2(0, 0, 0.5, padding / 2)}
 				/>
 				<SupportProduct
-					key="top-right"
 					index={index++}
 					productId={DevProduct.MONEY_500}
 					productTitle={getProductTitle(500)}
@@ -92,7 +88,6 @@ export function SupportProducts() {
 					position={new UDim2(0.5, padding / 2, 0, 0)}
 				/>
 				<SupportProduct
-					key="bottom-right"
 					index={index++}
 					productId={DevProduct.MONEY_1000}
 					productTitle={getProductTitle(1000)}
@@ -106,7 +101,6 @@ export function SupportProducts() {
 			</Group>
 
 			<SupportProduct
-				key="right-product"
 				index={index++}
 				productId={DevProduct.MONEY_5000}
 				productTitle={getProductTitle(5000)}
@@ -117,7 +111,7 @@ export function SupportProducts() {
 				size={new UDim2(0.4, -padding / 2, 1, 0)}
 				position={new UDim2(0.6, padding / 2, 0, 0)}
 			>
-				<SupportHeart key="heart" />
+				<SupportHeart />
 			</SupportProduct>
 		</scrollingframe>
 	);

@@ -1,17 +1,17 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 
 import { FrameProps } from "./frame";
 
 export interface ImageProps extends FrameProps<ImageLabel> {
 	image: string;
-	imageColor?: Color3 | Roact.Binding<Color3>;
-	imageTransparency?: number | Roact.Binding<number>;
-	imageRectOffset?: Vector2 | Roact.Binding<Vector2>;
-	imageRectSize?: Vector2 | Roact.Binding<Vector2>;
-	scaleType?: Roact.InferEnumNames<Enum.ScaleType>;
-	sliceScale?: number | Roact.Binding<number>;
-	sliceCenter?: Rect | Roact.Binding<Rect>;
-	tileSize?: UDim2 | Roact.Binding<UDim2>;
+	imageColor?: Color3 | React.Binding<Color3>;
+	imageTransparency?: number | React.Binding<number>;
+	imageRectOffset?: Vector2 | React.Binding<Vector2>;
+	imageRectSize?: Vector2 | React.Binding<Vector2>;
+	scaleType?: React.InferEnumNames<Enum.ScaleType>;
+	sliceScale?: number | React.Binding<number>;
+	sliceCenter?: Rect | React.Binding<Rect>;
+	tileSize?: UDim2 | React.Binding<UDim2>;
 }
 
 export function Image(props: ImageProps) {
@@ -37,11 +37,11 @@ export function Image(props: ImageProps) {
 			ZIndex={props.zIndex}
 			LayoutOrder={props.layoutOrder}
 			BorderSizePixel={0}
-			Event={props.event || {}}
-			Change={props.change || {}}
+			Event={props.event}
+			Change={props.change}
 		>
-			{props.cornerRadius && <uicorner key="corner" CornerRadius={props.cornerRadius} />}
 			{props.children}
+			{props.cornerRadius && <uicorner CornerRadius={props.cornerRadius} />}
 		</imagelabel>
 	);
 }

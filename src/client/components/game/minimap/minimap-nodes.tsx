@@ -1,6 +1,6 @@
 import { map, useInterval } from "@rbxts/pretty-react-hooks";
+import React, { Element, useState } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { Element, useState } from "@rbxts/roact";
 import { CanvasGroup } from "client/components/ui/canvas-group";
 import { useDefined, useStore } from "client/hooks";
 import { selectSnakeFromWorldSubject } from "client/store/world";
@@ -59,7 +59,6 @@ export function MinimapNodes() {
 	return (
 		<>
 			<CanvasGroup
-				key="nodes"
 				groupTransparency={0.5}
 				backgroundTransparency={1}
 				cornerRadius={new UDim(1, 0)}
@@ -68,7 +67,7 @@ export function MinimapNodes() {
 				{nodes}
 			</CanvasGroup>
 
-			{snake && <MinimapCursor key="map-cursor" point={normalizeToWorldBounds(snake.head)} angle={snake.angle} />}
+			{snake && <MinimapCursor point={normalizeToWorldBounds(snake.head)} angle={snake.angle} />}
 		</>
 	);
 }

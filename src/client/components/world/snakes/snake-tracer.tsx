@@ -1,5 +1,5 @@
 import { blend, lerp } from "@rbxts/pretty-react-hooks";
-import Roact, { memo, useMemo } from "@rbxts/roact";
+import React, { memo, useMemo } from "@rbxts/react";
 import { useRem } from "client/hooks";
 import { images } from "shared/assets";
 import { getSnakeSkin, getSnakeSkinForTracer } from "shared/constants/skins";
@@ -65,7 +65,6 @@ function SnakeTracerComponent({ line, effects, skinId, index }: SnakeTracerProps
 		>
 			{style.boostActive && (
 				<imagelabel
-					key="glow"
 					Image={images.ui.blur}
 					ImageColor3={glowStyle.color}
 					ImageTransparency={glowStyle.transparency}

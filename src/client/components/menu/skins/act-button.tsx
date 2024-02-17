@@ -1,7 +1,7 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
 import { composeBindings } from "@rbxts/pretty-react-hooks";
+import React, { useEffect, useMemo } from "@rbxts/react";
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { sendAlert } from "client/alerts";
 import { PrimaryButton } from "client/components/ui/primary-button";
 import { Shadow } from "client/components/ui/shadow";
@@ -160,18 +160,16 @@ export function ActButton() {
 			position={new UDim2(0.5, 0, 1, -rem(19))}
 		>
 			<Shadow
-				key="glow-background"
 				shadowColor={palette.white}
 				shadowTransparency={lerpBinding(hover, 0.5, 0.2)}
 				shadowSize={rem(1)}
 				shadowPosition={rem(-0.25)}
 				zIndex={0}
 			>
-				<uigradient key="gradient" Color={gradient} Rotation={gradientSpin} />
+				<uigradient Color={gradient} Rotation={gradientSpin} />
 			</Shadow>
 
 			<Text
-				key="text"
 				change={{
 					TextBounds: (rbx) => {
 						textWidthMotion.spring(rbx.TextBounds.X);

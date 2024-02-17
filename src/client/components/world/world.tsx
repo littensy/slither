@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { Group } from "client/components/ui/group";
 import { RemProvider } from "client/providers/rem-provider";
 
@@ -12,13 +12,13 @@ import { WorldSubject } from "./world-subject";
 export function World() {
 	return (
 		<RemProvider minimumRem={6}>
-			<Group key="world-layer">
-				<Backdrop key="backdrop" />
-				<Candy key="candy" />
-				<Snakes key="snakes" />
-				<WorldSubject key="world-subject" />
-				<WorldBorder key="world-border" />
-				<WorldSounds key="world-sounds" />
+			<Group>
+				<Backdrop />
+				<Candy />
+				<Snakes />
+				<WorldSubject />
+				<WorldBorder />
+				<WorldSounds />
 			</Group>
 		</RemProvider>
 	);

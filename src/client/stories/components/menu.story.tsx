@@ -1,7 +1,7 @@
 import "client/app/react-config";
 
 import { hoarcekat } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { Menu } from "client/components/menu";
 import { InputCapture } from "client/components/ui/input-capture";
 import { World } from "client/components/world";
@@ -28,15 +28,14 @@ export = hoarcekat(() => {
 	return (
 		<RootProvider>
 			<InputCapture
-				key="shortcuts"
 				onInputBegan={(rbx, input) => {
 					if (input.KeyCode === Enum.KeyCode.F) {
 						toggle();
 					}
 				}}
 			/>
-			<World key="world" />
-			<Menu key="menu" />
+			<World />
+			<Menu />
 		</RootProvider>
 	);
 });

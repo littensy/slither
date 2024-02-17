@@ -1,5 +1,5 @@
 import { useCamera, useEventListener } from "@rbxts/pretty-react-hooks";
-import { useRef, useState } from "@rbxts/roact";
+import { useRef, useState } from "@rbxts/react";
 import { Players, UserInputService } from "@rbxts/services";
 import { useCharacter } from "client/hooks";
 

@@ -1,6 +1,6 @@
 import { useInterval } from "@rbxts/pretty-react-hooks";
+import React, { useRef } from "@rbxts/react";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useRef } from "@rbxts/roact";
 import { selectSnakeById } from "shared/store/snakes";
 import { Character } from "shared/utils/player-utils";
 

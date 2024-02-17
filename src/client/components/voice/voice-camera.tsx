@@ -1,6 +1,6 @@
 import { useCamera, useEventListener, useInterval } from "@rbxts/pretty-react-hooks";
+import React from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { selectSnakeFromWorldSubject } from "client/store/world";
 

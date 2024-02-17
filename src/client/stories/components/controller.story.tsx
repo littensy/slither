@@ -1,8 +1,8 @@
 import "client/app/react-config";
 
 import { hoarcekat, useInterval } from "@rbxts/pretty-react-hooks";
+import React, { useEffect } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
 import { Players } from "@rbxts/services";
 import { Controller } from "client/components/controller";
 import { Frame } from "client/components/ui/frame";
@@ -39,7 +39,6 @@ function Debugger() {
 	return (
 		<>
 			<Text
-				key="score"
 				text={`Score: ${snake.score}`}
 				textColor={palette.text}
 				textXAlignment="Left"
@@ -48,7 +47,6 @@ function Debugger() {
 			/>
 
 			<Text
-				key="tracers"
 				text={`Tracers: ${math.floor(description.length)}`}
 				textColor={palette.text}
 				textXAlignment="Left"
@@ -56,9 +54,8 @@ function Debugger() {
 				position={new UDim2(0, rem(2), 1, rem(-4))}
 			/>
 
-			<Group key="ruler" size={new UDim2(1, 0, 0.5, 0)}>
+			<Group size={new UDim2(1, 0, 0.5, 0)}>
 				<uilistlayout
-					key="layout"
 					FillDirection="Horizontal"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
@@ -78,7 +75,6 @@ function Debugger() {
 							layoutOrder={index}
 						>
 							<Text
-								key="data"
 								text={`${score}\nl${math.floor(description.length)}\nd${string.format(
 									"%.2f",
 									description.radius,
@@ -87,12 +83,8 @@ function Debugger() {
 								textScaled
 								size={new UDim2(1, 0, 1, 0)}
 							>
-								<uipadding
-									key="padding"
-									PaddingBottom={new UDim(0, rem(0.5))}
-									PaddingTop={new UDim(0, rem(0.5))}
-								/>
-								<uitextsizeconstraint key="text-size-constraint" MaxTextSize={rem(2)} />
+								<uipadding PaddingBottom={new UDim(0, rem(0.5))} PaddingTop={new UDim(0, rem(0.5))} />
+								<uitextsizeconstraint MaxTextSize={rem(2)} />
 							</Text>
 						</Frame>
 					);
@@ -125,9 +117,9 @@ export = hoarcekat(() => {
 
 	return (
 		<RootProvider>
-			<World key="world" />
-			<Controller key="controller" />
-			<Debugger key="debugger" />
+			<World />
+			<Controller />
+			<Debugger />
 		</RootProvider>
 	);
 });

@@ -19,13 +19,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: bahmutov/npm-install@v1
-      - uses: ok-nick/setup-aftman@v0.3.0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.15.3
+      - uses: ok-nick/setup-aftman@v0.4.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Compile
-        run: yarn build:prod --verbose
+        run: pnpm build:prod --verbose
 
       - name: Build project
         run: rojo build --output place.rbxlx
@@ -43,7 +48,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: ok-nick/setup-aftman@v0.3.0
+      - uses: ok-nick/setup-aftman@v0.4.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 

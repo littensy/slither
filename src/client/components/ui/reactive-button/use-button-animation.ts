@@ -1,5 +1,5 @@
 import { useUpdateEffect } from "@rbxts/pretty-react-hooks";
-import Roact, { useMemo } from "@rbxts/roact";
+import React, { useMemo } from "@rbxts/react";
 import { springs } from "client/constants/springs";
 import { useMotion } from "client/hooks";
 
@@ -8,19 +8,19 @@ export interface ButtonAnimation {
 	 * An underdamped spring. `-1` is fully hovered, `0` is neutral, and `1` is
 	 * fully pressed. Values outside of this range are possible.
 	 */
-	readonly position: Roact.Binding<number>;
+	readonly position: React.Binding<number>;
 	/**
 	 * A critically damped spring that is `1` when the button is pressed.
 	 */
-	readonly press: Roact.Binding<number>;
+	readonly press: React.Binding<number>;
 	/**
 	 * A critically damped spring that is `1` when the button is hovered.
 	 */
-	readonly hover: Roact.Binding<number>;
+	readonly hover: React.Binding<number>;
 	/**
 	 * Same as `hover`, but `pressed` must be `false`.
 	 */
-	readonly hoverOnly: Roact.Binding<number>;
+	readonly hoverOnly: React.Binding<number>;
 }
 
 /**

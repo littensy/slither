@@ -1,6 +1,6 @@
 import { blend, lerp, map, useTimer } from "@rbxts/pretty-react-hooks";
 import { composeBindings } from "@rbxts/pretty-react-hooks";
-import Roact, { memo, useEffect, useMemo } from "@rbxts/roact";
+import React, { memo, useEffect, useMemo } from "@rbxts/react";
 import { Image } from "client/components/ui/image";
 import { Shadow } from "client/components/ui/shadow";
 import { springs } from "client/constants/springs";
@@ -15,11 +15,11 @@ interface CandyItemProps {
 	readonly size: number;
 	readonly point: Vector2;
 	readonly color: Color3;
-	readonly worldScale: Roact.Binding<number>;
+	readonly worldScale: React.Binding<number>;
 	readonly eatenAt?: Vector2;
 }
 
-export const CandyItem = memo<CandyItemProps>(({ variant, size, point, color, eatenAt, worldScale }) => {
+function CandyItemComponent({ variant, size, point, color, worldScale, eatenAt }: CandyItemProps) {
 	const rem = useRem();
 	const timer = useTimer();
 	const seed = useSeed();
@@ -71,7 +71,6 @@ export const CandyItem = memo<CandyItemProps>(({ variant, size, point, color, ea
 			position={position}
 		>
 			<Shadow
-				key="glow"
 				shadowColor={brighten(color, 0.7)}
 				shadowSize={glow}
 				shadowTransparency={transparency.map((t) => blend(0.6, t))}
@@ -79,4 +78,6 @@ export const CandyItem = memo<CandyItemProps>(({ variant, size, point, color, ea
 			/>
 		</Image>
 	);
-});
+}
+
+export const CandyItem = memo(CandyItemComponent);

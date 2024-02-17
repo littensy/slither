@@ -1,9 +1,9 @@
 import { useDebounceState, usePrevious } from "@rbxts/pretty-react-hooks";
-import Roact, { useEffect, useMemo, useRef } from "@rbxts/roact";
-import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
+import React, { useEffect, useMemo, useRef } from "@rbxts/react";
 import { Frame } from "client/components/ui/frame";
 import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
+import { Transition } from "client/components/ui/transition";
 import { fonts } from "client/constants/fonts";
 import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
@@ -99,9 +99,8 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 	}, [visible]);
 
 	return (
-		<CanvasOrFrame
+		<Transition
 			groupTransparency={nameTransparency}
-			backgroundTransparency={1}
 			anchorPoint={new Vector2(0.5, 0.5)}
 			size={size}
 			position={position}
@@ -109,23 +108,15 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 			zIndex={0}
 		>
 			<uipadding
-				key="margin"
 				PaddingTop={new UDim(0, rem(CANVAS_MARGIN))}
 				PaddingBottom={new UDim(0, rem(CANVAS_MARGIN))}
 				PaddingLeft={new UDim(0, rem(CANVAS_MARGIN))}
 				PaddingRight={new UDim(0, rem(CANVAS_MARGIN))}
 			/>
 
-			<Shadow
-				key="drop-shadow"
-				shadowBlur={0.75}
-				shadowColor={palette.crust}
-				shadowPosition={rem(0.5)}
-				shadowTransparency={0.5}
-			/>
+			<Shadow shadowBlur={0.75} shadowColor={palette.crust} shadowPosition={rem(0.5)} shadowTransparency={0.5} />
 
 			<Frame
-				key="tail"
 				backgroundColor={palette.surface0}
 				cornerRadius={new UDim(0, rem(2 * TAIL_SIZE))}
 				anchorPoint={new Vector2(0.5, 0.5)}
@@ -135,14 +126,12 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 			/>
 
 			<Frame
-				key="background"
 				backgroundColor={palette.surface0}
 				cornerRadius={new UDim(0, rem(0.75))}
 				size={new UDim2(1, 0, 1, 0)}
 			/>
 
 			<Text
-				key="snake-name"
 				font={fonts.inter.medium}
 				text={name}
 				textSize={rem(1.5)}
@@ -154,6 +143,6 @@ export function SnakeNameTag({ name, head, headOffset, angle, scale, radius, ski
 					},
 				}}
 			/>
-		</CanvasOrFrame>
+		</Transition>
 	);
 }

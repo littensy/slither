@@ -1,15 +1,15 @@
+import React, { createBinding, useEffect, useMemo, useRef } from "@rbxts/react";
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import { createMotion, immediate, spring } from "@rbxts/ripple";
-import Roact, { createBinding, useEffect, useMemo, useRef } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { springs } from "client/constants/springs";
 import { describeSnakeFromScore, selectSnakeIsBoosting, SnakeEntity } from "shared/store/snakes";
 
 import { SnakeOnScreen } from "./use-snakes-on-screen";
 
-export type SnakeLineBinding = Roact.Binding<LineMotionValues>;
+export type SnakeLineBinding = React.Binding<LineMotionValues>;
 
-export type SnakeEffectBinding = Roact.Binding<EffectMotionValues>;
+export type SnakeEffectBinding = React.Binding<EffectMotionValues>;
 
 export interface SnakeBindings {
 	readonly bindings: Map<number, TracerBindingController>;

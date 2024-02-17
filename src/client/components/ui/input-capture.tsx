@@ -1,5 +1,5 @@
 import { useEventListener } from "@rbxts/pretty-react-hooks";
-import Roact, { useState } from "@rbxts/roact";
+import React, { useState } from "@rbxts/react";
 import { UserInputService } from "@rbxts/services";
 import { IS_EDIT } from "shared/constants/core";
 

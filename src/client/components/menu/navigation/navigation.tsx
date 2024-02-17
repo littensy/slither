@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { Group } from "client/components/ui/group";
 import { useRem } from "client/hooks";
 import { images } from "shared/assets";
@@ -14,15 +14,10 @@ export function Navigation() {
 
 	return (
 		<Group size={new UDim2(1, 0, 0, rem(7.5))}>
-			<Indicator
-				key="indicator"
-				colors={[palette.red, palette.mauve, palette.blue]}
-				order={["support", "home", "skins"]}
-			/>
+			<Indicator colors={[palette.red, palette.mauve, palette.blue]} order={["support", "home", "skins"]} />
 
-			<Group key="destinations" size={new UDim2(1, 0, 0, rem(5))} position={new UDim2(0, 0, 0, rem(3))}>
+			<Group size={new UDim2(1, 0, 0, rem(5))} position={new UDim2(0, 0, 0, rem(3))}>
 				<uilistlayout
-					key="layout"
 					SortOrder="LayoutOrder"
 					FillDirection="Horizontal"
 					VerticalAlignment="Center"
@@ -31,7 +26,6 @@ export function Navigation() {
 				/>
 
 				<Destination
-					key="support"
 					page="support"
 					label="Support"
 					color={palette.red}
@@ -41,7 +35,6 @@ export function Navigation() {
 				/>
 
 				<Destination
-					key="home"
 					page="home"
 					label="Home"
 					color={palette.mauve}
@@ -51,7 +44,6 @@ export function Navigation() {
 				/>
 
 				<Destination
-					key="skins"
 					page="skins"
 					label="Skins"
 					color={palette.blue}
