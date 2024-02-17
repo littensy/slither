@@ -1,5 +1,5 @@
 import { useBindingState, useTimer } from "@rbxts/pretty-react-hooks";
-import { useEffect, useMemo } from "@rbxts/roact";
+import { useEffect, useMemo } from "@rbxts/react";
 import { setTimeout } from "@rbxts/set-timeout";
 import { useRem } from "client/hooks";
 import { brighten } from "shared/utils/color-utils";

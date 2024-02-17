@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "@rbxts/roact";
+import { useMemo, useRef } from "@rbxts/react";
 import { subtractRadians } from "shared/utils/math-utils";
 
 /**

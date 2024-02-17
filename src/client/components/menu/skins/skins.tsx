@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 
 import { ActButton } from "./act-button";
 import { SkinCarousel } from "./skin-carousel";
@@ -6,8 +6,8 @@ import { SkinCarousel } from "./skin-carousel";
 export function Skins() {
 	return (
 		<>
-			<ActButton key="act-button" />
-			<SkinCarousel key="carousel" />
+			<ActButton />
+			<SkinCarousel />
 		</>
 	);
 }

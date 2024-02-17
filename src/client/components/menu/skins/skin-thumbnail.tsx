@@ -1,4 +1,4 @@
-import Roact, { useEffect } from "@rbxts/roact";
+import React, { useEffect } from "@rbxts/react";
 import { CanvasGroup } from "client/components/ui/canvas-group";
 import { Image } from "client/components/ui/image";
 import { useMotion, useRem } from "client/hooks";
@@ -10,7 +10,7 @@ import { SNAKE_ANGLE_OFFSET } from "../../world/snakes";
 interface SkinThumbnailProps {
 	readonly skin: SnakeSkin;
 	readonly active: boolean;
-	readonly transparency: Roact.Binding<number>;
+	readonly transparency: React.Binding<number>;
 }
 
 const TRACER_SIZE = 7;
@@ -50,10 +50,9 @@ export function SkinThumbnail({ skin, active, transparency }: SkinThumbnailProps
 			groupTransparency={transparency}
 			size={new UDim2(1, 0, 1, 0)}
 		>
-			<uipadding key="offset" PaddingTop={offset} PaddingRight={offset} />
+			<uipadding PaddingTop={offset} PaddingRight={offset} />
 
 			<Image
-				key="head"
 				image={skin.headTexture ?? skin.texture[0]}
 				imageColor={skin.tint[0]}
 				scaleType="Slice"
@@ -65,14 +64,12 @@ export function SkinThumbnail({ skin, active, transparency }: SkinThumbnailProps
 				rotation={45}
 			>
 				<Image
-					key="eye-right"
 					image={skin.eyeTextureRight}
 					size={new UDim2(0.45, 0, 0.45, 0)}
 					position={new UDim2(0.5, 0, 0.1, 0)}
 				/>
 
 				<Image
-					key="eye-left"
 					image={skin.eyeTextureLeft}
 					anchorPoint={new Vector2(1, 0)}
 					size={new UDim2(0.45, 0, 0.45, 0)}

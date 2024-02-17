@@ -1,10 +1,10 @@
-import Roact, { forwardRef, Ref } from "@rbxts/roact";
+import React, { forwardRef, Ref } from "@rbxts/react";
 
 import { FrameProps } from "./frame";
 
 export interface CanvasGroupProps extends FrameProps<CanvasGroup> {
-	groupColor?: Color3 | Roact.Binding<Color3>;
-	groupTransparency?: number | Roact.Binding<number>;
+	groupColor?: Color3 | React.Binding<Color3>;
+	groupTransparency?: number | React.Binding<number>;
 }
 
 export const CanvasGroup = forwardRef((props: CanvasGroupProps, ref: Ref<CanvasGroup>) => {
@@ -24,11 +24,11 @@ export const CanvasGroup = forwardRef((props: CanvasGroupProps, ref: Ref<CanvasG
 			ZIndex={props.zIndex}
 			LayoutOrder={props.layoutOrder}
 			BorderSizePixel={0}
-			Event={props.event || {}}
-			Change={props.change || {}}
+			Event={props.event}
+			Change={props.change}
 		>
-			{props.cornerRadius && <uicorner key="corner" CornerRadius={props.cornerRadius} />}
 			{props.children}
+			{props.cornerRadius && <uicorner CornerRadius={props.cornerRadius} />}
 		</canvasgroup>
 	);
 });

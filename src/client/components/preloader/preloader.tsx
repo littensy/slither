@@ -1,5 +1,5 @@
 import { useAsyncEffect, useDeferState } from "@rbxts/pretty-react-hooks";
-import Roact, { useMemo } from "@rbxts/roact";
+import React, { useMemo } from "@rbxts/react";
 import { ContentProvider } from "@rbxts/services";
 import { images, sounds } from "shared/assets";
 
@@ -59,7 +59,6 @@ export function Preloader() {
 			position={new UDim2(1, rem(-2), 1, rem(-2))}
 		>
 			<uistroke
-				key="stroke"
 				Thickness={rem(0.1)}
 				Color={Color3.fromRGB(0, 0, 0)}
 				Transparency={0.5}

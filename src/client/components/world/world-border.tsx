@@ -1,5 +1,5 @@
+import React, { useEffect, useMemo } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { CanvasGroup } from "client/components/ui/canvas-group";
 import { Frame } from "client/components/ui/frame";
 import { Group } from "client/components/ui/group";
@@ -60,17 +60,15 @@ export function WorldBorder() {
 			zIndex={3}
 		>
 			<Frame
-				key="box"
 				backgroundColor={palette.red}
 				backgroundTransparency={0.5}
 				size={new UDim2(0.5, rem(-2), 1, 0)}
 				position={new UDim2(0.5, rem(2), 0, 0)}
 			>
-				<uistroke key="stroke" Color={palette.red} Thickness={rem(2)} Transparency={0.5} />
+				<uistroke Color={palette.red} Thickness={rem(2)} Transparency={0.5} />
 
-				<CanvasGroup key="stripes-container" size={new UDim2(1, 0, 1, 0)} backgroundTransparency={1}>
+				<CanvasGroup size={new UDim2(1, 0, 1, 0)} backgroundTransparency={1}>
 					<Image
-						key="stripes"
 						image={images.ui.tile_stripes}
 						imageColor={palette.black}
 						imageTransparency={0.75}

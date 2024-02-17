@@ -1,5 +1,5 @@
 import { useEventListener } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { UserInputService } from "@rbxts/services";
 
 interface GamepadProps {

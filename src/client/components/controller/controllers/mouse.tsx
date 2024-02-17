@@ -1,4 +1,4 @@
-import Roact, { useEffect, useState } from "@rbxts/roact";
+import React, { useEffect, useState } from "@rbxts/react";
 import { InputCapture } from "client/components/ui/input-capture";
 import { lerpRadians } from "shared/utils/math-utils";
 

@@ -1,7 +1,7 @@
 import { lerpBinding, useMountEffect } from "@rbxts/pretty-react-hooks";
 import { composeBindings } from "@rbxts/pretty-react-hooks";
+import React, { useEffect, useMemo } from "@rbxts/react";
 import { useSelector, useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { dismissAlert } from "client/alerts";
 import { Frame } from "client/components/ui/frame";
 import { Image } from "client/components/ui/image";
@@ -102,36 +102,23 @@ export function Alert({ alert, index }: AlertProps) {
 			position={position}
 		>
 			<Shadow
-				key="drop-shadow"
 				shadowColor={hasGradient ? palette.white : lerpBinding(transition, alert.color, style.background)}
 				shadowTransparency={lerpBinding(transition, 1, 0.3)}
 				shadowSize={rem(3)}
 			>
-				{hasGradient && (
-					<uigradient
-						key="drop-shadow-gradient"
-						Color={new ColorSequence(style.background, style.backgroundSecondary)}
-					/>
-				)}
+				{hasGradient && <uigradient Color={new ColorSequence(style.background, style.backgroundSecondary)} />}
 			</Shadow>
 
 			<Frame
-				key="background"
 				backgroundColor={hasGradient ? palette.white : style.background}
 				backgroundTransparency={lerpBinding(transition, 1, 0.1)}
 				cornerRadius={new UDim(0, rem(1))}
 				size={new UDim2(1, 0, 1, 0)}
 			>
-				{hasGradient && (
-					<uigradient
-						key="background-gradient"
-						Color={new ColorSequence(style.background, style.backgroundSecondary)}
-					/>
-				)}
+				{hasGradient && <uigradient Color={new ColorSequence(style.background, style.backgroundSecondary)} />}
 			</Frame>
 
 			<Frame
-				key="highlight"
 				backgroundColor={alert.color}
 				backgroundTransparency={lerpBinding(style.highlight, 1, 0.9)}
 				cornerRadius={new UDim(0, rem(1))}
@@ -139,19 +126,15 @@ export function Alert({ alert, index }: AlertProps) {
 			/>
 
 			<Outline
-				key="border"
 				innerColor={hasGradient ? palette.white : alert.color}
 				innerTransparency={lerpBinding(transition, 1, 0.85)}
 				outerTransparency={lerpBinding(transition, 1, 0.75)}
 				cornerRadius={new UDim(0, rem(1))}
 			>
-				{hasGradient && (
-					<uigradient key="border-gradient" Color={new ColorSequence(alert.color, alert.colorSecondary)} />
-				)}
+				{hasGradient && <uigradient Color={new ColorSequence(alert.color, alert.colorSecondary)} />}
 			</Outline>
 
 			<Text
-				key="icon"
 				font={fonts.inter.regular}
 				text={alert.emoji}
 				textColor={style.message}
@@ -163,7 +146,6 @@ export function Alert({ alert, index }: AlertProps) {
 			/>
 
 			<Text
-				key="message"
 				richText
 				font={fonts.inter.medium}
 				text={alert.message}
@@ -182,7 +164,6 @@ export function Alert({ alert, index }: AlertProps) {
 			/>
 
 			<Image
-				key="close"
 				image={images.ui.alert_dismiss}
 				imageColor={brightenIfDark(alert.colorSecondary || alert.colorMessage || alert.color)}
 				imageTransparency={lerpBinding(transition, 1, 0)}
@@ -192,7 +173,6 @@ export function Alert({ alert, index }: AlertProps) {
 			/>
 
 			<AlertTimer
-				key="timer"
 				duration={alert.duration}
 				color={alert.color}
 				colorSecondary={alert.colorSecondary}

@@ -1,4 +1,4 @@
-import Roact, { useEffect } from "@rbxts/roact";
+import React, { useEffect } from "@rbxts/react";
 
 import { useTouchMove } from "../utils/use-touch-move";
 

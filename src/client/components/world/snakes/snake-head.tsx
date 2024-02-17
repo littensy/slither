@@ -1,5 +1,5 @@
+import React, { useEffect, useMemo } from "@rbxts/react";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect, useMemo } from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
 import { Image } from "client/components/ui/image";
 import { springs } from "client/constants/springs";
@@ -12,7 +12,7 @@ import { SNAKE_ANGLE_OFFSET } from "./constants";
 import { SnakeEffectBinding, SnakeLineBinding } from "./use-snake-bindings";
 import { useTracerStyle } from "./use-tracer-style";
 
-interface SnakeHeadProps extends Roact.PropsWithChildren {
+interface SnakeHeadProps extends React.PropsWithChildren {
 	readonly angle: number;
 	readonly desiredAngle: number;
 	readonly line: SnakeLineBinding;
@@ -59,7 +59,6 @@ export function SnakeHead({ angle, desiredAngle, line, effects, skinId, isClient
 	return (
 		<Group anchorPoint={new Vector2(0.5, 0.5)} size={size} position={position}>
 			<Image
-				key="head"
 				image={skin.headTexture ?? tracerSkin.texture}
 				imageColor={style.color}
 				imageTransparency={style.transparency}
@@ -70,7 +69,6 @@ export function SnakeHead({ angle, desiredAngle, line, effects, skinId, isClient
 				rotation={rotation}
 			>
 				<Image
-					key="eye-right"
 					image={skin.eyeTextureRight}
 					imageTransparency={style.transparency}
 					size={new UDim2(0.45, 0, 0.45, 0)}
@@ -79,7 +77,6 @@ export function SnakeHead({ angle, desiredAngle, line, effects, skinId, isClient
 				/>
 
 				<Image
-					key="eye-left"
 					image={skin.eyeTextureLeft}
 					imageTransparency={style.transparency}
 					anchorPoint={new Vector2(1, 0)}

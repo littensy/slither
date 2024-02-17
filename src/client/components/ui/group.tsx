@@ -1,20 +1,20 @@
-import Roact, { forwardRef } from "@rbxts/roact";
+import React, { forwardRef } from "@rbxts/react";
 
-interface GroupProps extends Roact.PropsWithChildren {
-	ref?: Roact.Ref<Frame>;
-	event?: Roact.JsxInstanceEvents<Frame>;
-	change?: Roact.JsxInstanceChangeEvents<Frame>;
-	size?: UDim2 | Roact.Binding<UDim2>;
-	position?: UDim2 | Roact.Binding<UDim2>;
-	anchorPoint?: Vector2 | Roact.Binding<Vector2>;
-	rotation?: number | Roact.Binding<number>;
-	clipsDescendants?: boolean | Roact.Binding<boolean>;
-	layoutOrder?: number | Roact.Binding<number>;
-	visible?: boolean | Roact.Binding<boolean>;
-	zIndex?: number | Roact.Binding<number>;
+interface GroupProps extends React.PropsWithChildren {
+	ref?: React.Ref<Frame>;
+	event?: React.InstanceEvent<Frame>;
+	change?: React.InstanceChangeEvent<Frame>;
+	size?: UDim2 | React.Binding<UDim2>;
+	position?: UDim2 | React.Binding<UDim2>;
+	anchorPoint?: Vector2 | React.Binding<Vector2>;
+	rotation?: number | React.Binding<number>;
+	clipsDescendants?: boolean | React.Binding<boolean>;
+	layoutOrder?: number | React.Binding<number>;
+	visible?: boolean | React.Binding<boolean>;
+	zIndex?: number | React.Binding<number>;
 }
 
-export const Group = forwardRef((props: GroupProps, ref: Roact.Ref<Frame>) => {
+export const Group = forwardRef((props: GroupProps, ref: React.Ref<Frame>) => {
 	return (
 		<frame
 			ref={ref}
@@ -27,8 +27,8 @@ export const Group = forwardRef((props: GroupProps, ref: Roact.Ref<Frame>) => {
 			Visible={props.visible}
 			ZIndex={props.zIndex}
 			BackgroundTransparency={1}
-			Event={props.event || {}}
-			Change={props.change || {}}
+			Event={props.event}
+			Change={props.change}
 		>
 			{props.children}
 		</frame>

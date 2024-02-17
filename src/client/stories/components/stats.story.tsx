@@ -1,7 +1,7 @@
 import "client/app/react-config";
 
 import { hoarcekat, useMountEffect } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { Menu } from "client/components/menu";
 import { Stats } from "client/components/stats";
 import { Backdrop } from "client/components/world/backdrop";
@@ -20,9 +20,9 @@ export = hoarcekat(() => {
 
 	return (
 		<RootProvider>
-			<Backdrop key="backdrop" />
-			<Menu key="menu" />
-			<Stats key="stats" />
+			<Backdrop />
+			<Menu />
+			<Stats />
 		</RootProvider>
 	);
 });

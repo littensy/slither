@@ -1,5 +1,5 @@
 import { lerpBinding, useTimer } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { Outline } from "client/components/ui/outline";
 import { PrimaryButton } from "client/components/ui/primary-button";
 import { Shadow } from "client/components/ui/shadow";
@@ -40,18 +40,16 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 			position={position}
 		>
 			<Shadow
-				key="rainbow"
 				shadowColor={palette.white}
 				shadowTransparency={lerpBinding(hover, 0.2, 0)}
 				shadowSize={rem(1.5)}
 				shadowPosition={rem(0.25)}
 				zIndex={0}
 			>
-				<uigradient key="gradient" Color={gradient} Rotation={gradientSpin} />
+				<uigradient Color={gradient} Rotation={gradientSpin} />
 			</Shadow>
 
 			<Text
-				key="text"
 				font={fonts.inter.medium}
 				text="Start Playing →"
 				textColor={palette.mantle}
@@ -59,7 +57,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 				size={new UDim2(1, 0, 1, 0)}
 			/>
 
-			<Outline key="outline" cornerRadius={new UDim(0, rem(1))} innerTransparency={0} />
+			<Outline cornerRadius={new UDim(0, rem(1))} innerTransparency={0} />
 		</PrimaryButton>
 	);
 }

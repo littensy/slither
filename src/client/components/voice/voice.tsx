@@ -1,4 +1,4 @@
-import Roact, { useMemo } from "@rbxts/roact";
+import React, { useMemo } from "@rbxts/react";
 import { Players } from "@rbxts/services";
 
 import { useVoiceCharacters } from "./utils";
@@ -16,7 +16,7 @@ export function Voice() {
 
 	return (
 		<>
-			<VoiceCamera key="local-camera" />
+			<VoiceCamera />
 
 			{charactersExcludingSelf.map(({ player, model }) => (
 				<VoiceCharacter key={player.Name} player={player} model={model} />

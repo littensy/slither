@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "@rbxts/roact";
+import { useCallback, useContext } from "@rbxts/react";
 
 import { DEFAULT_REM, RemContext } from "../providers/rem-provider";
 

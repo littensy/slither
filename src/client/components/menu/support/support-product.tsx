@@ -1,8 +1,7 @@
 import { blend, lerpBinding, useTimeout } from "@rbxts/pretty-react-hooks";
 import { composeBindings } from "@rbxts/pretty-react-hooks";
-import Roact, { useMemo } from "@rbxts/roact";
+import React, { useMemo } from "@rbxts/react";
 import { MarketplaceService, Players } from "@rbxts/services";
-import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
 import { Frame } from "client/components/ui/frame";
 import { Group } from "client/components/ui/group";
 import { Outline } from "client/components/ui/outline";
@@ -10,12 +9,13 @@ import { PrimaryButton } from "client/components/ui/primary-button";
 import { ReactiveButton } from "client/components/ui/reactive-button";
 import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
+import { Transition } from "client/components/ui/transition";
 import { fonts } from "client/constants/fonts";
 import { useMotion, useProductPrice, useRem } from "client/hooks";
 import { palette } from "shared/constants/palette";
 import { brighten } from "shared/utils/color-utils";
 
-interface SupportProductProps extends Roact.PropsWithChildren {
+interface SupportProductProps extends React.PropsWithChildren {
 	readonly index: number;
 	readonly productId: number;
 	readonly productTitle: string;
@@ -82,76 +82,63 @@ export function SupportProduct({
 	);
 
 	return (
-		<CanvasOrFrame
+		<Transition
 			groupTransparency={lerpBinding(visible, 1, 0)}
 			rotation={lerpBinding(visible, initialRotation, 0)}
-			backgroundTransparency={1}
 			size={size}
 			position={lerpBinding(transition, position.add(new UDim2(0, 0, 0, rem(6))), position)}
 		>
 			<ReactiveButton
-				key="button"
 				onClick={promptPurchase}
 				onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
 				backgroundTransparency={1}
 				size={new UDim2(1, 0, 1, 0)}
 			>
 				<Shadow
-					key="glow"
 					shadowColor={palette.white}
 					shadowTransparency={composeBindings(lerpBinding(hover, 0.2, 0), lerpBinding(glow, 1, 0), blend)}
 					shadowSize={rem(12)}
 				>
-					<uigradient key="gradient" Color={gradient} Rotation={95} />
+					<uigradient Color={gradient} Rotation={95} />
 				</Shadow>
 
 				<Shadow
-					key="drop-shadow"
 					shadowSize={rem(2.5)}
 					shadowBlur={0.3}
 					shadowTransparency={lerpBinding(hover, 0.7, 0.25)}
 					shadowPosition={rem(0.5)}
 				/>
 
-				<Frame
-					key="background"
-					backgroundColor={palette.white}
-					cornerRadius={new UDim(0, rem(2))}
-					size={new UDim2(1, 0, 1, 0)}
-				>
-					<uigradient key="gradient" Color={gradient} Rotation={95} />
+				<Frame backgroundColor={palette.white} cornerRadius={new UDim(0, rem(2))} size={new UDim2(1, 0, 1, 0)}>
+					<uigradient Color={gradient} Rotation={95} />
 
 					<Frame
-						key="background-overlay-top"
 						backgroundColor={brighten(primaryColor, 2)}
 						backgroundTransparency={lerpBinding(hover, 1, 0)}
 						cornerRadius={new UDim(0, rem(2))}
 						size={new UDim2(1, 0, 1, 0)}
 					>
-						<uigradient key="gradient" Transparency={new NumberSequence(0, 1)} Rotation={95} />
+						<uigradient Transparency={new NumberSequence(0, 1)} Rotation={95} />
 					</Frame>
 
 					<Frame
-						key="background-overlay-bottom"
 						backgroundColor={brighten(secondaryColor, 2)}
 						backgroundTransparency={lerpBinding(hover, 1, 0)}
 						cornerRadius={new UDim(0, rem(2))}
 						size={new UDim2(1, 0, 1, 0)}
 					>
-						<uigradient key="gradient" Transparency={new NumberSequence(1, 0)} Rotation={95} />
+						<uigradient Transparency={new NumberSequence(1, 0)} Rotation={95} />
 					</Frame>
 
-					<Outline key="outline" cornerRadius={new UDim(0, rem(2))} />
+					<Outline cornerRadius={new UDim(0, rem(2))} />
 				</Frame>
 
 				<Group
-					key="header"
 					anchorPoint={new Vector2(0.5, 0)}
 					size={new UDim2(0, rem(10), 0, rem(7))}
 					position={new UDim2(0.5, 0, 0, rem(2))}
 				>
 					<Text
-						key="title"
 						font={fonts.inter.bold}
 						text={productTitle}
 						textSize={rem(4.5)}
@@ -160,7 +147,6 @@ export function SupportProduct({
 					/>
 
 					<Text
-						key="subtitle"
 						font={fonts.inter.bold}
 						text={productSubtitle}
 						textSize={rem(1.25)}
@@ -171,7 +157,6 @@ export function SupportProduct({
 
 					{productDiscount !== undefined && (
 						<Text
-							key="discount"
 							richText
 							font={fonts.inter.bold}
 							text={productDiscount}
@@ -184,7 +169,6 @@ export function SupportProduct({
 				</Group>
 
 				<PrimaryButton
-					key="purchase-button"
 					onClick={promptPurchase}
 					overlayGradient={gradient}
 					anchorPoint={new Vector2(0.5, 1)}
@@ -192,9 +176,8 @@ export function SupportProduct({
 					position={new UDim2(0.5, 0, 1, rem(-2.25))}
 				>
 					<Text
-						key="price"
 						font={fonts.inter.medium}
-						text={`\u{E002}${price}`}
+						text={`${RobloxEmoji.Robux}${price}`}
 						textSize={rem(1.5)}
 						textColor={palette.base}
 						position={new UDim2(0.5, 0, 0.5, 0)}
@@ -203,6 +186,6 @@ export function SupportProduct({
 
 				{children}
 			</ReactiveButton>
-		</CanvasOrFrame>
+		</Transition>
 	);
 }

@@ -1,7 +1,7 @@
 import "client/app/react-config";
 
 import { hoarcekat, useInterval } from "@rbxts/pretty-react-hooks";
-import Roact, { useEffect } from "@rbxts/roact";
+import React, { useEffect } from "@rbxts/react";
 import { Controller } from "client/components/controller";
 import { World } from "client/components/world/world";
 import { RootProvider } from "client/providers/root-provider";
@@ -60,8 +60,8 @@ export = hoarcekat(() => {
 
 	return (
 		<RootProvider>
-			<World key="world" />
-			<Controller key="menu" />
+			<World />
+			<Controller />
 		</RootProvider>
 	);
 });

@@ -1,20 +1,20 @@
-import Roact, { forwardRef, Ref } from "@rbxts/roact";
+import React, { forwardRef, Ref } from "@rbxts/react";
 
-export interface FrameProps<T extends Instance = Frame> extends Roact.PropsWithChildren {
-	ref?: Roact.Ref<T>;
-	event?: Roact.JsxInstanceEvents<T>;
-	change?: Roact.JsxInstanceChangeEvents<T>;
-	size?: UDim2 | Roact.Binding<UDim2>;
-	position?: UDim2 | Roact.Binding<UDim2>;
-	anchorPoint?: Vector2 | Roact.Binding<Vector2>;
-	rotation?: number | Roact.Binding<number>;
-	backgroundColor?: Color3 | Roact.Binding<Color3>;
-	backgroundTransparency?: number | Roact.Binding<number>;
-	clipsDescendants?: boolean | Roact.Binding<boolean>;
-	visible?: boolean | Roact.Binding<boolean>;
-	zIndex?: number | Roact.Binding<number>;
-	layoutOrder?: number | Roact.Binding<number>;
-	cornerRadius?: UDim | Roact.Binding<UDim>;
+export interface FrameProps<T extends Instance = Frame> extends React.PropsWithChildren {
+	ref?: React.Ref<T>;
+	event?: React.InstanceEvent<T>;
+	change?: React.InstanceChangeEvent<T>;
+	size?: UDim2 | React.Binding<UDim2>;
+	position?: UDim2 | React.Binding<UDim2>;
+	anchorPoint?: Vector2 | React.Binding<Vector2>;
+	rotation?: number | React.Binding<number>;
+	backgroundColor?: Color3 | React.Binding<Color3>;
+	backgroundTransparency?: number | React.Binding<number>;
+	clipsDescendants?: boolean | React.Binding<boolean>;
+	visible?: boolean | React.Binding<boolean>;
+	zIndex?: number | React.Binding<number>;
+	layoutOrder?: number | React.Binding<number>;
+	cornerRadius?: UDim | React.Binding<UDim>;
 }
 
 export const Frame = forwardRef((props: FrameProps, ref: Ref<Frame>) => {
@@ -32,11 +32,11 @@ export const Frame = forwardRef((props: FrameProps, ref: Ref<Frame>) => {
 			ZIndex={props.zIndex}
 			LayoutOrder={props.layoutOrder}
 			BorderSizePixel={0}
-			Event={props.event || {}}
-			Change={props.change || {}}
+			Event={props.event}
+			Change={props.change}
 		>
-			{props.cornerRadius && <uicorner key="corner" CornerRadius={props.cornerRadius} />}
 			{props.children}
+			{props.cornerRadius && <uicorner CornerRadius={props.cornerRadius} />}
 		</frame>
 	);
 });

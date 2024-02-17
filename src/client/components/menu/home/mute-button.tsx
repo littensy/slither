@@ -1,5 +1,5 @@
+import React from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact from "@rbxts/roact";
 import { PrimaryButton } from "client/components/ui/primary-button";
 import { Text } from "client/components/ui/text";
 import { fonts } from "client/constants/fonts";
@@ -19,7 +19,6 @@ export function MuteButton() {
 			size={new UDim2(0, rem(4), 0, rem(4))}
 		>
 			<Text
-				key="caption"
 				font={fonts.inter.medium}
 				text={musicEnabled ? "🔊" : "🔇"}
 				textSize={rem(2)}

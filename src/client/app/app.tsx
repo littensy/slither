@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 
 import { Alerts } from "../components/alerts";
 import { Controller } from "../components/controller";
@@ -15,23 +15,23 @@ import { World } from "../components/world";
 export function App() {
 	return (
 		<ErrorHandler>
-			<Music key="music" />
-			<Preloader key="preloader" />
-			<Voice key="voice" />
+			<Music />
+			<Preloader />
+			<Voice />
 
-			<Layer key="world-layer">
-				<Controller key="controller" />
-				<World key="world" />
-				<Game key="game" />
+			<Layer>
+				<Controller />
+				<World />
+				<Game />
 			</Layer>
 
-			<Layer key="menu-layer">
-				<Menu key="menu" />
-				<Stats key="stats" />
+			<Layer>
+				<Menu />
+				<Stats />
 			</Layer>
 
-			<Layer key="modal-layer">
-				<Alerts key="alerts" />
+			<Layer>
+				<Alerts />
 			</Layer>
 		</ErrorHandler>
 	);

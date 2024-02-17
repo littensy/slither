@@ -1,5 +1,5 @@
+import React, { memo, useEffect, useMemo } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { memo, useEffect, useMemo } from "@rbxts/roact";
 import { selectSkinOverride } from "client/store/menu";
 import { USER_NAME } from "shared/constants/core";
 import { describeSnakeFromScore } from "shared/store/snakes";
@@ -18,7 +18,7 @@ interface SnakeProps {
 	readonly setSnakeBindings: (bindings: SnakeBindings) => void;
 }
 
-export const Snake = memo<SnakeProps>(({ snakeOnScreen, scale, offset, subject, setSnakeBindings }) => {
+function SnakeComponent({ snakeOnScreen, scale, offset, subject, setSnakeBindings }: SnakeProps) {
 	const snake = snakeOnScreen.snake;
 	const snakeBindings = useSnakeBindings(snakeOnScreen, scale, snake.id === subject);
 	const snakeSkinOverride = useSelector(selectSkinOverride);
@@ -57,9 +57,9 @@ export const Snake = memo<SnakeProps>(({ snakeOnScreen, scale, offset, subject, 
 
 	return (
 		<>
+			{<>{children}</>}
 			{snakeOnScreen.head && (
 				<SnakeHead
-					key="head"
 					angle={snake.angle}
 					desiredAngle={snake.desiredAngle}
 					line={snakeBindings.head.line}
@@ -68,7 +68,6 @@ export const Snake = memo<SnakeProps>(({ snakeOnScreen, scale, offset, subject, 
 					isClient={snake.id === USER_NAME}
 				>
 					<SnakeNameTag
-						key="name-tag"
 						name={snake.name}
 						head={snake.head}
 						headOffset={offset}
@@ -80,7 +79,8 @@ export const Snake = memo<SnakeProps>(({ snakeOnScreen, scale, offset, subject, 
 					/>
 				</SnakeHead>
 			)}
-			{children}
 		</>
 	);
-});
+}
+
+export const Snake = memo(SnakeComponent);

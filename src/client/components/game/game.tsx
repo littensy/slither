@@ -1,10 +1,10 @@
 import { lerpBinding } from "@rbxts/pretty-react-hooks";
+import React, { useEffect } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
-import { CanvasOrFrame } from "client/components/ui/canvas-or-frame";
 import { useMotion } from "client/hooks";
 import { selectWorldSubject } from "client/store/world";
 
+import { Transition } from "../ui/transition";
 import { Compass } from "./compass";
 import { Minimap } from "./minimap";
 
@@ -17,13 +17,9 @@ export function Game() {
 	}, [inGame]);
 
 	return (
-		<CanvasOrFrame
-			groupTransparency={lerpBinding(transition, 1, 0)}
-			backgroundTransparency={1}
-			size={new UDim2(1, 0, 1, 0)}
-		>
-			<Minimap key="minimap" />
-			<Compass key="compass" />
-		</CanvasOrFrame>
+		<Transition groupTransparency={lerpBinding(transition, 1, 0)} size={new UDim2(1, 0, 1, 0)}>
+			<Minimap />
+			<Compass />
+		</Transition>
 	);
 }

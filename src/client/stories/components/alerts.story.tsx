@@ -1,7 +1,7 @@
 import "client/app/react-config";
 
 import { hoarcekat } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { sendAlert } from "client/alerts";
 import { Alerts } from "client/components/alerts";
 import { Menu } from "client/components/menu";
@@ -42,11 +42,10 @@ export = hoarcekat(() => {
 
 	return (
 		<RootProvider>
-			<Backdrop key="backdrop" />
-			<Alerts key="alerts" />
-			<Menu key="menu" />
+			<Backdrop />
+			<Alerts />
+			<Menu />
 			<InputCapture
-				key="keybinds"
 				onInputBegan={(_, input) => {
 					if (input.KeyCode === Enum.KeyCode.F) {
 						alert();

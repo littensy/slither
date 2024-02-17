@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { useRem } from "client/hooks";
 
 import { fonts } from "../../constants/fonts";
@@ -6,19 +6,19 @@ import { FrameProps } from "./frame";
 
 export interface TextProps<T extends Instance = TextLabel> extends FrameProps<T> {
 	font?: Font;
-	text?: string | Roact.Binding<string>;
-	textColor?: Color3 | Roact.Binding<Color3>;
-	textSize?: number | Roact.Binding<number>;
-	textTransparency?: number | Roact.Binding<number>;
-	textWrapped?: boolean | Roact.Binding<boolean>;
-	textXAlignment?: Roact.InferEnumNames<Enum.TextXAlignment>;
-	textYAlignment?: Roact.InferEnumNames<Enum.TextYAlignment>;
-	textTruncate?: Roact.InferEnumNames<Enum.TextTruncate>;
-	textScaled?: boolean | Roact.Binding<boolean>;
-	textHeight?: number | Roact.Binding<number>;
+	text?: string | React.Binding<string>;
+	textColor?: Color3 | React.Binding<Color3>;
+	textSize?: number | React.Binding<number>;
+	textTransparency?: number | React.Binding<number>;
+	textWrapped?: boolean | React.Binding<boolean>;
+	textXAlignment?: React.InferEnumNames<Enum.TextXAlignment>;
+	textYAlignment?: React.InferEnumNames<Enum.TextYAlignment>;
+	textTruncate?: React.InferEnumNames<Enum.TextTruncate>;
+	textScaled?: boolean | React.Binding<boolean>;
+	textHeight?: number | React.Binding<number>;
 	textAutoResize?: "X" | "Y" | "XY";
-	richText?: boolean | Roact.Binding<boolean>;
-	maxVisibleGraphemes?: number | Roact.Binding<number>;
+	richText?: boolean | React.Binding<boolean>;
+	maxVisibleGraphemes?: number | React.Binding<number>;
 }
 
 export function Text(props: TextProps) {
@@ -50,11 +50,11 @@ export function Text(props: TextProps) {
 			Visible={props.visible}
 			ZIndex={props.zIndex}
 			LayoutOrder={props.layoutOrder}
-			Change={props.change || {}}
-			Event={props.event || {}}
+			Change={props.change}
+			Event={props.event}
 		>
-			{props.cornerRadius && <uicorner key="corner" CornerRadius={props.cornerRadius} />}
 			{props.children}
+			{props.cornerRadius && <uicorner CornerRadius={props.cornerRadius} />}
 		</textlabel>
 	);
 }

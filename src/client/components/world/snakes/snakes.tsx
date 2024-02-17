@@ -1,6 +1,6 @@
 import { composeBindings, toBinding } from "@rbxts/pretty-react-hooks";
+import React, { useCallback, useMemo, useRef, useState } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useCallback, useMemo, useRef, useState } from "@rbxts/roact";
 import { Group } from "client/components/ui/group";
 import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
@@ -19,7 +19,7 @@ export function Snakes() {
 	const [transition, transitionMotion] = useMotion(1);
 	const [snakeBindings, setSnakeBindings] = useState<SnakeBindings>();
 
-	const offset = useMemo((): Roact.Binding<UDim2> => {
+	const offset = useMemo((): React.Binding<UDim2> => {
 		if (!snakeBindings) {
 			return toBinding(new UDim2(0.5, 0, 0.5, 0));
 		}

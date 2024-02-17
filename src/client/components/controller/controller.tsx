@@ -1,6 +1,6 @@
 import { useThrottleCallback } from "@rbxts/pretty-react-hooks";
+import React, { useEffect } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
 import { useInputDevice, useStore } from "client/hooks";
 import { REMOTE_TICK, WORLD_TICK } from "shared/constants/core";
 import { remotes } from "shared/remotes";
@@ -45,9 +45,9 @@ export function Controller() {
 
 	return (
 		<>
-			{device === "keyboard" && <Mouse key="mouse" updateAngle={updateAngle.run} setBoost={setBoost.run} />}
-			{device === "touch" && <Touch key="touch" updateAngle={updateAngle.run} setBoost={setBoost.run} />}
-			{device === "gamepad" && <Gamepad key="gamepad" updateAngle={updateAngle.run} setBoost={setBoost.run} />}
+			{device === "keyboard" && <Mouse updateAngle={updateAngle.run} setBoost={setBoost.run} />}
+			{device === "touch" && <Touch updateAngle={updateAngle.run} setBoost={setBoost.run} />}
+			{device === "gamepad" && <Gamepad updateAngle={updateAngle.run} setBoost={setBoost.run} />}
 		</>
 	);
 }

@@ -1,6 +1,6 @@
 import { useInterval } from "@rbxts/pretty-react-hooks";
+import React, { useEffect } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
 import { useStore } from "client/hooks";
 import { selectSnakeSpectated } from "client/store/world";
 import { cycleNextSnake, selectLocalSnake } from "shared/store/snakes";

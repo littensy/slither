@@ -1,6 +1,6 @@
 import { useEventListener } from "@rbxts/pretty-react-hooks";
+import React, { useBinding, useEffect, useMemo } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
-import Roact, { useBinding, useEffect, useMemo } from "@rbxts/roact";
 import { RunService } from "@rbxts/services";
 import { Frame } from "client/components/ui/frame";
 import { Shadow } from "client/components/ui/shadow";
@@ -58,13 +58,7 @@ export function Indicator({ colors, order }: IndicatorProps) {
 			size={style.size}
 			position={style.position}
 		>
-			<Shadow
-				key="glow"
-				shadowPosition={rem(0)}
-				shadowSize={rem(0)}
-				shadowColor={color}
-				shadowTransparency={0.8}
-			/>
+			<Shadow shadowPosition={rem(0)} shadowSize={rem(0)} shadowColor={color} shadowTransparency={0.8} />
 		</Frame>
 	);
 }

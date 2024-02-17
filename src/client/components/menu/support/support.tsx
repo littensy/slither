@@ -1,4 +1,4 @@
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { RemProvider } from "client/providers/rem-provider";
 
 import { SupportFooter } from "./support-footer";
@@ -8,12 +8,12 @@ import { SupportProducts } from "./support-products";
 export function Support() {
 	return (
 		<>
-			<RemProvider key="rem-override" minimumRem={0}>
-				<SupportProducts key="products" />
+			<RemProvider minimumRem={0}>
+				<SupportProducts />
 			</RemProvider>
 
-			<SupportFooter key="footer" />
-			<SupportPremium key="premium" />
+			<SupportFooter />
+			<SupportPremium />
 		</>
 	);
 }

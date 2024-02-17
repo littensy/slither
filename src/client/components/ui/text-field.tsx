@@ -1,4 +1,4 @@
-import Roact, { useEffect, useState } from "@rbxts/roact";
+import React, { useEffect, useState } from "@rbxts/react";
 
 import { fonts } from "../../constants/fonts";
 import { Group } from "./group";
@@ -6,11 +6,11 @@ import { TextProps } from "./text";
 
 interface TextFieldProps extends TextProps<TextBox> {
 	text?: string;
-	placeholderText?: string | Roact.Binding<string>;
-	placeholderColor?: Color3 | Roact.Binding<Color3>;
-	clearTextOnFocus?: boolean | Roact.Binding<boolean>;
-	multiLine?: boolean | Roact.Binding<boolean>;
-	textEditable?: boolean | Roact.Binding<boolean>;
+	placeholderText?: string | React.Binding<string>;
+	placeholderColor?: Color3 | React.Binding<Color3>;
+	clearTextOnFocus?: boolean | React.Binding<boolean>;
+	multiLine?: boolean | React.Binding<boolean>;
+	textEditable?: boolean | React.Binding<boolean>;
 }
 
 export function TextField(props: TextFieldProps) {
@@ -50,12 +50,12 @@ export function TextField(props: TextFieldProps) {
 			ZIndex={props.zIndex}
 			LayoutOrder={props.layoutOrder}
 			BorderSizePixel={0}
-			Event={props.event || {}}
-			Change={props.change || {}}
+			Event={props.event}
+			Change={props.change}
 		>
-			<Group key="ref" ref={setChildRef} />
-			{props.cornerRadius && <uicorner key="corner" CornerRadius={props.cornerRadius} />}
 			{props.children}
+			{props.cornerRadius && <uicorner CornerRadius={props.cornerRadius} />}
+			<Group ref={setChildRef} />
 		</textbox>
 	);
 }

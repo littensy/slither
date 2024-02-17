@@ -1,5 +1,5 @@
 import { useTimer } from "@rbxts/pretty-react-hooks";
-import Roact from "@rbxts/roact";
+import React from "@rbxts/react";
 import { Image } from "client/components/ui/image";
 import { useRem } from "client/hooks";
 import { images } from "shared/assets";
@@ -23,8 +23,8 @@ export function HomeTitle({ position }: HomeTitleProps) {
 			size={new UDim2(0, rem(30), 0, rem(20))}
 			position={position}
 		>
-			<uiaspectratioconstraint key="aspect-ratio" AspectRatio={1014 / 544} />
-			<uigradient key="gradient" Color={gradientPinched} Rotation={rotation} />
+			<uiaspectratioconstraint AspectRatio={1014 / 544} />
+			<uigradient Color={gradientPinched} Rotation={rotation} />
 		</Image>
 	);
 }

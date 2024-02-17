@@ -1,5 +1,5 @@
+import React, { useEffect } from "@rbxts/react";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import Roact, { useEffect } from "@rbxts/roact";
 import { Image } from "client/components/ui/image";
 import { springs } from "client/constants/springs";
 import { useMotion, useRem } from "client/hooks";
@@ -12,7 +12,7 @@ import { brighten } from "shared/utils/color-utils";
 interface SkinIndicatorProps {
 	readonly id: string;
 	readonly primary: Color3;
-	readonly transparency: Roact.Binding<number>;
+	readonly transparency: React.Binding<number>;
 }
 
 export function SkinIndicator({ id, primary, transparency }: SkinIndicatorProps) {
@@ -43,7 +43,6 @@ export function SkinIndicator({ id, primary, transparency }: SkinIndicatorProps)
 			position={new UDim2(1, -rem(1), 0, rem(1))}
 		>
 			<Image
-				key="indicator"
 				image={images.ui.circle}
 				imageColor={palette.offwhite}
 				imageTransparency={transparency}

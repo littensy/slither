@@ -1,4 +1,4 @@
-import { useMemo } from "@rbxts/roact";
+import { useMemo } from "@rbxts/react";
 
 /**
  * Generates a random seed unique to this function component.
