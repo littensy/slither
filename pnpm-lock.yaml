@@ -21,8 +21,8 @@ dependencies:
     specifier: ^0.4.1
     version: 0.4.1
   '@rbxts/react':
-    specifier: ^0.1.1
-    version: 0.1.1
+    specifier: ^0.2.0
+    version: 0.2.0
   '@rbxts/react-reflex':
     specifier: ^0.3.3
     version: 0.3.3
@@ -222,7 +222,7 @@ packages:
     resolution: {integrity: sha512-KURAgOn2Lvpgprm0tnut6ghVEOMwEVXMKl/uUBNqMKH6476cUI891SkIgmAuMzhItsgskcSS/HSHiwp30JMgVA==}
     dependencies:
       '@rbxts/flipper': 2.0.1
-      '@rbxts/react': 0.1.1
+      '@rbxts/react': 0.2.0
       '@rbxts/react-roblox': 0.3.0
       '@rbxts/services': 1.5.4
       '@rbxts/set-timeout': 1.1.2
@@ -231,7 +231,7 @@ packages:
   /@rbxts/react-reflex@0.3.3:
     resolution: {integrity: sha512-MmTg4+83xpnuG1NZkx2LiMaodh+ZRvH48cqeM8Z/THOl/9mMT5sC7ZPGBVQugwXp2L4gPiR9pyQnG/vWdyzhew==}
     dependencies:
-      '@rbxts/react': 0.1.1
+      '@rbxts/react': 0.2.0
       '@rbxts/reflex': 4.3.1
     dev: false
 
@@ -252,8 +252,8 @@ packages:
       '@rbxts/react-vendor': 0.1.0
     dev: false
 
-  /@rbxts/react@0.1.1:
-    resolution: {integrity: sha512-qTW24vKD0z2/LALAvXpk16brSeP4weB0w48Jio1z3obO+HdzzEaJ1y3ut6/iKnXl7LCtMO+QOfcxZgLmRqS/5A==}
+  /@rbxts/react@0.2.0:
+    resolution: {integrity: sha512-xrjwrn3nU8kGvZpk+AlnS2bgsZWFMaZR6sWUMUpUpDGZhHLYLT1FYOaIeuegajHZtCxNIn4PRUG6zIewlQleZA==}
     dependencies:
       '@rbxts/react-vendor': 0.1.0
     dev: false
