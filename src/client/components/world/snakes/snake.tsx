@@ -57,7 +57,7 @@ function SnakeComponent({ snakeOnScreen, scale, offset, subject, setSnakeBinding
 
 	return (
 		<>
-			{<>{children}</>}
+			{children}
 			{snakeOnScreen.head && (
 				<SnakeHead
 					angle={snake.angle}
