@@ -18,14 +18,14 @@ dependencies:
     specifier: ^1.0.4
     version: 1.0.4
   '@rbxts/pretty-react-hooks':
-    specifier: ^0.4.1
-    version: 0.4.1
+    specifier: ^0.4.2
+    version: 0.4.2(@rbxts/react-roblox@0.3.1)(@rbxts/react@0.2.0)
   '@rbxts/react':
     specifier: ^0.2.0
     version: 0.2.0
   '@rbxts/react-reflex':
-    specifier: ^0.3.3
-    version: 0.3.3
+    specifier: ^0.3.4
+    version: 0.3.4(@rbxts/react@0.2.0)(@rbxts/reflex@4.3.1)
   '@rbxts/react-roblox':
     specifier: ^0.3.1
     version: 0.3.1
@@ -218,8 +218,11 @@ packages:
     resolution: {integrity: sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==}
     dev: false
 
-  /@rbxts/pretty-react-hooks@0.4.1:
-    resolution: {integrity: sha512-KURAgOn2Lvpgprm0tnut6ghVEOMwEVXMKl/uUBNqMKH6476cUI891SkIgmAuMzhItsgskcSS/HSHiwp30JMgVA==}
+  /@rbxts/pretty-react-hooks@0.4.2(@rbxts/react-roblox@0.3.1)(@rbxts/react@0.2.0):
+    resolution: {integrity: sha512-PSHTkfNeG1+sXo1EIuzPmxIcR5BQVcP3MZG7fjUF7ulUfmfbY4AUzCsQoXxYYshavLCBA6OxEigKS+eOJX4kWg==}
+    peerDependencies:
+      '@rbxts/react': '*'
+      '@rbxts/react-roblox': '*'
     dependencies:
       '@rbxts/flipper': 2.0.1
       '@rbxts/react': 0.2.0
@@ -228,8 +231,11 @@ packages:
       '@rbxts/set-timeout': 1.1.2
     dev: false
 
-  /@rbxts/react-reflex@0.3.3:
-    resolution: {integrity: sha512-MmTg4+83xpnuG1NZkx2LiMaodh+ZRvH48cqeM8Z/THOl/9mMT5sC7ZPGBVQugwXp2L4gPiR9pyQnG/vWdyzhew==}
+  /@rbxts/react-reflex@0.3.4(@rbxts/react@0.2.0)(@rbxts/reflex@4.3.1):
+    resolution: {integrity: sha512-GCXd7PjS/ovxD5v2oWqKMrxXROL5k49DiQC2M4UOUKHp+rGJeRGTlGcThnS7uqg6GZpSaCbPPsDZAx1hm7E2Yw==}
+    peerDependencies:
+      '@rbxts/react': '*'
+      '@rbxts/reflex': '*'
     dependencies:
       '@rbxts/react': 0.2.0
       '@rbxts/reflex': 4.3.1
