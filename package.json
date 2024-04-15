@@ -36,10 +36,10 @@
 	"dependencies": {
 		"@rbxts/bitbuffer2": "1.0.0-ts.0",
 		"@rbxts/flipper": "^2.0.1",
-		"@rbxts/lapis": "^0.2.10",
+		"@rbxts/lapis": "^0.3.0",
 		"@rbxts/object-utils": "^1.0.4",
 		"@rbxts/pretty-react-hooks": "^0.4.2",
-		"@rbxts/react": "^0.2.0",
+		"@rbxts/react": "^0.3.6",
 		"@rbxts/react-reflex": "^0.3.4",
 		"@rbxts/react-roblox": "^0.3.1",
 		"@rbxts/reflex": "^4.3.1",
