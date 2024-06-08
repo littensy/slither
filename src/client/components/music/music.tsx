@@ -19,8 +19,6 @@ const MUSIC = [
 	"rbxassetid://9047105308", // Dusk To Dawn
 	"rbxassetid://9047105702", // Light Dreamer
 	"rbxassetid://9047105533", // No Smoking
-	"rbxassetid://1837441830", // Rattleback
-	"rbxassetid://1845743370", // Blue Night Waltz
 	"rbxassetid://1848354536", // Relaxed Scene
 	"rbxassetid://9043887091", // Lo-fi Chill A
 	"rbxassetid://9044565954", // Smooth Vibes (c)
