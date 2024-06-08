@@ -58,8 +58,8 @@ importers:
         version: 2.0.2
     devDependencies:
       '@rbxts/compiler-types':
-        specifier: 2.3.0-types.0
-        version: 2.3.0-types.0
+        specifier: 2.3.0-types.1
+        version: 2.3.0-types.1
       '@rbxts/types':
         specifier: ^1.0.780
         version: 1.0.780
@@ -156,8 +156,8 @@ packages:
   '@rbxts/bitbuffer2@1.0.0-ts.0':
     resolution: {integrity: sha512-Ly4y6gO5oVUubCFQLJZe9bc8u9jRGPKFoR0R4KSH689PxFQcKf5M5XMQG90DsAbhMk0KXZ2jKYiZuXb6ONBNuQ==}
 
-  '@rbxts/compiler-types@2.3.0-types.0':
-    resolution: {integrity: sha512-2kllUXLlK22OzSi3GmLT+/O70U9oB2iXp4rGFk5FLwc1pqf4W9EsInuJ0t7poLE2XnqnpW/ojff9CUNivI2+lw==}
+  '@rbxts/compiler-types@2.3.0-types.1':
+    resolution: {integrity: sha512-NZWNo+fC4icfJte+NiDSDdWJo1KwzD0MDQ2iBi70YhNYlkA7+Xc+B1udbVqxLJuBur2JxG5bbKrpMAfHqfCtbw==}
 
   '@rbxts/flipper@2.0.1':
     resolution: {integrity: sha512-kxb5AZizP05XSmo3waS/QkcfNMD5b6HX4gGwyHOyBow260R5MIT4L/ZUPLvleXXyb9b67X4NVmHoac1tPXOLNA==}
@@ -1103,7 +1103,7 @@ snapshots:
 
   '@rbxts/bitbuffer2@1.0.0-ts.0': {}
 
-  '@rbxts/compiler-types@2.3.0-types.0': {}
+  '@rbxts/compiler-types@2.3.0-types.1': {}
 
   '@rbxts/flipper@2.0.1': {}
 

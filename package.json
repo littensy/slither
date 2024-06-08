@@ -16,7 +16,7 @@
 		"output:prod": "mantle outputs --environment production > mantle-output.json"
 	},
 	"devDependencies": {
-		"@rbxts/compiler-types": "2.3.0-types.0",
+		"@rbxts/compiler-types": "2.3.0-types.1",
 		"@rbxts/types": "^1.0.780",
 		"@typescript-eslint/eslint-plugin": "^7.12.0",
 		"@typescript-eslint/parser": "^7.12.0",
