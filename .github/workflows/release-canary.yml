@@ -49,7 +49,7 @@ jobs:
           path: place.rbxlx
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: canary
     needs: build
 
