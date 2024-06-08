@@ -22,6 +22,10 @@ const MUSIC = [
 	"rbxassetid://1848354536", // Relaxed Scene
 	"rbxassetid://9043887091", // Lo-fi Chill A
 	"rbxassetid://9044565954", // Smooth Vibes (c)
+	"rbxassetid://1839841807", // Relax (c)
+	"rbxassetid://1838979278", // Early Morning
+	"rbxassetid://1841998846", // Lobby Soirée (c)
+	"rbxassetid://9047104411", // Beach Cushions
 ];
 
 export function Music() {
