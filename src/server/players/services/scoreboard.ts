@@ -10,15 +10,15 @@ export async function initScoreboardService() {
 		stats.Parent = player;
 
 		const knockouts = new Instance("IntValue");
-		knockouts.Name = "KOs";
+		knockouts.Name = "☠️ KOs";
 		knockouts.Parent = stats;
 
 		const score = new Instance("IntValue");
-		score.Name = "Score";
+		score.Name = "💯 Score";
 		score.Parent = stats;
 
 		const cash = new Instance("IntValue");
-		cash.Name = "Cash";
+		cash.Name = "💵 Cash";
 		cash.Parent = stats;
 
 		const unsubscribeFromScoreAndKnockoutsUpdate = store.subscribe(selectSnakeById(player.Name), (snake) => {
