@@ -39,7 +39,7 @@
 		"@rbxts/lapis": "^0.3.0",
 		"@rbxts/object-utils": "^1.0.4",
 		"@rbxts/pretty-react-hooks": "^0.5.0",
-		"@rbxts/react": "^0.3.6",
+		"@rbxts/react": "^0.4.0",
 		"@rbxts/react-reflex": "^0.3.4",
 		"@rbxts/react-roblox": "^0.3.6",
 		"@rbxts/reflex": "^4.3.1",

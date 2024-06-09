@@ -24,11 +24,11 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0
       '@rbxts/react':
-        specifier: ^0.3.6
-        version: 0.3.6
+        specifier: ^0.4.0
+        version: 0.4.0
       '@rbxts/react-reflex':
         specifier: ^0.3.4
-        version: 0.3.4(@rbxts/react@0.3.6)(@rbxts/reflex@4.3.1)
+        version: 0.3.4(@rbxts/react@0.4.0)(@rbxts/reflex@4.3.1)
       '@rbxts/react-roblox':
         specifier: ^0.3.6
         version: 0.3.6
@@ -185,8 +185,14 @@ packages:
   '@rbxts/react-vendor@0.3.6':
     resolution: {integrity: sha512-q3HilP6ZNHSgWW0lwka+Ft4Iq+fnPBppOeQhGua1XCtM2hEqhmUmME8DI1UlnaK/aGzdYW1bWC7YfHZhHGsIeA==}
 
+  '@rbxts/react-vendor@0.4.0':
+    resolution: {integrity: sha512-roWs9FmR7CQDK1N6gE/36tiCBQRl8v1S0pUJD2Ly3ZMVvfjAk2gixrkqGcKFGtXQQq6r4dTAtHduAeZJBd640g==}
+
   '@rbxts/react@0.3.6':
     resolution: {integrity: sha512-GeEqKjjyJT3zG85xEVCu3IMQdYRoXk4P9XCua4oriTIfuJaSTOWUukOmQ5ILpG/BpksLqXlpH8zqKKZcZaIs3g==}
+
+  '@rbxts/react@0.4.0':
+    resolution: {integrity: sha512-yhqXzfH5YpwfZyiWipQMfQsI//2sC86Jqn2rMkP+l1y4CfhCvoYxpaI5qS7Xum9F+DsBHiwJNeUxm2V2LzXW0A==}
 
   '@rbxts/reflex@4.3.1':
     resolution: {integrity: sha512-S5MbEpHKeRh9NWhwGJ789WbUsmlAlpQziWaNK4+kz1EpaaQ7uHQMZAuN1DYl4+QkqmOSuPlj04COwmArBGWH1Q==}
@@ -1121,9 +1127,9 @@ snapshots:
       '@rbxts/services': 1.5.4
       '@rbxts/set-timeout': 1.1.2
 
-  '@rbxts/react-reflex@0.3.4(@rbxts/react@0.3.6)(@rbxts/reflex@4.3.1)':
+  '@rbxts/react-reflex@0.3.4(@rbxts/react@0.4.0)(@rbxts/reflex@4.3.1)':
     dependencies:
-      '@rbxts/react': 0.3.6
+      '@rbxts/react': 0.4.0
       '@rbxts/reflex': 4.3.1
 
   '@rbxts/react-roblox@0.3.6':
@@ -1133,9 +1139,15 @@ snapshots:
 
   '@rbxts/react-vendor@0.3.6': {}
 
+  '@rbxts/react-vendor@0.4.0': {}
+
   '@rbxts/react@0.3.6':
     dependencies:
       '@rbxts/react-vendor': 0.3.6
+
+  '@rbxts/react@0.4.0':
+    dependencies:
+      '@rbxts/react-vendor': 0.4.0
 
   '@rbxts/reflex@4.3.1': {}
 
