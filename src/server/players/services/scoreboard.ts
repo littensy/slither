@@ -21,18 +21,18 @@ export async function initScoreboardService() {
 		cash.Name = "💵 Cash";
 		cash.Parent = stats;
 
-		const unsubscribeFromScoreAndKnockoutsUpdate = store.subscribe(selectSnakeById(player.Name), (snake) => {
+		const unsubscribeFromSnake = store.subscribe(selectSnakeById(player.Name), (snake) => {
 			score.Value = snake ? snake.score : 0;
 			knockouts.Value = snake ? snake.eliminations : 0;
 		});
 
-		const unsubscribeFromCashUpdate = store.subscribe(selectPlayerBalance(player.Name), (balance) => {
+		const unsubscribeFromCash = store.subscribe(selectPlayerBalance(player.Name), (balance) => {
 			cash.Value = balance ?? 0;
 		});
 
 		promisePlayerDisconnected(player).then(() => {
-			unsubscribeFromScoreAndKnockoutsUpdate();
-			unsubscribeFromCashUpdate();
+			unsubscribeFromSnake();
+			unsubscribeFromCash();
 		});
 	});
 }
