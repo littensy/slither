@@ -21,8 +21,8 @@ importers:
         specifier: ^1.0.4
         version: 1.0.4
       '@rbxts/pretty-react-hooks':
-        specifier: ^0.5.0
-        version: 0.5.0
+        specifier: ^0.5.1
+        version: 0.5.1
       '@rbxts/react':
         specifier: ^0.4.0
         version: 0.4.0
@@ -30,8 +30,8 @@ importers:
         specifier: ^0.3.4
         version: 0.3.4(@rbxts/react@0.4.0)(@rbxts/reflex@4.3.1)
       '@rbxts/react-roblox':
-        specifier: ^0.3.6
-        version: 0.3.6
+        specifier: ^0.4.0
+        version: 0.4.0
       '@rbxts/reflex':
         specifier: ^4.3.1
         version: 4.3.1
@@ -129,6 +129,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -136,6 +137,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -170,8 +172,8 @@ packages:
   '@rbxts/object-utils@1.0.4':
     resolution: {integrity: sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==}
 
-  '@rbxts/pretty-react-hooks@0.5.0':
-    resolution: {integrity: sha512-6SMwpcvg7gInb0WxEQnuzWtXlFr9G6YDBP0dnvvUtFIYhccA7qt0eCcG59ADalDAB78wy1UyHteqZ2LN8rd+Rw==}
+  '@rbxts/pretty-react-hooks@0.5.1':
+    resolution: {integrity: sha512-0JreWizUKryJGhU34PnK5XQNQkD1odgW3ZXri3SBGbMs0mtS+Icb7eJKJ0ul+4k4u4FEO/gKRPo5SWFP+XJ3xA==}
 
   '@rbxts/react-reflex@0.3.4':
     resolution: {integrity: sha512-GCXd7PjS/ovxD5v2oWqKMrxXROL5k49DiQC2M4UOUKHp+rGJeRGTlGcThnS7uqg6GZpSaCbPPsDZAx1hm7E2Yw==}
@@ -179,17 +181,11 @@ packages:
       '@rbxts/react': '*'
       '@rbxts/reflex': '*'
 
-  '@rbxts/react-roblox@0.3.6':
-    resolution: {integrity: sha512-4o6UUPXHZMZuUuAl92aTe/b1YoQkuPFsah3iQVV+Ic50cJivX0cBqEs5sGj6GviBUbQI1ZilYBhlc0/uk63iSA==}
-
-  '@rbxts/react-vendor@0.3.6':
-    resolution: {integrity: sha512-q3HilP6ZNHSgWW0lwka+Ft4Iq+fnPBppOeQhGua1XCtM2hEqhmUmME8DI1UlnaK/aGzdYW1bWC7YfHZhHGsIeA==}
+  '@rbxts/react-roblox@0.4.0':
+    resolution: {integrity: sha512-nse7mc7aLS78zfaXNfqeXX0vllRGnGQBKcrnl3FeDJo9+7oMKLF4mLAtrCkQ5ojZOnNKNcDPE7PKmOX7Q8QguQ==}
 
   '@rbxts/react-vendor@0.4.0':
     resolution: {integrity: sha512-roWs9FmR7CQDK1N6gE/36tiCBQRl8v1S0pUJD2Ly3ZMVvfjAk2gixrkqGcKFGtXQQq6r4dTAtHduAeZJBd640g==}
-
-  '@rbxts/react@0.3.6':
-    resolution: {integrity: sha512-GeEqKjjyJT3zG85xEVCu3IMQdYRoXk4P9XCua4oriTIfuJaSTOWUukOmQ5ILpG/BpksLqXlpH8zqKKZcZaIs3g==}
 
   '@rbxts/react@0.4.0':
     resolution: {integrity: sha512-yhqXzfH5YpwfZyiWipQMfQsI//2sC86Jqn2rMkP+l1y4CfhCvoYxpaI5qS7Xum9F+DsBHiwJNeUxm2V2LzXW0A==}
@@ -1119,11 +1115,11 @@ snapshots:
 
   '@rbxts/object-utils@1.0.4': {}
 
-  '@rbxts/pretty-react-hooks@0.5.0':
+  '@rbxts/pretty-react-hooks@0.5.1':
     dependencies:
       '@rbxts/flipper': 2.0.1
-      '@rbxts/react': 0.3.6
-      '@rbxts/react-roblox': 0.3.6
+      '@rbxts/react': 0.4.0
+      '@rbxts/react-roblox': 0.4.0
       '@rbxts/services': 1.5.4
       '@rbxts/set-timeout': 1.1.2
 
@@ -1132,18 +1128,12 @@ snapshots:
       '@rbxts/react': 0.4.0
       '@rbxts/reflex': 4.3.1
 
-  '@rbxts/react-roblox@0.3.6':
+  '@rbxts/react-roblox@0.4.0':
     dependencies:
-      '@rbxts/react': 0.3.6
-      '@rbxts/react-vendor': 0.3.6
-
-  '@rbxts/react-vendor@0.3.6': {}
+      '@rbxts/react': 0.4.0
+      '@rbxts/react-vendor': 0.4.0
 
   '@rbxts/react-vendor@0.4.0': {}
-
-  '@rbxts/react@0.3.6':
-    dependencies:
-      '@rbxts/react-vendor': 0.3.6
 
   '@rbxts/react@0.4.0':
     dependencies:
