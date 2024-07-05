@@ -13,13 +13,18 @@ export async function initScoreboardService() {
 		knockouts.Name = "☠️ KOs";
 		knockouts.Parent = stats;
 
+		const cash = new Instance("IntValue");
+		cash.Name = "💵 Cash";
+		cash.Parent = stats;
+
 		const score = new Instance("IntValue");
 		score.Name = "💯 Score";
 		score.Parent = stats;
 
-		const cash = new Instance("IntValue");
-		cash.Name = "💵 Cash";
-		cash.Parent = stats;
+		const isPrimary = new Instance("BoolValue");
+		isPrimary.Name = "IsPrimary";
+		isPrimary.Value = true;
+		isPrimary.Parent = score;
 
 		const unsubscribeFromSnake = store.subscribe(selectSnakeById(player.Name), (snake) => {
 			score.Value = snake ? snake.score : 0;
