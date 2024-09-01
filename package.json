@@ -16,22 +16,22 @@
 		"output:prod": "mantle outputs --environment production > mantle-output.json"
 	},
 	"devDependencies": {
-		"@rbxts/compiler-types": "2.3.0-types.1",
-		"@rbxts/types": "^1.0.780",
-		"@typescript-eslint/eslint-plugin": "^7.12.0",
-		"@typescript-eslint/parser": "^7.12.0",
+		"@rbxts/compiler-types": "2.3.0-types.2",
+		"@rbxts/types": "^1.0.803",
+		"@typescript-eslint/eslint-plugin": "^8.3.0",
+		"@typescript-eslint/parser": "^8.3.0",
 		"cross-env": "^7.0.3",
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-prettier": "^5.1.3",
+		"eslint-plugin-prettier": "^5.2.1",
 		"eslint-plugin-roblox-ts": "^0.0.36",
-		"eslint-plugin-simple-import-sort": "^12.1.0",
-		"eslint-plugin-unused-imports": "^3.2.0",
-		"prettier": "^3.3.1",
+		"eslint-plugin-simple-import-sort": "^12.1.1",
+		"eslint-plugin-unused-imports": "^4.1.3",
+		"prettier": "^3.3.3",
 		"rbxts-transform-debug": "^2.2.0",
 		"rbxts-transform-env": "^2.2.0",
 		"roblox-ts": "2.3.0-dev-d7847ea",
-		"typescript": "^5.4.5"
+		"typescript": "^5.5.4"
 	},
 	"dependencies": {
 		"@rbxts/bitbuffer2": "1.0.0-ts.0",
