@@ -1,5 +1,4 @@
 import { Players, RunService } from "@rbxts/services";
-import { $NODE_ENV } from "rbxts-transform-env";
 
 // Premium benefit applied when earning money passively
 // during a game or when purchasing a product from the shop.
@@ -13,8 +12,8 @@ export const SNAKE_BOOST_SPEED = 12;
 
 export const REMOTE_TICK = 1 / 20; // Roblox limits
 
-export const IS_PROD = $NODE_ENV === "production";
-export const IS_CANARY = $NODE_ENV === "canary";
+export const IS_PROD = game.PlaceId === 14162747150;
+export const IS_CANARY = !IS_PROD;
 export const IS_EDIT = RunService.IsStudio() && !RunService.IsRunning();
 
 export const USER_ID = Players.LocalPlayer ? Players.LocalPlayer.UserId : 0;

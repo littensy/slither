@@ -25,7 +25,7 @@ function SnakeComponent({ snakeOnScreen, scale, offset, subject, setSnakeBinding
 
 	const radius = describeSnakeFromScore(snake.score).radius;
 	const distance = snake.head.sub(offset.mul(-1)).Magnitude;
-	const skin = snake.id !== subject ? snake.skin : snakeSkinOverride ?? snake.skin;
+	const skin = snake.id !== subject ? snake.skin : (snakeSkinOverride ?? snake.skin);
 	const showNameTag = snake.id !== subject && !snake.dead && distance < 16;
 
 	const children = useMemo(() => {

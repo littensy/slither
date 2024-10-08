@@ -35,7 +35,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Compile
-        run: pnpm build:dev --verbose
+        run: pnpm build --verbose
 
       - name: Build project
         run: rojo build --output place.rbxlx

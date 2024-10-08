@@ -30,7 +30,7 @@ jobs:
           pnpm prettier --check src
 
       - name: Compile
-        run: pnpm build:dev --verbose
+        run: pnpm build --verbose
 
       - name: Build project
         run: rojo build --output place.rbxlx
