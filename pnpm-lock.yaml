@@ -21,8 +21,8 @@ importers:
         specifier: ^1.0.4
         version: 1.0.4
       '@rbxts/pretty-react-hooks':
-        specifier: ^0.5.2
-        version: 0.5.2
+        specifier: ^0.6.0
+        version: 0.6.0
       '@rbxts/react':
         specifier: ^17.2.1
         version: 17.2.1
@@ -39,8 +39,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0
       '@rbxts/ripple':
-        specifier: ^0.8.2
-        version: 0.8.2
+        specifier: ^0.9.1
+        version: 0.9.1
       '@rbxts/services':
         specifier: ^1.5.5
         version: 1.5.5
@@ -166,8 +166,8 @@ packages:
   '@rbxts/object-utils@1.0.4':
     resolution: {integrity: sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==}
 
-  '@rbxts/pretty-react-hooks@0.5.2':
-    resolution: {integrity: sha512-aOnYTDXUGspMIXdqUw65ub9js40c0BZqXK5ROR7esRHak+JtpbGdbkM2a4A8Pw7c3jehi0Ri+tnLsmmLAj9mhQ==}
+  '@rbxts/pretty-react-hooks@0.6.0':
+    resolution: {integrity: sha512-KPaJ9xvbE6UJ1ECe4bwHBM3iqQ+IYcn0QfHjyRNZgADrz6/An+2zpxydY4ACjawAqRYybV7jwd6MqCJJiXHjOA==}
 
   '@rbxts/react-reflex@0.3.4':
     resolution: {integrity: sha512-GCXd7PjS/ovxD5v2oWqKMrxXROL5k49DiQC2M4UOUKHp+rGJeRGTlGcThnS7uqg6GZpSaCbPPsDZAx1hm7E2Yw==}
@@ -190,8 +190,8 @@ packages:
   '@rbxts/remo@1.5.0':
     resolution: {integrity: sha512-+2qOeGvu4VwPnKUGmsNwGymNPNG+TirpgW3KWFNg4J0fYpqZCLSArt9pIEIZakzRq1kjWZHzrF9OziU3K0/g5A==}
 
-  '@rbxts/ripple@0.8.2':
-    resolution: {integrity: sha512-1F+yA8ugw0LEDBerQfIiIdUDoOfwz8O86GkH+sJkBViC/zJWDCZdrlzcdk7G7adePqkeBRfPp89g/4dUzZ4JQQ==}
+  '@rbxts/ripple@0.9.1':
+    resolution: {integrity: sha512-gLjKYy+mJO67NoN/9d7/8kBy6+SNG1/09GNNnh89DYWT5iHYdxC0/XKbKrKZpx7Fcsz5iY9Sl6vOvSnFwFbQuw==}
 
   '@rbxts/services@1.5.5':
     resolution: {integrity: sha512-Hu7QH2ecefS60zpakKG3T2vgABydoOJqpSG7nXr59wFAbPk/cA+OcsntYPHUWyHAat0VFGZ5jNZLTLdiqfssvg==}
@@ -1019,11 +1019,11 @@ snapshots:
 
   '@rbxts/object-utils@1.0.4': {}
 
-  '@rbxts/pretty-react-hooks@0.5.2':
+  '@rbxts/pretty-react-hooks@0.6.0':
     dependencies:
-      '@rbxts/flipper': 2.0.1
       '@rbxts/react': 17.2.1
       '@rbxts/react-roblox': 17.2.1
+      '@rbxts/ripple': 0.9.1
       '@rbxts/services': 1.5.5
       '@rbxts/set-timeout': 1.1.2
 
@@ -1047,7 +1047,7 @@ snapshots:
 
   '@rbxts/remo@1.5.0': {}
 
-  '@rbxts/ripple@0.8.2': {}
+  '@rbxts/ripple@0.9.1': {}
 
   '@rbxts/services@1.5.5': {}
 
