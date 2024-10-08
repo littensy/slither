@@ -6,7 +6,6 @@ import { Controller } from "client/components/controller";
 import { World } from "client/components/world/world";
 import { RootProvider } from "client/providers/root-provider";
 import { store } from "client/store";
-import { profileAllComponents } from "client/utils/profiler";
 import { USER_NAME, WORLD_TICK } from "shared/constants/core";
 import { getRandomAccent } from "shared/constants/palette";
 import { getRandomBaseSnakeSkin } from "shared/constants/skins";
@@ -17,8 +16,6 @@ import { createScheduler } from "shared/utils/scheduler";
 import { useMockRemotes } from "../utils/use-mock-remotes";
 
 const IDS = [USER_NAME, ...fillArray(10, (index) => `${index}`)];
-
-profileAllComponents();
 
 export = hoarcekat(() => {
 	useMockRemotes();

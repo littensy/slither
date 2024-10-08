@@ -2,7 +2,7 @@ import React from "@rbxts/react";
 import { Text } from "client/components/ui/text";
 import { fonts } from "client/constants/fonts";
 import { useRem } from "client/hooks";
-import { $git, $package } from "rbxts-transform-debug";
+import { IS_PROD } from "shared/constants/core";
 import { palette } from "shared/constants/palette";
 
 interface HomeVersionProps {
@@ -10,8 +10,8 @@ interface HomeVersionProps {
 }
 
 const DIVIDER = `  <font transparency="0.75">—</font>  `;
-const VERSION = $package.version;
-const TIMESTAMP = DateTime.fromIsoDate($git().ISODate)?.FormatLocalTime("LLL", "en-us") ?? "unknown";
+const REPO = "littensy/slither";
+const MODE = IS_PROD ? "production" : "development";
 
 export function HomeVersion({ position }: HomeVersionProps) {
 	const rem = useRem();
@@ -20,7 +20,7 @@ export function HomeVersion({ position }: HomeVersionProps) {
 		<Text
 			richText
 			font={fonts.inter.medium}
-			text={VERSION + DIVIDER + TIMESTAMP}
+			text={REPO + DIVIDER + MODE}
 			textSize={rem(1.25)}
 			textColor={palette.text}
 			textTransparency={0.5}
