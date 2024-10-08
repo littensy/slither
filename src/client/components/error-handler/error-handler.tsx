@@ -3,9 +3,7 @@ import { ErrorBoundary } from "client/components/ui/error-boundary";
 
 import { ErrorPage } from "./error-page";
 
-interface ErrorHandlerProps extends React.PropsWithChildren {}
-
-export function ErrorHandler({ children }: ErrorHandlerProps) {
+export function ErrorHandler({ children }: React.PropsWithChildren) {
 	return (
 		<ErrorBoundary
 			fallback={(message) => {

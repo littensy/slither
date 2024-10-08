@@ -4,9 +4,7 @@ import { store } from "client/store";
 
 import { RemProvider, RemProviderProps } from "./rem-provider";
 
-interface RootProviderProps extends RemProviderProps {}
-
-export function RootProvider({ baseRem, remOverride, children }: RootProviderProps) {
+export function RootProvider({ baseRem, remOverride, children }: RemProviderProps) {
 	return (
 		<ReflexProvider producer={store}>
 			<RemProvider baseRem={baseRem} remOverride={remOverride}>
