@@ -84,7 +84,7 @@ export class BotBehavior {
 		const speed = snake.boost ? SNAKE_BOOST_SPEED : SNAKE_SPEED;
 
 		const angle = math.atan2(direction.Y, direction.X);
-		const newPosition = head.add(new Vector2(math.cos(angle), math.sin(angle)).mul(speed));
+		const newPosition = head.add(new Vector2(math.cos(angle), math.sin(angle)).mul(speed * 1.5));
 		const targetAngle = math.atan2(newPosition.Y - head.Y, newPosition.X - head.X);
 
 		if (head.sub(enemy.head).Magnitude <= 5) {
@@ -108,6 +108,7 @@ export class BotBehavior {
 				this.player_target = nearbyEnemy;
 				this.pursue(snake, nearbyEnemy, direction);
 			} else {
+				this.player_target = undefined;
 				this.flee(snake, direction);
 			}
 			return;
