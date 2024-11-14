@@ -104,10 +104,14 @@ export class BotBehavior {
 
 		const [nearbyEnemy, direction, fleeDistance] = this.nearestEnemy(snake) ?? [];
 		if (nearbyEnemy && direction) {
-			if (snake.score > nearbyEnemy.score && snake.head.sub(nearbyEnemy.head).Dot(direction) < 0) {
+			if (
+				!fleeDistance &&
+				snake.score > nearbyEnemy.score &&
+				snake.head.sub(nearbyEnemy.head).Dot(direction) < 0
+			) {
 				this.player_target = nearbyEnemy;
 				this.pursue(snake, nearbyEnemy, direction);
-			} else if (fleeDistance) {
+			} else {
 				this.flee(snake, direction);
 			}
 			return;
