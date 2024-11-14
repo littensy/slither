@@ -102,13 +102,9 @@ export class BotBehavior {
 			return;
 		}
 
-		const [nearbyEnemy, direction, fleeDistance] = this.nearestEnemy(snake) ?? [];
+		const [nearbyEnemy, direction] = this.nearestEnemy(snake) ?? [];
 		if (nearbyEnemy && direction) {
-			if (
-				!fleeDistance &&
-				snake.score > nearbyEnemy.score &&
-				snake.head.sub(nearbyEnemy.head).Dot(direction) < 0
-			) {
+			if (snake.score > nearbyEnemy.score && snake.head.sub(nearbyEnemy.head).Dot(direction) < 0) {
 				this.player_target = nearbyEnemy;
 				this.pursue(snake, nearbyEnemy, direction);
 			} else {
@@ -129,7 +125,7 @@ export class BotBehavior {
 		}
 	}
 
-	private nearestEnemy(snake: SnakeEntity): [SnakeEntity, Vector2, boolean] | undefined {
+	private nearestEnemy(snake: SnakeEntity): [SnakeEntity, Vector2] | undefined {
 		const radius = describeSnakeFromScore(snake.score).radius;
 
 		const nearest = snakeGrid.nearest(snake.head, radius * 10 + 3, (hit) => {
@@ -147,8 +143,8 @@ export class BotBehavior {
 		const direction = nearest.position.sub(snake.head);
 		const distance = direction.Magnitude;
 
-		if (distance <= 20 * (radius + enemyRadius)) {
-			return [enemy, direction.Unit, distance <= 5 * (radius + enemyRadius)];
+		if (distance <= 10 * (radius + enemyRadius)) {
+			return [enemy, direction.Unit];
 		}
 	}
 
