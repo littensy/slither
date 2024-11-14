@@ -143,7 +143,7 @@ export class BotBehavior {
 		const direction = nearest.position.sub(snake.head);
 		const distance = direction.Magnitude;
 
-		if (distance <= 10 * (radius + enemyRadius)) {
+		if (distance <= 5 * (radius + enemyRadius)) {
 			return [enemy, direction.Unit];
 		}
 	}
