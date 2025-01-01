@@ -21,23 +21,23 @@ importers:
         specifier: ^1.0.4
         version: 1.0.4
       '@rbxts/pretty-react-hooks':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.6.1
+        version: 0.6.1
       '@rbxts/react':
-        specifier: ^17.2.1
-        version: 17.2.1
+        specifier: ^17.2.3
+        version: 17.2.3
       '@rbxts/react-reflex':
         specifier: ^0.3.4
-        version: 0.3.4(@rbxts/react@17.2.1)(@rbxts/reflex@4.3.1)
+        version: 0.3.4(@rbxts/react@17.2.3)(@rbxts/reflex@4.3.1)
       '@rbxts/react-roblox':
-        specifier: ^17.2.1
-        version: 17.2.1
+        specifier: ^17.2.3
+        version: 17.2.3
       '@rbxts/reflex':
         specifier: ^4.3.1
         version: 4.3.1
       '@rbxts/remo':
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: ^1.5.1
+        version: 1.5.1
       '@rbxts/ripple':
         specifier: ^0.9.1
         version: 0.9.1
@@ -166,8 +166,8 @@ packages:
   '@rbxts/object-utils@1.0.4':
     resolution: {integrity: sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==}
 
-  '@rbxts/pretty-react-hooks@0.6.0':
-    resolution: {integrity: sha512-KPaJ9xvbE6UJ1ECe4bwHBM3iqQ+IYcn0QfHjyRNZgADrz6/An+2zpxydY4ACjawAqRYybV7jwd6MqCJJiXHjOA==}
+  '@rbxts/pretty-react-hooks@0.6.1':
+    resolution: {integrity: sha512-dnHS1z2Emq2ZC1dqKtcYmuhu04xkFgN25J/rnWYL4UnX9LuGXGrG4qF3kBlNRyTQXjGf+pXVlX6mLQmwfsSxOQ==}
 
   '@rbxts/react-reflex@0.3.4':
     resolution: {integrity: sha512-GCXd7PjS/ovxD5v2oWqKMrxXROL5k49DiQC2M4UOUKHp+rGJeRGTlGcThnS7uqg6GZpSaCbPPsDZAx1hm7E2Yw==}
@@ -175,20 +175,20 @@ packages:
       '@rbxts/react': '*'
       '@rbxts/reflex': '*'
 
-  '@rbxts/react-roblox@17.2.1':
-    resolution: {integrity: sha512-qKCz63iMl6fFq2SUXoMG6paAW8TGxsEyUwoRk6bojg7b3NzBqYMz5/eRcJsbPqMjwR56PWBhCOH3fdf4sOcFbw==}
+  '@rbxts/react-roblox@17.2.3':
+    resolution: {integrity: sha512-YgS+C3tf92iM1NTK1f6R2O2G8+nbcKFnblA0mTs2Nt878OsWLgxhnhkCBZ6wYv+yeDGD9/sssKHZ6s2LzUWTrQ==}
 
-  '@rbxts/react-vendor@17.2.1':
-    resolution: {integrity: sha512-7DxFweCbhhso4M4tl1pO7Kil9SZrvOl1SoZ4lnwUfoxdHvSmWgeKgaUqd+ZS3/u1E8kRraqGQ56Q8zjUEEUzlA==}
+  '@rbxts/react-vendor@17.2.3':
+    resolution: {integrity: sha512-dWCiVelvTK6h920geaFH/OQ5zoWHyhyqyfH51hKx2/iVZ6OiiyNVJ5UqEIkJMG4HsJ8JnkTORizV3+MtQ41BtA==}
 
-  '@rbxts/react@17.2.1':
-    resolution: {integrity: sha512-iu0RsVvfHroI7l+QXjwE0FiWV2rXoKMxuznDZ8vnx2BsFqrPnCqFjXuNeGYZwibibZC6jbyq7uKl+/8cz7XlsA==}
+  '@rbxts/react@17.2.3':
+    resolution: {integrity: sha512-IoOB8e2W8MxT0MKWFf0Ls0vT61ImYL6ctHQgz5+oazma6z8bqFtJjgPxOuy6jmMSuyfBe7rYp/muou0kIjZT+Q==}
 
   '@rbxts/reflex@4.3.1':
     resolution: {integrity: sha512-S5MbEpHKeRh9NWhwGJ789WbUsmlAlpQziWaNK4+kz1EpaaQ7uHQMZAuN1DYl4+QkqmOSuPlj04COwmArBGWH1Q==}
 
-  '@rbxts/remo@1.5.0':
-    resolution: {integrity: sha512-+2qOeGvu4VwPnKUGmsNwGymNPNG+TirpgW3KWFNg4J0fYpqZCLSArt9pIEIZakzRq1kjWZHzrF9OziU3K0/g5A==}
+  '@rbxts/remo@1.5.1':
+    resolution: {integrity: sha512-ZLXyMdxBkmuexWKd/Rq912GjgIDznA2Pgc5Kvtzji57FkwlFX+vcoQCdo9cMvV2z9me5RR57TSljk5NO4ErQKw==}
 
   '@rbxts/ripple@0.9.1':
     resolution: {integrity: sha512-gLjKYy+mJO67NoN/9d7/8kBy6+SNG1/09GNNnh89DYWT5iHYdxC0/XKbKrKZpx7Fcsz5iY9Sl6vOvSnFwFbQuw==}
@@ -1013,33 +1013,33 @@ snapshots:
 
   '@rbxts/object-utils@1.0.4': {}
 
-  '@rbxts/pretty-react-hooks@0.6.0':
+  '@rbxts/pretty-react-hooks@0.6.1':
     dependencies:
-      '@rbxts/react': 17.2.1
-      '@rbxts/react-roblox': 17.2.1
+      '@rbxts/react': 17.2.3
+      '@rbxts/react-roblox': 17.2.3
       '@rbxts/ripple': 0.9.1
       '@rbxts/services': 1.5.5
       '@rbxts/set-timeout': 1.1.2
 
-  '@rbxts/react-reflex@0.3.4(@rbxts/react@17.2.1)(@rbxts/reflex@4.3.1)':
+  '@rbxts/react-reflex@0.3.4(@rbxts/react@17.2.3)(@rbxts/reflex@4.3.1)':
     dependencies:
-      '@rbxts/react': 17.2.1
+      '@rbxts/react': 17.2.3
       '@rbxts/reflex': 4.3.1
 
-  '@rbxts/react-roblox@17.2.1':
+  '@rbxts/react-roblox@17.2.3':
     dependencies:
-      '@rbxts/react': 17.2.1
-      '@rbxts/react-vendor': 17.2.1
+      '@rbxts/react': 17.2.3
+      '@rbxts/react-vendor': 17.2.3
 
-  '@rbxts/react-vendor@17.2.1': {}
+  '@rbxts/react-vendor@17.2.3': {}
 
-  '@rbxts/react@17.2.1':
+  '@rbxts/react@17.2.3':
     dependencies:
-      '@rbxts/react-vendor': 17.2.1
+      '@rbxts/react-vendor': 17.2.3
 
   '@rbxts/reflex@4.3.1': {}
 
-  '@rbxts/remo@1.5.0': {}
+  '@rbxts/remo@1.5.1': {}
 
   '@rbxts/ripple@0.9.1': {}
 
