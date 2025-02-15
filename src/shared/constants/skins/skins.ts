@@ -82,6 +82,13 @@ export const snakeSkins: readonly SnakeSkin[] = [
 
 	{
 		...defaultSnakeSkin,
+		id: "south-korea",
+		price: 100,
+		tint: [palette.offwhite, palette.offwhite, palette.blue, palette.red],
+	},
+
+	{
+		...defaultSnakeSkin,
 		id: "mexico",
 		price: 100,
 		tint: [palette.blue, palette.blue, palette.offwhite, palette.offwhite, palette.red, palette.red],
