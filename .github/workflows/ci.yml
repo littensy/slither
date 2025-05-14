@@ -21,6 +21,8 @@ jobs:
           version: 9.2.0
           run_install: true
       - uses: CompeyDev/setup-rokit@v0.1.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Lint
         run: |
