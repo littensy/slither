@@ -57,3 +57,4 @@ jobs:
           ROBLOSECURITY: ${{ secrets.ROBLOSECURITY }}
           MANTLE_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           MANTLE_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          MANTLE_OPEN_CLOUD_API_KEY: ${{ secrets.MANTLE_OPEN_CLOUD_API_KEY }}
