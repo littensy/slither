@@ -23,9 +23,7 @@ jobs:
         with:
           version: 9.2.0
           run_install: true
-      - uses: ok-nick/setup-aftman@v0.4.2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: CompeyDev/setup-rokit@v0.1.2
 
       - name: Compile
         run: pnpm build --verbose
@@ -46,9 +44,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: ok-nick/setup-aftman@v0.4.2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: CompeyDev/setup-rokit@v0.1.2
 
       - name: Download place artifact
         uses: actions/download-artifact@v4

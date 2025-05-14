@@ -1,0 +1,9 @@
+# This file lists tools managed by Rokit, a toolchain manager for Roblox projects.
+# For more information, see https://github.com/rojo-rbx/rokit
+
+# New tools can be added by running `rokit add <tool>` in a terminal.
+
+[tools]
+rojo = "rojo-rbx/rojo@7.5.1"
+tarmac = "rojo-rbx/tarmac@0.7.5"
+mantle = "blake-mealey/mantle@0.11.18"
