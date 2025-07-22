@@ -1,3 +1,34 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=littensy&project=slither&lang=id">Bahasa Indonesia</a>
+      </div>
+    </div>
+  </details>
+</div>
+
 <h3 align="center">
     <img src="assets/marketing/github_logo.png" alt="Slither Icon" width="192" />
     <br />
