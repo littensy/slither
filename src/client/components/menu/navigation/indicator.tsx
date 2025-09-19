@@ -4,7 +4,7 @@ import { useSelector } from "@rbxts/react-reflex";
 import { RunService } from "@rbxts/services";
 import { Frame } from "client/components/ui/frame";
 import { Shadow } from "client/components/ui/shadow";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { MenuPage, selectCurrentPage } from "client/store/menu";
 import { map } from "shared/utils/math-utils";
 
@@ -20,8 +20,8 @@ export function Indicator({ colors, order }: IndicatorProps) {
 	const currentIndex = order.indexOf(page);
 	const currentColor = colors[currentIndex];
 
-	const [color, colorMotion] = useMotion(Color3.fromRGB(255, 255, 255));
-	const [position, positionMotion] = useMotion(0);
+	const [color, colorSpring] = useSpring(Color3.fromRGB(255, 255, 255));
+	const [position, positionSpring] = useSpring(0);
 	const [velocity, setVelocity] = useBinding(0);
 
 	const style = useMemo(() => {
@@ -31,23 +31,22 @@ export function Indicator({ colors, order }: IndicatorProps) {
 			}),
 
 			size: velocity.map((x) => {
-				return new UDim2(0, math.round(rem(x + 4)), 0, rem(1));
+				return new UDim2(0, math.round(rem(x * 0.05 + 4)), 0, rem(1));
 			}),
 		};
 	}, [rem]);
 
 	useEffect(() => {
 		const x = map(currentIndex, 0, 2, -8, 8);
-		positionMotion.spring(x, { tension: 240, friction: 25, mass: 1.5 });
+		positionSpring.setGoal(x, { tension: 240, friction: 25, mass: 1.5 });
 	}, [page, rem]);
 
 	useEffect(() => {
-		colorMotion.spring(currentColor);
+		colorSpring.setGoal(currentColor);
 	}, [currentColor]);
 
 	useEventListener(RunService.Heartbeat, () => {
-		const velocity = math.abs(positionMotion.getVelocity());
-		setVelocity(50 * velocity);
+		setVelocity(math.abs(positionSpring.getVelocity()));
 	});
 
 	return (

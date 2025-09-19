@@ -5,7 +5,7 @@ import { useSelector } from "@rbxts/react-reflex";
 import { Group } from "client/components/ui/group";
 import { Image } from "client/components/ui/image";
 import { Text } from "client/components/ui/text";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { selectSnakeFromWorldSubject } from "client/store/world";
 import { images } from "shared/assets";
 
@@ -20,8 +20,8 @@ export function Compass() {
 	const leader = useLeader();
 	const subject = useSelector(selectSnakeFromWorldSubject);
 
-	const [displacement, displacementMotion] = useMotion(new Vector2());
-	const [visible, visibleMotion] = useMotion(0);
+	const [displacement, displacementSpring] = useSpring(new Vector2());
+	const [visible, visibleSpring] = useSpring(0);
 
 	const style = useMemo(() => {
 		const rotation = displacement.map((vector) => {
@@ -44,15 +44,15 @@ export function Compass() {
 
 	useEffect(() => {
 		if (subject && leader && subject !== leader) {
-			displacementMotion.spring(leader.head.sub(subject.head));
+			displacementSpring.setGoal(leader.head.sub(subject.head));
 
 			if (leader.head.sub(subject.head).Magnitude > MIN_RANGE) {
-				visibleMotion.spring(1);
+				visibleSpring.setGoal(1);
 				return;
 			}
 		}
 
-		visibleMotion.spring(0);
+		visibleSpring.setGoal(0);
 	}, [subject, leader]);
 
 	return (

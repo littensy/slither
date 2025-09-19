@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useRef } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
 import { DelayRender } from "client/components/ui/delay-render";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { MenuPage, selectCurrentPage, selectIsMenuOpen, selectMenuTransition } from "client/store/menu";
 
 import { Transition } from "../ui/transition";
@@ -25,10 +25,10 @@ export function MenuContainer({ page, children }: MenuContainerProps) {
 
 	const menuTransition = useSelector(selectMenuTransition);
 	const transitionFrom = useRef(rem(TRANSITION_DEFAULT));
-	const [transition, transitionMotion] = useMotion(0);
+	const [transition, transitionSpring] = useSpring(0);
 
 	useEffect(() => {
-		transitionMotion.spring(visible ? 1 : 0, springs.gentle);
+		transitionSpring.setGoal(visible ? 1 : 0, springs.gentle);
 	}, [visible]);
 
 	// wrapped in useMemo instead of an effect so that it can update

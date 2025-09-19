@@ -4,7 +4,7 @@ import React from "@rbxts/react";
 import { images } from "shared/assets";
 import { palette } from "shared/constants/palette";
 
-import { useMotion, useRem } from "../../hooks";
+import { useRem, useSpring } from "../../hooks";
 import { Frame } from "./frame";
 import { Image } from "./image";
 import { Outline } from "./outline";
@@ -36,13 +36,13 @@ export function PrimaryButton({
 	children,
 }: PrimaryButtonProps) {
 	const rem = useRem();
-	const [hover, hoverMotion] = useMotion(0);
+	const [hover, hoverSpring] = useSpring(0);
 
 	return (
 		<ReactiveButton
 			onClick={onClick}
 			onHover={(hovered) => {
-				hoverMotion.spring(hovered ? 1 : 0);
+				hoverSpring.setGoal(hovered ? 1 : 0);
 				onHover?.(hovered);
 			}}
 			backgroundTransparency={1}

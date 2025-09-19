@@ -11,7 +11,7 @@ import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
 import { Transition } from "client/components/ui/transition";
 import { fonts } from "client/constants/fonts";
-import { useMotion, useProductPrice, useRem } from "client/hooks";
+import { useProductPrice, useRem, useSpring } from "client/hooks";
 import { palette } from "shared/constants/palette";
 import { brighten } from "shared/utils/color-utils";
 
@@ -46,10 +46,10 @@ export function SupportProduct({
 		return math.random(15, 30) * (math.random() > 0.5 ? 1 : -1);
 	}, []);
 
-	const [hover, hoverMotion] = useMotion(0);
-	const [transition, transitionMotion] = useMotion(0);
-	const [visible, visibleMotion] = useMotion(0);
-	const [glow, glowMotion] = useMotion(0);
+	const [hover, hoverSpring] = useSpring(0);
+	const [transition, transitionSpring] = useSpring(0);
+	const [visible, visibleSpring] = useSpring(0);
+	const [glow, glowSpring] = useSpring(0);
 
 	const promptPurchase = async () => {
 		MarketplaceService.PromptProductPurchase(Players.LocalPlayer, productId);
@@ -58,14 +58,14 @@ export function SupportProduct({
 	const gradient = new ColorSequence(primaryColor, secondaryColor);
 
 	useTimeout(() => {
-		transitionMotion.spring(1, {
+		transitionSpring.setGoal(1, {
 			tension: 180,
 			friction: 20,
 			mass: 2 + 0.3 * index,
-			restingVelocity: 0.0001,
+			precision: 0.0001,
 		});
 
-		visibleMotion.spring(1, {
+		visibleSpring.setGoal(1, {
 			tension: 150,
 			friction: 30,
 		});
@@ -73,7 +73,7 @@ export function SupportProduct({
 
 	useTimeout(
 		() => {
-			glowMotion.spring(1, {
+			glowSpring.setGoal(1, {
 				tension: 50,
 				friction: 20,
 			});
@@ -90,7 +90,7 @@ export function SupportProduct({
 		>
 			<ReactiveButton
 				onClick={promptPurchase}
-				onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
+				onHover={(hovered) => hoverSpring.setGoal(hovered ? 1 : 0)}
 				backgroundTransparency={1}
 				size={new UDim2(1, 0, 1, 0)}
 			>

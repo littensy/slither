@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useRef, useState } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
 import { Group } from "client/components/ui/group";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { selectWorldCamera } from "client/store/world";
 
 import { Snake } from "./snake";
@@ -16,7 +16,7 @@ export function Snakes() {
 	const snakesOnScreen = useSnakesOnScreen(world.scale, world.offset);
 	const previousOffset = useRef(new UDim2(0.5, 0, 0.5, 0));
 
-	const [transition, transitionMotion] = useMotion(1);
+	const [transition, transitionSpring] = useSpring(1);
 	const [snakeBindings, setSnakeBindings] = useState<SnakeBindings>();
 
 	const offset = useMemo((): React.Binding<UDim2> => {
@@ -35,10 +35,10 @@ export function Snakes() {
 			// Manually transition from the current subject to the next
 			if (snakeBindings && snakeBindings !== bindings) {
 				previousOffset.current = offset.getValue();
-				transitionMotion.set(0);
-				transitionMotion.spring(1, {
+				transitionSpring.setGoal(1, {
 					...springs.world,
-					restingVelocity: 1e-8,
+					position: 0,
+					precision: 1e-8,
 				});
 			}
 

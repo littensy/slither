@@ -6,7 +6,7 @@ import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
 import { fonts } from "client/constants/fonts";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { palette } from "shared/constants/palette";
 
 import { Transition } from "../ui/transition";
@@ -33,8 +33,8 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 	const secondaryDark = secondary.Lerp(palette.crust, 0.75);
 
 	const rem = useRem();
-	const [transparency, transparencyMotion] = useMotion(1);
-	const [textWidth, textWidthMotion] = useMotion({ label: 0, value: 0 });
+	const [transparency, transparencySpring] = useSpring(1);
+	const [textWidth, textWidthSpring] = useSpring({ label: 0, value: 0 });
 
 	const size = useMemo(() => {
 		return textWidth.map(({ label, value }) => {
@@ -45,7 +45,7 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 	}, [rem]);
 
 	useEffect(() => {
-		transparencyMotion.spring(enabled ? 0 : 0.75, springs.slow);
+		transparencySpring.setGoal(enabled ? 0 : 0.75, springs.slow);
 	}, [enabled]);
 
 	return (
@@ -105,7 +105,7 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 					position={new UDim2(0, rem(CARD_MARGIN + CARD_EMOJI_WIDTH + CARD_PADDING), 0.5, -rem(0.25))}
 					change={{
 						TextBounds: (rbx) => {
-							textWidthMotion.spring({ label: rbx.TextBounds.X });
+							textWidthSpring.setGoal({ label: rbx.TextBounds.X });
 						},
 					}}
 				/>
@@ -121,7 +121,7 @@ export function StatsCard({ onClick, emoji, label, value, primary, secondary, en
 					position={new UDim2(0, rem(CARD_MARGIN + CARD_EMOJI_WIDTH + CARD_PADDING), 0.5, -rem(0.25))}
 					change={{
 						TextBounds: (rbx) => {
-							textWidthMotion.spring({ value: rbx.TextBounds.X });
+							textWidthSpring.setGoal({ value: rbx.TextBounds.X });
 						},
 					}}
 				/>

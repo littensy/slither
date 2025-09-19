@@ -4,7 +4,7 @@ import React, { memo, useEffect, useMemo } from "@rbxts/react";
 import { Image } from "client/components/ui/image";
 import { Shadow } from "client/components/ui/shadow";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem, useSeed } from "client/hooks";
+import { useRem, useSeed, useSpring } from "client/hooks";
 import { images } from "shared/assets";
 import { CandyType } from "shared/store/candy";
 import { brighten } from "shared/utils/color-utils";
@@ -24,8 +24,8 @@ function CandyItemComponent({ variant, size, point, color, worldScale, eatenAt }
 	const timer = useTimer();
 	const seed = useSeed();
 
-	const [pointSmooth, pointMotion] = useMotion(point);
-	const [transition, transitionMotion] = useMotion(1);
+	const [pointSmooth, pointSpring] = useSpring(point);
+	const [transition, transitionSpring] = useSpring(1);
 
 	const { position, glow, transparency } = useMemo(() => {
 		const position = timer.value.map((t) => {
@@ -58,8 +58,8 @@ function CandyItemComponent({ variant, size, point, color, worldScale, eatenAt }
 	useEffect(() => {
 		const position = eatenAt || point;
 
-		pointMotion.spring(position, springs.world);
-		transitionMotion.spring(eatenAt ? 1 : 0);
+		pointSpring.setGoal(position, springs.world);
+		transitionSpring.setGoal(eatenAt ? 1 : 0);
 	}, [point, eatenAt]);
 
 	return (

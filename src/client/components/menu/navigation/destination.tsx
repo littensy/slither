@@ -10,7 +10,7 @@ import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
 import { fonts } from "client/constants/fonts";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem, useStore } from "client/hooks";
+import { useRem, useSpring, useStore } from "client/hooks";
 import { MenuPage, selectIsPage } from "client/store/menu";
 import { palette } from "shared/constants/palette";
 
@@ -27,10 +27,10 @@ export function Destination({ page, label, icon, iconAlt, color, order }: Destin
 	const rem = useRem();
 	const store = useStore();
 	const isPage = useSelectorCreator(selectIsPage, page);
-	const [transition, transitionMotion] = useMotion(0);
+	const [transition, transitionSpring] = useSpring(0);
 
 	useEffect(() => {
-		transitionMotion.spring(isPage ? 1 : 0, springs.responsive);
+		transitionSpring.setGoal(isPage ? 1 : 0, springs.responsive);
 	}, [isPage]);
 
 	return (

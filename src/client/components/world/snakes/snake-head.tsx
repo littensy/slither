@@ -3,7 +3,7 @@ import { useSelectorCreator } from "@rbxts/react-reflex";
 import { Group } from "client/components/ui/group";
 import { Image } from "client/components/ui/image";
 import { springs } from "client/constants/springs";
-import { useContinuousAngle, useMotion, useRem } from "client/hooks";
+import { useContinuousAngle, useRem, useSpring } from "client/hooks";
 import { selectWorldInputAngle } from "client/store/world";
 import { getSnakeSkin, getSnakeSkinForTracer } from "shared/constants/skins";
 import { subtractRadians } from "shared/utils/math-utils";
@@ -36,8 +36,8 @@ export function SnakeHead({ angle, desiredAngle, line, effects, skinId, isClient
 	const angleDifference = useContinuousAngle(subtractRadians(desiredAngle, currentAngle));
 	const style = useTracerStyle(line, effects, 0, skin.headColor || tracerSkin.tint);
 
-	const [rotation, rotationMotion] = useMotion(math.deg(currentAngle + SNAKE_ANGLE_OFFSET));
-	const [look, lookMotion] = useMotion(0);
+	const [rotation, rotationSpring] = useSpring(math.deg(currentAngle + SNAKE_ANGLE_OFFSET));
+	const [look, lookSpring] = useSpring(0);
 
 	const { size, position } = useMemo(() => {
 		const size = line.map(({ diameter }) => {
@@ -52,8 +52,8 @@ export function SnakeHead({ angle, desiredAngle, line, effects, skinId, isClient
 	}, [rem]);
 
 	useEffect(() => {
-		rotationMotion.spring(math.deg(currentAngle + SNAKE_ANGLE_OFFSET), springs.world);
-		lookMotion.spring(math.deg(angleDifference));
+		rotationSpring.setGoal(math.deg(currentAngle + SNAKE_ANGLE_OFFSET), springs.world);
+		lookSpring.setGoal(math.deg(angleDifference));
 	}, [currentAngle, angleDifference]);
 
 	return (

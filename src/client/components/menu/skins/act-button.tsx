@@ -8,7 +8,7 @@ import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
 import { fonts } from "client/constants/fonts";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { selectMenuCurrentSkin } from "client/store/menu";
 import { formatInteger } from "client/utils/format-integer";
 import { sounds } from "shared/assets";
@@ -64,11 +64,11 @@ export function ActButton() {
 	const balance = useSelectorCreator(selectPlayerBalance, USER_NAME);
 	const status = getStatus(equippedSkin, currentSkin, inventory, balance);
 
-	const [primary, primaryMotion] = useMotion(new Color3());
-	const [secondary, secondaryMotion] = useMotion(new Color3());
-	const [textWidth, textWidthMotion] = useMotion(0);
-	const [gradientSpin, gradientSpinMotion] = useMotion(0);
-	const [hover, hoverMotion] = useMotion(0);
+	const [primary, primarySpring] = useSpring(new Color3());
+	const [secondary, secondarySpring] = useSpring(new Color3());
+	const [textWidth, textWidthSpring] = useSpring(0);
+	const [gradientSpin, gradientSpinSpring] = useSpring(0);
+	const [hover, hoverSpring] = useSpring(0);
 
 	const { size, gradient } = useMemo(() => {
 		const size = textWidth.map((width) => {
@@ -83,7 +83,7 @@ export function ActButton() {
 	}, [rem]);
 
 	const onClick = () => {
-		gradientSpinMotion.spring(gradientSpin.getValue() + 180, springs.molasses);
+		gradientSpinSpring.setGoal(gradientSpin.getValue() + 180, springs.molasses);
 
 		if (status.variant === "buy") {
 			remotes.save.buySkin.fire(currentSkin);
@@ -102,24 +102,24 @@ export function ActButton() {
 	useEffect(() => {
 		switch (status.variant) {
 			case "wearing":
-				primaryMotion.spring(palette.red);
-				secondaryMotion.spring(palette.peach);
+				primarySpring.setGoal(palette.red);
+				secondarySpring.setGoal(palette.peach);
 				break;
 
 			case "wear":
-				primaryMotion.spring(palette.blue);
-				secondaryMotion.spring(palette.mauve);
+				primarySpring.setGoal(palette.blue);
+				secondarySpring.setGoal(palette.mauve);
 				break;
 
 			case "buy":
-				primaryMotion.spring(palette.teal);
-				secondaryMotion.spring(palette.green);
+				primarySpring.setGoal(palette.teal);
+				secondarySpring.setGoal(palette.green);
 				break;
 
 			case "not-enough-money":
 			case "none":
-				primaryMotion.spring(palette.red);
-				secondaryMotion.spring(palette.red);
+				primarySpring.setGoal(palette.red);
+				secondarySpring.setGoal(palette.red);
 				break;
 		}
 	}, [status.variant]);
@@ -152,7 +152,7 @@ export function ActButton() {
 	return (
 		<PrimaryButton
 			onClick={onClick}
-			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
+			onHover={(hovered) => hoverSpring.setGoal(hovered ? 1 : 0)}
 			overlayGradient={gradient}
 			overlayRotation={gradientSpin}
 			anchorPoint={new Vector2(0.5, 1)}
@@ -172,7 +172,7 @@ export function ActButton() {
 			<Text
 				change={{
 					TextBounds: (rbx) => {
-						textWidthMotion.spring(rbx.TextBounds.X);
+						textWidthSpring.setGoal(rbx.TextBounds.X);
 					},
 				}}
 				richText

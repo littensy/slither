@@ -3,20 +3,20 @@ import React, { useEffect } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
 import { Image } from "client/components/ui/image";
 import { springs } from "client/constants/springs";
-import { useMotion } from "client/hooks";
+import { useSpring } from "client/hooks";
 import { selectIsMenuOpen } from "client/store/menu";
 import { images } from "shared/assets";
 import { palette } from "shared/constants/palette";
 
 export function MenuVignette() {
 	const open = useSelector(selectIsMenuOpen);
-	const [transition, transitionMotion] = useMotion(0);
+	const [transition, transitionSpring] = useSpring(0);
 
 	useEffect(() => {
 		if (open) {
-			transitionMotion.spring(1, springs.molasses);
+			transitionSpring.setGoal(1, springs.molasses);
 		} else {
-			transitionMotion.spring(0, springs.molasses);
+			transitionSpring.setGoal(0, springs.molasses);
 		}
 	}, [open]);
 
