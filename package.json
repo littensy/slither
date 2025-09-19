@@ -47,5 +47,6 @@
 		"@rbxts/t": "^3.2.1",
 		"@rbxts/testez": "0.4.2-ts.0",
 		"@rbxts/validate-tree": "^2.0.2"
-	}
+	},
+	"packageManager": "pnpm@10.17.0"
 }
