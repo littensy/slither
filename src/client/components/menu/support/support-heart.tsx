@@ -3,21 +3,21 @@ import React, { useEffect } from "@rbxts/react";
 import { setTimeout } from "@rbxts/set-timeout";
 import { Image } from "client/components/ui/image";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { images } from "shared/assets";
 
 export function SupportHeart() {
 	const rem = useRem();
-	const [transition, transitionMotion] = useMotion(0);
-	const [pulse, pulseMotion] = useMotion(0);
+	const [transition, transitionSpring] = useSpring(0);
+	const [pulse, pulseSpring] = useSpring(0);
 
 	const impulse = () => {
-		transitionMotion.impulse(-0.02);
+		transitionSpring.impulse(-20);
 
 		setTimeout(() => {
-			transitionMotion.impulse(0.05);
-			pulseMotion.set(0);
-			pulseMotion.spring(1, springs.molasses);
+			transitionSpring.impulse(50);
+			pulseSpring.setPosition(0);
+			pulseSpring.setGoal(1, springs.molasses);
 		}, 0.3);
 	};
 
@@ -27,7 +27,7 @@ export function SupportHeart() {
 
 	useEffect(() => {
 		// set initial goal for impulse
-		transitionMotion.spring(0, springs.gentle);
+		transitionSpring.setGoal(0, springs.gentle);
 	}, []);
 
 	return (

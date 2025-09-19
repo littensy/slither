@@ -1,7 +1,7 @@
 import { blend, lerpBinding, useUpdateEffect } from "@rbxts/pretty-react-hooks";
 import { composeBindings } from "@rbxts/pretty-react-hooks";
 import React from "@rbxts/react";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { ButtonSoundVariant, playButtonDown, playButtonUp } from "shared/assets";
 
 import { Button } from "../button";
@@ -64,15 +64,15 @@ export function ReactiveButton({
 	children,
 }: ReactiveButtonProps) {
 	const rem = useRem();
-	const [sizeAnimation, sizeMotion] = useMotion(0);
+	const [sizeAnimation, sizeSpring] = useSpring(0);
 	const [press, hover, buttonEvents] = useButtonState();
 	const animation = useButtonAnimation(press, hover);
 
 	useUpdateEffect(() => {
 		if (press) {
-			sizeMotion.spring(-0.1, { tension: 300 });
+			sizeSpring.setGoal(-0.1, { tension: 300 });
 		} else {
-			sizeMotion.spring(0, { impulse: 0.01, tension: 300 });
+			sizeSpring.setGoal(0, { impulse: 10, tension: 300 });
 		}
 	}, [press]);
 

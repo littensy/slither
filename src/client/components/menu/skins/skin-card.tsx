@@ -3,7 +3,7 @@ import React, { useEffect } from "@rbxts/react";
 import { Image } from "client/components/ui/image";
 import { ReactiveButton } from "client/components/ui/reactive-button";
 import { Shadow } from "client/components/ui/shadow";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { images, playSound, sounds } from "shared/assets";
 
 import { SkinIndicator } from "./skin-indicator";
@@ -41,18 +41,18 @@ export function SkinCard({ id, index, active, shuffle, onClick }: SkinCardProps)
 
 	const rem = useRem();
 	const palette = usePalette(id, shuffle);
-	const [position, positionMotion] = useMotion(getPosition(rem(1), math.sign(index) * 3));
-	const [size, sizeMotion] = useMotion(getSize(rem(1), false));
-	const [transparency, transparencyMotion] = useMotion(1);
+	const [position, positionSpring] = useSpring(getPosition(rem(1), math.sign(index) * 3));
+	const [size, sizeSpring] = useSpring(getSize(rem(1), false));
+	const [transparency, transparencySpring] = useSpring(1);
 
 	useEffect(() => {
-		positionMotion.spring(getPosition(rem(1), index), {
+		positionSpring.setGoal(getPosition(rem(1), index), {
 			tension: 250,
 			friction: 22,
 			mass: 1 + math.abs(index / 2),
 		});
-		sizeMotion.spring(getSize(rem(1), index === 0));
-		transparencyMotion.spring(hidden ? 1 : 0);
+		sizeSpring.setGoal(getSize(rem(1), index === 0));
+		transparencySpring.setGoal(hidden ? 1 : 0);
 	}, [rem, index]);
 
 	return (

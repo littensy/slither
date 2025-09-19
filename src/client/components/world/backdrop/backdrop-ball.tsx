@@ -1,14 +1,15 @@
 import Object from "@rbxts/object-utils";
 import { map, useCamera, useEventListener } from "@rbxts/pretty-react-hooks";
-import React, { useBinding, useEffect, useMemo } from "@rbxts/react";
-import { useSelector } from "@rbxts/react-reflex";
+import React, { useBinding, useMemo } from "@rbxts/react";
 import { RunService } from "@rbxts/services";
 import { Image } from "client/components/ui/image";
-import { springs } from "client/constants/springs";
-import { useMotion, useSeed } from "client/hooks";
-import { selectWorldCamera } from "client/store/world";
+import { useSeed } from "client/hooks";
 import { images } from "shared/assets";
 import { accents } from "shared/constants/palette";
+
+interface BackdropBallProps {
+	readonly smoothOffset: React.Binding<Vector2>;
+}
 
 /**
  * Constrains a value within a range by applying a modulo operation.
@@ -18,12 +19,10 @@ function mod(value: number, min: number, max: number) {
 	return ((value - min) % range) + min;
 }
 
-export function BackdropBall() {
+export function BackdropBall({ smoothOffset }: BackdropBallProps) {
 	const camera = useCamera();
-	const world = useSelector(selectWorldCamera);
 	const seed = useSeed();
 	const [timer, setTimer] = useBinding(0);
-	const [smoothOffset, smoothOffsetMotion] = useMotion(world.offset);
 
 	const color = useMemo(() => {
 		const colors = Object.values(accents);
@@ -59,10 +58,6 @@ export function BackdropBall() {
 	useEventListener(RunService.Heartbeat, (deltaTime) => {
 		setTimer(timer.getValue() + 0.01 * deltaTime);
 	});
-
-	useEffect(() => {
-		smoothOffsetMotion.spring(world.offset, springs.world);
-	}, [world.offset]);
 
 	return (
 		<Image

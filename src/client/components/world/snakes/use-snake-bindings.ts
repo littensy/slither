@@ -1,15 +1,14 @@
 import React, { createBinding, useEffect, useMemo, useRef } from "@rbxts/react";
 import { useSelectorCreator } from "@rbxts/react-reflex";
-import { createMotion, immediate, spring } from "@rbxts/ripple";
-import { RunService } from "@rbxts/services";
+import { createSpring } from "@rbxts/ripple";
 import { springs } from "client/constants/springs";
 import { describeSnakeFromScore, selectSnakeIsBoosting, SnakeEntity } from "shared/store/snakes";
 
 import { SnakeOnScreen } from "./use-snakes-on-screen";
 
-export type SnakeLineBinding = React.Binding<LineMotionValues>;
+export type SnakeLineBinding = React.Binding<LineSpringValues>;
 
-export type SnakeEffectBinding = React.Binding<EffectMotionValues>;
+export type SnakeEffectBinding = React.Binding<EffectSpringValues>;
 
 export interface SnakeBindings {
 	readonly bindings: Map<number, TracerBindingController>;
@@ -26,7 +25,7 @@ interface TracerBindingController {
 	readonly destroy: () => void;
 }
 
-type LineMotionValues = {
+type LineSpringValues = {
 	readonly diameter: number;
 	readonly fromX: number;
 	readonly fromY: number;
@@ -34,7 +33,7 @@ type LineMotionValues = {
 	readonly toY: number;
 };
 
-type EffectMotionValues = {
+type EffectSpringValues = {
 	readonly boost: number;
 	readonly dead: number;
 };
@@ -52,7 +51,7 @@ function createSnakeBindings(snake: SnakeEntity, scale: number): SnakeBindings {
 		scale: number,
 		tracer: Vector2,
 	): TracerBindingController => {
-		const lineMotion = createMotion<LineMotionValues>({
+		const lineSpring = createSpring<LineSpringValues>({
 			diameter: getSize(snake) * scale,
 			fromX: tracer.X * scale,
 			fromY: tracer.Y * scale,
@@ -60,27 +59,20 @@ function createSnakeBindings(snake: SnakeEntity, scale: number): SnakeBindings {
 			toY: tracer.Y * scale,
 		});
 
-		const effectMotion = createMotion<EffectMotionValues>({
+		const effectSpring = createSpring<EffectSpringValues>({
 			boost: snake.boost ? 1 : 0,
 			dead: snake.dead ? 1 : 0,
 		});
 
-		const [line, setLine] = createBinding(lineMotion.get());
-		const [effects, setEffects] = createBinding(effectMotion.get());
+		const [line, setLine] = createBinding(lineSpring.getPosition());
+		const [effects, setEffects] = createBinding(effectSpring.getPosition());
 
-		const connection = RunService.Heartbeat.Connect((deltaTime) => {
-			if (!lineMotion.isComplete()) {
-				setLine(lineMotion.step(deltaTime));
-			}
+		lineSpring.onChange(setLine);
+		lineSpring.start();
 
-			if (!effectMotion.isComplete()) {
-				setEffects(effectMotion.step(deltaTime));
-			}
-		});
-
-		const createGoal = (goal: number, isSubject: boolean) => {
-			return spring(goal, isSubject ? springs.world : springs.default);
-		};
+		effectSpring.configure(springs.slow);
+		effectSpring.onChange(setEffects);
+		effectSpring.start();
 
 		const update = (snake: SnakeEntity, scale: number, boosting: boolean, isSubject: boolean) => {
 			const tracer = snake.tracers[index];
@@ -90,24 +82,27 @@ function createSnakeBindings(snake: SnakeEntity, scale: number): SnakeBindings {
 				return;
 			}
 
-			lineMotion.to({
-				diameter: immediate(getSize(snake) * scale),
-				fromX: createGoal(tracer.X * scale, isSubject),
-				fromY: createGoal(tracer.Y * scale, isSubject),
-				toX: createGoal(previousTracer.X * scale, isSubject),
-				toY: createGoal(previousTracer.Y * scale, isSubject),
+			const diameter = getSize(snake) * scale;
+
+			lineSpring.setPosition({ diameter });
+			lineSpring.configure(isSubject ? springs.world : springs.default);
+			lineSpring.setGoal({
+				diameter,
+				fromX: tracer.X * scale,
+				fromY: tracer.Y * scale,
+				toX: previousTracer.X * scale,
+				toY: previousTracer.Y * scale,
 			});
 
-			effectMotion.to({
-				boost: spring(boosting ? 1 : 0, springs.slow),
-				dead: spring(snake.dead ? 1 : 0, springs.slow),
+			effectSpring.setGoal({
+				boost: boosting ? 1 : 0,
+				dead: snake.dead ? 1 : 0,
 			});
 		};
 
 		const destroy = () => {
-			connection.Disconnect();
-			lineMotion.destroy();
-			effectMotion.destroy();
+			lineSpring.destroy();
+			effectSpring.destroy();
 		};
 
 		return { index, line, effects, update, destroy };

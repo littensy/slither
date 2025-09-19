@@ -2,7 +2,7 @@ import React, { useEffect } from "@rbxts/react";
 import { useSelectorCreator } from "@rbxts/react-reflex";
 import { Image } from "client/components/ui/image";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { images } from "shared/assets";
 import { USER_NAME } from "shared/constants/core";
 import { palette } from "shared/constants/palette";
@@ -22,12 +22,12 @@ export function SkinIndicator({ id, primary, transparency }: SkinIndicatorProps)
 	const owned = useSelectorCreator(selectPlayerOwnsSkin, USER_NAME, id);
 	const equipped = useSelectorCreator(selectPlayerEquippedSkin, USER_NAME, id);
 
-	const [indicator, indicatorMotion] = useMotion(new UDim2());
+	const [indicator, indicatorSpring] = useSpring(new UDim2());
 
 	useEffect(() => {
 		const padding = rem(12, "pixel") + 4; // 6px - 2px
 
-		indicatorMotion.spring(
+		indicatorSpring.setGoal(
 			equipped ? new UDim2(0, rem(2) - padding, 0, rem(2) - padding) : new UDim2(),
 			springs.gentle,
 		);

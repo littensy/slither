@@ -11,7 +11,7 @@ import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
 import { fonts } from "client/constants/fonts";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { Alert, selectAlertIndex } from "client/store/alert";
 import { selectIsMenuOpen } from "client/store/menu";
 import { images, playSound, sounds } from "shared/assets";
@@ -37,10 +37,10 @@ export function Alert({ alert, index }: AlertProps) {
 	const menuOpen = useSelector(selectIsMenuOpen);
 	const visibleIndex = useSelectorCreator(selectAlertIndex, alert.id);
 
-	const [transition, transitionMotion] = useMotion(0);
-	const [hover, hoverMotion] = useMotion(0);
-	const [size, sizeMotion] = useMotion(new UDim2(0, ALERT_WIDTH / 2, 0, ALERT_HEIGHT / 2));
-	const [position, positionMotion] = useMotion(new UDim2(0.5, 0, 0, rem(5)));
+	const [transition, transitionSpring] = useSpring(0);
+	const [hover, hoverSpring] = useSpring(0);
+	const [size, sizeSpring] = useSpring(new UDim2(0, ALERT_WIDTH / 2, 0, ALERT_HEIGHT / 2));
+	const [position, positionSpring] = useSpring(new UDim2(0.5, 0, 0, rem(5)));
 
 	const style = useMemo(() => {
 		const highlight = composeBindings(hover, transition, (a, b) => a * b);
@@ -57,18 +57,18 @@ export function Alert({ alert, index }: AlertProps) {
 		const width = math.max(textWidth + rem(10), rem(ALERT_WIDTH));
 		const height = rem(ALERT_HEIGHT);
 
-		sizeMotion.spring(new UDim2(0, width, 0, height), springs.gentle);
+		sizeSpring.setGoal(new UDim2(0, width, 0, height), springs.gentle);
 	};
 
 	useEffect(() => {
-		transitionMotion.spring(alert.visible ? 1 : 0, springs.gentle);
+		transitionSpring.setGoal(alert.visible ? 1 : 0, springs.gentle);
 	}, [alert.visible]);
 
 	useEffect(() => {
 		const position = (ALERT_HEIGHT + LIST_PADDING) * index;
 		const offset = menuOpen ? 10 : 5;
 
-		positionMotion.spring(new UDim2(0.5, 0, 0, rem(position + offset)), {
+		positionSpring.setGoal(new UDim2(0.5, 0, 0, rem(position + offset)), {
 			tension: 180,
 			friction: 12,
 			mass: mapStrict(index, 0, MAX_VISIBLE_ALERTS, 1, 2),
@@ -94,7 +94,7 @@ export function Alert({ alert, index }: AlertProps) {
 				dismissAlert(alert.id);
 				playSound(sounds.alert_dismiss);
 			}}
-			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0, springs.responsive)}
+			onHover={(hovered) => hoverSpring.setGoal(hovered ? 1 : 0, springs.responsive)}
 			soundVariant="none"
 			backgroundTransparency={1}
 			anchorPoint={new Vector2(0.5, 0)}

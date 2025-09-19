@@ -2,7 +2,7 @@ import React, { useBinding, useEffect, useMemo } from "@rbxts/react";
 import { useSelector } from "@rbxts/react-reflex";
 import { Group } from "client/components/ui/group";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { selectWorldCamera } from "client/store/world";
 
 import { CandyItem } from "./candy-item";
@@ -13,7 +13,7 @@ export function Candy() {
 	const world = useSelector(selectWorldCamera);
 	const candyOnScreen = useCandyOnScreen(world.offset, world.scale);
 
-	const [smoothOffset, offsetMotion] = useMotion(world.offset);
+	const [smoothOffset, offsetSpring] = useSpring(world.offset);
 	const [scale, setScale] = useBinding(world.scale);
 
 	const children = useMemo(() => {
@@ -41,7 +41,7 @@ export function Candy() {
 	}, [candyOnScreen]);
 
 	useEffect(() => {
-		offsetMotion.spring(world.offset, springs.world);
+		offsetSpring.setGoal(world.offset, springs.world);
 	}, [world.offset]);
 
 	useEffect(() => {

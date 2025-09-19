@@ -1,6 +1,6 @@
 import React, { useEffect } from "@rbxts/react";
 import { Image } from "client/components/ui/image";
-import { useContinuousAngle, useMotion } from "client/hooks";
+import { useContinuousAngle, useSpring } from "client/hooks";
 import { images } from "shared/assets";
 import { palette } from "shared/constants/palette";
 
@@ -14,10 +14,10 @@ interface MinimapCursorProps {
 export function MinimapCursor({ point, angle }: MinimapCursorProps) {
 	const rem = useMinimapRem();
 	const rotation = math.deg(useContinuousAngle(angle));
-	const [smoothRotation, smoothRotationMotion] = useMotion(rotation);
+	const [smoothRotation, smoothRotationSpring] = useSpring(rotation);
 
 	useEffect(() => {
-		smoothRotationMotion.spring(rotation);
+		smoothRotationSpring.setGoal(rotation);
 	}, [rotation]);
 
 	return (

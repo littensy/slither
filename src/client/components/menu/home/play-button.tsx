@@ -5,7 +5,7 @@ import { PrimaryButton } from "client/components/ui/primary-button";
 import { Shadow } from "client/components/ui/shadow";
 import { Text } from "client/components/ui/text";
 import { fonts } from "client/constants/fonts";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { palette } from "shared/constants/palette";
 import { remotes } from "shared/remotes";
 
@@ -20,7 +20,7 @@ interface PlayButtonProps {
 export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	const rem = useRem();
 	const timer = useTimer();
-	const [hover, hoverMotion] = useMotion(0);
+	const [hover, hoverSpring] = useSpring(0);
 
 	const gradientSpin = timer.value.map((t) => {
 		return 30 * t;
@@ -33,7 +33,7 @@ export function PlayButton({ anchorPoint, size, position }: PlayButtonProps) {
 	return (
 		<PrimaryButton
 			onClick={onClick}
-			onHover={(hovered) => hoverMotion.spring(hovered ? 1 : 0)}
+			onHover={(hovered) => hoverSpring.setGoal(hovered ? 1 : 0)}
 			overlayGradient={new ColorSequence(palette.mauve, palette.blue)}
 			anchorPoint={anchorPoint}
 			size={size}

@@ -5,7 +5,7 @@ import { Frame } from "client/components/ui/frame";
 import { Group } from "client/components/ui/group";
 import { Image } from "client/components/ui/image";
 import { springs } from "client/constants/springs";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { selectWorldCamera } from "client/store/world";
 import { images } from "shared/assets";
 import { WORLD_BOUNDS } from "shared/constants/core";
@@ -15,7 +15,7 @@ export function WorldBorder() {
 	const rem = useRem();
 	const world = useSelector(selectWorldCamera);
 
-	const [worldCamera, worldCameraMotion] = useMotion({
+	const [worldCamera, worldCameraSpring] = useSpring({
 		x: -world.offset.X,
 		y: -world.offset.Y,
 		scale: world.scale,
@@ -41,7 +41,7 @@ export function WorldBorder() {
 	}, [rem]);
 
 	useEffect(() => {
-		worldCameraMotion.spring(
+		worldCameraSpring.setGoal(
 			{
 				x: -world.offset.X,
 				y: -world.offset.Y,

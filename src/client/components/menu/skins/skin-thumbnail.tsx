@@ -1,7 +1,7 @@
 import React, { useEffect } from "@rbxts/react";
 import { CanvasGroup } from "client/components/ui/canvas-group";
 import { Image } from "client/components/ui/image";
-import { useMotion, useRem } from "client/hooks";
+import { useRem, useSpring } from "client/hooks";
 import { SnakeSkin } from "shared/constants/skins";
 import { fillArray } from "shared/utils/object-utils";
 
@@ -37,10 +37,10 @@ const TRACERS = fillArray(TRACER_POINTS, (index) => {
 
 export function SkinThumbnail({ skin, active, transparency }: SkinThumbnailProps) {
 	const rem = useRem();
-	const [offset, offsetMotion] = useMotion(new UDim());
+	const [offset, offsetSpring] = useSpring(new UDim());
 
 	useEffect(() => {
-		offsetMotion.spring(active ? new UDim(0, rem(-0.5)) : new UDim(0, rem(2)));
+		offsetSpring.setGoal(active ? new UDim(0, rem(-0.5)) : new UDim(0, rem(2)));
 	}, [active, rem]);
 
 	return (
