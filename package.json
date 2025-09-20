@@ -15,20 +15,22 @@
 		"output:prod": "mantle outputs --environment production > mantle-output.json"
 	},
 	"devDependencies": {
+		"@eslint/js": "^9.36.0",
 		"@rbxts/compiler-types": "3.0.0-types.0",
 		"@rbxts/types": "^1.0.882",
 		"@typescript-eslint/eslint-plugin": "^8.44.0",
 		"@typescript-eslint/parser": "^8.44.0",
-		"cross-env": "^7.0.3",
-		"eslint": "^8.57.1",
-		"eslint-config-prettier": "^9.1.2",
+		"eslint": "^9.36.0",
+		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.4",
-		"eslint-plugin-roblox-ts": "^0.0.36",
+		"eslint-plugin-roblox-ts": "^1.2.1",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"eslint-plugin-unused-imports": "^4.2.0",
+		"jiti": "^2.5.1",
 		"prettier": "^3.6.2",
 		"roblox-ts": "3.0.0",
-		"typescript": "^5.9.2"
+		"typescript": "^5.9.2",
+		"typescript-eslint": "^8.44.0"
 	},
 	"dependencies": {
 		"@rbxts/bitbuffer2": "1.0.0-ts.0",

@@ -17,7 +17,7 @@ export interface ButtonEvents {
  * @param enabled Whether the button is enabled or not.
  * @returns The press state, hover state, and a `ButtonEvents` object.
  */
-export function useButtonState(enabled = true): LuaTuple<[press: boolean, hover: boolean, events: ButtonEvents]> {
+export function useButtonState(enabled = true): [press: boolean, hover: boolean, events: ButtonEvents] {
 	const [{ press, hover }, setState] = useState({
 		press: false,
 		hover: false,
@@ -45,5 +45,5 @@ export function useButtonState(enabled = true): LuaTuple<[press: boolean, hover:
 		}
 	});
 
-	return $tuple(press, hover, events);
+	return [press, hover, events];
 }

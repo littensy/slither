@@ -59,5 +59,5 @@ export function useTouchMove() {
 		setJumping(true);
 	});
 
-	return $tuple(direction, jumping);
+	return [direction, jumping] as const;
 }
