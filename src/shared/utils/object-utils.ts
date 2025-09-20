@@ -84,7 +84,7 @@ export function shuffle<T extends defined>(array: T[]): T[] {
 export function countProperties(object: object): number {
 	let size = 0;
 
-	for (const _ of pairs(object)) {
+	for (const [_] of pairs(object)) {
 		size += 1;
 	}
 
