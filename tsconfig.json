@@ -7,6 +7,7 @@
 		"jsxFactory": "React.createElement",
 		"jsxFragmentFactory": "React.Fragment",
 		"module": "commonjs",
+		"ignoreDeprecations": "6.0",
 		"moduleResolution": "Node",
 		"noLib": true,
 		"resolveJsonModule": true,
@@ -15,9 +16,7 @@
 		"moduleDetection": "force",
 		"strict": true,
 		"target": "ESNext",
-		"typeRoots": [
-			"node_modules/@rbxts"
-		],
+		"typeRoots": ["node_modules/@rbxts"],
 		// configurable
 		"rootDir": "src",
 		"outDir": "out",
@@ -25,7 +24,5 @@
 		"incremental": true,
 		"tsBuildInfoFile": "out/tsconfig.tsbuildinfo"
 	},
-	"include": [
-		"**/*/*",
-	],
+	"include": ["**/*/*"]
 }

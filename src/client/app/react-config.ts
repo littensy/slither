@@ -1,11 +1,10 @@
+import { backend } from "@rbxts/react-devtools-core";
+import ReactGlobals from "@rbxts/react-globals";
 import { RunService } from "@rbxts/services";
 
-declare const _G: {
-	__DEV__: boolean;
-	__REACT_MICROPROFILER_LEVEL: number;
-};
-
 if (RunService.IsStudio()) {
-	_G.__DEV__ = true;
-	_G.__REACT_MICROPROFILER_LEVEL = 10;
+	ReactGlobals.__DEV__ = true;
+	ReactGlobals.__PROFILE__ = true;
+
+	backend.connectToDevtools();
 }
