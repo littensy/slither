@@ -7,7 +7,6 @@
 		"jsxFactory": "React.createElement",
 		"jsxFragmentFactory": "React.Fragment",
 		"module": "commonjs",
-		"ignoreDeprecations": "6.0",
 		"moduleResolution": "Node",
 		"noLib": true,
 		"resolveJsonModule": true,
