@@ -48,8 +48,8 @@ importers:
         specifier: 0.10.0-alpha.3
         version: 0.10.0-alpha.3
       '@rbxts/services':
-        specifier: ^1.5.5
-        version: 1.5.5
+        specifier: ^1.6.0
+        version: 1.6.0
       '@rbxts/set-timeout':
         specifier: ^1.1.2
         version: 1.1.2
@@ -313,8 +313,8 @@ packages:
   '@rbxts/ripple@0.9.3':
     resolution: {integrity: sha512-GmwjQl7a8pvGPGQYLmaAcf2RBPpneOL5P1+U8CzTHt9tBhCdk0TEJ/MQoTv9JnHD62RMBE1jogQBvuGgl9VXAg==}
 
-  '@rbxts/services@1.5.5':
-    resolution: {integrity: sha512-Hu7QH2ecefS60zpakKG3T2vgABydoOJqpSG7nXr59wFAbPk/cA+OcsntYPHUWyHAat0VFGZ5jNZLTLdiqfssvg==}
+  '@rbxts/services@1.6.0':
+    resolution: {integrity: sha512-YH02E1/tGHeMXB0Mam8qPdAZa2fjQWdylEscSL4Zn0RIaQeByYImA2qUsXM3nBdhcyKHDwltzSznDKyCGfFEWA==}
 
   '@rbxts/set-timeout@1.1.2':
     resolution: {integrity: sha512-P/A0IiH9wuZdSJYr4Us0MDFm61nvIFR0acfKFHLkcOsgvIgELC90Up9ugiSsaMEHRIcIcO5UjE39LuS3xTzQHw==}
@@ -1183,7 +1183,7 @@ snapshots:
       '@rbxts/react': 17.3.7-alpha.1
       '@rbxts/react-roblox': 17.3.7-alpha.1(@rbxts/react@17.3.7-alpha.1)
       '@rbxts/ripple': 0.9.3
-      '@rbxts/services': 1.5.5
+      '@rbxts/services': 1.6.0
       '@rbxts/set-timeout': 1.1.2
 
   '@rbxts/react-devtools-core@17.3.7-alpha.1':
@@ -1221,11 +1221,11 @@ snapshots:
 
   '@rbxts/ripple@0.9.3': {}
 
-  '@rbxts/services@1.5.5': {}
+  '@rbxts/services@1.6.0': {}
 
   '@rbxts/set-timeout@1.1.2':
     dependencies:
-      '@rbxts/services': 1.5.5
+      '@rbxts/services': 1.6.0
 
   '@rbxts/t@3.2.1': {}
 
