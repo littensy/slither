@@ -33,8 +33,8 @@ importers:
         specifier: ^0.3.7
         version: 0.3.7(@rbxts/react@17.3.7-ts.1)(@rbxts/reflex@4.3.1)
       '@rbxts/react-ripple':
-        specifier: 3.0.0
-        version: 3.0.0(@rbxts/react@17.3.7-ts.1)
+        specifier: 3.0.1
+        version: 3.0.1(@rbxts/react@17.3.7-ts.1)
       '@rbxts/react-roblox':
         specifier: 17.3.7-ts.1
         version: 17.3.7-ts.1(@rbxts/react@17.3.7-ts.1)
@@ -42,11 +42,11 @@ importers:
         specifier: ^4.3.1
         version: 4.3.1
       '@rbxts/remo':
-        specifier: ^1.5.2
-        version: 1.5.2
+        specifier: ^1.5.3
+        version: 1.5.3
       '@rbxts/ripple':
-        specifier: 0.10.0
-        version: 0.10.0
+        specifier: 0.10.1
+        version: 0.10.1
       '@rbxts/services':
         specifier: ^1.6.0
         version: 1.6.0
@@ -288,8 +288,8 @@ packages:
       '@rbxts/react': '*'
       '@rbxts/reflex': '*'
 
-  '@rbxts/react-ripple@3.0.0':
-    resolution: {integrity: sha512-2zj7e6ZZMm73cjiuf+FCWU1hY3iuV0i0iqRehrnVO5WTApChiElNkBDFzN2FgdmQ8ah3KYUNY/1zqpsTCuYTPg==}
+  '@rbxts/react-ripple@3.0.1':
+    resolution: {integrity: sha512-+hNxiWLHUWGcHBuQrnPzIGtyRkn9eSdBtN1t1n0taRnkwjAXlcqM6jKD6mGfvls3lwwI0N4L/FcP4W+b7U7OEw==}
     peerDependencies:
       '@rbxts/react': '*'
 
@@ -304,11 +304,11 @@ packages:
   '@rbxts/reflex@4.3.1':
     resolution: {integrity: sha512-S5MbEpHKeRh9NWhwGJ789WbUsmlAlpQziWaNK4+kz1EpaaQ7uHQMZAuN1DYl4+QkqmOSuPlj04COwmArBGWH1Q==}
 
-  '@rbxts/remo@1.5.2':
-    resolution: {integrity: sha512-UQSlJgLcLg1+ocXvg30TfdbuvrS4Qc3yzoxLltc+OP71fF6PmaUg/b6EQlXIt/uBCTOszDHJ7I3nlyG+pTLFjQ==}
+  '@rbxts/remo@1.5.3':
+    resolution: {integrity: sha512-yNw4FXqE06MVDFrgW48anqXWiiiFN5Udvir4f/F9w4tXGTTDXO4xedL3RrVC7d/T+i/omrJxP4MRklH6xJo6DQ==}
 
-  '@rbxts/ripple@0.10.0':
-    resolution: {integrity: sha512-UZN5lD3DD3JtBZVphl4GlKN4u0m1bbHg7uNdLJmwZYCX+j/XOS+jc7oOEImT5rQkJNuP9jzOYHicxQcXmhPsaQ==}
+  '@rbxts/ripple@0.10.1':
+    resolution: {integrity: sha512-nBxSQCg4PKbQbFg08UGx0tBxWiufP/G0WaJ8QAV64V1bGxIWjfRmtrcuABodC1soTRDdVqqMm7C/CkYWP5Cm/g==}
 
   '@rbxts/ripple@0.9.3':
     resolution: {integrity: sha512-GmwjQl7a8pvGPGQYLmaAcf2RBPpneOL5P1+U8CzTHt9tBhCdk0TEJ/MQoTv9JnHD62RMBE1jogQBvuGgl9VXAg==}
@@ -1265,10 +1265,10 @@ snapshots:
       '@rbxts/react': 17.3.7-ts.1
       '@rbxts/reflex': 4.3.1
 
-  '@rbxts/react-ripple@3.0.0(@rbxts/react@17.3.7-ts.1)':
+  '@rbxts/react-ripple@3.0.1(@rbxts/react@17.3.7-ts.1)':
     dependencies:
       '@rbxts/react': 17.3.7-ts.1
-      '@rbxts/ripple': 0.10.0
+      '@rbxts/ripple': 0.10.1
 
   '@rbxts/react-roblox@17.3.7-ts.1(@rbxts/react@17.3.7-ts.1)':
     dependencies:
@@ -1281,9 +1281,9 @@ snapshots:
 
   '@rbxts/reflex@4.3.1': {}
 
-  '@rbxts/remo@1.5.2': {}
+  '@rbxts/remo@1.5.3': {}
 
-  '@rbxts/ripple@0.10.0': {}
+  '@rbxts/ripple@0.10.1': {}
 
   '@rbxts/ripple@0.9.3': {}
 
